@@ -1,0 +1,20 @@
+pkgname=genera-fonts-latin
+version=0.1.0
+revision=1
+archs="noarch"
+hostmakedepends="python3"
+depends="fontconfig xbps-triggers"
+short_desc="Genera bitmap fonts containing visible Latin letters"
+maintainer="Genera Fonts maintainers <noreply@example.invalid>"
+license="BSD-3-Clause, custom:Typeface-as-Typeface"
+homepage="https://github.com/htayj/genera-fonts"
+font_dirs="/usr/share/fonts/genera-fonts/latin/bdf /usr/share/fonts/genera-fonts/latin/otb"
+
+do_install() {
+	local src=${GENERA_FONTS_SOURCE_DIR:-}
+	local release_dir=${GENERA_FONTS_RELEASE_DIR:-}
+	[ -x "${src}/scripts/stage-linux-package.sh" ] || msg_error "set GENERA_FONTS_SOURCE_DIR\n"
+	[ -f "${release_dir}/Genera-fonts-latin-v${version}.tar.gz" ] || msg_error "set GENERA_FONTS_RELEASE_DIR\n"
+	"${src}/scripts/stage-linux-package.sh" --format void --group latin \
+		--destdir "${DESTDIR}" --version "v${version}" --release-dir "${release_dir}"
+}

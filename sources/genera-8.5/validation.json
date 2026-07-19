@@ -1,0 +1,2281 @@
+{
+  "authority": "the VLOD resident object remains authoritative for this profile",
+  "bdf_exact_count": 82,
+  "bfd_exact_count": 88,
+  "font_count": 89,
+  "fonts": [
+    {
+      "bdf": {
+        "differences": [
+          "codes differ: only-world=[] only-bdf=[0, 9, 10, 12, 13, 94, 127]"
+        ],
+        "filename": "40vr.bdf.~3~",
+        "sha256": "f4d17e6a7836928e07793c82947c0b769d938221e95c2eb4240e206e4eeac2ff",
+        "size_bytes": 29815
+      },
+      "bfd": {
+        "differences": [
+          "codes differ: only-world=[] only-bfd=[0, 9, 10, 12, 13, 94, 127]"
+        ],
+        "filename": "40vr.bfd.~1~",
+        "sha256": "a4f474d2086851c0e91d79c7ca53cd8010d05d5a038f6c5262103040dd2e607e",
+        "size_bytes": 22948
+      },
+      "font": "40VR"
+    },
+    {
+      "bdf": {
+        "differences": [],
+        "filename": "5x5.bdf.~3~",
+        "sha256": "a927e854a93c24656f1e2dea131d4b07021ec66ed116e8f38ca660aa89ccb340",
+        "size_bytes": 9216
+      },
+      "bfd": {
+        "differences": [],
+        "filename": "5x5.bfd.~2~",
+        "sha256": "43f1d19364b2504d7085aec063971083e28cc1bc7333aa13202a0b52c4816c0f",
+        "size_bytes": 4500
+      },
+      "font": "5X5"
+    },
+    {
+      "bdf": {
+        "differences": [],
+        "filename": "bigfnt.bdf.~3~",
+        "sha256": "3e93cfb50ce641f09e5ecbca001e0f817e779b3835fdb7d12b8f783b8e9e7dc8",
+        "size_bytes": 16146
+      },
+      "bfd": {
+        "differences": [],
+        "filename": "bigfnt.bfd.~4~",
+        "sha256": "7e5199a198ae5c3db5acaaffe565bfa331e5b1d54cee1d1279f6b5e317065322",
+        "size_bytes": 13048
+      },
+      "font": "BIGFNT"
+    },
+    {
+      "bdf": {
+        "differences": [],
+        "filename": "bigfntb.bdf.~3~",
+        "sha256": "3314d33cce56b3e18a66d91f0d4508828767922e3271e58174be06903da045a8",
+        "size_bytes": 18156
+      },
+      "bfd": {
+        "differences": [],
+        "filename": "bigfntb.bfd.~1~",
+        "sha256": "bf1b84038fa2385165a2a9dc0379abba0d257e9bdd540c555301255a44c2955b",
+        "size_bytes": 13594
+      },
+      "font": "BIGFNTB"
+    },
+    {
+      "bdf": {
+        "differences": [],
+        "filename": "bigfntbi.bdf.~3~",
+        "sha256": "4e3af01850593d7434501746bef0b602c2097b3d5050eaa22923215d3e0a5455",
+        "size_bytes": 18441
+      },
+      "bfd": {
+        "differences": [],
+        "filename": "bigfntbi.bfd.~1~",
+        "sha256": "d9aa6e3fa49680d8890e6a1cfc4af111b8c749cd737dfd2d766f724968c59444",
+        "size_bytes": 13596
+      },
+      "font": "BIGFNTBI"
+    },
+    {
+      "bdf": {
+        "differences": [],
+        "filename": "bigfnti.bdf.~3~",
+        "sha256": "c61e66039177ff58cb2d81c664b3a5181ef620793116de7896c1979bfdd46cc9",
+        "size_bytes": 18190
+      },
+      "bfd": {
+        "differences": [],
+        "filename": "bigfnti.bfd.~1~",
+        "sha256": "7da3738ee8d06983e8804518c294a078c4d9ff6eea807e4613c022d74bfb6a8b",
+        "size_bytes": 13594
+      },
+      "font": "BIGFNTI"
+    },
+    {
+      "bdf": {
+        "differences": [],
+        "filename": "boxfont.bdf.~3~",
+        "sha256": "18e76f5727faf1c03dedbacc9b7644a11a2b4f538003a074d2b2694efd76d3ea",
+        "size_bytes": 17462
+      },
+      "bfd": {
+        "differences": [],
+        "filename": "boxfont.bfd.~1~",
+        "sha256": "e568bcf1924b633a46d7a883ea23bda9850b37e7998a4c77a2994b9c0e1eec4f",
+        "size_bytes": 9578
+      },
+      "font": "BOXFONT"
+    },
+    {
+      "bdf": {
+        "differences": [],
+        "filename": "cptfont.bdf.~3~",
+        "sha256": "b463ccf4dbf1017aa1e4d484fa8bd9dc9decbfd02bde348aa9eb02e4c6eb35fd",
+        "size_bytes": 14929
+      },
+      "bfd": {
+        "differences": [],
+        "filename": "cptfont.bfd.~5~",
+        "sha256": "2c1ab907bb403f25f7601587309d0dc9c015a75f4396554cb83b65e43dd1a00c",
+        "size_bytes": 10178
+      },
+      "font": "CPTFONT"
+    },
+    {
+      "bdf": {
+        "differences": [],
+        "filename": "cptfontb.bdf.~3~",
+        "sha256": "46cd8258b787cdba446b2c8d2f42d1ec1182ccc352b880974893a920519cf1d7",
+        "size_bytes": 13580
+      },
+      "bfd": {
+        "differences": [],
+        "filename": "cptfontb.bfd.~3~",
+        "sha256": "958fdbd54151907fef95d1b84cdeaa3f19bd8f5d6f1a07df4a148d66ff6aa18f",
+        "size_bytes": 9192
+      },
+      "font": "CPTFONTB"
+    },
+    {
+      "bdf": {
+        "differences": [],
+        "filename": "cptfontbi.bdf.~3~",
+        "sha256": "ef2547dfb4cf8c5292522301e8c846148682d439979ef46b500500ffa77ca569",
+        "size_bytes": 14305
+      },
+      "bfd": {
+        "differences": [],
+        "filename": "cptfontbi.bfd.~1~",
+        "sha256": "0cbae04e74dff566a4050efdc1300d1e7c6aa60dd85634b049897f06ed191aa2",
+        "size_bytes": 9582
+      },
+      "font": "CPTFONTBI"
+    },
+    {
+      "bdf": {
+        "differences": [],
+        "filename": "cptfontc.bdf.~3~",
+        "sha256": "25c4e5e0807b56cd009b7ee8d14c7411300da8885145ec78ebd5de084f338394",
+        "size_bytes": 13530
+      },
+      "bfd": {
+        "differences": [],
+        "filename": "cptfontc.bfd.~2~",
+        "sha256": "d3b40697f656b1bcb113383a9495d7bafb77dd81a4757970e12f0881f97d43ec",
+        "size_bytes": 9524
+      },
+      "font": "CPTFONTC"
+    },
+    {
+      "bdf": {
+        "differences": [],
+        "filename": "cptfontcb.bdf.~3~",
+        "sha256": "96169549e8e1815f828815969f54a27bb3c389b9b57fc29ab1b5c0f8e7376ed5",
+        "size_bytes": 13531
+      },
+      "bfd": {
+        "differences": [],
+        "filename": "cptfontcb.bfd.~4~",
+        "sha256": "88a833d813a814413d612120eb23333e733e641642c99d285fc8e9c2eec97e4a",
+        "size_bytes": 9534
+      },
+      "font": "CPTFONTCB"
+    },
+    {
+      "bdf": {
+        "differences": [
+          "codes differ: only-world=[202] only-bdf=[]"
+        ],
+        "filename": "cptfontcc.bdf.~3~",
+        "sha256": "ed65f9e72409a5409a67c9203fde64a2d0805ba264fbca2926e61d766cb63ef7",
+        "size_bytes": 13628
+      },
+      "bfd": {
+        "differences": [],
+        "filename": "cptfontcc.bfd.~3~",
+        "sha256": "6bead6b363eaa3c8aaebadeeefcc1dfcfef3c1d6c9501c1cf44424d3bc4fa757",
+        "size_bytes": 9650
+      },
+      "font": "CPTFONTCC"
+    },
+    {
+      "bdf": {
+        "differences": [
+          "codes differ: only-world=[193, 194, 195, 196, 197, 198, 199, 200, 202, 203, 204, 205, 206, 207] only-bdf=[]"
+        ],
+        "filename": "cptfonti.bdf.~3~",
+        "sha256": "aced6af7242802a7030bd366783232bb022a469462fbf36a1956f8feed29e074",
+        "size_bytes": 13594
+      },
+      "bfd": {
+        "differences": [],
+        "filename": "cptfonti.bfd.~9~",
+        "sha256": "027edbc60eec9f178773a917f2f9c6c4642fe4319a0cdb64e3aa67e2e82ecdc6",
+        "size_bytes": 10180
+      },
+      "font": "CPTFONTI"
+    },
+    {
+      "bdf": {
+        "differences": [],
+        "filename": "dutch14.bdf.~3~",
+        "sha256": "0aec9839f26e31c9f9f39831312327a013a23420f1d821def017f855d883d032",
+        "size_bytes": 15004
+      },
+      "bfd": {
+        "differences": [],
+        "filename": "dutch14.bfd.~1~",
+        "sha256": "4580ecfbc22d224b62592b4e8a3f8231d5ac115b2b7259829b711d24300c2307",
+        "size_bytes": 11054
+      },
+      "font": "DUTCH14"
+    },
+    {
+      "bdf": {
+        "differences": [],
+        "filename": "dutch14b.bdf.~3~",
+        "sha256": "c7042c144727c11450356f8d152b8c3160317b0c7de484630cdcf9c45c6faf84",
+        "size_bytes": 15286
+      },
+      "bfd": {
+        "differences": [],
+        "filename": "dutch14b.bfd.~1~",
+        "sha256": "43ac0e21d1d9690e1964695ad7c858e9d2df8d7a65441034b5046b5abe4df824",
+        "size_bytes": 11008
+      },
+      "font": "DUTCH14B"
+    },
+    {
+      "bdf": {
+        "differences": [],
+        "filename": "dutch14bi.bdf.~3~",
+        "sha256": "f9cd3500ca15cf400ba4c170120d7f7125bb7f7c1f03ade7a9d8990a2721c1e3",
+        "size_bytes": 16064
+      },
+      "bfd": {
+        "differences": [],
+        "filename": "dutch14bi.bfd.~1~",
+        "sha256": "281eb880539ea935688e104a7c2f930de4822795ed1d6a0440cb6da98ee39923",
+        "size_bytes": 11054
+      },
+      "font": "DUTCH14BI"
+    },
+    {
+      "bdf": {
+        "differences": [],
+        "filename": "dutch14i.bdf.~3~",
+        "sha256": "e2a273fe4e90736beff7cf66961aff44b6ca363c635c5db4126fb4a06a4191c9",
+        "size_bytes": 15437
+      },
+      "bfd": {
+        "differences": [],
+        "filename": "dutch14i.bfd.~1~",
+        "sha256": "f41f6cd2bbedb035f40f6e491501557c104fdc105dcc13a9970c1009b42039af",
+        "size_bytes": 11056
+      },
+      "font": "DUTCH14I"
+    },
+    {
+      "bdf": {
+        "differences": [],
+        "filename": "dutch20.bdf.~3~",
+        "sha256": "bf61d46158e00795ff401114b6dbf63d5cde135e6d5719b158410e31e1de0d9e",
+        "size_bytes": 17464
+      },
+      "bfd": {
+        "differences": [],
+        "filename": "dutch20.bfd.~1~",
+        "sha256": "5a34fe694e75e3103bdaa56c930c220ad0fcdca4fcbf6ca488ade987709bf51e",
+        "size_bytes": 13586
+      },
+      "font": "DUTCH20"
+    },
+    {
+      "bdf": {
+        "differences": [],
+        "filename": "dutch20b.bdf.~3~",
+        "sha256": "6b0cab1c777d55cc5a07a8a80078fbac58c76dfa50d8f2a64d28b99a255e29bc",
+        "size_bytes": 18356
+      },
+      "bfd": {
+        "differences": [],
+        "filename": "dutch20b.bfd.~1~",
+        "sha256": "5ee04fe3602dc67999cb9ed7163f0e7d6a2f82b037d30542f7b5087306775ce3",
+        "size_bytes": 13500
+      },
+      "font": "DUTCH20B"
+    },
+    {
+      "bdf": {
+        "differences": [],
+        "filename": "dutch20bi.bdf.~3~",
+        "sha256": "a9e69430a35bb9a4675fd587d25b557c3a77970e5950497fbe80be0e091e6ecb",
+        "size_bytes": 18813
+      },
+      "bfd": {
+        "differences": [],
+        "filename": "dutch20bi.bfd.~1~",
+        "sha256": "4ff20753a66502328d7f226345e6f8b852d5c0fc680ef40483b9002027c586b8",
+        "size_bytes": 13566
+      },
+      "font": "DUTCH20BI"
+    },
+    {
+      "bdf": {
+        "differences": [],
+        "filename": "dutch20i.bdf.~3~",
+        "sha256": "61718ac8c31031bd2724b66c8d952c3695e74b619a5e97e7bd01c1705710fb83",
+        "size_bytes": 18530
+      },
+      "bfd": {
+        "differences": [],
+        "filename": "dutch20i.bfd.~2~",
+        "sha256": "31c68e493c2bf616590fd50f1a65e532869badd30325051c88af3119a47156c5",
+        "size_bytes": 13372
+      },
+      "font": "DUTCH20I"
+    },
+    {
+      "bdf": {
+        "differences": [],
+        "filename": "edsymbol12.bdf.~3~",
+        "sha256": "18025f1788fc71e6d01bfb18cf5ca9afbbbb0461587eb23827390a699c299fbb",
+        "size_bytes": 1210
+      },
+      "bfd": {
+        "differences": [],
+        "filename": "edsymbol12.bfd.~1~",
+        "sha256": "928fab8cf8ad1792ed7c0170d780dbb23dfa03d01460a48599802ec2625baf6c",
+        "size_bytes": 814
+      },
+      "font": "EDSYMBOL12"
+    },
+    {
+      "bdf": {
+        "differences": [],
+        "filename": "einy7.bdf.~3~",
+        "sha256": "30a1ed9974afd415125c0bb025e4121fce882f8c9644a79afb984574ca9df56a",
+        "size_bytes": 12692
+      },
+      "bfd": {
+        "differences": [],
+        "filename": "einy7.bfd.~7~",
+        "sha256": "6c4d938075d5cd9c12be57e99dedfbc5efb4886235a4d56f53546c243883de11",
+        "size_bytes": 6982
+      },
+      "font": "EINY7"
+    },
+    {
+      "bdf": {
+        "differences": [],
+        "filename": "einy8.bdf.~3~",
+        "sha256": "7e415eefda99f958f9f4b2db57f28f5365395a04f3869b735020fd949d21bd95",
+        "size_bytes": 12898
+      },
+      "bfd": {
+        "differences": [],
+        "filename": "einy8.bfd.~2~",
+        "sha256": "38a2b92099c976fa6d08989f1cabca131000542aa5fa23220aa49ea781a77e02",
+        "size_bytes": 7374
+      },
+      "font": "EINY8"
+    },
+    {
+      "bdf": {
+        "differences": [
+          "0: bbx [3, 3, 5, 6] != [10, 3, 0, 6]",
+          "0: bitmap differs",
+          "2: bbx [11, 16, 2, 0] != [13, 16, 0, 0]",
+          "2: bitmap differs",
+          "3: bbx [11, 16, 2, 0] != [13, 16, 0, 0]",
+          "3: bitmap differs",
+          "6: bbx [9, 1, 1, 5] != [10, 1, 0, 5]",
+          "6: bitmap differs",
+          "7: bbx [14, 1, 5, 5] != [21, 1, 0, 5]",
+          "7: bitmap differs",
+          "8: bbx [4, 3, 6, 12] != [10, 3, 0, 12]",
+          "8: bitmap differs",
+          "9: bbx [4, 3, 5, 12] != [10, 3, 0, 12]",
+          "9: bitmap differs",
+          "10: bbx [10, 15, 4, 0] != [14, 15, 0, 0]",
+          "10: bitmap differs",
+          "11: bbx [11, 15, 3, 0] != [14, 15, 0, 0]",
+          "11: bitmap differs",
+          "12: bbx [14, 16, 2, -1] != [16, 16, 0, -1]",
+          "12: bitmap differs",
+          "13: bbx [14, 16, 4, -3] != [20, 16, 0, -3]",
+          "13: bitmap differs",
+          "14: bbx [18, 15, 2, 0] != [20, 15, 0, 0]",
+          "14: bitmap differs",
+          "16: bbx [6, 2, 4, 12] != [10, 2, 0, 12]",
+          "16: bitmap differs",
+          "17: bbx [5, 3, 5, 12] != [10, 3, 0, 12]",
+          "17: bitmap differs",
+          "18: bbx [6, 5, 2, -5] != [10, 5, 0, -5]",
+          "18: bitmap differs",
+          "19: bbx [6, 3, 4, 12] != [10, 3, 0, 12]",
+          "19: bitmap differs",
+          "20: bbx [6, 2, 4, 12] != [10, 2, 0, 12]",
+          "20: bitmap differs",
+          "21: bbx [4, 7, 2, 2] != [6, 7, 0, 2]",
+          "21: bitmap differs",
+          "22: bbx [4, 7, 2, 2] != [6, 7, 0, 2]",
+          "22: bitmap differs",
+          "23: bbx [8, 7, 2, 2] != [10, 7, 0, 2]",
+          "23: bitmap differs",
+          "24: bbx [8, 7, 2, 2] != [10, 7, 0, 2]",
+          "24: bitmap differs",
+          "25: bbx [34, 16, 3, -1] != [37, 16, 0, -1]",
+          "25: bitmap differs",
+          "26: bbx [7, 5, 5, 10] != [12, 5, 0, 10]",
+          "26: bitmap differs",
+          "27: bbx [8, 5, 2, -3] != [12, 5, 0, -3]",
+          "27: bitmap differs",
+          "29: bbx [14, 16, 2, -1] != [16, 16, 0, -1]",
+          "29: bitmap differs",
+          "30: bbx [14, 16, 2, -1] != [16, 16, 0, -1]",
+          "30: bitmap differs",
+          "31: bbx [5, 15, 4, 0] != [10, 15, 0, 0]",
+          "31: bitmap differs",
+          "33: bbx [5, 15, 4, 0] != [10, 15, 0, 0]",
+          "33: bitmap differs",
+          "34: bbx [7, 5, 5, 10] != [12, 5, 0, 10]",
+          "34: bitmap differs",
+          "36: bbx [18, 18, 2, -2] != [20, 18, 0, -2]",
+          "36: bitmap differs",
+          "37: bbx [23, 16, 3, 0] != [26, 16, 0, 0]",
+          "37: bitmap differs",
+          "38: bbx [20, 16, 2, 0] != [22, 16, 0, 0]",
+          "38: bitmap differs",
+          "39: bbx [3, 5, 5, 10] != [8, 5, 0, 10]",
+          "39: bitmap differs",
+          "40: bbx [8, 16, 2, 0] != [10, 16, 0, 0]",
+          "40: bitmap differs",
+          "41: bbx [7, 16, 1, 0] != [8, 16, 0, 0]",
+          "41: bitmap differs",
+          "42: bbx [10, 8, 4, 7] != [14, 8, 0, 7]",
+          "42: bitmap differs",
+          "44: bbx [4, 5, 3, -3] != [10, 5, 0, -3]",
+          "44: bitmap differs",
+          "45: bbx [5, 2, 3, 4] != [9, 2, 0, 4]",
+          "45: bitmap differs",
+          "46: bbx [3, 3, 4, 0] != [10, 3, 0, 0]",
+          "46: bitmap differs",
+          "48: bbx [18, 16, 2, 0] != [20, 16, 0, 0]",
+          "48: bitmap differs",
+          "49: bbx [9, 16, 3, 0] != [13, 16, 0, 0]",
+          "49: bitmap differs",
+          "50: bbx [18, 16, 2, 0] != [20, 16, 0, 0]",
+          "50: bitmap differs",
+          "51: bbx [18, 16, 2, 0] != [20, 16, 0, 0]",
+          "51: bitmap differs",
+          "53: bbx [18, 16, 2, 0] != [20, 16, 0, 0]",
+          "53: bitmap differs",
+          "54: bbx [18, 16, 2, 0] != [20, 16, 0, 0]",
+          "54: bitmap differs",
+          "55: bbx [16, 16, 4, 0] != [20, 16, 0, 0]",
+          "55: bitmap differs",
+          "56: bbx [18, 16, 2, 0] != [20, 16, 0, 0]",
+          "56: bitmap differs",
+          "57: bbx [18, 16, 2, 0] != [20, 16, 0, 0]",
+          "57: bitmap differs",
+          "58: bbx [4, 11, 4, 0] != [10, 11, 0, 0]",
+          "58: bitmap differs",
+          "59: bbx [5, 14, 3, -3] != [10, 14, 0, -3]",
+          "59: bitmap differs",
+          "63: bbx [13, 16, 3, 0] != [16, 16, 0, 0]",
+          "63: bitmap differs",
+          "66: bbx [19, 16, 2, 0] != [21, 16, 0, 0]",
+          "66: bitmap differs",
+          "67: bbx [19, 16, 2, 0] != [21, 16, 0, 0]",
+          "67: bitmap differs",
+          "68: bbx [20, 16, 2, 0] != [22, 16, 0, 0]",
+          "68: bitmap differs",
+          "69: bbx [18, 16, 2, 0] != [20, 16, 0, 0]",
+          "69: bitmap differs",
+          "70: bbx [17, 16, 2, 0] != [19, 16, 0, 0]",
+          "70: bitmap differs",
+          "71: bbx [20, 16, 2, 0] != [22, 16, 0, 0]",
+          "71: bitmap differs",
+          "72: bbx [20, 16, 2, 0] != [22, 16, 0, 0]",
+          "72: bitmap differs",
+          "73: bbx [5, 16, 2, 0] != [7, 16, 0, 0]",
+          "73: bitmap differs",
+          "74: bbx [16, 16, 1, 0] != [17, 16, 0, 0]",
+          "74: bitmap differs",
+          "75: bbx [20, 16, 2, 0] != [22, 16, 0, 0]",
+          "75: bitmap differs",
+          "76: bbx [14, 16, 2, 0] != [16, 16, 0, 0]",
+          "76: bitmap differs",
+          "77: bbx [26, 16, 2, 0] != [28, 16, 0, 0]",
+          "77: bitmap differs",
+          "78: bbx [21, 16, 2, 0] != [23, 16, 0, 0]",
+          "78: bitmap differs",
+          "79: bbx [20, 16, 2, 0] != [22, 16, 0, 0]",
+          "79: bitmap differs",
+          "80: bbx [19, 16, 2, 0] != [21, 16, 0, 0]",
+          "80: bitmap differs",
+          "81: bbx [20, 16, 2, 0] != [22, 16, 0, 0]",
+          "81: bitmap differs",
+          "82: bbx [18, 16, 2, 0] != [20, 16, 0, 0]",
+          "82: bitmap differs",
+          "83: bbx [18, 16, 2, 0] != [20, 16, 0, 0]",
+          "83: bitmap differs",
+          "84: bbx [15, 16, 3, 0] != [18, 16, 0, 0]",
+          "84: bitmap differs",
+          "85: bbx [19, 16, 2, 0] != [21, 16, 0, 0]",
+          "85: bitmap differs",
+          "86: bbx [21, 16, 4, 0] != [25, 16, 0, 0]",
+          "86: bitmap differs",
+          "87: bbx [30, 16, 3, 0] != [33, 16, 0, 0]",
+          "87: bitmap differs",
+          "89: bbx [18, 16, 3, 0] != [21, 16, 0, 0]",
+          "89: bitmap differs",
+          "90: bbx [18, 16, 1, 0] != [19, 16, 0, 0]",
+          "90: bitmap differs",
+          "91: bbx [8, 16, 2, 0] != [10, 16, 0, 0]",
+          "91: bitmap differs",
+          "92: bbx [4, 5, 2, -3] != [8, 5, 0, -3]",
+          "92: bitmap differs",
+          "93: bbx [8, 16, 1, 0] != [9, 16, 0, 0]",
+          "93: bitmap differs",
+          "94: bbx [6, 3, 4, 12] != [10, 3, 0, 12]",
+          "94: bitmap differs",
+          "96: bbx [3, 5, 5, 10] != [8, 5, 0, 10]",
+          "96: bitmap differs",
+          "97: bbx [14, 11, 2, 0] != [16, 11, 0, 0]",
+          "97: bitmap differs",
+          "98: bbx [15, 16, 1, 0] != [16, 16, 0, 0]",
+          "98: bitmap differs",
+          "99: bbx [13, 11, 2, 0] != [15, 11, 0, 0]",
+          "99: bitmap differs",
+          "104: bbx [15, 16, 1, 0] != [16, 16, 0, 0]",
+          "104: bitmap differs",
+          "107: bbx [13, 16, 2, 0] != [15, 16, 0, 0]",
+          "107: bitmap differs",
+          "110: bbx [15, 11, 1, 0] != [16, 11, 0, 0]",
+          "110: bitmap differs",
+          "113: bbx [14, 15, 2, -4] != [16, 15, 0, -4]",
+          "113: bitmap differs",
+          "116: bbx [9, 13, 3, 0] != [12, 13, 0, 0]",
+          "116: bitmap differs",
+          "117: bbx [14, 11, 2, 0] != [16, 11, 0, 0]",
+          "117: bitmap differs",
+          "118: bbx [11, 11, 3, 0] != [14, 11, 0, 0]",
+          "118: bitmap differs",
+          "120: bbx [13, 11, 1, 0] != [14, 11, 0, 0]",
+          "120: bitmap differs",
+          "122: bbx [13, 11, 1, 0] != [14, 11, 0, 0]",
+          "122: bitmap differs",
+          "126: bbx [6, 2, 4, 12] != [10, 2, 0, 12]",
+          "126: bitmap differs",
+          "127: bbx [3, 11, 2, 0] != [5, 11, 0, 0]",
+          "127: bitmap differs"
+        ],
+        "filename": "eurex21i.bdf.~4~",
+        "sha256": "851aa39fd8f96c9a5213f4d8e9624a06b7eedf91d3bd724b888e1b96bf13eabb",
+        "size_bytes": 18826
+      },
+      "bfd": {
+        "differences": [],
+        "filename": "eurex21i.bfd.~3~",
+        "sha256": "9d0de6a9f31a0c45401e1fe2745730d0e6df441a4eb4c456b96023e851c46d6b",
+        "size_bytes": 12862
+      },
+      "font": "EUREX21I"
+    },
+    {
+      "bdf": {
+        "differences": [],
+        "filename": "eurex24i.bdf.~4~",
+        "sha256": "d2f9a36f5126ea1a312481aa19a119247b08f22f86034df3403a161bb81d4cd3",
+        "size_bytes": 19747
+      },
+      "bfd": {
+        "differences": [],
+        "filename": "eurex24i.bfd.~6~",
+        "sha256": "f60cecaa12986fe06894a8829480731e58191be8550e5d3d483d8481b164273f",
+        "size_bytes": 14360
+      },
+      "font": "EUREX24I"
+    },
+    {
+      "bdf": {
+        "differences": [],
+        "filename": "hippo10.bdf.~3~",
+        "sha256": "f2b468ece7fa3f58db5306dbab9d3a7e88c59c1c73e373df4cf37ab9682bb5d7",
+        "size_bytes": 10744
+      },
+      "bfd": {
+        "differences": [],
+        "filename": "hippo10.bfd.~2~",
+        "sha256": "6df593c4c7a698c4e5a1ab5a33ef9927b39a3069f12207d076324abe0183c71c",
+        "size_bytes": 8286
+      },
+      "font": "HIPPO10"
+    },
+    {
+      "bdf": {
+        "differences": [],
+        "filename": "hippo12.bdf.~3~",
+        "sha256": "479511f3d6eecfa8b3c8aab7f5e2493bebcdd6fc5dd6d60074ef366f5b3b090b",
+        "size_bytes": 10788
+      },
+      "bfd": {
+        "differences": [],
+        "filename": "hippo12.bfd.~1~",
+        "sha256": "99fb4f53d80a524c836962040723556a6cba4340776c6564e0e0334f5f70f1f8",
+        "size_bytes": 7974
+      },
+      "font": "HIPPO12"
+    },
+    {
+      "bdf": {
+        "differences": [],
+        "filename": "hl10.bdf.~3~",
+        "sha256": "5a5bbb3a59187977090766a0ca4c4bb0fe510c3b385f410eda7a1e0bd56cb48b",
+        "size_bytes": 13451
+      },
+      "bfd": {
+        "differences": [],
+        "filename": "hl10.bfd.~5~",
+        "sha256": "49bee3ca29ba37bfa269eaa4d648c1ed0963a39da7b083d7f85bba273d9dfde8",
+        "size_bytes": 9380
+      },
+      "font": "HL10"
+    },
+    {
+      "bdf": {
+        "differences": [],
+        "filename": "hl10b.bdf.~3~",
+        "sha256": "2591748ff0597ecf0e3e084bb3995c99944a0d6a44f1bbe1f179f5579bbd9448",
+        "size_bytes": 13550
+      },
+      "bfd": {
+        "differences": [],
+        "filename": "hl10b.bfd.~6~",
+        "sha256": "ed038125c5d6bb1792b201a1fe97b85e0503271b1b1252ae3109eee908209e67",
+        "size_bytes": 8950
+      },
+      "font": "HL10B"
+    },
+    {
+      "bdf": {
+        "differences": [],
+        "filename": "hl10bi.bdf.~3~",
+        "sha256": "8ef4dc1008dc1d06d47ba5e596f794348cb98d1414494cc1cc06b0a73fc5d380",
+        "size_bytes": 13753
+      },
+      "bfd": {
+        "differences": [],
+        "filename": "hl10bi.bfd.~4~",
+        "sha256": "94debfcf0439ff795992684788a35c4f4a20313e5953261add3f854c3b3bc3ba",
+        "size_bytes": 9056
+      },
+      "font": "HL10BI"
+    },
+    {
+      "bdf": {
+        "differences": [],
+        "filename": "hl10i.bdf.~3~",
+        "sha256": "ace952e8aaf10a3e4000cdb16bc24f726c1b099f92a2511d19360e97f63c360f",
+        "size_bytes": 13534
+      },
+      "bfd": {
+        "differences": [],
+        "filename": "hl10i.bfd.~4~",
+        "sha256": "167d0df9a5d1432b5aa896f9db5d71138aabfc80b0ae6d62e2d5422e02e4fda7",
+        "size_bytes": 9166
+      },
+      "font": "HL10I"
+    },
+    {
+      "bdf": {
+        "differences": [],
+        "filename": "hl12.bdf.~3~",
+        "sha256": "efe69e05cc2a678b5d96c48ec1f3b9bde68c27bb44bc4dbb886dc9191f17a00b",
+        "size_bytes": 14178
+      },
+      "bfd": {
+        "differences": [],
+        "filename": "hl12.bfd.~3~",
+        "sha256": "5f16a85e54235f18565b7152f4da41fecc1147209d8f7701f67820cec2e739c1",
+        "size_bytes": 10540
+      },
+      "font": "HL12"
+    },
+    {
+      "bdf": {
+        "differences": [],
+        "filename": "hl12b.bdf.~3~",
+        "sha256": "2f59732d742cff217ba265ed9d05adf9d83c8f16a059931f39ae0219074108f9",
+        "size_bytes": 14436
+      },
+      "bfd": {
+        "differences": [],
+        "filename": "hl12b.bfd.~6~",
+        "sha256": "5956a4950ec6b3caf2d74c1cdc19e46fb8e32ab3c66ed9718bfa15e0aba62448",
+        "size_bytes": 10526
+      },
+      "font": "HL12B"
+    },
+    {
+      "bdf": {
+        "differences": [],
+        "filename": "hl12bi.bdf.~3~",
+        "sha256": "aa95425963dcb3b3a05ad5b7981400d37fb82404411a1a438835d82d6c5dd062",
+        "size_bytes": 14802
+      },
+      "bfd": {
+        "differences": [],
+        "filename": "hl12bi.bfd.~5~",
+        "sha256": "74b9c83bd59c7962b455adf6bd674c924718226003673bde5896e47adbf0e883",
+        "size_bytes": 10582
+      },
+      "font": "HL12BI"
+    },
+    {
+      "bdf": {
+        "differences": [],
+        "filename": "hl12i.bdf.~3~",
+        "sha256": "994934cc916fcb3dc08152023f1d94f7d347fff59202560372899f681df61139",
+        "size_bytes": 14419
+      },
+      "bfd": {
+        "differences": [],
+        "filename": "hl12i.bfd.~5~",
+        "sha256": "36dec629f49617be502f0e5acaf47b5de4ff98cbdb9510f9c3b819c0c536d727",
+        "size_bytes": 10530
+      },
+      "font": "HL12I"
+    },
+    {
+      "bdf": {
+        "differences": [],
+        "filename": "hl14.bdf.~3~",
+        "sha256": "92f9af14f422be7cb80f05d00594240b1c63e916947ed887db78df53d3a86778",
+        "size_bytes": 14962
+      },
+      "bfd": {
+        "differences": [],
+        "filename": "hl14.bfd.~4~",
+        "sha256": "e70f6621a2665b4b01ad6c9da936fcaf794632e928b0268bea0addb632aea76f",
+        "size_bytes": 10776
+      },
+      "font": "HL14"
+    },
+    {
+      "bdf": {
+        "differences": [],
+        "filename": "hl14b.bdf.~3~",
+        "sha256": "441087222acd2d2051a0ebbfe1457f9f5da55c59299821761bb61579ff081c71",
+        "size_bytes": 15434
+      },
+      "bfd": {
+        "differences": [],
+        "filename": "hl14b.bfd.~2~",
+        "sha256": "ea2ff0814e9ce108ed26fb0ffc3751b1d431fc1e58cc2e10e7c2e17ed16d312c",
+        "size_bytes": 10994
+      },
+      "font": "HL14B"
+    },
+    {
+      "bdf": {
+        "differences": [],
+        "filename": "hl14bi.bdf.~3~",
+        "sha256": "d2bba864f650cfca53d554e78d2f35f106616e1f383ba402aaabbfc8d7c762d8",
+        "size_bytes": 16076
+      },
+      "bfd": {
+        "differences": [],
+        "filename": "hl14bi.bfd.~3~",
+        "sha256": "afcbf4cb6b96e17b87c33e027fca27d370709863dc5fcc3590e69039288c88ae",
+        "size_bytes": 11052
+      },
+      "font": "HL14BI"
+    },
+    {
+      "bdf": {
+        "differences": [],
+        "filename": "hl14i.bdf.~3~",
+        "sha256": "7dc65329a88abc9ac18003e96aac470163675db23684c7941e4a6cd933537060",
+        "size_bytes": 15686
+      },
+      "bfd": {
+        "differences": [],
+        "filename": "hl14i.bfd.~2~",
+        "sha256": "3dea211d4c388fd0f56a58a728bccba74dbbe10de92281fbe1bde92c1cd391d0",
+        "size_bytes": 11010
+      },
+      "font": "HL14I"
+    },
+    {
+      "bdf": {
+        "differences": [],
+        "filename": "hl8.bdf.~3~",
+        "sha256": "a7d43dc84446d36ab0347ae710d6b5b66b6507a0b9bde77ae6c2621e0cf6dd97",
+        "size_bytes": 13098
+      },
+      "bfd": {
+        "differences": [],
+        "filename": "hl8.bfd.~2~",
+        "sha256": "81292f9e0e3647d0786071668b3ae303a62ae229ae90cc2e1712e679e51d3429",
+        "size_bytes": 9014
+      },
+      "font": "HL8"
+    },
+    {
+      "bdf": {
+        "differences": [],
+        "filename": "hl8b.bdf.~3~",
+        "sha256": "470079d70b2f1e4a3fa612c5582ba0289d15a44e1744ade333ded785266ab395",
+        "size_bytes": 13139
+      },
+      "bfd": {
+        "differences": [],
+        "filename": "hl8b.bfd.~2~",
+        "sha256": "7f0e206a77020faefc256e48be0a81c3d9355f3c4689366d16d2bf3cc8ffc267",
+        "size_bytes": 9016
+      },
+      "font": "HL8B"
+    },
+    {
+      "bdf": {
+        "differences": [],
+        "filename": "hl8bi.bdf.~3~",
+        "sha256": "7e0db9912c67cbd4cd27327c3a54fd0d1ad59ba7f0453febe9978ee6056347fd",
+        "size_bytes": 13179
+      },
+      "bfd": {
+        "differences": [],
+        "filename": "hl8bi.bfd.~1~",
+        "sha256": "11c2e0d6dbcf50a351f0967cfc6a346f92604027605125b899193a032c1e126e",
+        "size_bytes": 9018
+      },
+      "font": "HL8BI"
+    },
+    {
+      "bdf": {
+        "differences": [],
+        "filename": "hl8i.bdf.~3~",
+        "sha256": "d02ac4dc4855c6f024d89bfd1a89b7e38c971ebe9d0b5d93e1ba070f7c800509",
+        "size_bytes": 13116
+      },
+      "bfd": {
+        "differences": [],
+        "filename": "hl8i.bfd.~2~",
+        "sha256": "a9cb6c6b5cd0825b963213ccee9e0c30441d94800993bad43f8f4baf0eca1864",
+        "size_bytes": 8472
+      },
+      "font": "HL8I"
+    },
+    {
+      "bdf": {
+        "differences": [],
+        "filename": "jess11.bdf.~3~",
+        "sha256": "780e29a052f8a707e502dd7775bdad1726852bd75bfb81b08cbc5be189d8f7ba",
+        "size_bytes": 13697
+      },
+      "bfd": {
+        "differences": [],
+        "filename": "jess11.bfd.~5~",
+        "sha256": "cba95c59470421004d5d491beef16907340dae49ab200439ef8300430d9f275a",
+        "size_bytes": 8432
+      },
+      "font": "JESS11"
+    },
+    {
+      "bdf": {
+        "differences": [],
+        "filename": "jess11b.bdf.~3~",
+        "sha256": "39c00f116224e8716ff6555d99ea038f908c9024a514c78bcc1f3600501b3c68",
+        "size_bytes": 13841
+      },
+      "bfd": {
+        "differences": [],
+        "filename": "jess11b.bfd.~1~",
+        "sha256": "37b4e0ef98dc93a222624aa1baa3f75d0d210d5ccb6d0de417e111c46df9f8ba",
+        "size_bytes": 8434
+      },
+      "font": "JESS11B"
+    },
+    {
+      "bdf": {
+        "differences": [],
+        "filename": "jess11i.bdf.~3~",
+        "sha256": "7641b2dcc31d0f844f4822073189974e3c1c2ad83751412572e8301c363f8f95",
+        "size_bytes": 13967
+      },
+      "bfd": {
+        "differences": [],
+        "filename": "jess11i.bfd.~1~",
+        "sha256": "bc1a22d056b8573dd939ece5839e4906158399c4239de70e8c36ea677281732d",
+        "size_bytes": 8430
+      },
+      "font": "JESS11I"
+    },
+    {
+      "bdf": {
+        "differences": [],
+        "filename": "jess13.bdf.~3~",
+        "sha256": "b9175b40301a6d632f6275277b89379d7017d67129f1e561d188d7a4f50e4269",
+        "size_bytes": 14190
+      },
+      "bfd": {
+        "differences": [],
+        "filename": "jess13.bfd.~4~",
+        "sha256": "c915c389960620cc19357c954917d3791e4e582db610fb0b8a1b57352ef1115e",
+        "size_bytes": 10036
+      },
+      "font": "JESS13"
+    },
+    {
+      "bdf": {
+        "differences": [],
+        "filename": "jess13b.bdf.~3~",
+        "sha256": "083e8339dbc4ec1097282f7df354c0fe1ab1b542d0a91245985dfad41bd1acb7",
+        "size_bytes": 14315
+      },
+      "bfd": {
+        "differences": [],
+        "filename": "jess13b.bfd.~3~",
+        "sha256": "28abea3e8c177b9b5774efe50a837950ff0b6f1505061a9949023dd5e21885a6",
+        "size_bytes": 10030
+      },
+      "font": "JESS13B"
+    },
+    {
+      "bdf": {
+        "differences": [],
+        "filename": "jess13i.bdf.~3~",
+        "sha256": "fd57bd89e55a92fd2927f67eac1de96f6ccd80255ba467886a1cc77446a6d966",
+        "size_bytes": 14651
+      },
+      "bfd": {
+        "differences": [],
+        "filename": "jess13i.bfd.~2~",
+        "sha256": "91f8ddaea3b6f8e61af6f370cd18f3f75961d3cd2a4e8737dbad41f7ec47b8bd",
+        "size_bytes": 10038
+      },
+      "font": "JESS13I"
+    },
+    {
+      "bdf": {
+        "differences": [],
+        "filename": "jess14.bdf.~3~",
+        "sha256": "caad8d51b8ac7ab9089da91dd84e35c72db68e4796a7d83401e62ab410567b03",
+        "size_bytes": 14440
+      },
+      "bfd": {
+        "differences": [],
+        "filename": "jess14.bfd.~4~",
+        "sha256": "09034816e7a10d01af08a77b68c888c608330760c2411b40d5d9177032b415cf",
+        "size_bytes": 10536
+      },
+      "font": "JESS14"
+    },
+    {
+      "bdf": {
+        "differences": [],
+        "filename": "jess14b.bdf.~3~",
+        "sha256": "7f19c71519147888c6dbf7fa1d7085fa1cf824eacad47423eab3a1f3766d1a04",
+        "size_bytes": 14736
+      },
+      "bfd": {
+        "differences": [],
+        "filename": "jess14b.bfd.~1~",
+        "sha256": "754997ef5f4a124f7b3c917af317e9093f6c63b5e314ac147219155f6f5b212d",
+        "size_bytes": 10546
+      },
+      "font": "JESS14B"
+    },
+    {
+      "bdf": {
+        "differences": [],
+        "filename": "jess14i.bdf.~3~",
+        "sha256": "d5c8ead53fafee220f708d3c76f7cc418d71f23a2892617fda2c935f04aac047",
+        "size_bytes": 15490
+      },
+      "bfd": {
+        "differences": [],
+        "filename": "jess14i.bfd.~1~",
+        "sha256": "a11c69e92188e2489b3a6610a23257cacdd70beedd9eda09ea5c1bd653c6bbb3",
+        "size_bytes": 10402
+      },
+      "font": "JESS14I"
+    },
+    {
+      "bdf": {
+        "differences": [],
+        "filename": "math10.bdf.~3~",
+        "sha256": "1971d9031a21aa80bd592e2590eb98f3c45c9086e757b455f5f7bf60ad7bca60",
+        "size_bytes": 11857
+      },
+      "bfd": {
+        "differences": [],
+        "filename": "math10.bfd.~4~",
+        "sha256": "bbc315de359a3c78bce0a11dfd894608e251e8be9127652e1bab4f4839b7d53f",
+        "size_bytes": 8646
+      },
+      "font": "MATH10"
+    },
+    {
+      "bdf": {
+        "differences": [],
+        "filename": "math12.bdf.~3~",
+        "sha256": "f22663f2b8c9991f72c3a924c21fa3973159902db69da9301217ac28f033e374",
+        "size_bytes": 11915
+      },
+      "bfd": {
+        "differences": [],
+        "filename": "math12.bfd.~1~",
+        "sha256": "97171c8acc303211417ee1d9b1b80ad95a5c015aaa1a72921374198208b934b9",
+        "size_bytes": 8372
+      },
+      "font": "MATH12"
+    },
+    {
+      "bdf": {
+        "differences": [],
+        "filename": "medfnt.bdf.~3~",
+        "sha256": "aba0c12f308de8dc3555d92d1201619efd9ae38ee6ed35afd2df3a64d675c2ce",
+        "size_bytes": 14198
+      },
+      "bfd": {
+        "differences": [],
+        "filename": "medfnt.bfd.~7~",
+        "sha256": "8e39fa90ef2ac0c92003a6953763d812962bc971304bc00cf4e2331365a8c56a",
+        "size_bytes": 9600
+      },
+      "font": "MEDFNT"
+    },
+    {
+      "bdf": {
+        "differences": [],
+        "filename": "medfntb.bdf.~3~",
+        "sha256": "194a3fa7bc7b7ab9edce94a91b79abb414a9ac3775fa1c2647cad2faa51a1fa6",
+        "size_bytes": 14473
+      },
+      "bfd": {
+        "differences": [],
+        "filename": "medfntb.bfd.~1~",
+        "sha256": "e0490b0bb0877f4741627c7883ceb598771a7b7e48c83e516606c537ec071076",
+        "size_bytes": 10010
+      },
+      "font": "MEDFNTB"
+    },
+    {
+      "bdf": {
+        "differences": [],
+        "filename": "medfntbi.bdf.~3~",
+        "sha256": "199856a173663d5ede66f01e22e570e1d75280f3c1e455ef5f462ea90eb1aa60",
+        "size_bytes": 15810
+      },
+      "bfd": {
+        "differences": [],
+        "filename": "medfntbi.bfd.~1~",
+        "sha256": "f597cfbb12ec27267ec65a65cca5a35fa7f865802ebf4ac140576c7efa8508fd",
+        "size_bytes": 10012
+      },
+      "font": "MEDFNTBI"
+    },
+    {
+      "bdf": {
+        "differences": [],
+        "filename": "medfnti.bdf.~3~",
+        "sha256": "0343d9234f124646d21f83a1dc36485c5f4074eef1b315bb881e529b3ead9d47",
+        "size_bytes": 15224
+      },
+      "bfd": {
+        "differences": [],
+        "filename": "medfnti.bfd.~1~",
+        "sha256": "df8094aa94d50555abe62879473d69a526293fa42b70ee352130acd2ee2d0bb5",
+        "size_bytes": 9602
+      },
+      "font": "MEDFNTI"
+    },
+    {
+      "bdf": {
+        "differences": [
+          "codes differ: only-world=[46] only-bdf=[]"
+        ],
+        "filename": "mouse.bdf.~3~",
+        "sha256": "71e11fdf577b354c1792ee250be39f1b73b70383632faa45c1dbf01f057a2eb9",
+        "size_bytes": 7893
+      },
+      "bfd": {
+        "differences": [],
+        "filename": "mouse.bfd.~7~",
+        "sha256": "8d822aedfd28ce6115c7cf03840e58aefa9743a7f7596617110fe0f73336cae0",
+        "size_bytes": 4624
+      },
+      "font": "MOUSE"
+    },
+    {
+      "bdf": {
+        "differences": [],
+        "filename": "narrow.bdf.~3~",
+        "sha256": "36cdbcca14acdd52b58cd40db0b8737fe05d238eee231465ad0d423a80827137",
+        "size_bytes": 2524
+      },
+      "bfd": {
+        "differences": [],
+        "filename": "narrow.bfd.~5~",
+        "sha256": "c39381fa6d3273207ae5732a2a38f470c1511b7faa6c21c038bd58e388d6a534",
+        "size_bytes": 1462
+      },
+      "font": "NARROW"
+    },
+    {
+      "bdf": {
+        "differences": [],
+        "filename": "swiss12-ccaps.bdf.~3~",
+        "sha256": "34b02d6b99a1276c0039369093baf0f9889d142d3d22887e1a5bb421f2714d69",
+        "size_bytes": 14064
+      },
+      "bfd": {
+        "differences": [],
+        "filename": "swiss12-ccaps.bfd.~2~",
+        "sha256": "758661b7e88148a9368575ab6cf0e0a5ae51226d957cc08c4174cf51d0133844",
+        "size_bytes": 10230
+      },
+      "font": "SWISS12-CCAPS"
+    },
+    {
+      "bdf": {
+        "differences": [],
+        "filename": "swiss12b-ccaps.bdf.~3~",
+        "sha256": "a65a2711af1c8b63489f16f1d0e5fea7f55c44f6206a255acaad94f5e35c872c",
+        "size_bytes": 14185
+      },
+      "bfd": {
+        "differences": [],
+        "filename": "swiss12b-ccaps.bfd.~2~",
+        "sha256": "b61713cf8e97a21f015689d5a7d30a9b0b40b3d558b4f787d7a6a05ab8846b5b",
+        "size_bytes": 10192
+      },
+      "font": "SWISS12B-CCAPS"
+    },
+    {
+      "bdf": {
+        "differences": [],
+        "filename": "swiss20.bdf.~3~",
+        "sha256": "c6682cd5a56c06f7e5ae79be2f90a5a1ac9d3b49ec9a92ade38bd35ed3a2043e",
+        "size_bytes": 17648
+      },
+      "bfd": {
+        "differences": [],
+        "filename": "swiss20.bfd.~1~",
+        "sha256": "9bbe91e6d8bcc6ec639b320caa7f483168977fb6ae49dc5ae05d112d11efe977",
+        "size_bytes": 13586
+      },
+      "font": "SWISS20"
+    },
+    {
+      "bdf": {
+        "differences": [],
+        "filename": "swiss20b.bdf.~3~",
+        "sha256": "54ef6778daa569cccccbfaa601f668941e7ef63b7604aad6ea15f00b9181dc4e",
+        "size_bytes": 18378
+      },
+      "bfd": {
+        "differences": [],
+        "filename": "swiss20b.bfd.~1~",
+        "sha256": "af5b15433196a23a729bb09cf20937a9cd5369affe36ce1993f8593f43a48714",
+        "size_bytes": 13596
+      },
+      "font": "SWISS20B"
+    },
+    {
+      "bdf": {
+        "differences": [],
+        "filename": "swiss20bi.bdf.~3~",
+        "sha256": "702de37a2c125554a3c33a5612a24b4aee8f4048c35bb6ca714d0ad8a20bf2de",
+        "size_bytes": 18643
+      },
+      "bfd": {
+        "differences": [],
+        "filename": "swiss20bi.bfd.~1~",
+        "sha256": "17b39083d7277e3dbe0852a4c57f7ecccbd82b87842e62084d8548f3a283902b",
+        "size_bytes": 13598
+      },
+      "font": "SWISS20BI"
+    },
+    {
+      "bdf": {
+        "differences": [],
+        "filename": "swiss20i.bdf.~3~",
+        "sha256": "d0a0e4da1168a6945c2cb1aec828ebc3b6cfd8b97146f9e80cccab0ceb543e9e",
+        "size_bytes": 18453
+      },
+      "bfd": {
+        "differences": [],
+        "filename": "swiss20i.bfd.~1~",
+        "sha256": "ad2e9c63276f802d520404ae64af708ebb6922fbb20704b41d424c3845d9e2f8",
+        "size_bytes": 13568
+      },
+      "font": "SWISS20I"
+    },
+    {
+      "bdf": {
+        "differences": [],
+        "filename": "symbol10.bdf.~3~",
+        "sha256": "732555e822a0585948687601e31b1da4cdd2835bbe2b4a8220c087a71b02fcd6",
+        "size_bytes": 15194
+      },
+      "bfd": {
+        "differences": [],
+        "filename": "symbol10.bfd.~2~",
+        "sha256": "b87c70c4c69805d2802d4f291105cfa2bef42adcee67355ff4e0f9a5afbc5b3c",
+        "size_bytes": 10540
+      },
+      "font": "SYMBOL10"
+    },
+    {
+      "bdf": {
+        "differences": [],
+        "filename": "symbol12.bdf.~3~",
+        "sha256": "284c3419fb5469c00cae0fc479a74b23bd92c5506aadd65480af3f8204cef9ac",
+        "size_bytes": 8361
+      },
+      "bfd": {
+        "differences": [],
+        "filename": "symbol12.bfd.~10~",
+        "sha256": "dd820bdd06662fab5cc6d1109d474158d2df6789e6e1f0bbaf6f4d181847ecbd",
+        "size_bytes": 6338
+      },
+      "font": "SYMBOL12"
+    },
+    {
+      "bdf": {
+        "differences": [],
+        "filename": "tiny.bdf.~3~",
+        "sha256": "9f38f4d4a16369306c927b62cf013b393d60d1179efec843e0c04463238b8f49",
+        "size_bytes": 12085
+      },
+      "bfd": {
+        "differences": [],
+        "filename": "tiny.bfd.~2~",
+        "sha256": "7bebe2b26b491b8d91e713f89a66ba8b262c34d4323cdbe5f1acfff25ff2e887",
+        "size_bytes": 5540
+      },
+      "font": "TINY"
+    },
+    {
+      "bdf": {
+        "differences": [],
+        "filename": "tr10.bdf.~3~",
+        "sha256": "0ed3273a69fe2efff19e8006da050b637dfb9eb75383c38ba5abdf07abed763c",
+        "size_bytes": 13446
+      },
+      "bfd": {
+        "differences": [],
+        "filename": "tr10.bfd.~4~",
+        "sha256": "f3f5ac16750055a98dcd92a87b5b4ddaf949d9b1e93fe7e5639838446d05f9a0",
+        "size_bytes": 9484
+      },
+      "font": "TR10"
+    },
+    {
+      "bdf": {
+        "differences": [],
+        "filename": "tr10b.bdf.~3~",
+        "sha256": "65e4b57413f83df037b9ee9947ad1fcf6fba628f423f7726e358731cc2c20ea5",
+        "size_bytes": 13503
+      },
+      "bfd": {
+        "differences": [],
+        "filename": "tr10b.bfd.~3~",
+        "sha256": "7ab96865197ec062eb7536afb8a9fe92a882849584b8c94d78537190c9e744a2",
+        "size_bytes": 9490
+      },
+      "font": "TR10B"
+    },
+    {
+      "bdf": {
+        "differences": [],
+        "filename": "tr10bi.bdf.~3~",
+        "sha256": "c18830bd53e45bb65da5d7f7028a50c622834a2d96f9542626af853a0abe5b75",
+        "size_bytes": 13647
+      },
+      "bfd": {
+        "differences": [],
+        "filename": "tr10bi.bfd.~4~",
+        "sha256": "09ee84a9f3af37f31d4a89f47aadffd655eb3b454af162751156d00f49e61fb0",
+        "size_bytes": 9528
+      },
+      "font": "TR10BI"
+    },
+    {
+      "bdf": {
+        "differences": [],
+        "filename": "tr10i.bdf.~3~",
+        "sha256": "e535b18a5d99407956db3825e0d6fde5ab3bb31a9a26882fc3a655c918f01c68",
+        "size_bytes": 13464
+      },
+      "bfd": {
+        "differences": [],
+        "filename": "tr10i.bfd.~3~",
+        "sha256": "87dbbf90547b9373145e1d9713fd92e2f948bf97ca78c3ecb3a359041bc85812",
+        "size_bytes": 9470
+      },
+      "font": "TR10I"
+    },
+    {
+      "bdf": {
+        "differences": [],
+        "filename": "tr12.bdf.~3~",
+        "sha256": "98bfbcf506d71633dca6f2d21777318c50cb622be0498617a8108d678d0d2d4d",
+        "size_bytes": 14427
+      },
+      "bfd": {
+        "differences": [],
+        "filename": "tr12.bfd.~3~",
+        "sha256": "36e2a3ec0ec1e48854532f608713678266554247c35b75051174bd8afbd1b5bc",
+        "size_bytes": 10492
+      },
+      "font": "TR12"
+    },
+    {
+      "bdf": {
+        "differences": [],
+        "filename": "tr12b.bdf.~3~",
+        "sha256": "10d12c42bd4e8b6dd18993b943bf41c76fd00ffc46e2903a2e832a31364a4de4",
+        "size_bytes": 14689
+      },
+      "bfd": {
+        "differences": [],
+        "filename": "tr12b.bfd.~5~",
+        "sha256": "8b839345263a0ccd3a40d540c435e1ce2e5241db109c20bf0aba315ec1fd6937",
+        "size_bytes": 11558
+      },
+      "font": "TR12B"
+    },
+    {
+      "bdf": {
+        "differences": [],
+        "filename": "tr12bi.bdf.~3~",
+        "sha256": "4518f5b430aaa49a67cc75d0a59732a353cf973e8f9b13cc59dafe263f87a799",
+        "size_bytes": 14899
+      },
+      "bfd": {
+        "differences": [],
+        "filename": "tr12bi.bfd.~2~",
+        "sha256": "42e223c94665c90701e80f98f1ea31b889e545142eab427dce2355a809462f83",
+        "size_bytes": 10492
+      },
+      "font": "TR12BI"
+    },
+    {
+      "bdf": {
+        "differences": [],
+        "filename": "tr12i.bdf.~3~",
+        "sha256": "93b99cb3bf4b649471762bb70933d766e8679d7b7a2780b29b3b8ff89edee8a9",
+        "size_bytes": 14513
+      },
+      "bfd": {
+        "differences": [],
+        "filename": "tr12i.bfd.~4~",
+        "sha256": "21f2a669bb4d233487cab265e7f6d637d860706da491b9d725a20973d4b1cce3",
+        "size_bytes": 10538
+      },
+      "font": "TR12I"
+    },
+    {
+      "bdf": {
+        "differences": [],
+        "filename": "tr8.bdf.~3~",
+        "sha256": "a54bd0e3caa802858bab9790a8b9293e68e8931da53c6d570778a25b1d490ce7",
+        "size_bytes": 13032
+      },
+      "bfd": {
+        "differences": [],
+        "filename": "tr8.bfd.~3~",
+        "sha256": "3b2d53fdd76d6cdb4bc1763af93ac2a460941cfc1f18e7f3e9d24065ab549ad3",
+        "size_bytes": 8506
+      },
+      "font": "TR8"
+    },
+    {
+      "bdf": {
+        "differences": [],
+        "filename": "tr8b.bdf.~3~",
+        "sha256": "04002acd329fa7efdee51d7e84536506171cb088de11bda6b24a259be0e2ee04",
+        "size_bytes": 13110
+      },
+      "bfd": {
+        "differences": [],
+        "filename": "tr8b.bfd.~3~",
+        "sha256": "5b3a483bc87757e175a31e9f580955808820c04d0f592f6f22b9c9888f3b72a4",
+        "size_bytes": 8960
+      },
+      "font": "TR8B"
+    },
+    {
+      "bdf": {
+        "differences": [],
+        "filename": "tr8bi.bdf.~3~",
+        "sha256": "8d3b744954510d97fa3a618470be5faa48c85b64faca54520eac790247ed7dc7",
+        "size_bytes": 13246
+      },
+      "bfd": {
+        "differences": [],
+        "filename": "tr8bi.bfd.~2~",
+        "sha256": "cc14e2669891c221b5fe93e2fa1487939b42a9da82c4ef1c87e64052315420f6",
+        "size_bytes": 8962
+      },
+      "font": "TR8BI"
+    },
+    {
+      "bdf": {
+        "differences": [],
+        "filename": "tr8i.bdf.~3~",
+        "sha256": "13e2bb955d462f66257282ada842ea25df49004289094b5c91a2932c82aec5f8",
+        "size_bytes": 13055
+      },
+      "bfd": {
+        "differences": [],
+        "filename": "tr8i.bfd.~3~",
+        "sha256": "9c2c00d67a2c6df9971ec38974f7ac8c8cfca02e68efe0205dc33bf73a595f55",
+        "size_bytes": 8448
+      },
+      "font": "TR8I"
+    },
+    {
+      "bdf": {
+        "differences": [
+          "codes differ: only-world=[193, 194, 195, 196, 197, 198, 199, 200, 202, 203, 204, 205, 206, 207] only-bdf=[]"
+        ],
+        "filename": "tvfont.bdf.~3~",
+        "sha256": "2a95fedae531904908dd1dc4fe46c157020f2a41e5b4559d8768dd22f38465fa",
+        "size_bytes": 13003
+      },
+      "bfd": {
+        "differences": [],
+        "filename": "tvfont.bfd.~7~",
+        "sha256": "d54967388acac9a28046a8f73f8266ab7b750d9bdd46d87588bd214631ffeedb",
+        "size_bytes": 9072
+      },
+      "font": "TVFONT"
+    },
+    {
+      "bdf": {
+        "differences": [],
+        "filename": "tvfontb.bdf.~3~",
+        "sha256": "1388680bebc751d17fd0c70ae8b9581b01e421f7909504b76bf9a8474c5d85f7",
+        "size_bytes": 13004
+      },
+      "bfd": {
+        "differences": [],
+        "filename": "tvfontb.bfd.~2~",
+        "sha256": "235773d0ed6022c9b52305ccd609c70c178e646610d591509ad0f2900cfbddb8",
+        "size_bytes": 8554
+      },
+      "font": "TVFONTB"
+    },
+    {
+      "bdf": {
+        "differences": [],
+        "filename": "tvfontbi.bdf.~3~",
+        "sha256": "00f58b2a38fb276b36251ffeaa692615c53d5f1a592cee79f6c203a77691a7e7",
+        "size_bytes": 13032
+      },
+      "bfd": {
+        "differences": [],
+        "filename": "tvfontbi.bfd.~2~",
+        "sha256": "f623e79b12fea1481154b0eeaded8fc80eae37c52f36cf67a719d630d9d65ce0",
+        "size_bytes": 8512
+      },
+      "font": "TVFONTBI"
+    },
+    {
+      "bdf": {
+        "differences": [],
+        "filename": "tvfontcb.bdf.~3~",
+        "sha256": "6cbe2124ebaa66964f2be8a41de3ee28c7c1c149e0872a7cd674a1e9aa211091",
+        "size_bytes": 13011
+      },
+      "bfd": {
+        "differences": [],
+        "filename": "tvfontcb.bfd.~3~",
+        "sha256": "97c462d9de3ad9ca634301e89ff7cbe890e6a2ad213497323a417fd43ef9bec1",
+        "size_bytes": 8192
+      },
+      "font": "TVFONTCB"
+    },
+    {
+      "bdf": {
+        "differences": [
+          "codes differ: only-world=[193, 194, 195, 196, 197, 198, 199, 200, 202, 203, 204, 205, 206, 207] only-bdf=[]",
+          "3: bbx [6, 7, 0, -2] != [7, 7, -1, -2]",
+          "3: bitmap differs",
+          "27: bbx [5, 8, 1, -1] != [5, 7, 1, 0]",
+          "27: bitmap differs",
+          "32: bbx [1, 1, 0, 0] != [1, 1, -1, 0]",
+          "40: bbx [3, 8, 1, -1] != [4, 8, 1, -1]",
+          "40: bitmap differs",
+          "41: bbx [3, 8, 1, -1] != [4, 8, 0, -1]",
+          "41: bitmap differs",
+          "95: bbx [6, 1, 0, -2] != [5, 1, -1, -2]",
+          "95: bitmap differs",
+          "112: bbx [6, 7, 0, -2] != [7, 7, -1, -2]",
+          "112: bitmap differs",
+          "121: bbx [6, 7, 0, -2] != [7, 7, -1, -2]",
+          "121: bitmap differs"
+        ],
+        "filename": "tvfonti.bdf.~3~",
+        "sha256": "108454d732f3f0a6d1932430859aac6c891d9f5e6bf8f863bb58ab813215f863",
+        "size_bytes": 13013
+      },
+      "bfd": {
+        "differences": [],
+        "filename": "tvfonti.bfd.~6~",
+        "sha256": "2149d45a4601cde8f3f69461ae391f7b796e34810367c50bc8c5939a3cbb3d97",
+        "size_bytes": 9062
+      },
+      "font": "TVFONTI"
+    },
+    {
+      "bdf": {
+        "differences": [],
+        "filename": "vt100.bdf.~3~",
+        "sha256": "6d97e491b1f915862320e888c8ab075b382e84729859d7db74c48b3bc901a23e",
+        "size_bytes": 9908
+      },
+      "bfd": {
+        "differences": [],
+        "filename": "vt100.bfd.~4~",
+        "sha256": "c84816c74411fa67482cb446358fedb649b0efc8e2cd585caaf04bb633b149cd",
+        "size_bytes": 7002
+      },
+      "font": "VT100"
+    }
+  ],
+  "schema_version": 1,
+  "scope": "evidence-only comparison with matching licensed Genera 8.5 font files",
+  "standard_character_name_evidence": {
+    "characters": [
+      {
+        "name": "Center-Dot",
+        "raw_code": 0,
+        "raw_octal": "0"
+      },
+      {
+        "name": "Down-Arrow",
+        "raw_code": 1,
+        "raw_octal": "1"
+      },
+      {
+        "name": "Alpha",
+        "raw_code": 2,
+        "raw_octal": "2"
+      },
+      {
+        "name": "Beta",
+        "raw_code": 3,
+        "raw_octal": "3"
+      },
+      {
+        "name": "And-sign",
+        "raw_code": 4,
+        "raw_octal": "4"
+      },
+      {
+        "name": "Not-sign",
+        "raw_code": 5,
+        "raw_octal": "5"
+      },
+      {
+        "name": "Epsilon",
+        "raw_code": 6,
+        "raw_octal": "6"
+      },
+      {
+        "name": "Pi",
+        "raw_code": 7,
+        "raw_octal": "7"
+      },
+      {
+        "name": "Lambda",
+        "raw_code": 8,
+        "raw_octal": "10"
+      },
+      {
+        "name": "Gamma",
+        "raw_code": 9,
+        "raw_octal": "11"
+      },
+      {
+        "name": "Delta",
+        "raw_code": 10,
+        "raw_octal": "12"
+      },
+      {
+        "name": "Up-Arrow",
+        "raw_code": 11,
+        "raw_octal": "13"
+      },
+      {
+        "name": "Plus-Minus",
+        "raw_code": 12,
+        "raw_octal": "14"
+      },
+      {
+        "name": "Circle-Plus",
+        "raw_code": 13,
+        "raw_octal": "15"
+      },
+      {
+        "name": "Infinity",
+        "raw_code": 14,
+        "raw_octal": "16"
+      },
+      {
+        "name": "Partial-Delta",
+        "raw_code": 15,
+        "raw_octal": "17"
+      },
+      {
+        "name": "Left-Horseshoe",
+        "raw_code": 16,
+        "raw_octal": "20"
+      },
+      {
+        "name": "Right-Horseshoe",
+        "raw_code": 17,
+        "raw_octal": "21"
+      },
+      {
+        "name": "Up-Horseshoe",
+        "raw_code": 18,
+        "raw_octal": "22"
+      },
+      {
+        "name": "Down-Horseshoe",
+        "raw_code": 19,
+        "raw_octal": "23"
+      },
+      {
+        "name": "Universal-Quantifier",
+        "raw_code": 20,
+        "raw_octal": "24"
+      },
+      {
+        "name": "Existential-Quantifier",
+        "raw_code": 21,
+        "raw_octal": "25"
+      },
+      {
+        "name": "Circle-X",
+        "raw_code": 22,
+        "raw_octal": "26"
+      },
+      {
+        "name": "Double-Arrow",
+        "raw_code": 23,
+        "raw_octal": "27"
+      },
+      {
+        "name": "Left-Arrow",
+        "raw_code": 24,
+        "raw_octal": "30"
+      },
+      {
+        "name": "Right-Arrow",
+        "raw_code": 25,
+        "raw_octal": "31"
+      },
+      {
+        "name": "Not-Equals",
+        "raw_code": 26,
+        "raw_octal": "32"
+      },
+      {
+        "name": "Lozenge",
+        "raw_code": 27,
+        "raw_octal": "33"
+      },
+      {
+        "name": "Less-Or-Equal",
+        "raw_code": 28,
+        "raw_octal": "34"
+      },
+      {
+        "name": "Greater-Or-Equal",
+        "raw_code": 29,
+        "raw_octal": "35"
+      },
+      {
+        "name": "Equivalence",
+        "raw_code": 30,
+        "raw_octal": "36"
+      },
+      {
+        "name": "Or-sign",
+        "raw_code": 31,
+        "raw_octal": "37"
+      },
+      {
+        "name": "Space",
+        "raw_code": 32,
+        "raw_octal": "40"
+      },
+      {
+        "name": "!",
+        "raw_code": 33,
+        "raw_octal": "41"
+      },
+      {
+        "name": "\"",
+        "raw_code": 34,
+        "raw_octal": "42"
+      },
+      {
+        "name": "#",
+        "raw_code": 35,
+        "raw_octal": "43"
+      },
+      {
+        "name": "$",
+        "raw_code": 36,
+        "raw_octal": "44"
+      },
+      {
+        "name": "%",
+        "raw_code": 37,
+        "raw_octal": "45"
+      },
+      {
+        "name": "&",
+        "raw_code": 38,
+        "raw_octal": "46"
+      },
+      {
+        "name": "'",
+        "raw_code": 39,
+        "raw_octal": "47"
+      },
+      {
+        "name": "Open",
+        "raw_code": 40,
+        "raw_octal": "50"
+      },
+      {
+        "name": "Close",
+        "raw_code": 41,
+        "raw_octal": "51"
+      },
+      {
+        "name": "*",
+        "raw_code": 42,
+        "raw_octal": "52"
+      },
+      {
+        "name": "Plus-sign",
+        "raw_code": 43,
+        "raw_octal": "53"
+      },
+      {
+        "name": ",",
+        "raw_code": 44,
+        "raw_octal": "54"
+      },
+      {
+        "name": "Minus-sign",
+        "raw_code": 45,
+        "raw_octal": "55"
+      },
+      {
+        "name": ".",
+        "raw_code": 46,
+        "raw_octal": "56"
+      },
+      {
+        "name": "/",
+        "raw_code": 47,
+        "raw_octal": "57"
+      },
+      {
+        "name": "0",
+        "raw_code": 48,
+        "raw_octal": "60"
+      },
+      {
+        "name": "1",
+        "raw_code": 49,
+        "raw_octal": "61"
+      },
+      {
+        "name": "2",
+        "raw_code": 50,
+        "raw_octal": "62"
+      },
+      {
+        "name": "3",
+        "raw_code": 51,
+        "raw_octal": "63"
+      },
+      {
+        "name": "4",
+        "raw_code": 52,
+        "raw_octal": "64"
+      },
+      {
+        "name": "5",
+        "raw_code": 53,
+        "raw_octal": "65"
+      },
+      {
+        "name": "6",
+        "raw_code": 54,
+        "raw_octal": "66"
+      },
+      {
+        "name": "7",
+        "raw_code": 55,
+        "raw_octal": "67"
+      },
+      {
+        "name": "8",
+        "raw_code": 56,
+        "raw_octal": "70"
+      },
+      {
+        "name": "9",
+        "raw_code": 57,
+        "raw_octal": "71"
+      },
+      {
+        "name": ":",
+        "raw_code": 58,
+        "raw_octal": "72"
+      },
+      {
+        "name": ";",
+        "raw_code": 59,
+        "raw_octal": "73"
+      },
+      {
+        "name": "Less-sign",
+        "raw_code": 60,
+        "raw_octal": "74"
+      },
+      {
+        "name": "Equal-sign",
+        "raw_code": 61,
+        "raw_octal": "75"
+      },
+      {
+        "name": "Greater-sign",
+        "raw_code": 62,
+        "raw_octal": "76"
+      },
+      {
+        "name": "?",
+        "raw_code": 63,
+        "raw_octal": "77"
+      },
+      {
+        "name": "@",
+        "raw_code": 64,
+        "raw_octal": "100"
+      },
+      {
+        "name": "A",
+        "raw_code": 65,
+        "raw_octal": "101"
+      },
+      {
+        "name": "B",
+        "raw_code": 66,
+        "raw_octal": "102"
+      },
+      {
+        "name": "C",
+        "raw_code": 67,
+        "raw_octal": "103"
+      },
+      {
+        "name": "D",
+        "raw_code": 68,
+        "raw_octal": "104"
+      },
+      {
+        "name": "E",
+        "raw_code": 69,
+        "raw_octal": "105"
+      },
+      {
+        "name": "F",
+        "raw_code": 70,
+        "raw_octal": "106"
+      },
+      {
+        "name": "G",
+        "raw_code": 71,
+        "raw_octal": "107"
+      },
+      {
+        "name": "H",
+        "raw_code": 72,
+        "raw_octal": "110"
+      },
+      {
+        "name": "I",
+        "raw_code": 73,
+        "raw_octal": "111"
+      },
+      {
+        "name": "J",
+        "raw_code": 74,
+        "raw_octal": "112"
+      },
+      {
+        "name": "K",
+        "raw_code": 75,
+        "raw_octal": "113"
+      },
+      {
+        "name": "L",
+        "raw_code": 76,
+        "raw_octal": "114"
+      },
+      {
+        "name": "M",
+        "raw_code": 77,
+        "raw_octal": "115"
+      },
+      {
+        "name": "N",
+        "raw_code": 78,
+        "raw_octal": "116"
+      },
+      {
+        "name": "O",
+        "raw_code": 79,
+        "raw_octal": "117"
+      },
+      {
+        "name": "P",
+        "raw_code": 80,
+        "raw_octal": "120"
+      },
+      {
+        "name": "Q",
+        "raw_code": 81,
+        "raw_octal": "121"
+      },
+      {
+        "name": "R",
+        "raw_code": 82,
+        "raw_octal": "122"
+      },
+      {
+        "name": "S",
+        "raw_code": 83,
+        "raw_octal": "123"
+      },
+      {
+        "name": "T",
+        "raw_code": 84,
+        "raw_octal": "124"
+      },
+      {
+        "name": "U",
+        "raw_code": 85,
+        "raw_octal": "125"
+      },
+      {
+        "name": "V",
+        "raw_code": 86,
+        "raw_octal": "126"
+      },
+      {
+        "name": "W",
+        "raw_code": 87,
+        "raw_octal": "127"
+      },
+      {
+        "name": "X",
+        "raw_code": 88,
+        "raw_octal": "130"
+      },
+      {
+        "name": "Y",
+        "raw_code": 89,
+        "raw_octal": "131"
+      },
+      {
+        "name": "Z",
+        "raw_code": 90,
+        "raw_octal": "132"
+      },
+      {
+        "name": "[",
+        "raw_code": 91,
+        "raw_octal": "133"
+      },
+      {
+        "name": "\\",
+        "raw_code": 92,
+        "raw_octal": "134"
+      },
+      {
+        "name": "]",
+        "raw_code": 93,
+        "raw_octal": "135"
+      },
+      {
+        "name": "^",
+        "raw_code": 94,
+        "raw_octal": "136"
+      },
+      {
+        "name": "_",
+        "raw_code": 95,
+        "raw_octal": "137"
+      },
+      {
+        "name": "`",
+        "raw_code": 96,
+        "raw_octal": "140"
+      },
+      {
+        "name": "a",
+        "raw_code": 97,
+        "raw_octal": "141"
+      },
+      {
+        "name": "b",
+        "raw_code": 98,
+        "raw_octal": "142"
+      },
+      {
+        "name": "c",
+        "raw_code": 99,
+        "raw_octal": "143"
+      },
+      {
+        "name": "d",
+        "raw_code": 100,
+        "raw_octal": "144"
+      },
+      {
+        "name": "e",
+        "raw_code": 101,
+        "raw_octal": "145"
+      },
+      {
+        "name": "f",
+        "raw_code": 102,
+        "raw_octal": "146"
+      },
+      {
+        "name": "g",
+        "raw_code": 103,
+        "raw_octal": "147"
+      },
+      {
+        "name": "h",
+        "raw_code": 104,
+        "raw_octal": "150"
+      },
+      {
+        "name": "i",
+        "raw_code": 105,
+        "raw_octal": "151"
+      },
+      {
+        "name": "j",
+        "raw_code": 106,
+        "raw_octal": "152"
+      },
+      {
+        "name": "k",
+        "raw_code": 107,
+        "raw_octal": "153"
+      },
+      {
+        "name": "l",
+        "raw_code": 108,
+        "raw_octal": "154"
+      },
+      {
+        "name": "m",
+        "raw_code": 109,
+        "raw_octal": "155"
+      },
+      {
+        "name": "n",
+        "raw_code": 110,
+        "raw_octal": "156"
+      },
+      {
+        "name": "o",
+        "raw_code": 111,
+        "raw_octal": "157"
+      },
+      {
+        "name": "p",
+        "raw_code": 112,
+        "raw_octal": "160"
+      },
+      {
+        "name": "q",
+        "raw_code": 113,
+        "raw_octal": "161"
+      },
+      {
+        "name": "r",
+        "raw_code": 114,
+        "raw_octal": "162"
+      },
+      {
+        "name": "s",
+        "raw_code": 115,
+        "raw_octal": "163"
+      },
+      {
+        "name": "t",
+        "raw_code": 116,
+        "raw_octal": "164"
+      },
+      {
+        "name": "u",
+        "raw_code": 117,
+        "raw_octal": "165"
+      },
+      {
+        "name": "v",
+        "raw_code": 118,
+        "raw_octal": "166"
+      },
+      {
+        "name": "w",
+        "raw_code": 119,
+        "raw_octal": "167"
+      },
+      {
+        "name": "x",
+        "raw_code": 120,
+        "raw_octal": "170"
+      },
+      {
+        "name": "y",
+        "raw_code": 121,
+        "raw_octal": "171"
+      },
+      {
+        "name": "z",
+        "raw_code": 122,
+        "raw_octal": "172"
+      },
+      {
+        "name": "{",
+        "raw_code": 123,
+        "raw_octal": "173"
+      },
+      {
+        "name": "|",
+        "raw_code": 124,
+        "raw_octal": "174"
+      },
+      {
+        "name": "}",
+        "raw_code": 125,
+        "raw_octal": "175"
+      },
+      {
+        "name": "~",
+        "raw_code": 126,
+        "raw_octal": "176"
+      },
+      {
+        "name": "Integral",
+        "raw_code": 127,
+        "raw_octal": "177"
+      },
+      {
+        "name": "Grave-Accent",
+        "raw_code": 193,
+        "raw_octal": "301"
+      },
+      {
+        "name": "Acute-Accent",
+        "raw_code": 194,
+        "raw_octal": "302"
+      },
+      {
+        "name": "Circumflex-Accent",
+        "raw_code": 195,
+        "raw_octal": "303"
+      },
+      {
+        "name": "Tilde-Accent",
+        "raw_code": 196,
+        "raw_octal": "304"
+      },
+      {
+        "name": "Macron-Accent",
+        "raw_code": 197,
+        "raw_octal": "305"
+      },
+      {
+        "name": "Breve-Accent",
+        "raw_code": 198,
+        "raw_octal": "306"
+      },
+      {
+        "name": "Over-Dot-Accent",
+        "raw_code": 199,
+        "raw_octal": "307"
+      },
+      {
+        "name": "Dieresis-Accent",
+        "raw_code": 200,
+        "raw_octal": "310"
+      },
+      {
+        "name": "Over-Ring-Accent",
+        "raw_code": 202,
+        "raw_octal": "312"
+      },
+      {
+        "name": "Cedilla-Accent",
+        "raw_code": 203,
+        "raw_octal": "313"
+      },
+      {
+        "name": "Underline-Accent",
+        "raw_code": 204,
+        "raw_octal": "314"
+      },
+      {
+        "name": "Double-Acute-Accent",
+        "raw_code": 205,
+        "raw_octal": "315"
+      },
+      {
+        "name": "Ognek-Accent",
+        "raw_code": 206,
+        "raw_octal": "316"
+      },
+      {
+        "name": "Hacek-Accent",
+        "raw_code": 207,
+        "raw_octal": "317"
+      }
+    ],
+    "font": "CPTFONT",
+    "reference_filename": "cptfont.bdf.~3~",
+    "reference_sha256": "b463ccf4dbf1017aa1e4d484fa8bd9dc9decbfd02bde348aa9eb02e4c6eb35fd",
+    "scope": "evidence-only raw-code names; no glyph data is copied"
+  }
+}

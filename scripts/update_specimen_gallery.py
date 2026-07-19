@@ -1,0 +1,171 @@
+#!/usr/bin/env python3
+"""Update or verify the tracked Genera font specimen gallery."""
+
+from __future__ import annotations
+
+import argparse
+import hashlib
+import json
+from pathlib import Path
+import shutil
+import struct
+import tempfile
+
+
+ROOT = Path(__file__).resolve().parents[1]
+DEFAULT_DISTRIBUTION = ROOT / "dist"
+DEFAULT_GALLERY = ROOT / "specimens"
+DEFAULT_INDEX = ROOT / "SPECIMENS.md"
+
+
+class GalleryError(ValueError):
+    pass
+
+
+def require(condition: bool, message: str) -> None:
+    if not condition:
+        raise GalleryError(message)
+
+
+def sha256(path: Path) -> str:
+    digest = hashlib.sha256()
+    with path.open("rb") as stream:
+        for chunk in iter(lambda: stream.read(1024 * 1024), b""):
+            digest.update(chunk)
+    return digest.hexdigest()
+
+
+def png_dimensions(path: Path) -> tuple[int, int]:
+    data = path.read_bytes()[:24]
+    require(data[:8] == b"\x89PNG\r\n\x1a\n", f"not a PNG: {path}")
+    require(data[12:16] == b"IHDR", f"PNG lacks leading IHDR: {path}")
+    return struct.unpack(">II", data[16:24])
+
+
+def render_gallery(distribution: Path, gallery: Path, index: Path) -> None:
+    catalog_path = distribution / "unicode" / "catalog.json"
+    require(catalog_path.is_file(), f"missing Unicode catalog: {catalog_path}")
+    catalog = json.loads(catalog_path.read_text(encoding="utf-8"))
+    fonts = catalog.get("fonts")
+    require(isinstance(fonts, list) and len(fonts) == 89, "unexpected font inventory")
+    gallery.mkdir(parents=True, exist_ok=True)
+    for class_name in ("latin", "symbols"):
+        (gallery / class_name).mkdir()
+
+    manifest_fonts = []
+    grouped: dict[str, list[dict]] = {"latin": [], "symbols": []}
+    for record in fonts:
+        content_class = record["content_class"]
+        require(content_class in grouped, f"unknown content class: {content_class}")
+        source = distribution / record["specimen_path"]
+        destination = gallery / content_class / source.name
+        require(source.is_file(), f"missing generated specimen: {source}")
+        shutil.copyfile(source, destination)
+        width, height = png_dimensions(destination)
+        item = {
+            "name": record["name"],
+            "content_class": content_class,
+            "kind": record["specimen_kind"],
+            "path": (Path("specimens") / content_class / source.name).as_posix(),
+            "width": width,
+            "height": height,
+            "sha256": sha256(destination),
+            "unicode_bdf_sha256": record["bdf_sha256"],
+            "repertoire": record["repertoire"],
+        }
+        manifest_fonts.append(item)
+        grouped[content_class].append(item)
+
+    manifest = {
+        "schema_version": 1,
+        "profile": catalog["profile"],
+        "mapping_id": catalog["mapping_id"],
+        "font_count": len(manifest_fonts),
+        "content_class_counts": {
+            key: len(value) for key, value in grouped.items()
+        },
+        "fonts": manifest_fonts,
+    }
+    (gallery / "MANIFEST.json").write_text(
+        json.dumps(manifest, indent=2, sort_keys=True) + "\n", encoding="utf-8"
+    )
+
+    lines = [
+        "# Genera font specimens",
+        "",
+        "These 89 deterministic specimens cover every font resident in the pinned",
+        "Genera 8.5 base world. Latin-capable fonts use the project pangram; specialty",
+        "repertoires use complete Unicode-addressed glyph sheets. The images preserve",
+        "the recovered one-bit geometry without smoothing or scaling beyond integer pixels.",
+        "",
+    ]
+    for content_class, heading in (("latin", "Latin-capable fonts"), ("symbols", "Specialty repertoires")):
+        lines.extend([f"## {heading}", ""])
+        for item in grouped[content_class]:
+            label = item["name"]
+            relative = Path(item["path"]).as_posix()
+            lines.extend(
+                [
+                    f"### {label}",
+                    "",
+                    f"![{label} bitmap-font specimen]({relative})",
+                    "",
+                ]
+            )
+    index.write_text("\n".join(lines), encoding="utf-8")
+
+
+def compare_file(expected: Path, observed: Path) -> None:
+    require(observed.is_file(), f"tracked gallery file is missing: {observed}")
+    require(expected.read_bytes() == observed.read_bytes(), f"tracked gallery differs: {observed}")
+
+
+def main() -> int:
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--distribution", type=Path, default=DEFAULT_DISTRIBUTION)
+    parser.add_argument("--gallery", type=Path, default=DEFAULT_GALLERY)
+    parser.add_argument("--index", type=Path, default=DEFAULT_INDEX)
+    parser.add_argument("--check", action="store_true")
+    args = parser.parse_args()
+    try:
+        if args.check:
+            with tempfile.TemporaryDirectory(prefix="genera-font-specimens-") as directory:
+                temporary = Path(directory)
+                expected_gallery = temporary / "specimens"
+                expected_index = temporary / "SPECIMENS.md"
+                render_gallery(args.distribution.resolve(), expected_gallery, expected_index)
+                expected_files = {
+                    path.relative_to(expected_gallery): path
+                    for path in expected_gallery.rglob("*")
+                    if path.is_file()
+                }
+                observed_files = {
+                    path.relative_to(args.gallery): path
+                    for path in args.gallery.rglob("*")
+                    if path.is_file()
+                } if args.gallery.is_dir() else {}
+                require(set(expected_files) == set(observed_files), "tracked specimen path closure differs")
+                for relative, path in expected_files.items():
+                    compare_file(path, observed_files[relative])
+                compare_file(expected_index, args.index)
+        else:
+            if args.gallery.exists():
+                known = {"latin", "symbols", "MANIFEST.json"}
+                unknown = sorted(path.name for path in args.gallery.iterdir() if path.name not in known)
+                require(not unknown, "gallery contains unrecognized entries: " + ", ".join(unknown))
+                for class_name in ("latin", "symbols"):
+                    path = args.gallery / class_name
+                    if path.is_dir():
+                        shutil.rmtree(path)
+                manifest = args.gallery / "MANIFEST.json"
+                if manifest.is_file():
+                    manifest.unlink()
+            render_gallery(args.distribution.resolve(), args.gallery.resolve(), args.index.resolve())
+    except (GalleryError, OSError, ValueError, json.JSONDecodeError) as error:
+        parser.error(str(error))
+    print("Specimen gallery is reproducible." if args.check else "Specimen gallery updated.")
+    return 0
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())

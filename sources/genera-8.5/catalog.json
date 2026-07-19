@@ -1,0 +1,739 @@
+{
+  "decoder": {
+    "commit": "2602eab2ef1bea4800312f71f9185e9261c6fa6c",
+    "execution_model": "read-only mmap and inert tagged-object traversal",
+    "extractor_path": "scripts/extract-genera-fonts.py",
+    "extractor_sha256": "f242612ca77d94099eb2c1aab0837cc4673c51fdd04f926811229c5f1503c334",
+    "helper_path": "scripts/lisp_machine_fonts.py",
+    "helper_sha256": "8a2218279a1910db86a42485d3af3baf2ba836088197c9b2427b8476ceef7ecf",
+    "repository": "https://github.com/htayj/lisp-machine-container-museum.git"
+  },
+  "defined_glyph_count": 10836,
+  "font_count": 89,
+  "fonts": [
+    {
+      "defined_glyph_count": 121,
+      "font": "40VR",
+      "path": "fonts/40vr.json",
+      "sha256": "0751d46b17bd6671036842ed6123489a5c4928681d1bb842d007c4db9351796f",
+      "size_bytes": 107108,
+      "slot_count": 128
+    },
+    {
+      "defined_glyph_count": 97,
+      "font": "5X5",
+      "path": "fonts/5x5.json",
+      "sha256": "c97b41ccc67c4801d059c1dfb4a762c2c7d05c0c0926fc79192016785bce7ac1",
+      "size_bytes": 32133,
+      "slot_count": 128
+    },
+    {
+      "defined_glyph_count": 128,
+      "font": "BIGFNT",
+      "path": "fonts/bigfnt.json",
+      "sha256": "8d50bc0bb361a7087d0f04657d54b242b39eca87bcdaaabc31306c6ad58ea91f",
+      "size_bytes": 64292,
+      "slot_count": 128
+    },
+    {
+      "defined_glyph_count": 128,
+      "font": "BIGFNTB",
+      "path": "fonts/bigfntb.json",
+      "sha256": "66e3af0b401ee41f9e60098750fd679de0a834d496fedaade1975c7f7c3c3e20",
+      "size_bytes": 66853,
+      "slot_count": 128
+    },
+    {
+      "defined_glyph_count": 128,
+      "font": "BIGFNTBI",
+      "path": "fonts/bigfntbi.json",
+      "sha256": "41a1d7737a7628d05df9e2f78e2a7c6938e93294edeebf23a9a96e80f6ddc7fd",
+      "size_bytes": 64212,
+      "slot_count": 128
+    },
+    {
+      "defined_glyph_count": 128,
+      "font": "BIGFNTI",
+      "path": "fonts/bigfnti.json",
+      "sha256": "e25b2bb115874ee5fe75a3509d02c27598d493e0d34c0885a1b6d5f343d545b3",
+      "size_bytes": 63853,
+      "slot_count": 128
+    },
+    {
+      "defined_glyph_count": 128,
+      "font": "BOXFONT",
+      "path": "fonts/boxfont.json",
+      "sha256": "140ae8584ff2056136e6a75596e412b93853237d4d33decca696752f1c90af24",
+      "size_bytes": 48673,
+      "slot_count": 128
+    },
+    {
+      "defined_glyph_count": 142,
+      "font": "CPTFONT",
+      "path": "fonts/cptfont.json",
+      "sha256": "61192f67793272aef9fd08c666988358bef7a6f81cbc270b0f55202e33f724ee",
+      "size_bytes": 52420,
+      "slot_count": 142
+    },
+    {
+      "defined_glyph_count": 128,
+      "font": "CPTFONTB",
+      "path": "fonts/cptfontb.json",
+      "sha256": "3b40e1fe5c980d34bc2ec653bff858bf5ba36b0c7b9617ad91342a0e146b6628",
+      "size_bytes": 48675,
+      "slot_count": 128
+    },
+    {
+      "defined_glyph_count": 128,
+      "font": "CPTFONTBI",
+      "path": "fonts/cptfontbi.json",
+      "sha256": "bd7d8244b2b567e5b1feffacb47452020db85604151735159acadec778740b64",
+      "size_bytes": 48676,
+      "slot_count": 128
+    },
+    {
+      "defined_glyph_count": 128,
+      "font": "CPTFONTC",
+      "path": "fonts/cptfontc.json",
+      "sha256": "80dde7a83a11e6cd67c0bd7a6f92e2dcfce713f56586805ae9ccc9590177d195",
+      "size_bytes": 47139,
+      "slot_count": 128
+    },
+    {
+      "defined_glyph_count": 128,
+      "font": "CPTFONTCB",
+      "path": "fonts/cptfontcb.json",
+      "sha256": "69a76a4a0bd8bcbf4e0a29e2897ee8fce6955cf6367073b7c1d660ca9483a920",
+      "size_bytes": 47140,
+      "slot_count": 128
+    },
+    {
+      "defined_glyph_count": 130,
+      "font": "CPTFONTCC",
+      "path": "fonts/cptfontcc.json",
+      "sha256": "c47b52013499f7754ff1e33fda5a7f3c5c11a8ec282f2f23428a7a36379cf91f",
+      "size_bytes": 61739,
+      "slot_count": 203
+    },
+    {
+      "defined_glyph_count": 142,
+      "font": "CPTFONTI",
+      "path": "fonts/cptfonti.json",
+      "sha256": "14e0c5b813e88054b15cf90bdea53ac03a6842b20663610519216c06116cfe7d",
+      "size_bytes": 52421,
+      "slot_count": 142
+    },
+    {
+      "defined_glyph_count": 128,
+      "font": "DUTCH14",
+      "path": "fonts/dutch14.json",
+      "sha256": "9eca3c2c81f1f9ae62b223e1b31af4698fd8009f2555878302e405e37c5ecdea",
+      "size_bytes": 52900,
+      "slot_count": 128
+    },
+    {
+      "defined_glyph_count": 128,
+      "font": "DUTCH14B",
+      "path": "fonts/dutch14b.json",
+      "sha256": "b5af98be8e3310681a961925934c38631c0793e4e65fae76c8e0d499f842a0d0",
+      "size_bytes": 53177,
+      "slot_count": 128
+    },
+    {
+      "defined_glyph_count": 128,
+      "font": "DUTCH14BI",
+      "path": "fonts/dutch14bi.json",
+      "sha256": "c6058cfe074e6bfc7950c42a6ccdf9beea30a377420a43f4320bea81d31798a7",
+      "size_bytes": 53815,
+      "slot_count": 128
+    },
+    {
+      "defined_glyph_count": 128,
+      "font": "DUTCH14I",
+      "path": "fonts/dutch14i.json",
+      "sha256": "6fac021bc09483ba05fa2f3bd176f0156716c9f6e4d24a277fb19031bda93128",
+      "size_bytes": 53212,
+      "slot_count": 128
+    },
+    {
+      "defined_glyph_count": 128,
+      "font": "DUTCH20",
+      "path": "fonts/dutch20.json",
+      "sha256": "f9742ca0535684e9b5df159b414d15b31f85885a238d21df7e5a7ab3b14801e8",
+      "size_bytes": 63258,
+      "slot_count": 128
+    },
+    {
+      "defined_glyph_count": 128,
+      "font": "DUTCH20B",
+      "path": "fonts/dutch20b.json",
+      "sha256": "8e66bfd12c3c661e8d21f8d6bfd08f292bf544126d498cf7af07eaf47ef7a055",
+      "size_bytes": 64164,
+      "slot_count": 128
+    },
+    {
+      "defined_glyph_count": 128,
+      "font": "DUTCH20BI",
+      "path": "fonts/dutch20bi.json",
+      "sha256": "f69abadccc35298379f85ea66a3b600169cc146fb63b4f0034d8a05941e6d5a5",
+      "size_bytes": 64968,
+      "slot_count": 128
+    },
+    {
+      "defined_glyph_count": 128,
+      "font": "DUTCH20I",
+      "path": "fonts/dutch20i.json",
+      "sha256": "a4248ef261d0e500bb40358e79d58b0fa1a8c25bb9f4d350c3e6cb10ff6e75df",
+      "size_bytes": 64449,
+      "slot_count": 128
+    },
+    {
+      "defined_glyph_count": 9,
+      "font": "EDSYMBOL12",
+      "path": "fonts/edsymbol12.json",
+      "sha256": "6764b149f06f295cce4687468ff23739095e76ba7a1c3fe7dde628bc95f4cdc4",
+      "size_bytes": 21815,
+      "slot_count": 102
+    },
+    {
+      "defined_glyph_count": 128,
+      "font": "EINY7",
+      "path": "fonts/einy7.json",
+      "sha256": "73ae0eb740d3bcf73e2f82219551c5761b7b384cb3983524948f03cb80e7cd42",
+      "size_bytes": 38044,
+      "slot_count": 128
+    },
+    {
+      "defined_glyph_count": 128,
+      "font": "EINY8",
+      "path": "fonts/einy8.json",
+      "sha256": "5a5aa031a06ead4ccc0bd186c21db7d533f06e08057b11a0612beb15a5dc0e81",
+      "size_bytes": 39836,
+      "slot_count": 128
+    },
+    {
+      "defined_glyph_count": 118,
+      "font": "EUREX21I",
+      "path": "fonts/eurex21i.json",
+      "sha256": "1d4a09bfc9ed90ebbe48075c26b768a8ac7ae06081fe1398b55d8317c17c53df",
+      "size_bytes": 73486,
+      "slot_count": 168
+    },
+    {
+      "defined_glyph_count": 118,
+      "font": "EUREX24I",
+      "path": "fonts/eurex24i.json",
+      "sha256": "a72438d5d7c09b9650fb6f46be02c7cff2c2184ab2a1ad6fc2273f19b49f0c95",
+      "size_bytes": 79493,
+      "slot_count": 168
+    },
+    {
+      "defined_glyph_count": 96,
+      "font": "HIPPO10",
+      "path": "fonts/hippo10.json",
+      "sha256": "b4dac64350e95cd0e0b7b916b3eab926d9f74ccc1bf5aec18ecac0b6931b8fb5",
+      "size_bytes": 45642,
+      "slot_count": 128
+    },
+    {
+      "defined_glyph_count": 98,
+      "font": "HIPPO12",
+      "path": "fonts/hippo12.json",
+      "sha256": "891a111e288ffd7cf8214a6bf35d9a1e888a692d1f23632a1c1c45fad7586bca",
+      "size_bytes": 44729,
+      "slot_count": 128
+    },
+    {
+      "defined_glyph_count": 128,
+      "font": "HL10",
+      "path": "fonts/hl10.json",
+      "sha256": "1f16d34b9e556bc857ad40774e3f8d182c4b678409dc006bdab86b401dd3ec91",
+      "size_bytes": 46953,
+      "slot_count": 128
+    },
+    {
+      "defined_glyph_count": 128,
+      "font": "HL10B",
+      "path": "fonts/hl10b.json",
+      "sha256": "5130331404aaa2d1177b2d6cd0d22d60b59c56ff7c267675a8c055ddff54d37a",
+      "size_bytes": 47060,
+      "slot_count": 128
+    },
+    {
+      "defined_glyph_count": 128,
+      "font": "HL10BI",
+      "path": "fonts/hl10bi.json",
+      "sha256": "73e65ed4cdb432b4d2fb1cbd383eecaade94f31c94b5e330d1ef0dbbdf7915ff",
+      "size_bytes": 47237,
+      "slot_count": 128
+    },
+    {
+      "defined_glyph_count": 128,
+      "font": "HL10I",
+      "path": "fonts/hl10i.json",
+      "sha256": "10deef58a62d2f57ca28203cd219e844dce6bf0436d7378989e3c2a30ab14fbd",
+      "size_bytes": 47146,
+      "slot_count": 128
+    },
+    {
+      "defined_glyph_count": 128,
+      "font": "HL12",
+      "path": "fonts/hl12.json",
+      "sha256": "11dbd255500be2ffc39d57d6d0a2279085135731d009a3c55cee6d29bb63f073",
+      "size_bytes": 50700,
+      "slot_count": 128
+    },
+    {
+      "defined_glyph_count": 128,
+      "font": "HL12B",
+      "path": "fonts/hl12b.json",
+      "sha256": "346656698c889486b8aa5f478fe6c2e82c46df5734212a94ed22971e3213d354",
+      "size_bytes": 50979,
+      "slot_count": 128
+    },
+    {
+      "defined_glyph_count": 129,
+      "font": "HL12BI",
+      "path": "fonts/hl12bi.json",
+      "sha256": "e2d005605527661949a64c24302d30384b879ad993de551827e88e6171cf5a7a",
+      "size_bytes": 65549,
+      "slot_count": 201
+    },
+    {
+      "defined_glyph_count": 128,
+      "font": "HL12I",
+      "path": "fonts/hl12i.json",
+      "sha256": "9fada15083fbb084a0664ce86ab86823261ad0b28f0d329ee0e70eab2a90f864",
+      "size_bytes": 50980,
+      "slot_count": 128
+    },
+    {
+      "defined_glyph_count": 128,
+      "font": "HL14",
+      "path": "fonts/hl14.json",
+      "sha256": "60ec07fd34f0e82a3e7a4d158a44293aadf348a0ab09710d3af0d739f9e434a0",
+      "size_bytes": 52799,
+      "slot_count": 128
+    },
+    {
+      "defined_glyph_count": 128,
+      "font": "HL14B",
+      "path": "fonts/hl14b.json",
+      "sha256": "b410d0356089e3079d05aa977d1ef6c823a0ec36c3969e6deb770a0619aff246",
+      "size_bytes": 53269,
+      "slot_count": 128
+    },
+    {
+      "defined_glyph_count": 128,
+      "font": "HL14BI",
+      "path": "fonts/hl14bi.json",
+      "sha256": "9cdcaafc8205fdc2c44108f1dfe92a1c486d2dcc7ef2d06b4d2fae674a2291e7",
+      "size_bytes": 53881,
+      "slot_count": 128
+    },
+    {
+      "defined_glyph_count": 128,
+      "font": "HL14I",
+      "path": "fonts/hl14i.json",
+      "sha256": "bb6fdda399285232b9f105239950d43706e0d0265f5a0161e4bd2052d5aab012",
+      "size_bytes": 53386,
+      "slot_count": 128
+    },
+    {
+      "defined_glyph_count": 128,
+      "font": "HL8",
+      "path": "fonts/hl8.json",
+      "sha256": "c2c2a67d6345a0e77935ecc122f4c70662065796d10bb9503edf306f174148ab",
+      "size_bytes": 44828,
+      "slot_count": 128
+    },
+    {
+      "defined_glyph_count": 128,
+      "font": "HL8B",
+      "path": "fonts/hl8b.json",
+      "sha256": "41199ca15a888cd6294384bf1a0dcb2cd1b04adf6f39adaa6b7100b5bd68ae9e",
+      "size_bytes": 45199,
+      "slot_count": 128
+    },
+    {
+      "defined_glyph_count": 128,
+      "font": "HL8BI",
+      "path": "fonts/hl8bi.json",
+      "sha256": "e4b1e3d5f66dc687fd0c68afcf18e0efaf5271044521fb05171bf30c74a9428c",
+      "size_bytes": 45369,
+      "slot_count": 128
+    },
+    {
+      "defined_glyph_count": 128,
+      "font": "HL8I",
+      "path": "fonts/hl8i.json",
+      "sha256": "c3b7016daaddd5140526b18d49779471fff54404a8e6bdb0d640c62a7dfecd76",
+      "size_bytes": 45146,
+      "slot_count": 128
+    },
+    {
+      "defined_glyph_count": 128,
+      "font": "JESS11",
+      "path": "fonts/jess11.json",
+      "sha256": "e70f9e90824f3a017a2567e57f7be6812a41580557c72f00075938473ffd94d6",
+      "size_bytes": 48872,
+      "slot_count": 128
+    },
+    {
+      "defined_glyph_count": 128,
+      "font": "JESS11B",
+      "path": "fonts/jess11b.json",
+      "sha256": "3788e6aa1ed850ce785088c0d4052f8cb35144d482ed6ed394ac31c588c116c1",
+      "size_bytes": 48987,
+      "slot_count": 128
+    },
+    {
+      "defined_glyph_count": 128,
+      "font": "JESS11I",
+      "path": "fonts/jess11i.json",
+      "sha256": "a48cb701c37477c13f6bf665db8ef8fb0eefef290168121862d19091cb78097d",
+      "size_bytes": 49076,
+      "slot_count": 128
+    },
+    {
+      "defined_glyph_count": 128,
+      "font": "JESS13",
+      "path": "fonts/jess13.json",
+      "sha256": "736b6c570d3c9c5769bc01dcd91858a9b11e6dd5fb5fcc646a36a87b56baeb8c",
+      "size_bytes": 48888,
+      "slot_count": 128
+    },
+    {
+      "defined_glyph_count": 128,
+      "font": "JESS13B",
+      "path": "fonts/jess13b.json",
+      "sha256": "9d46c557f774a3a4c87d070c5d4e6910b87d7812629a8dd7762b57087dc53b12",
+      "size_bytes": 48832,
+      "slot_count": 128
+    },
+    {
+      "defined_glyph_count": 128,
+      "font": "JESS13I",
+      "path": "fonts/jess13i.json",
+      "sha256": "1a7d78a7d0685865f96ac9904774f1d8464c186eb448b76d5840df430193ce9e",
+      "size_bytes": 49098,
+      "slot_count": 128
+    },
+    {
+      "defined_glyph_count": 128,
+      "font": "JESS14",
+      "path": "fonts/jess14.json",
+      "sha256": "002e8bf152dad57488eb365e7886f3fb8fd95b7883023c181a8259728b03d445",
+      "size_bytes": 50588,
+      "slot_count": 128
+    },
+    {
+      "defined_glyph_count": 128,
+      "font": "JESS14B",
+      "path": "fonts/jess14b.json",
+      "sha256": "294b45721e17ba67dbb2164ea4cfe823a8d7efe63303db0c664aadbb37ae6d9a",
+      "size_bytes": 50834,
+      "slot_count": 128
+    },
+    {
+      "defined_glyph_count": 128,
+      "font": "JESS14I",
+      "path": "fonts/jess14i.json",
+      "sha256": "f08b1c8ec98a18a1d414cc7e2ff5ab385bc302422f9d1570e81109880bb43d2c",
+      "size_bytes": 51331,
+      "slot_count": 128
+    },
+    {
+      "defined_glyph_count": 95,
+      "font": "MATH10",
+      "path": "fonts/math10.json",
+      "sha256": "7008d173dc706641c738417e533d4dc38cb0f64340f94a742c934edc0cb87848",
+      "size_bytes": 47838,
+      "slot_count": 128
+    },
+    {
+      "defined_glyph_count": 102,
+      "font": "MATH12",
+      "path": "fonts/math12.json",
+      "sha256": "0724b8f51a6b29e84c684e9449692cd8276ad1546b2cb3306dd728e8316b354b",
+      "size_bytes": 45779,
+      "slot_count": 128
+    },
+    {
+      "defined_glyph_count": 128,
+      "font": "MEDFNT",
+      "path": "fonts/medfnt.json",
+      "sha256": "a800ed145b664f83987080577a77da676e520f0272309c1f82bd63209dc9e72b",
+      "size_bytes": 50593,
+      "slot_count": 128
+    },
+    {
+      "defined_glyph_count": 128,
+      "font": "MEDFNTB",
+      "path": "fonts/medfntb.json",
+      "sha256": "0ca3447e9cf3f389f3d69b2a1a106474e460be21d818a2a8561de8cf1ccf36e6",
+      "size_bytes": 50853,
+      "slot_count": 128
+    },
+    {
+      "defined_glyph_count": 128,
+      "font": "MEDFNTBI",
+      "path": "fonts/medfntbi.json",
+      "sha256": "bb47b045b323710cb26f4a44f6a9687400a6dfba0182ed1baa8c2c02ffca8c6a",
+      "size_bytes": 49976,
+      "slot_count": 128
+    },
+    {
+      "defined_glyph_count": 128,
+      "font": "MEDFNTI",
+      "path": "fonts/medfnti.json",
+      "sha256": "17e24d8c51382ca61919a04701cd87bd141b1b6502d864951554dcd357f65def",
+      "size_bytes": 49496,
+      "slot_count": 128
+    },
+    {
+      "defined_glyph_count": 51,
+      "font": "MOUSE",
+      "path": "fonts/mouse.json",
+      "sha256": "7c52d2687d39ead154023451e533f68fe16ccea0a8e13d2a07c5e3987953284d",
+      "size_bytes": 37834,
+      "slot_count": 128
+    },
+    {
+      "defined_glyph_count": 19,
+      "font": "NARROW",
+      "path": "fonts/narrow.json",
+      "sha256": "980248a26e15e2ce4c8badf945b54779db070d1a1f86073c0d94a2c18a9e5866",
+      "size_bytes": 28396,
+      "slot_count": 128
+    },
+    {
+      "defined_glyph_count": 128,
+      "font": "SWISS12-CCAPS",
+      "path": "fonts/swiss12-ccaps.json",
+      "sha256": "325660b9d7490ece133e303dcead3fbb638ff5918a3b8a9c73d1a35ff214c941",
+      "size_bytes": 50612,
+      "slot_count": 128
+    },
+    {
+      "defined_glyph_count": 128,
+      "font": "SWISS12B-CCAPS",
+      "path": "fonts/swiss12b-ccaps.json",
+      "sha256": "1bf1d2f3a483e2db6ddefe5ced15a766c0696bbc7b44f69cdc13bbe0bbab053b",
+      "size_bytes": 50818,
+      "slot_count": 128
+    },
+    {
+      "defined_glyph_count": 128,
+      "font": "SWISS20",
+      "path": "fonts/swiss20.json",
+      "sha256": "d6d761f469a60224dadfaf35e6171e69176f24ae87ff785ec86e4a9944311c47",
+      "size_bytes": 63311,
+      "slot_count": 128
+    },
+    {
+      "defined_glyph_count": 128,
+      "font": "SWISS20B",
+      "path": "fonts/swiss20b.json",
+      "sha256": "a3eb12329028575bab6e8b796cf366752b7099dafdba2227956cce40903f28b1",
+      "size_bytes": 64145,
+      "slot_count": 128
+    },
+    {
+      "defined_glyph_count": 128,
+      "font": "SWISS20BI",
+      "path": "fonts/swiss20bi.json",
+      "sha256": "44703f38faf7160425b4d45d01ca75c6a5ab14d35c3bb3aa84f787e862daa76c",
+      "size_bytes": 65070,
+      "slot_count": 128
+    },
+    {
+      "defined_glyph_count": 128,
+      "font": "SWISS20I",
+      "path": "fonts/swiss20i.json",
+      "sha256": "3bcda05f175ff2ddeb72725e6cab740d03d4199213ebe92454ac754ef3678cbd",
+      "size_bytes": 64552,
+      "slot_count": 128
+    },
+    {
+      "defined_glyph_count": 82,
+      "font": "SYMBOL10",
+      "path": "fonts/symbol10.json",
+      "sha256": "baebb9ab9a6b1a00d3c82dc2f768ae9b6f73cd4e21e6de44b8fc97e8d1991b63",
+      "size_bytes": 58010,
+      "slot_count": 128
+    },
+    {
+      "defined_glyph_count": 77,
+      "font": "SYMBOL12",
+      "path": "fonts/symbol12.json",
+      "sha256": "8fce943f50cfb1ecfccd32facc97996c2df45792723586f73f4e007ad53a98c2",
+      "size_bytes": 40676,
+      "slot_count": 128
+    },
+    {
+      "defined_glyph_count": 128,
+      "font": "TINY",
+      "path": "fonts/tiny.json",
+      "sha256": "7b786459b3f1ea2b9cf625307d29ee320c6b222ca60b3c014f74facd98019c3c",
+      "size_bytes": 35483,
+      "slot_count": 128
+    },
+    {
+      "defined_glyph_count": 128,
+      "font": "TR10",
+      "path": "fonts/tr10.json",
+      "sha256": "515c0dac3e92c56bfa8ae938523b8e26a76c081ad9d536c49ffbf91ef5a18896",
+      "size_bytes": 46808,
+      "slot_count": 128
+    },
+    {
+      "defined_glyph_count": 128,
+      "font": "TR10B",
+      "path": "fonts/tr10b.json",
+      "sha256": "91b6a16227fd6ce2d1b6d0f11491c597060bb8c108bddf73ec16789a61b88148",
+      "size_bytes": 47029,
+      "slot_count": 128
+    },
+    {
+      "defined_glyph_count": 128,
+      "font": "TR10BI",
+      "path": "fonts/tr10bi.json",
+      "sha256": "9c39b7ea6a4513380c0fca1551dd42f93f57534ce43825483b89d00f9ad2f7b1",
+      "size_bytes": 47320,
+      "slot_count": 128
+    },
+    {
+      "defined_glyph_count": 128,
+      "font": "TR10I",
+      "path": "fonts/tr10i.json",
+      "sha256": "9540f5b6809f9b2279b8ec280e950fceae7649dd3f0ba2a3a3241341cc32de4e",
+      "size_bytes": 47119,
+      "slot_count": 128
+    },
+    {
+      "defined_glyph_count": 128,
+      "font": "TR12",
+      "path": "fonts/tr12.json",
+      "sha256": "27de3c8eae666072da8cab2b7ff16e259c8f0122a2876e688869258a60294788",
+      "size_bytes": 50817,
+      "slot_count": 128
+    },
+    {
+      "defined_glyph_count": 128,
+      "font": "TR12B",
+      "path": "fonts/tr12b.json",
+      "sha256": "eb619ee9691304c2f9b418472635ecd6574bd5f3a392ba5c54c3df9447498a14",
+      "size_bytes": 54589,
+      "slot_count": 128
+    },
+    {
+      "defined_glyph_count": 128,
+      "font": "TR12BI",
+      "path": "fonts/tr12bi.json",
+      "sha256": "cffb384f5d14eaad13ee8624514f5e93d6a07f5a6dee638f8ce7d27e167e91cd",
+      "size_bytes": 51348,
+      "slot_count": 128
+    },
+    {
+      "defined_glyph_count": 128,
+      "font": "TR12I",
+      "path": "fonts/tr12i.json",
+      "sha256": "8cbe42aee8eaa208abff1ae448edf6f5ea295568a7f7e58bc77bc689431f7eb1",
+      "size_bytes": 50976,
+      "slot_count": 128
+    },
+    {
+      "defined_glyph_count": 128,
+      "font": "TR8",
+      "path": "fonts/tr8.json",
+      "sha256": "538f3ecd30e33b1609f1e27a485b7f18bba551358505bd528c9afa00c4d0aa2c",
+      "size_bytes": 42941,
+      "slot_count": 128
+    },
+    {
+      "defined_glyph_count": 128,
+      "font": "TR8B",
+      "path": "fonts/tr8b.json",
+      "sha256": "99070715d54361ec2adb7bd29152c66711f07121be94977ace299bea4d1f1ffa",
+      "size_bytes": 44926,
+      "slot_count": 128
+    },
+    {
+      "defined_glyph_count": 128,
+      "font": "TR8BI",
+      "path": "fonts/tr8bi.json",
+      "sha256": "27f2cd9da87f283b7f08a5750d6a51204f139d5271be2d0bda482ae7f0753190",
+      "size_bytes": 45107,
+      "slot_count": 128
+    },
+    {
+      "defined_glyph_count": 128,
+      "font": "TR8I",
+      "path": "fonts/tr8i.json",
+      "sha256": "f300d849bee7ad116a32072090ccde4ccb52559f7a9b2e6ff86fa53a53085fa5",
+      "size_bytes": 43198,
+      "slot_count": 128
+    },
+    {
+      "defined_glyph_count": 142,
+      "font": "TVFONT",
+      "path": "fonts/tvfont.json",
+      "sha256": "9079459b4e851592ca828cef142282be42a942ee7009e0e6d3ab20fc5c318a79",
+      "size_bytes": 48442,
+      "slot_count": 142
+    },
+    {
+      "defined_glyph_count": 128,
+      "font": "TVFONTB",
+      "path": "fonts/tvfontb.json",
+      "sha256": "a55d5839a4fab3c21576577739dfd0f0ae34f043138045a276f2c63f65589713",
+      "size_bytes": 43553,
+      "slot_count": 128
+    },
+    {
+      "defined_glyph_count": 128,
+      "font": "TVFONTBI",
+      "path": "fonts/tvfontbi.json",
+      "sha256": "26229f7f062ce60bda7741c0125171e71f84316e48fe79d59dd0d2b42c95953a",
+      "size_bytes": 43486,
+      "slot_count": 128
+    },
+    {
+      "defined_glyph_count": 128,
+      "font": "TVFONTCB",
+      "path": "fonts/tvfontcb.json",
+      "sha256": "def8644089840c09f08f70909aba09289078de7907c0b6c1eb199ce57c428ca3",
+      "size_bytes": 43296,
+      "slot_count": 128
+    },
+    {
+      "defined_glyph_count": 142,
+      "font": "TVFONTI",
+      "path": "fonts/tvfonti.json",
+      "sha256": "b775267f72bc138aa30efafd76e54fc23a2dbbd9fcd77247f4c32843c8f7f1f5",
+      "size_bytes": 48443,
+      "slot_count": 142
+    },
+    {
+      "defined_glyph_count": 94,
+      "font": "VT100",
+      "path": "fonts/vt100.json",
+      "sha256": "8a693d2bd46612bfd7fe8fd0aa72bc222b68ae0b202d033f0f5a104ccac698e4",
+      "size_bytes": 42991,
+      "slot_count": 137
+    }
+  ],
+  "normalized_geometry_sha256": "35dc71287724e5976016ec934530d131042d25518d14e2e8cd40a96ff590eac5",
+  "profile": "Genera 8.5 base-world resident screen fonts",
+  "schema_version": 1,
+  "scope_note": "This is the complete 89-object resident FONT inventory of the pinned base world, not every font file distributed with Genera.",
+  "slot_count": 11659,
+  "source": {
+    "filename": "Genera-8-5.vlod",
+    "format": "little-endian VLM VLOD V2",
+    "sha256": "a8ee5e86cc7e322f7385af3e0cd579d7650d4dcfc3ce328acbf8b25515dd0672",
+    "size_bytes": 54804480
+  },
+  "variable_width_font_count": 71
+}

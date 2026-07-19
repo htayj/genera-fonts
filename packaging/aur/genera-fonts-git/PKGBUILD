@@ -1,0 +1,47 @@
+# Maintainer: Genera Fonts maintainers <noreply@example.invalid>
+pkgbase=genera-fonts-git
+pkgname=('genera-fonts-latin-git' 'genera-fonts-symbols-git')
+pkgver=r1.g0000000
+pkgrel=1
+pkgdesc='Unicode-encoded Symbolics Genera 8.5 bitmap fonts'
+arch=('any')
+url='https://github.com/htayj/genera-fonts'
+license=('BSD-3-Clause' 'LicenseRef-Typeface-as-Typeface')
+makedepends=('git' 'python' 'xorg-fonttosfnt')
+options=('!strip')
+source=('genera-fonts::git+https://github.com/htayj/genera-fonts.git')
+sha256sums=('SKIP')
+
+pkgver() {
+  cd genera-fonts
+  printf 'r%s.g%s\n' "$(git rev-list --count HEAD)" "$(git rev-parse --short=7 HEAD)"
+}
+
+build() {
+  cd genera-fonts
+  local epoch
+  epoch=$(git show -s --format=%ct HEAD)
+  SOURCE_DATE_EPOCH="$epoch" make release VERSION="$pkgver" SOURCE_DATE_EPOCH="$epoch"
+}
+
+package_genera-fonts-latin-git() {
+  pkgdesc='Genera bitmap fonts containing visible Latin letters (VCS)'
+  depends=('fontconfig')
+  provides=("genera-fonts-latin=$pkgver")
+  conflicts=('genera-fonts-latin')
+  backup=('etc/fonts/conf.d/75-genera-fonts-latin.conf')
+  cd genera-fonts
+  scripts/stage-linux-package.sh --format arch --group latin \
+    --destdir "$pkgdir" --version "$pkgver"
+}
+
+package_genera-fonts-symbols-git() {
+  pkgdesc='Genera specialty bitmap fonts without visible Latin letters (VCS)'
+  depends=('fontconfig')
+  provides=("genera-fonts-symbols=$pkgver")
+  conflicts=('genera-fonts-symbols')
+  backup=('etc/fonts/conf.d/75-genera-fonts-symbols.conf')
+  cd genera-fonts
+  scripts/stage-linux-package.sh --format arch --group symbols \
+    --destdir "$pkgdir" --version "$pkgver"
+}

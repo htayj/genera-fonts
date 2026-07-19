@@ -1,0 +1,554 @@
+name: Release packaging
+
+on:
+  push:
+    branches:
+      - '**'
+    tags:
+      - 'v*'
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    outputs:
+      release_version: ${{ steps.version.outputs.release_version }}
+      source_date_epoch: ${{ steps.version.outputs.source_date_epoch }}
+
+    steps:
+      - name: Check out repository and pinned Genera font corpus
+        uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7
+        with:
+          fetch-depth: 0
+          submodules: recursive
+
+      - name: Install build and native-X dependencies
+        run: |
+          set -euo pipefail
+          sudo apt-get update
+          sudo DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends \
+            ca-certificates \
+            git \
+            libx11-6 \
+            make \
+            python3 \
+            python3-fonttools \
+            xfonts-utils \
+            xvfb
+          command -v bdftopcf
+          command -v fonttosfnt
+          command -v mkfontdir
+          command -v Xvfb
+
+      - name: Compute reproducible release inputs
+        id: version
+        run: |
+          set -euo pipefail
+          case "$GITHUB_REF" in
+            refs/tags/*) release_version=${GITHUB_REF#refs/tags/} ;;
+            *) release_version=$(git describe --tags --always --dirty) ;;
+          esac
+          source_date_epoch=$(git show -s --format=%ct HEAD)
+          case "$release_version" in
+            *-dirty)
+              echo "refusing to package a dirty checkout: $release_version" >&2
+              exit 1
+              ;;
+          esac
+          [[ "$source_date_epoch" =~ ^[0-9]+$ ]] || {
+            echo "invalid commit timestamp: $source_date_epoch" >&2
+            exit 1
+          }
+          echo "release version: $release_version"
+          echo "source date epoch: $source_date_epoch"
+          echo "release_version=$release_version" >> "$GITHUB_OUTPUT"
+          echo "source_date_epoch=$source_date_epoch" >> "$GITHUB_OUTPUT"
+
+      - name: Build, verify, and package release archives
+        env:
+          SOURCE_DATE_EPOCH: ${{ steps.version.outputs.source_date_epoch }}
+          VERSION: ${{ steps.version.outputs.release_version }}
+        run: make ci VERSION="$VERSION" SOURCE_DATE_EPOCH="$SOURCE_DATE_EPOCH"
+
+      - name: Verify the two release archives and checksums
+        env:
+          VERSION: ${{ steps.version.outputs.release_version }}
+        run: |
+          set -euo pipefail
+          assets=()
+          for collection in latin symbols; do
+            archive="dist/release/Genera-fonts-$collection-$VERSION.tar.gz"
+            [[ -f "$archive" ]] || {
+              echo "missing exact $collection release archive: $archive" >&2
+              exit 1
+            }
+            checksum="$archive.sha256"
+            [[ -f "$checksum" ]] || {
+              echo "missing checksum for $archive" >&2
+              exit 1
+            }
+            (cd "$(dirname "$checksum")" && sha256sum -c "$(basename "$checksum")")
+            assets+=("$archive" "$checksum")
+          done
+
+          mapfile -t actual < <(find dist/release -maxdepth 1 -type f -print | sort)
+          mapfile -t expected < <(printf '%s\n' "${assets[@]}" | sort)
+          if [[ "${actual[*]}" != "${expected[*]}" ]]; then
+            echo "dist/release contains files outside the two-archive allowlist" >&2
+            diff -u \
+              <(printf '%s\n' "${expected[@]}") \
+              <(printf '%s\n' "${actual[@]}") || true
+            exit 1
+          fi
+
+      - name: Upload release archives for package jobs
+        uses: actions/upload-artifact@b7c566a772e6b6bfb58ed0dc250532a479d7789f # v6
+        with:
+          name: genera-fonts-release-archives
+          path: |
+            dist/release/Genera-fonts-latin-*.tar.gz
+            dist/release/Genera-fonts-latin-*.tar.gz.sha256
+            dist/release/Genera-fonts-symbols-*.tar.gz
+            dist/release/Genera-fonts-symbols-*.tar.gz.sha256
+          if-no-files-found: error
+
+  test-nix:
+    name: Nix (${{ matrix.system }})
+    runs-on: ${{ matrix.runner }}
+    needs: build
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - system: x86_64-linux
+            runner: ubuntu-24.04
+          - system: aarch64-linux
+            runner: ubuntu-24.04-arm
+
+    steps:
+      - name: Check out repository and pinned Genera font corpus
+        uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7
+        with:
+          fetch-depth: 0
+          submodules: recursive
+
+      - name: Run both Nix package checks on the native architecture
+        run: make test-nix-flake-container CONTAINER_RUNTIME=docker
+
+  package:
+    name: Package (${{ matrix.format }})
+    runs-on: ubuntu-latest
+    needs: build
+    strategy:
+      fail-fast: false
+      matrix:
+        format:
+          - deb
+          - rpm
+          - arch
+          - void
+
+    steps:
+      - name: Check out packaging sources
+        uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7
+        with:
+          fetch-depth: 0
+          submodules: recursive
+
+      - name: Download verified release archives
+        uses: actions/download-artifact@37930b1c2abaa49bbe596cd826c3c89aef350131 # v7
+        with:
+          name: genera-fonts-release-archives
+          path: dist/release
+
+      - name: Install DEB packaging dependencies
+        if: ${{ matrix.format == 'deb' }}
+        run: |
+          set -euo pipefail
+          sudo apt-get update
+          sudo DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends \
+            dpkg-dev
+
+      - name: Install RPM packaging dependencies
+        if: ${{ matrix.format == 'rpm' }}
+        run: |
+          set -euo pipefail
+          sudo apt-get update
+          sudo DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends \
+            file \
+            rpm
+
+      - name: Build DEB packages
+        if: ${{ matrix.format == 'deb' }}
+        env:
+          SOURCE_DATE_EPOCH: ${{ needs.build.outputs.source_date_epoch }}
+          VERSION: ${{ needs.build.outputs.release_version }}
+        run: scripts/package-deb.sh --version "$VERSION"
+
+      - name: Build RPM packages
+        if: ${{ matrix.format == 'rpm' }}
+        env:
+          SOURCE_DATE_EPOCH: ${{ needs.build.outputs.source_date_epoch }}
+          VERSION: ${{ needs.build.outputs.release_version }}
+        run: scripts/package-rpm.sh --version "$VERSION"
+
+      - name: Build Arch packages in Arch Linux
+        if: ${{ matrix.format == 'arch' }}
+        env:
+          SOURCE_DATE_EPOCH: ${{ needs.build.outputs.source_date_epoch }}
+          VERSION: ${{ needs.build.outputs.release_version }}
+        run: |
+          set -euo pipefail
+          docker run --rm \
+            -e "SOURCE_DATE_EPOCH=$SOURCE_DATE_EPOCH" \
+            -e "VERSION=$VERSION" \
+            -v "$PWD:/repo" \
+            -w /repo \
+            docker.io/library/archlinux:base-devel@sha256:212b1e518e94ee9c52be55e8a32da75fcf11e7b5610b80b49479e67880102406 \
+            bash -lc '
+              set -euo pipefail
+              pacman -Sy --noconfirm --needed \
+                base-devel bash coreutils findutils python
+              repo_uid=$(stat -c %u /repo)
+              repo_gid=$(stat -c %g /repo)
+              if [[ "$repo_uid" -eq 0 ]]; then
+                repo_uid=1000
+                repo_gid=1000
+              fi
+              if getent group "$repo_gid" >/dev/null; then
+                group_name=$(getent group "$repo_gid" | cut -d: -f1)
+              else
+                group_name=builder
+                groupadd -g "$repo_gid" "$group_name"
+              fi
+              if getent passwd "$repo_uid" >/dev/null; then
+                user_name=$(getent passwd "$repo_uid" | cut -d: -f1)
+              else
+                user_name=builder
+                useradd -m -u "$repo_uid" -g "$repo_gid" "$user_name"
+              fi
+              mkdir -p /repo/dist/packages/arch
+              chown -R "$repo_uid:$repo_gid" /repo/dist/packages/arch
+              runuser -u "$user_name" -- \
+                ./scripts/package-arch.sh --version "$VERSION"
+            '
+
+      - name: Build Void packages in Void Linux
+        if: ${{ matrix.format == 'void' }}
+        env:
+          SOURCE_DATE_EPOCH: ${{ needs.build.outputs.source_date_epoch }}
+          VERSION: ${{ needs.build.outputs.release_version }}
+        run: scripts/package-void.sh --version "$VERSION" --runtime docker
+
+      - name: Verify two packages and their checksum coverage
+        env:
+          FORMAT: ${{ matrix.format }}
+        run: |
+          set -euo pipefail
+          case "$FORMAT" in
+            deb) pattern='*.deb' ;;
+            rpm) pattern='*.rpm' ;;
+            arch) pattern='*.pkg.tar.*' ;;
+            void) pattern='*.xbps' ;;
+            *) echo "unsupported package format: $FORMAT" >&2; exit 1 ;;
+          esac
+
+          package_dir="dist/packages/$FORMAT"
+          mapfile -t packages < <(
+            find "$package_dir" -maxdepth 1 -type f -name "$pattern" \
+              ! -name '*.sha256' ! -name '*.sig' -print | sort
+          )
+          if [[ ${#packages[@]} -ne 2 ]]; then
+            echo "expected two $FORMAT packages, found ${#packages[@]}" >&2
+            exit 1
+          fi
+          for collection in latin symbols; do
+            matches=()
+            for package in "${packages[@]}"; do
+              if [[ $(basename "$package") == genera-fonts-$collection[-_]* ]]; then
+                matches+=("$package")
+              fi
+            done
+            if [[ ${#matches[@]} -ne 1 ]]; then
+              echo "expected one $FORMAT package for $collection, found ${#matches[@]}" >&2
+              exit 1
+            fi
+          done
+          for package in "${packages[@]}"; do
+            checksum="$package.sha256"
+            [[ -f "$checksum" ]] || {
+              echo "missing checksum for $package" >&2
+              exit 1
+            }
+            (cd "$package_dir" && sha256sum -c "$(basename "$checksum")")
+          done
+
+      - name: Upload DEB packages
+        if: ${{ matrix.format == 'deb' }}
+        uses: actions/upload-artifact@b7c566a772e6b6bfb58ed0dc250532a479d7789f # v6
+        with:
+          name: genera-fonts-deb-packages
+          path: |
+            dist/packages/deb/*.deb
+            dist/packages/deb/*.deb.sha256
+          if-no-files-found: error
+
+      - name: Upload RPM packages
+        if: ${{ matrix.format == 'rpm' }}
+        uses: actions/upload-artifact@b7c566a772e6b6bfb58ed0dc250532a479d7789f # v6
+        with:
+          name: genera-fonts-rpm-packages
+          path: |
+            dist/packages/rpm/*.rpm
+            dist/packages/rpm/*.rpm.sha256
+          if-no-files-found: error
+
+      - name: Upload Arch packages
+        if: ${{ matrix.format == 'arch' }}
+        uses: actions/upload-artifact@b7c566a772e6b6bfb58ed0dc250532a479d7789f # v6
+        with:
+          name: genera-fonts-arch-packages
+          path: |
+            dist/packages/arch/*.pkg.tar.zst
+            dist/packages/arch/*.pkg.tar.zst.sha256
+          if-no-files-found: error
+
+      - name: Upload Void packages
+        if: ${{ matrix.format == 'void' }}
+        uses: actions/upload-artifact@b7c566a772e6b6bfb58ed0dc250532a479d7789f # v6
+        with:
+          name: genera-fonts-void-packages
+          path: |
+            dist/packages/void/*.xbps
+            dist/packages/void/*.xbps.sha256
+          if-no-files-found: error
+
+  test-packages:
+    name: Install test (${{ matrix.format }})
+    runs-on: ubuntu-latest
+    needs:
+      - build
+      - package
+    if: ${{ always() && !cancelled() && needs.build.result == 'success' }}
+    strategy:
+      fail-fast: false
+      matrix:
+        format:
+          - deb
+          - rpm
+          - arch
+          - void
+
+    steps:
+      - name: Check out package verification scripts
+        uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7
+        with:
+          fetch-depth: 0
+          submodules: recursive
+
+      - name: Download packages
+        uses: actions/download-artifact@37930b1c2abaa49bbe596cd826c3c89aef350131 # v7
+        with:
+          name: genera-fonts-${{ matrix.format }}-packages
+          path: dist/packages/${{ matrix.format }}
+
+      - name: Install and verify both packages in a native container
+        env:
+          FORMAT: ${{ matrix.format }}
+        run: |
+          set -euo pipefail
+          case "$FORMAT" in
+            deb) pattern='*.deb' ;;
+            rpm) pattern='*.rpm' ;;
+            arch) pattern='*.pkg.tar.*' ;;
+            void) pattern='*.xbps' ;;
+            *) echo "unsupported package format: $FORMAT" >&2; exit 1 ;;
+          esac
+          mapfile -t packages < <(
+            find "dist/packages/$FORMAT" -maxdepth 1 -type f -name "$pattern" \
+              ! -name '*.sha256' ! -name '*.sig' -print | sort
+          )
+          if [[ ${#packages[@]} -ne 2 ]]; then
+            echo "expected two $FORMAT packages, found ${#packages[@]}" >&2
+            exit 1
+          fi
+          scripts/test-linux-package-container.sh \
+            --runtime docker \
+            --format "$FORMAT" \
+            --package "${packages[0]}" \
+            --package "${packages[1]}"
+
+  release:
+    runs-on: ubuntu-latest
+    needs:
+      - build
+      - package
+      - test-nix
+      - test-packages
+    if: ${{ startsWith(github.ref, 'refs/tags/v') }}
+    permissions:
+      contents: write
+
+    steps:
+      - name: Check out tagged repository
+        uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7
+        with:
+          fetch-depth: 0
+          submodules: recursive
+
+      - name: Verify that the tag commit is on origin/main
+        env:
+          TAG_NAME: ${{ github.ref_name }}
+        run: |
+          set -euo pipefail
+          [[ "$TAG_NAME" == v* ]] || {
+            echo "release tag must start with v: $TAG_NAME" >&2
+            exit 1
+          }
+          git fetch --no-tags origin main:refs/remotes/origin/main
+          tag_commit=$(git rev-parse "$TAG_NAME^{commit}")
+          if [[ "$tag_commit" != "$GITHUB_SHA" ]]; then
+            echo "tag resolves to $tag_commit, but workflow SHA is $GITHUB_SHA" >&2
+            exit 1
+          fi
+          if ! git merge-base --is-ancestor "$tag_commit" origin/main; then
+            echo "$TAG_NAME commit $tag_commit is not on origin/main" >&2
+            exit 1
+          fi
+
+      - name: Download release archives
+        uses: actions/download-artifact@37930b1c2abaa49bbe596cd826c3c89aef350131 # v7
+        with:
+          name: genera-fonts-release-archives
+          path: release-assets/archives
+
+      - name: Download DEB packages
+        uses: actions/download-artifact@37930b1c2abaa49bbe596cd826c3c89aef350131 # v7
+        with:
+          name: genera-fonts-deb-packages
+          path: release-assets/deb
+
+      - name: Download RPM packages
+        uses: actions/download-artifact@37930b1c2abaa49bbe596cd826c3c89aef350131 # v7
+        with:
+          name: genera-fonts-rpm-packages
+          path: release-assets/rpm
+
+      - name: Download Arch packages
+        uses: actions/download-artifact@37930b1c2abaa49bbe596cd826c3c89aef350131 # v7
+        with:
+          name: genera-fonts-arch-packages
+          path: release-assets/arch
+
+      - name: Download Void packages
+        uses: actions/download-artifact@37930b1c2abaa49bbe596cd826c3c89aef350131 # v7
+        with:
+          name: genera-fonts-void-packages
+          path: release-assets/void
+
+      - name: Verify the release asset allowlist and all checksums
+        id: assets
+        env:
+          TAG_NAME: ${{ github.ref_name }}
+        run: |
+          set -euo pipefail
+          assets=()
+
+          require_asset() {
+            local directory=$1
+            local filename=$2
+            local label=$3
+            local asset="$directory/$filename"
+            [[ -f "$asset" ]] || {
+              echo "missing exact $label asset: $asset" >&2
+              exit 1
+            }
+            local checksum="$asset.sha256"
+            [[ -f "$checksum" ]] || {
+              echo "missing checksum for $asset" >&2
+              exit 1
+            }
+            (cd "$(dirname "$checksum")" && sha256sum -c "$(basename "$checksum")")
+            assets+=("$asset" "$checksum")
+          }
+
+          deb_version=$(scripts/package-version.sh --format deb "$TAG_NAME")
+          rpm_version=$(scripts/package-version.sh --format rpm "$TAG_NAME")
+          arch_version=$(scripts/package-version.sh --format arch "$TAG_NAME")
+          void_version=$(scripts/package-version.sh --format void "$TAG_NAME")
+
+          for collection in latin symbols; do
+            require_asset \
+              release-assets/archives \
+              "Genera-fonts-$collection-$TAG_NAME.tar.gz" \
+              "$collection release archive"
+            require_asset \
+              release-assets/deb \
+              "genera-fonts-${collection}_${deb_version}-1_all.deb" \
+              "$collection DEB package"
+            require_asset \
+              release-assets/rpm \
+              "genera-fonts-$collection-$rpm_version-1.noarch.rpm" \
+              "$collection RPM package"
+            require_asset \
+              release-assets/arch \
+              "genera-fonts-$collection-$arch_version-1-any.pkg.tar.zst" \
+              "$collection Arch package"
+            require_asset \
+              release-assets/void \
+              "genera-fonts-$collection-${void_version}_1.noarch.xbps" \
+              "$collection Void package"
+          done
+
+          expected=$(mktemp)
+          actual=$(mktemp)
+          printf '%s\n' "${assets[@]}" | sort -u > "$expected"
+          find release-assets -type f -print | sort > "$actual"
+          if ! diff -u "$expected" "$actual"; then
+            echo "release assets differ from the explicit allowlist" >&2
+            exit 1
+          fi
+          if [[ $(wc -l < "$expected") -ne 20 ]]; then
+            echo "expected exactly 10 assets and 10 checksums" >&2
+            exit 1
+          fi
+
+          {
+            echo 'paths<<GENERA_RELEASE_ASSETS'
+            cat "$expected"
+            echo 'GENERA_RELEASE_ASSETS'
+          } >> "$GITHUB_OUTPUT"
+
+      - name: Create immutable GitHub Release
+        env:
+          ASSET_PATHS: ${{ steps.assets.outputs.paths }}
+          GH_REPO: ${{ github.repository }}
+          GH_TOKEN: ${{ github.token }}
+          TAG_NAME: ${{ github.ref_name }}
+        run: |
+          set -euo pipefail
+          if gh release view "$TAG_NAME" >/dev/null 2>&1; then
+            echo "release $TAG_NAME already exists; refusing to mutate it" >&2
+            exit 1
+          fi
+
+          mapfile -t assets <<< "$ASSET_PATHS"
+          if [[ ${#assets[@]} -ne 20 ]]; then
+            echo "expected 20 allowlisted upload paths, found ${#assets[@]}" >&2
+            exit 1
+          fi
+
+          release_flags=()
+          case "$TAG_NAME" in
+            *alpha*|*beta*|*rc*|*pre*) release_flags+=(--prerelease) ;;
+          esac
+
+          gh release create "$TAG_NAME" "${assets[@]}" \
+            --verify-tag \
+            --title "Genera Fonts $TAG_NAME" \
+            --notes "Reproducible Unicode Genera font archives split into Latin and symbols collections, plus tested Linux packages for $TAG_NAME." \
+            "${release_flags[@]}"
