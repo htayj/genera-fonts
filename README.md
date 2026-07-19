@@ -23,6 +23,9 @@ The current reviewed corpus contains:
   Private Use Area scalars; and
 - 89 deterministic specimens, one for every resident font.
 
+**[Browse all 89 font specimens](SPECIMENS.md)** in the compact gallery with
+full-resolution originals.
+
 These are raster fonts. The build does not trace outlines, scale or hint
 glyphs, infer vectors, or synthesize missing characters. Unicode derivation
 changes character addresses and font identity without changing bitmaps,
