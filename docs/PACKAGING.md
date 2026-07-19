@@ -67,11 +67,10 @@ typeface publication notice.
 ## Distribution recipe templates
 
 `packaging/aur/` and `packaging/void/` contain AUR and Void recipe templates.
-They intentionally name the planned upstream
-`https://github.com/htayj/genera-fonts`; do not submit them until that repository
-exists and the recipe revisions, source hashes, and release URLs have been
-updated against a published tag. No Gentoo overlay is included in this initial
-profile.
+They name the public upstream `https://github.com/htayj/genera-fonts`. Do not
+submit them until a versioned release has been published and the recipe
+revisions, source hashes, and release URLs have been updated against that tag.
+No Gentoo overlay is included in this initial profile.
 
 ## License metadata
 

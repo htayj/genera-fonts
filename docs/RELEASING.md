@@ -7,6 +7,10 @@ profile. It does not require or contain the licensed VLOD or supplied Genera
 font files. Re-importing from licensed media is a separate maintainer audit;
 normal public builders start from `sources/genera-8.5/`.
 
+The public upstream repository is
+[`htayj/genera-fonts`](https://github.com/htayj/genera-fonts), its `origin`
+uses SSH, and its default branch is `main`.
+
 The release partition is computed from emitted Unicode content:
 
 - **latin** contains an artifact when it has a visible glyph in Basic Latin
