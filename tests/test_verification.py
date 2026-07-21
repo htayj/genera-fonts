@@ -30,6 +30,13 @@ importer = load_script("genera_font_importer_tests", "import_genera_fonts.py")
 builder = load_script("genera_font_builder_tests", "build.py")
 checker = load_script("genera_font_dist_checker_tests", "check_dist.py")
 repro = load_script("genera_font_repro_checker_tests", "check_reproducibility.py")
+gallery = load_script(
+    "genera_font_specimen_gallery_tests", "update_specimen_gallery.py"
+)
+release_builder = load_script(
+    "genera_font_release_builder_tests", "build_release.py"
+)
+otb_checker = load_script("genera_font_otb_checker_tests", "check_otb.py")
 
 
 def source_font_fixture() -> dict[str, object]:
@@ -431,6 +438,175 @@ class BuildInputTests(unittest.TestCase):
         with self.assertRaisesRegex(builder.BuildError, "schema keys differ"):
             self.load_mapping(open_inventory)
 
+    def test_font_identity_mapping_is_closed_and_resolves_logical_strikes(self) -> None:
+        source_manifest = builder.load_json(
+            ROOT / "sources" / "genera-8.5" / "SOURCE-MANIFEST.json"
+        )
+        source_catalog = builder.load_json(
+            ROOT / "sources" / "genera-8.5" / "catalog.json"
+        )
+        font_names = {record["font"] for record in source_catalog["fonts"]}
+        identities = builder.load_font_identities(font_names, source_manifest)
+
+        self.assertEqual(
+            identities["expected"],
+            {
+                "font_count": 89,
+                "mapped_font_count": 86,
+                "primary_style_count": 79,
+                "role_only_count": 7,
+                "unmapped_font_count": 3,
+                "typographic_family_count": 15,
+                "desktop_style_disambiguator_count": 2,
+            },
+        )
+        expected = {
+            "HL8": ("SWISS/ROMAN/VERY-SMALL", 8, "Medium", "R"),
+            "HL8B": ("SWISS/BOLD/VERY-SMALL", 8, "Bold", "R"),
+            "HL8I": ("SWISS/ITALIC/VERY-SMALL", 8, "Medium", "I"),
+            "HL8BI": ("SWISS/BOLD-ITALIC/VERY-SMALL", 8, "Bold", "I"),
+            "HL14": ("SWISS/ROMAN/LARGE", 14, "Medium", "R"),
+        }
+        for name, (logical_name, x_size, weight, slant) in expected.items():
+            with self.subTest(name=name):
+                identity = builder.resolved_font_identity(name, identities)
+                self.assertEqual(identity["logical_name"], logical_name)
+                self.assertEqual(identity["nominal_x_size"], x_size)
+                self.assertEqual(
+                    identity["typographic"]["family_name"],
+                    "Symbolics Genera Swiss",
+                )
+                self.assertEqual(identity["typographic"]["weight_name"], weight)
+                self.assertEqual(identity["typographic"]["slant"], slant)
+
+        hl8_record = next(
+            record for record in source_catalog["fonts"] if record["font"] == "HL8"
+        )
+        hl14_record = next(
+            record for record in source_catalog["fonts"] if record["font"] == "HL14"
+        )
+        hl8 = builder.load_json(ROOT / "sources/genera-8.5" / hl8_record["path"])
+        hl14 = builder.load_json(ROOT / "sources/genera-8.5" / hl14_record["path"])
+        self.assertEqual(hl8["metrics"]["character_height"], 11)
+        self.assertEqual(hl14["metrics"]["character_height"], 15)
+
+        box = builder.resolved_font_identity("BOXFONT", identities)
+        self.assertEqual(box["mapping_status"], "role-mapped")
+        self.assertIsNone(box["logical_name"])
+        mouse = builder.resolved_font_identity("MOUSE", identities)
+        self.assertEqual(mouse["logical_name"], "FIX/ROMAN/NORMAL")
+        self.assertEqual(mouse["primary"]["character_set"], "MOUSE")
+        self.assertEqual(
+            mouse["typographic"]["family_name"], "Symbolics Genera Mouse"
+        )
+        self.assertEqual(
+            builder.resolved_font_identity("CPTFONTB", identities)["typographic"][
+                "setwidth_name"
+            ],
+            "Expanded",
+        )
+        self.assertEqual(
+            builder.resolved_font_identity("CPTFONTCC", identities)["typographic"],
+            {
+                "family_name": "Symbolics Genera Fix",
+                "weight_name": "Medium",
+                "slant": "R",
+                "setwidth_name": "Condensed",
+                "add_style_name": "Extra",
+            },
+        )
+        self.assertEqual(
+            builder.resolved_font_identity("TR8BI", identities)["typographic"][
+                "add_style_name"
+            ],
+            "Very Small Strike",
+        )
+        self.assertEqual(
+            builder.resolved_font_identity("TR10BI", identities)["typographic"][
+                "add_style_name"
+            ],
+            "Small Strike",
+        )
+        self.assertEqual(
+            otb_checker._expected_style(
+                builder.resolved_font_identity("TR8BI", identities)["typographic"]
+            ),
+            "Very-Small-Strike Bold Italic",
+        )
+        unmapped = builder.resolved_font_identity("40VR", identities)
+        self.assertEqual(unmapped["mapping_status"], "unmapped")
+        self.assertIsNone(unmapped["primary"])
+
+        source_fonts = [
+            builder.load_json(ROOT / "sources/genera-8.5" / record["path"])
+            for record in source_catalog["fonts"]
+        ]
+        self.assertEqual(
+            builder.verify_desktop_identity_uniqueness(source_fonts, identities),
+            89,
+        )
+        colliding = copy.deepcopy(identities)
+        colliding["desktop_style_disambiguators"].clear()
+        with self.assertRaisesRegex(
+            builder.BuildError, "desktop font identity collision"
+        ):
+            builder.verify_desktop_identity_uniqueness(source_fonts, colliding)
+
+        self.assertEqual(
+            gallery.logical_identity_label(
+                builder.resolved_font_identity("HL8", identities)
+            ),
+            "SWISS/ROMAN/VERY-SMALL",
+        )
+        self.assertEqual(
+            gallery.logical_identity_label(mouse),
+            "FIX/ROMAN/NORMAL [MOUSE] · Symbolics Genera Mouse (role-mapped)",
+        )
+        self.assertEqual(
+            gallery.logical_identity_label(box),
+            "Symbolics Genera Box Font (role-mapped)",
+        )
+        self.assertEqual(
+            gallery.logical_identity_label(unmapped),
+            "unmapped resident strike",
+        )
+
+    def test_font_identity_mapping_rejects_an_open_or_inconsistent_inventory(self) -> None:
+        source_manifest = builder.load_json(
+            ROOT / "sources" / "genera-8.5" / "SOURCE-MANIFEST.json"
+        )
+        source_catalog = builder.load_json(
+            ROOT / "sources" / "genera-8.5" / "catalog.json"
+        )
+        font_names = {record["font"] for record in source_catalog["fonts"]}
+        mapping = builder.load_json(ROOT / "config/font-identities.json")
+
+        cases: list[tuple[str, dict[str, object], str]] = []
+        missing = copy.deepcopy(mapping)
+        missing["assignments"].pop("HL8")
+        cases.append(("missing", missing, "schema keys differ"))
+        no_primary = copy.deepcopy(mapping)
+        no_primary["assignments"]["HL8"]["primary"] = None
+        cases.append(("no-primary", no_primary, "mapped font lacks a primary style"))
+        wrong_family = copy.deepcopy(mapping)
+        wrong_family["assignments"]["HL8"]["primary"]["family"] = "DUTCH"
+        cases.append(
+            ("wrong-family", wrong_family, "primary and desktop family differ")
+        )
+        wrong_boundary = copy.deepcopy(mapping)
+        wrong_boundary["assignments"]["HL8"]["typographic_family"] = "BOX"
+        cases.append(
+            ("wrong-boundary", wrong_boundary, "mapping status and family kind differ")
+        )
+
+        for label, candidate, message in cases:
+            with self.subTest(label=label), tempfile.TemporaryDirectory() as directory:
+                path = Path(directory) / "font-identities.json"
+                write_json(path, candidate)
+                with mock.patch.object(builder, "FONT_IDENTITIES", path):
+                    with self.assertRaisesRegex(builder.BuildError, message):
+                        builder.load_font_identities(font_names, source_manifest)
+
     def test_crop_and_unicode_derivative_preserve_exact_display_geometry(self) -> None:
         raw = builder.crop_font(source_font_fixture())
         self.assertEqual(
@@ -532,6 +708,16 @@ ENDFONT
 
 
 class VerificationPrimitiveTests(unittest.TestCase):
+    def test_release_builder_rejects_an_unreviewed_fonttosfnt_version(self) -> None:
+        process = mock.Mock(stdout="fonttosfnt 1.0.4\n", stderr="")
+        with mock.patch.object(
+            release_builder.shutil, "which", return_value="/tmp/fonttosfnt"
+        ), mock.patch.object(release_builder.subprocess, "run", return_value=process):
+            with self.assertRaisesRegex(
+                release_builder.ReleaseError, "expected 'fonttosfnt 1.2.5'"
+            ):
+                release_builder._fonttosfnt_version("fonttosfnt")
+
     def test_bdf_parser_rejects_nonzero_storage_padding(self) -> None:
         with tempfile.TemporaryDirectory() as directory:
             valid = Path(directory) / "valid.bdf"

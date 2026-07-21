@@ -3,6 +3,7 @@
   "profile": "Genera 8.5 base-world resident font distribution",
   "source_manifest_sha256": "b5f31c4373f6346d9005a41446d20fa6e0b923cc51e847020140131f2e5d0f53",
   "unicode_mapping_sha256": "6c055f6361bae60602ee9948910c0aa12e42771d6cacae565fb2966b36b87176",
+  "font_identities_sha256": "f3b411a869ca0f021bffdd7f2e9bb4bd867590359c02c02b2f4b35c46026e6cc",
   "source_normalized_geometry_sha256": "35dc71287724e5976016ec934530d131042d25518d14e2e8cd40a96ff590eac5",
   "expected": {
     "font_count": 89,
@@ -19,6 +20,15 @@
     "unicode_alias_count": 178,
     "specimen_count": 89,
     "raw_geometry_inventory_sha256": "f7c43ae21c7596f77c5f046d86b2e88a713cca67680818dc719c21991e0dbea9",
-    "unicode_geometry_inventory_sha256": "c87ed9e221a6cfed824ccfdd26388ae7d22e2b3040a83e15aaf84dfe84f0e8a0"
+    "unicode_geometry_inventory_sha256": "c87ed9e221a6cfed824ccfdd26388ae7d22e2b3040a83e15aaf84dfe84f0e8a0",
+    "font_identity_counts": {
+      "mapped_font_count": 86,
+      "primary_style_count": 79,
+      "role_only_count": 7,
+      "unmapped_font_count": 3,
+      "typographic_family_count": 15,
+      "desktop_style_disambiguator_count": 2
+    },
+    "desktop_identity_count": 89
   }
 }

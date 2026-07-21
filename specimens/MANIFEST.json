@@ -4,984 +4,2627 @@
     "symbols": 11
   },
   "font_count": 89,
+  "font_identity_mapping_id": "symbolics-genera-8.5-resident-logical-fonts-v1",
+  "font_identity_mapping_sha256": "f3b411a869ca0f021bffdd7f2e9bb4bd867590359c02c02b2f4b35c46026e6cc",
   "fonts": [
     {
       "content_class": "latin",
       "height": 176,
       "kind": "pangram",
+      "logical_identity": {
+        "desktop_style_disambiguator": null,
+        "logical_name": null,
+        "mapping_status": "unmapped",
+        "nominal_x_size": null,
+        "primary": null,
+        "typographic": {
+          "add_style_name": "",
+          "family_name": "Symbolics Genera 40VR",
+          "setwidth_name": "Normal",
+          "slant": "R",
+          "weight_name": "Medium"
+        }
+      },
       "name": "40VR",
       "path": "specimens/latin/40vr.png",
       "repertoire": "standard",
       "sha256": "7089e6dcf7892304eb2c646687471a542a7e69a618ab5b02f04b6f555df40d09",
-      "unicode_bdf_sha256": "5379cc8ff4cf80536e910c9f74b96a03605622dc2ed41b804d1db2a3f1a0f250",
+      "unicode_bdf_sha256": "df7531b1910e4b5916fc8b461633c53019742f8395b7d25dc02ecf297c6809af",
       "width": 1054
     },
     {
       "content_class": "latin",
       "height": 22,
       "kind": "pangram",
+      "logical_identity": {
+        "desktop_style_disambiguator": null,
+        "logical_name": "FIX/UPPERCASE/VERY-SMALL",
+        "mapping_status": "mapped",
+        "nominal_x_size": 8,
+        "primary": {
+          "character_set": "STANDARD",
+          "face": "UPPERCASE",
+          "family": "FIX",
+          "size": "VERY-SMALL"
+        },
+        "typographic": {
+          "add_style_name": "Uppercase",
+          "family_name": "Symbolics Genera Fix",
+          "setwidth_name": "Normal",
+          "slant": "R",
+          "weight_name": "Medium"
+        }
+      },
       "name": "5X5",
       "path": "specimens/latin/5x5.png",
       "repertoire": "standard",
       "sha256": "3d7e051a522dc62f7fa6fd955a43e48f5d1cb23d1ed574f839f5168415e27956",
-      "unicode_bdf_sha256": "3050fa7634ae6102c29e2512857777aec9c1c7d0b5707ffb4ee76272554347f7",
+      "unicode_bdf_sha256": "8bbe1327c350167edad29bd79b3f2cd718a93f9334d21d41cb0b2bbd593a7d63",
       "width": 516
     },
     {
       "content_class": "latin",
       "height": 52,
       "kind": "pangram",
+      "logical_identity": {
+        "desktop_style_disambiguator": null,
+        "logical_name": "FIX/ROMAN/VERY-LARGE",
+        "mapping_status": "mapped",
+        "nominal_x_size": 18,
+        "primary": {
+          "character_set": "STANDARD",
+          "face": "ROMAN",
+          "family": "FIX",
+          "size": "VERY-LARGE"
+        },
+        "typographic": {
+          "add_style_name": "",
+          "family_name": "Symbolics Genera Fix",
+          "setwidth_name": "Normal",
+          "slant": "R",
+          "weight_name": "Medium"
+        }
+      },
       "name": "BIGFNT",
       "path": "specimens/latin/bigfnt.png",
       "repertoire": "standard",
       "sha256": "7b4387ae749f3a39fe59bdca23d7761f7fa6178cab74a88842a435e0af40427a",
-      "unicode_bdf_sha256": "069b351d8d23ecbf941f0beafa631a6dd3a1ff74109450e9d0da5df3f54656d7",
+      "unicode_bdf_sha256": "896c642ea757236131d271eff5b82a744329d90a09b8988a9c6890ab451ddaee",
       "width": 1020
     },
     {
       "content_class": "latin",
       "height": 52,
       "kind": "pangram",
+      "logical_identity": {
+        "desktop_style_disambiguator": null,
+        "logical_name": "FIX/BOLD/VERY-LARGE",
+        "mapping_status": "mapped",
+        "nominal_x_size": 18,
+        "primary": {
+          "character_set": "STANDARD",
+          "face": "BOLD",
+          "family": "FIX",
+          "size": "VERY-LARGE"
+        },
+        "typographic": {
+          "add_style_name": "",
+          "family_name": "Symbolics Genera Fix",
+          "setwidth_name": "Normal",
+          "slant": "R",
+          "weight_name": "Bold"
+        }
+      },
       "name": "BIGFNTB",
       "path": "specimens/latin/bigfntb.png",
       "repertoire": "standard",
       "sha256": "ae4a981882fb246c5b47fe1e3c091f5f97ec852abf936ff9746bedb66d9363b7",
-      "unicode_bdf_sha256": "d9c8570d78e5e495cf37ed50d91d704380bf7239a0064f687d80c1ac4b0b0b66",
+      "unicode_bdf_sha256": "0063204ebdeb4771fbea094ea33d9e375594cd114e77b4f9630d8436fd7a29c7",
       "width": 1104
     },
     {
       "content_class": "latin",
       "height": 52,
       "kind": "pangram",
+      "logical_identity": {
+        "desktop_style_disambiguator": null,
+        "logical_name": "FIX/BOLD-ITALIC/VERY-LARGE",
+        "mapping_status": "mapped",
+        "nominal_x_size": 18,
+        "primary": {
+          "character_set": "STANDARD",
+          "face": "BOLD-ITALIC",
+          "family": "FIX",
+          "size": "VERY-LARGE"
+        },
+        "typographic": {
+          "add_style_name": "",
+          "family_name": "Symbolics Genera Fix",
+          "setwidth_name": "Normal",
+          "slant": "I",
+          "weight_name": "Bold"
+        }
+      },
       "name": "BIGFNTBI",
       "path": "specimens/latin/bigfntbi.png",
       "repertoire": "standard",
       "sha256": "1748c875c40bc5b950f312e1728f6334f627ca2b79b302b0e3d7b546e05ec8a1",
-      "unicode_bdf_sha256": "f75af5b8919f5213b3aee35f10d98a15c55ce6a5879025b31abd2642ba25d5ed",
+      "unicode_bdf_sha256": "59217ab31b19ce61a6bd591626aa86621ca508fb58f7cfc43c15d1b1f4b5182f",
       "width": 1188
     },
     {
       "content_class": "latin",
       "height": 52,
       "kind": "pangram",
+      "logical_identity": {
+        "desktop_style_disambiguator": null,
+        "logical_name": "FIX/ITALIC/VERY-LARGE",
+        "mapping_status": "mapped",
+        "nominal_x_size": 18,
+        "primary": {
+          "character_set": "STANDARD",
+          "face": "ITALIC",
+          "family": "FIX",
+          "size": "VERY-LARGE"
+        },
+        "typographic": {
+          "add_style_name": "",
+          "family_name": "Symbolics Genera Fix",
+          "setwidth_name": "Normal",
+          "slant": "I",
+          "weight_name": "Medium"
+        }
+      },
       "name": "BIGFNTI",
       "path": "specimens/latin/bigfnti.png",
       "repertoire": "standard",
       "sha256": "7f47a354c467e254fb75cd38d56cad2e78c020aac38b3e3b3724fea3871d1c68",
-      "unicode_bdf_sha256": "cc5a249a8ef8d3fb7e2aba712ba89555ace0b70397a033472e6a3bde282864ac",
+      "unicode_bdf_sha256": "ca824622c168ef5cc304f6a0bcbabe7e204bff059c64a76bb7cc000b0e60f3a3",
       "width": 1104
     },
     {
       "content_class": "symbols",
       "height": 305,
       "kind": "glyph-sheet",
+      "logical_identity": {
+        "desktop_style_disambiguator": null,
+        "logical_name": null,
+        "mapping_status": "role-mapped",
+        "nominal_x_size": null,
+        "primary": null,
+        "typographic": {
+          "add_style_name": "",
+          "family_name": "Symbolics Genera Box Font",
+          "setwidth_name": "Normal",
+          "slant": "R",
+          "weight_name": "Medium"
+        }
+      },
       "name": "BOXFONT",
       "path": "specimens/symbols/boxfont.png",
       "repertoire": "boxfont",
       "sha256": "13e0a8659da981723ee9281401fd197e0008b021a7e1e28eabf92095755ccf51",
-      "unicode_bdf_sha256": "bbc23df3f6c421a745b63716df158fe47782e5b9f5dae75df17552e78bf8d803",
+      "unicode_bdf_sha256": "7071ba15e8c6438045de205bc1164138e95e238f228736feaa6aabc63001d2f8",
       "width": 385
     },
     {
       "content_class": "latin",
       "height": 36,
       "kind": "pangram",
+      "logical_identity": {
+        "desktop_style_disambiguator": null,
+        "logical_name": "FIX/ROMAN/NORMAL",
+        "mapping_status": "mapped",
+        "nominal_x_size": 12,
+        "primary": {
+          "character_set": "STANDARD",
+          "face": "ROMAN",
+          "family": "FIX",
+          "size": "NORMAL"
+        },
+        "typographic": {
+          "add_style_name": "",
+          "family_name": "Symbolics Genera Fix",
+          "setwidth_name": "Normal",
+          "slant": "R",
+          "weight_name": "Medium"
+        }
+      },
       "name": "CPTFONT",
       "path": "specimens/latin/cptfont.png",
       "repertoire": "standard",
       "sha256": "6f7361235af1961f5951699cccc85c14389d4d39648f589cb4801ef217a12a67",
-      "unicode_bdf_sha256": "ff052f90c30583796a9dd988353e9e363425fd1180fb20fa35dde1a75026df61",
+      "unicode_bdf_sha256": "8b0452132adc02d64acef8c588ad680a15daa457ad86444d314ebc5b66e56fae",
       "width": 684
     },
     {
       "content_class": "latin",
       "height": 36,
       "kind": "pangram",
+      "logical_identity": {
+        "desktop_style_disambiguator": null,
+        "logical_name": "FIX/BOLD-EXTENDED/NORMAL",
+        "mapping_status": "mapped",
+        "nominal_x_size": 12,
+        "primary": {
+          "character_set": "STANDARD",
+          "face": "BOLD-EXTENDED",
+          "family": "FIX",
+          "size": "NORMAL"
+        },
+        "typographic": {
+          "add_style_name": "",
+          "family_name": "Symbolics Genera Fix",
+          "setwidth_name": "Expanded",
+          "slant": "R",
+          "weight_name": "Bold"
+        }
+      },
       "name": "CPTFONTB",
       "path": "specimens/latin/cptfontb.png",
       "repertoire": "standard",
       "sha256": "7cdffa90cae8c1694c58d7ac50e975670f6d094b8e854279f87d67ccbb486151",
-      "unicode_bdf_sha256": "d60386010ab4616a0e81cda75f4a788ac5ecf806d3ffd19414396b3beaf98432",
+      "unicode_bdf_sha256": "ff5b4af62b85ba7cb631ee880d4d421fce861ae5568a6c762e8fed5083acf7d7",
       "width": 768
     },
     {
       "content_class": "latin",
       "height": 36,
       "kind": "pangram",
+      "logical_identity": {
+        "desktop_style_disambiguator": null,
+        "logical_name": "FIX/BOLD-ITALIC/NORMAL",
+        "mapping_status": "mapped",
+        "nominal_x_size": 12,
+        "primary": {
+          "character_set": "STANDARD",
+          "face": "BOLD-ITALIC",
+          "family": "FIX",
+          "size": "NORMAL"
+        },
+        "typographic": {
+          "add_style_name": "",
+          "family_name": "Symbolics Genera Fix",
+          "setwidth_name": "Normal",
+          "slant": "I",
+          "weight_name": "Bold"
+        }
+      },
       "name": "CPTFONTBI",
       "path": "specimens/latin/cptfontbi.png",
       "repertoire": "standard",
       "sha256": "9697fe1af56885e4cdf516d509cffbb7ab2e08628f9ad4a4484499dddf8bfc6a",
-      "unicode_bdf_sha256": "8ad530b0c9d1acc928ce6fff5a9049b0c7a3ad7cfd3a34395505fa73ff3703c2",
+      "unicode_bdf_sha256": "bab2e5f7fbb477d71433835042368aa01ef1267e3e98946723aa9684b50d7b08",
       "width": 768
     },
     {
       "content_class": "latin",
       "height": 36,
       "kind": "pangram",
+      "logical_identity": {
+        "desktop_style_disambiguator": null,
+        "logical_name": "FIX/CONDENSED/NORMAL",
+        "mapping_status": "mapped",
+        "nominal_x_size": 12,
+        "primary": {
+          "character_set": "STANDARD",
+          "face": "CONDENSED",
+          "family": "FIX",
+          "size": "NORMAL"
+        },
+        "typographic": {
+          "add_style_name": "",
+          "family_name": "Symbolics Genera Fix",
+          "setwidth_name": "Condensed",
+          "slant": "R",
+          "weight_name": "Medium"
+        }
+      },
       "name": "CPTFONTC",
       "path": "specimens/latin/cptfontc.png",
       "repertoire": "standard",
       "sha256": "41467605aee88b7fcf130a76099386e467dd6c90a04ad9135aa14d3b4743cfe2",
-      "unicode_bdf_sha256": "86e982860b2c9f4ffaacc1f38c91fe5c60ddaf06dbe8c07bd31bb2c620027ee2",
+      "unicode_bdf_sha256": "5ee3576c1b3ecd3d50f7fb0d4dbb26b6c448115020308a9498a81a98dbced206",
       "width": 600
     },
     {
       "content_class": "latin",
       "height": 36,
       "kind": "pangram",
+      "logical_identity": {
+        "desktop_style_disambiguator": null,
+        "logical_name": "FIX/BOLD/NORMAL",
+        "mapping_status": "mapped",
+        "nominal_x_size": 12,
+        "primary": {
+          "character_set": "STANDARD",
+          "face": "BOLD",
+          "family": "FIX",
+          "size": "NORMAL"
+        },
+        "typographic": {
+          "add_style_name": "",
+          "family_name": "Symbolics Genera Fix",
+          "setwidth_name": "Normal",
+          "slant": "R",
+          "weight_name": "Bold"
+        }
+      },
       "name": "CPTFONTCB",
       "path": "specimens/latin/cptfontcb.png",
       "repertoire": "standard",
       "sha256": "3b2e317cc2b7494afdda5f984ec6b175dc8b6d4d210903cd6b97e20a42ead181",
-      "unicode_bdf_sha256": "29f805234c37ded5f093977cdaf58c75c302bafdef2e05bee7fb18ee33402657",
+      "unicode_bdf_sha256": "345087cee75236e0e7bf922c100dd7ac8ca75d21ea00ea3ff50e4d4c87062fe8",
       "width": 684
     },
     {
       "content_class": "latin",
       "height": 36,
       "kind": "pangram",
+      "logical_identity": {
+        "desktop_style_disambiguator": null,
+        "logical_name": "FIX/EXTRA-CONDENSED/NORMAL",
+        "mapping_status": "mapped",
+        "nominal_x_size": 12,
+        "primary": {
+          "character_set": "STANDARD",
+          "face": "EXTRA-CONDENSED",
+          "family": "FIX",
+          "size": "NORMAL"
+        },
+        "typographic": {
+          "add_style_name": "Extra",
+          "family_name": "Symbolics Genera Fix",
+          "setwidth_name": "Condensed",
+          "slant": "R",
+          "weight_name": "Medium"
+        }
+      },
       "name": "CPTFONTCC",
       "path": "specimens/latin/cptfontcc.png",
       "repertoire": "standard",
       "sha256": "096bc4cf7a5915f9b032d1ca833b4c358929c6fca4d3abd25247a91a4422e799",
-      "unicode_bdf_sha256": "a94ef9cd815838803608f691c6e5f7ff1f13fb3b0222f5d4901bb1bfaa45dbfb",
+      "unicode_bdf_sha256": "7d7aa68ac5466c8b47a23b33702d921feef4ca0c51fc6572e07772d972bb887f",
       "width": 516
     },
     {
       "content_class": "latin",
       "height": 36,
       "kind": "pangram",
+      "logical_identity": {
+        "desktop_style_disambiguator": null,
+        "logical_name": "FIX/ITALIC/NORMAL",
+        "mapping_status": "mapped",
+        "nominal_x_size": 12,
+        "primary": {
+          "character_set": "STANDARD",
+          "face": "ITALIC",
+          "family": "FIX",
+          "size": "NORMAL"
+        },
+        "typographic": {
+          "add_style_name": "",
+          "family_name": "Symbolics Genera Fix",
+          "setwidth_name": "Normal",
+          "slant": "I",
+          "weight_name": "Medium"
+        }
+      },
       "name": "CPTFONTI",
       "path": "specimens/latin/cptfonti.png",
       "repertoire": "standard",
       "sha256": "35c2795b192c4a8ec7860a48e0eeec5b5b39ac65422ce4fb01c0acb534247860",
-      "unicode_bdf_sha256": "c7b089c6f451005dd38b6ece6e3a6fbb22df01767a17917536f31ce1f24ebe99",
+      "unicode_bdf_sha256": "272f76c0b5134ffbef33b6840a382f4ec9c205e52e6c8802b5a5a65ff3fd327e",
       "width": 684
     },
     {
       "content_class": "latin",
       "height": 42,
       "kind": "pangram",
+      "logical_identity": {
+        "desktop_style_disambiguator": null,
+        "logical_name": "DUTCH/ROMAN/LARGE",
+        "mapping_status": "mapped",
+        "nominal_x_size": 14,
+        "primary": {
+          "character_set": "STANDARD",
+          "face": "ROMAN",
+          "family": "DUTCH",
+          "size": "LARGE"
+        },
+        "typographic": {
+          "add_style_name": "",
+          "family_name": "Symbolics Genera Dutch",
+          "setwidth_name": "Normal",
+          "slant": "R",
+          "weight_name": "Medium"
+        }
+      },
       "name": "DUTCH14",
       "path": "specimens/latin/dutch14.png",
       "repertoire": "standard",
       "sha256": "3b24e8e35fe05d79bc4ec343898bec6dc9a06367bbb4bd9cbb0b60ef119128c2",
-      "unicode_bdf_sha256": "422410868507bde1060b8d16461ee4cf7cde0d06b870ea62ef6fa52791212d42",
+      "unicode_bdf_sha256": "eab737b80792676b9d129937becfa6ea11553ab14aada4af5b65bdf2e6533834",
       "width": 680
     },
     {
       "content_class": "latin",
       "height": 42,
       "kind": "pangram",
+      "logical_identity": {
+        "desktop_style_disambiguator": null,
+        "logical_name": "DUTCH/BOLD/LARGE",
+        "mapping_status": "mapped",
+        "nominal_x_size": 14,
+        "primary": {
+          "character_set": "STANDARD",
+          "face": "BOLD",
+          "family": "DUTCH",
+          "size": "LARGE"
+        },
+        "typographic": {
+          "add_style_name": "",
+          "family_name": "Symbolics Genera Dutch",
+          "setwidth_name": "Normal",
+          "slant": "R",
+          "weight_name": "Bold"
+        }
+      },
       "name": "DUTCH14B",
       "path": "specimens/latin/dutch14b.png",
       "repertoire": "standard",
       "sha256": "458ab0c11ae9e9d1f5cbe0db7417f37f5f95f25fc898aac490ecba61ef024b1d",
-      "unicode_bdf_sha256": "1c2f1b25415ab4032bfaa1f619f375a1594ff1be1bf789e193196c880ac51c18",
+      "unicode_bdf_sha256": "9504e3eb699fc93cb548ea42a9341eb32c07ebda46e3eb2de9c01262fd1ede95",
       "width": 764
     },
     {
       "content_class": "latin",
       "height": 42,
       "kind": "pangram",
+      "logical_identity": {
+        "desktop_style_disambiguator": null,
+        "logical_name": "DUTCH/BOLD-ITALIC/LARGE",
+        "mapping_status": "mapped",
+        "nominal_x_size": 14,
+        "primary": {
+          "character_set": "STANDARD",
+          "face": "BOLD-ITALIC",
+          "family": "DUTCH",
+          "size": "LARGE"
+        },
+        "typographic": {
+          "add_style_name": "",
+          "family_name": "Symbolics Genera Dutch",
+          "setwidth_name": "Normal",
+          "slant": "I",
+          "weight_name": "Bold"
+        }
+      },
       "name": "DUTCH14BI",
       "path": "specimens/latin/dutch14bi.png",
       "repertoire": "standard",
       "sha256": "998f1679f7e16a42586a351d60a215e6a68ec58f7b35907d85b1f189bf560f94",
-      "unicode_bdf_sha256": "9d545a346bcbd08b22d13295eff16226d51da4c0f4b01556041a39279beddad6",
+      "unicode_bdf_sha256": "5854884c6b7cd33ec017db1c91ae50dd07ea5b781f62d5d8fe2406ec45e5cef8",
       "width": 812
     },
     {
       "content_class": "latin",
       "height": 42,
       "kind": "pangram",
+      "logical_identity": {
+        "desktop_style_disambiguator": null,
+        "logical_name": "DUTCH/ITALIC/LARGE",
+        "mapping_status": "mapped",
+        "nominal_x_size": 14,
+        "primary": {
+          "character_set": "STANDARD",
+          "face": "ITALIC",
+          "family": "DUTCH",
+          "size": "LARGE"
+        },
+        "typographic": {
+          "add_style_name": "",
+          "family_name": "Symbolics Genera Dutch",
+          "setwidth_name": "Normal",
+          "slant": "I",
+          "weight_name": "Medium"
+        }
+      },
       "name": "DUTCH14I",
       "path": "specimens/latin/dutch14i.png",
       "repertoire": "standard",
       "sha256": "adc73cdd1bad09d55a66ecfaa7414b8adc14f793cb3f04722241a73824cb0ca8",
-      "unicode_bdf_sha256": "7395fdbe0e96c612243e0236ef87a2af51729137cf1047841c1d879df5a9b5a0",
+      "unicode_bdf_sha256": "335b2831a0a8102652781d0d2944fd6807d05eea2ba549ab7e2a7315597445d9",
       "width": 728
     },
     {
       "content_class": "latin",
       "height": 52,
       "kind": "pangram",
+      "logical_identity": {
+        "desktop_style_disambiguator": null,
+        "logical_name": "DUTCH/ROMAN/VERY-LARGE",
+        "mapping_status": "mapped",
+        "nominal_x_size": 18,
+        "primary": {
+          "character_set": "STANDARD",
+          "face": "ROMAN",
+          "family": "DUTCH",
+          "size": "VERY-LARGE"
+        },
+        "typographic": {
+          "add_style_name": "",
+          "family_name": "Symbolics Genera Dutch",
+          "setwidth_name": "Normal",
+          "slant": "R",
+          "weight_name": "Medium"
+        }
+      },
       "name": "DUTCH20",
       "path": "specimens/latin/dutch20.png",
       "repertoire": "standard",
       "sha256": "886bcdb1c07c97e2d9c64c1e0f73ae4355e0d1a867b1d4f6eaa466a5b73fccd0",
-      "unicode_bdf_sha256": "151702b926fc5037e0a9496b4848a4884a3f14a62e42cc3ad7c1408072ceed1e",
+      "unicode_bdf_sha256": "78bee767af8079c9f4795badeb9f48885995ee15fcb0cccca2a653db6b2ca16a",
       "width": 860
     },
     {
       "content_class": "latin",
       "height": 52,
       "kind": "pangram",
+      "logical_identity": {
+        "desktop_style_disambiguator": null,
+        "logical_name": "DUTCH/BOLD/VERY-LARGE",
+        "mapping_status": "mapped",
+        "nominal_x_size": 18,
+        "primary": {
+          "character_set": "STANDARD",
+          "face": "BOLD",
+          "family": "DUTCH",
+          "size": "VERY-LARGE"
+        },
+        "typographic": {
+          "add_style_name": "",
+          "family_name": "Symbolics Genera Dutch",
+          "setwidth_name": "Normal",
+          "slant": "R",
+          "weight_name": "Bold"
+        }
+      },
       "name": "DUTCH20B",
       "path": "specimens/latin/dutch20b.png",
       "repertoire": "standard",
       "sha256": "9b4f18270b9f0e346a60b82d368ff0d66f15858853d2764e2b55eff83afedb24",
-      "unicode_bdf_sha256": "937f4b4a162b4ffda0774e3ec202ad336a1a6b477867456433e4082bc463b751",
+      "unicode_bdf_sha256": "f9912e3e0b3535486a3fd7956b56e9b82d296db0c3baf9e6c62888b8b42b8f82",
       "width": 940
     },
     {
       "content_class": "latin",
       "height": 52,
       "kind": "pangram",
+      "logical_identity": {
+        "desktop_style_disambiguator": null,
+        "logical_name": "DUTCH/BOLD-ITALIC/VERY-LARGE",
+        "mapping_status": "mapped",
+        "nominal_x_size": 18,
+        "primary": {
+          "character_set": "STANDARD",
+          "face": "BOLD-ITALIC",
+          "family": "DUTCH",
+          "size": "VERY-LARGE"
+        },
+        "typographic": {
+          "add_style_name": "",
+          "family_name": "Symbolics Genera Dutch",
+          "setwidth_name": "Normal",
+          "slant": "I",
+          "weight_name": "Bold"
+        }
+      },
       "name": "DUTCH20BI",
       "path": "specimens/latin/dutch20bi.png",
       "repertoire": "standard",
       "sha256": "21578fa1a59ec681bdb9aad9ee2d206897c6a9afadec99c0418678a5a1aab358",
-      "unicode_bdf_sha256": "af472210dd1facb829433b9085ea01d4c64d7cac5367e463a4ed81a0b896b679",
+      "unicode_bdf_sha256": "07c1c4ce79a63926b1aed7f52f35eeebff8dff59172c72650783f86623379cea",
       "width": 1020
     },
     {
       "content_class": "latin",
       "height": 52,
       "kind": "pangram",
+      "logical_identity": {
+        "desktop_style_disambiguator": null,
+        "logical_name": "DUTCH/ITALIC/VERY-LARGE",
+        "mapping_status": "mapped",
+        "nominal_x_size": 18,
+        "primary": {
+          "character_set": "STANDARD",
+          "face": "ITALIC",
+          "family": "DUTCH",
+          "size": "VERY-LARGE"
+        },
+        "typographic": {
+          "add_style_name": "",
+          "family_name": "Symbolics Genera Dutch",
+          "setwidth_name": "Normal",
+          "slant": "I",
+          "weight_name": "Medium"
+        }
+      },
       "name": "DUTCH20I",
       "path": "specimens/latin/dutch20i.png",
       "repertoire": "standard",
       "sha256": "bb8a28fb959cb8f731c56570f5349a79be03468b17402644922d4044022216e5",
-      "unicode_bdf_sha256": "7eb8bcf044322b7a05dec4a41b76afc0f7f838e4958523f6827a5d2489335d03",
+      "unicode_bdf_sha256": "a789e32fe562469eff74de7bab65916c8972ecb03140b5363a78f08915fb240e",
       "width": 936
     },
     {
       "content_class": "symbols",
       "height": 43,
       "kind": "glyph-sheet",
+      "logical_identity": {
+        "desktop_style_disambiguator": null,
+        "logical_name": null,
+        "mapping_status": "role-mapped",
+        "nominal_x_size": null,
+        "primary": null,
+        "typographic": {
+          "add_style_name": "",
+          "family_name": "Symbolics Genera Editor Symbols",
+          "setwidth_name": "Normal",
+          "slant": "R",
+          "weight_name": "Medium"
+        }
+      },
       "name": "EDSYMBOL12",
       "path": "specimens/symbols/edsymbol12.png",
       "repertoire": "editor-symbols",
       "sha256": "5a52b4f7c736c9b99e13f4776e52b38676ceaa88ff4c4a90e66224bdb6969b8b",
-      "unicode_bdf_sha256": "53a18b42f8b9e43c43d7558f3d073e917fbab9d43636b86cb9585f3e0cb844bf",
+      "unicode_bdf_sha256": "bdadf6a8e5a813af6a8d665e44d6ea4ea4e05d5ec36ee342f1cd1a4ab0c18c68",
       "width": 641
     },
     {
       "content_class": "latin",
       "height": 26,
       "kind": "pangram",
+      "logical_identity": {
+        "desktop_style_disambiguator": null,
+        "logical_name": "FIX/ROMAN/VERY-SMALL",
+        "mapping_status": "mapped",
+        "nominal_x_size": 8,
+        "primary": {
+          "character_set": "STANDARD",
+          "face": "ROMAN",
+          "family": "FIX",
+          "size": "VERY-SMALL"
+        },
+        "typographic": {
+          "add_style_name": "",
+          "family_name": "Symbolics Genera Fix",
+          "setwidth_name": "Normal",
+          "slant": "R",
+          "weight_name": "Medium"
+        }
+      },
       "name": "EINY7",
       "path": "specimens/latin/einy7.png",
       "repertoire": "standard",
       "sha256": "a5c707afc7d1ddb7d70068bdde8c6cc82f09840422c977cb7df77f2842805a12",
-      "unicode_bdf_sha256": "f5fc1fb1d49baee58342bf02f9322c450df62ea12553d1e3711a06c75c0c1b0a",
+      "unicode_bdf_sha256": "c50dde702d96181db7e1aeed90ffd662736edd5b3a444f3e6095ec0637d1ba5b",
       "width": 432
     },
     {
       "content_class": "latin",
       "height": 28,
       "kind": "pangram",
+      "logical_identity": {
+        "desktop_style_disambiguator": null,
+        "logical_name": null,
+        "mapping_status": "unmapped",
+        "nominal_x_size": null,
+        "primary": null,
+        "typographic": {
+          "add_style_name": "",
+          "family_name": "Symbolics Genera EINY8",
+          "setwidth_name": "Normal",
+          "slant": "R",
+          "weight_name": "Medium"
+        }
+      },
       "name": "EINY8",
       "path": "specimens/latin/einy8.png",
       "repertoire": "standard",
       "sha256": "3b65b3bcdb45f9fcad90a15ff1552517a3ed70b0dea0e22b759eca71a1d4afb9",
-      "unicode_bdf_sha256": "0953b48471d7149c8dc267bc2534b8dc969af8fcbf18b9e14213715de32e8115",
+      "unicode_bdf_sha256": "96880ae497e9167661e24d5faed007a05c6552748901cac1528ddd9f7172c9af",
       "width": 432
     },
     {
       "content_class": "latin",
       "height": 54,
       "kind": "pangram",
+      "logical_identity": {
+        "desktop_style_disambiguator": null,
+        "logical_name": "EUREX/ITALIC/VERY-LARGE",
+        "mapping_status": "mapped",
+        "nominal_x_size": 18,
+        "primary": {
+          "character_set": "STANDARD",
+          "face": "ITALIC",
+          "family": "EUREX",
+          "size": "VERY-LARGE"
+        },
+        "typographic": {
+          "add_style_name": "",
+          "family_name": "Symbolics Genera Eurex",
+          "setwidth_name": "Normal",
+          "slant": "I",
+          "weight_name": "Medium"
+        }
+      },
       "name": "EUREX21I",
       "path": "specimens/latin/eurex21i.png",
       "repertoire": "standard",
       "sha256": "1ea282326915b2c95042c490ca08a243ca60d4ca9729412d6620db6765a06661",
-      "unicode_bdf_sha256": "cf67c015c08baa2a0090d9797f9628e3e95725b456198520f597cbcf24e416ca",
+      "unicode_bdf_sha256": "814187a54bd4b577ad6014114de9277601a08da63a2335b20314c4f72c46a7f5",
       "width": 1094
     },
     {
       "content_class": "latin",
       "height": 60,
       "kind": "pangram",
+      "logical_identity": {
+        "desktop_style_disambiguator": null,
+        "logical_name": "EUREX/ITALIC/HUGE",
+        "mapping_status": "mapped",
+        "nominal_x_size": 24,
+        "primary": {
+          "character_set": "STANDARD",
+          "face": "ITALIC",
+          "family": "EUREX",
+          "size": "HUGE"
+        },
+        "typographic": {
+          "add_style_name": "",
+          "family_name": "Symbolics Genera Eurex",
+          "setwidth_name": "Normal",
+          "slant": "I",
+          "weight_name": "Medium"
+        }
+      },
       "name": "EUREX24I",
       "path": "specimens/latin/eurex24i.png",
       "repertoire": "standard",
       "sha256": "f706d9e6a33ee80786c6e7e53ab4c62b7580d1c9d4ae918435c179f34bd323aa",
-      "unicode_bdf_sha256": "16bb9bc7d4df51ba65b13437d394341b69de4f7e18aa6c6fdd383a297dcf1c92",
+      "unicode_bdf_sha256": "400543caab7c06c4feae36461245e94d6af5c8e3181007abe3232f31be322752",
       "width": 1268
     },
     {
       "content_class": "symbols",
       "height": 265,
       "kind": "glyph-sheet",
+      "logical_identity": {
+        "desktop_style_disambiguator": null,
+        "logical_name": null,
+        "mapping_status": "role-mapped",
+        "nominal_x_size": null,
+        "primary": null,
+        "typographic": {
+          "add_style_name": "",
+          "family_name": "Symbolics Genera Greek",
+          "setwidth_name": "Normal",
+          "slant": "R",
+          "weight_name": "Medium"
+        }
+      },
       "name": "HIPPO10",
       "path": "specimens/symbols/hippo10.png",
       "repertoire": "greek",
       "sha256": "aec3728ef09baefefeaeb45761934fbc0d04a00a9da068dec4b8a5e7c67e20e4",
-      "unicode_bdf_sha256": "168cd030f6de94f581acf2870355d3446da4c7cb1c3e2ac7dc0f5e7c08c216ee",
+      "unicode_bdf_sha256": "642851b1ef1de880dbff8c279d7ee098261f125c3e17158e5213c40737fe2730",
       "width": 545
     },
     {
       "content_class": "symbols",
       "height": 295,
       "kind": "glyph-sheet",
+      "logical_identity": {
+        "desktop_style_disambiguator": null,
+        "logical_name": null,
+        "mapping_status": "role-mapped",
+        "nominal_x_size": null,
+        "primary": null,
+        "typographic": {
+          "add_style_name": "",
+          "family_name": "Symbolics Genera Greek",
+          "setwidth_name": "Normal",
+          "slant": "R",
+          "weight_name": "Medium"
+        }
+      },
       "name": "HIPPO12",
       "path": "specimens/symbols/hippo12.png",
       "repertoire": "greek",
       "sha256": "574d4f751fc2da5b295c48096b68c985e1a9f2ce3f20ade086e1839243040f82",
-      "unicode_bdf_sha256": "66f45c16e60d6effb83d4fe1786b37c605497f5ee3e1e4b153db1f799789cea6",
+      "unicode_bdf_sha256": "52fd819138b6e2bbd1964e4d8628f43f295d0de0d4e0e6b24b0d55952079e60c",
       "width": 513
     },
     {
       "content_class": "latin",
       "height": 36,
       "kind": "pangram",
+      "logical_identity": {
+        "desktop_style_disambiguator": null,
+        "logical_name": "SWISS/ROMAN/SMALL",
+        "mapping_status": "mapped",
+        "nominal_x_size": 10,
+        "primary": {
+          "character_set": "STANDARD",
+          "face": "ROMAN",
+          "family": "SWISS",
+          "size": "SMALL"
+        },
+        "typographic": {
+          "add_style_name": "",
+          "family_name": "Symbolics Genera Swiss",
+          "setwidth_name": "Normal",
+          "slant": "R",
+          "weight_name": "Medium"
+        }
+      },
       "name": "HL10",
       "path": "specimens/latin/hl10.png",
       "repertoire": "standard",
       "sha256": "e3dcffd8d319782ae30f052a1b165eaa1a93549d643210bac4bb2c41a9605b21",
-      "unicode_bdf_sha256": "32b4ea1c081093c258253a62958b433affac6d27f2e5e49a5e306ec4aa7b01ef",
+      "unicode_bdf_sha256": "f608d2564a7806f86492e2178bd1ab25de1c941f9b4b5e48f0ad6c71bc923694",
       "width": 518
     },
     {
       "content_class": "latin",
       "height": 36,
       "kind": "pangram",
+      "logical_identity": {
+        "desktop_style_disambiguator": null,
+        "logical_name": "SWISS/BOLD/SMALL",
+        "mapping_status": "mapped",
+        "nominal_x_size": 10,
+        "primary": {
+          "character_set": "STANDARD",
+          "face": "BOLD",
+          "family": "SWISS",
+          "size": "SMALL"
+        },
+        "typographic": {
+          "add_style_name": "",
+          "family_name": "Symbolics Genera Swiss",
+          "setwidth_name": "Normal",
+          "slant": "R",
+          "weight_name": "Bold"
+        }
+      },
       "name": "HL10B",
       "path": "specimens/latin/hl10b.png",
       "repertoire": "standard",
       "sha256": "c0a13a6c1513f23529ab9b6d526bdd0d1315666543a71ec91fbacda75d4ed0b2",
-      "unicode_bdf_sha256": "eb96dbb07f829be07c5cd5a78967c2f078642fdd15078ae30c24bcbfe73d1e7f",
+      "unicode_bdf_sha256": "c3ce6c4ed3ebb57a2ec02f68108afede7b2369d22617a7a33cf2132d9870cfe1",
       "width": 586
     },
     {
       "content_class": "latin",
       "height": 36,
       "kind": "pangram",
+      "logical_identity": {
+        "desktop_style_disambiguator": null,
+        "logical_name": "SWISS/BOLD-ITALIC/SMALL",
+        "mapping_status": "mapped",
+        "nominal_x_size": 10,
+        "primary": {
+          "character_set": "STANDARD",
+          "face": "BOLD-ITALIC",
+          "family": "SWISS",
+          "size": "SMALL"
+        },
+        "typographic": {
+          "add_style_name": "",
+          "family_name": "Symbolics Genera Swiss",
+          "setwidth_name": "Normal",
+          "slant": "I",
+          "weight_name": "Bold"
+        }
+      },
       "name": "HL10BI",
       "path": "specimens/latin/hl10bi.png",
       "repertoire": "standard",
       "sha256": "cac50decbf240eab80a344e407e6afef142a8eefa80ff9799faa88312602b415",
-      "unicode_bdf_sha256": "854176c4899fc8e0954f5e0be02f88ed74c5ff6b5773fc3fe3fb041f89eb9252",
+      "unicode_bdf_sha256": "3abca3729d94f69300dbd16650c5075e1352c25c056d0133d4c8f8258236be7f",
       "width": 608
     },
     {
       "content_class": "latin",
       "height": 36,
       "kind": "pangram",
+      "logical_identity": {
+        "desktop_style_disambiguator": null,
+        "logical_name": "SWISS/ITALIC/SMALL",
+        "mapping_status": "mapped",
+        "nominal_x_size": 10,
+        "primary": {
+          "character_set": "STANDARD",
+          "face": "ITALIC",
+          "family": "SWISS",
+          "size": "SMALL"
+        },
+        "typographic": {
+          "add_style_name": "",
+          "family_name": "Symbolics Genera Swiss",
+          "setwidth_name": "Normal",
+          "slant": "I",
+          "weight_name": "Medium"
+        }
+      },
       "name": "HL10I",
       "path": "specimens/latin/hl10i.png",
       "repertoire": "standard",
       "sha256": "085042c03a25edc89afb160baf3666a5fea9777f8d1b184c39379a1d73a5d14e",
-      "unicode_bdf_sha256": "75125fe0549bdabbbb82877ac43c86b0b1826d5ec334152c41e728e762443da0",
+      "unicode_bdf_sha256": "b13fd9852a14dc2d8cd203dc1ae1617c4c00c7391e4a9cf3b579480475917fcd",
       "width": 596
     },
     {
       "content_class": "latin",
       "height": 40,
       "kind": "pangram",
+      "logical_identity": {
+        "desktop_style_disambiguator": null,
+        "logical_name": "SWISS/ROMAN/NORMAL",
+        "mapping_status": "mapped",
+        "nominal_x_size": 12,
+        "primary": {
+          "character_set": "STANDARD",
+          "face": "ROMAN",
+          "family": "SWISS",
+          "size": "NORMAL"
+        },
+        "typographic": {
+          "add_style_name": "",
+          "family_name": "Symbolics Genera Swiss",
+          "setwidth_name": "Normal",
+          "slant": "R",
+          "weight_name": "Medium"
+        }
+      },
       "name": "HL12",
       "path": "specimens/latin/hl12.png",
       "repertoire": "standard",
       "sha256": "c98c20505193a033f38c5b887fa2d0a2ffa523722fc1c1f021f390f85ce03c4a",
-      "unicode_bdf_sha256": "a3b8877536cc7df6572fa730839413e69425dd8487b274a7a869f5799392c704",
+      "unicode_bdf_sha256": "27c78ad79c249815424fe51c36f659a581f0fbc16d1e3e6d4d0dd46241b084ec",
       "width": 648
     },
     {
       "content_class": "latin",
       "height": 40,
       "kind": "pangram",
+      "logical_identity": {
+        "desktop_style_disambiguator": null,
+        "logical_name": "SWISS/BOLD/NORMAL",
+        "mapping_status": "mapped",
+        "nominal_x_size": 12,
+        "primary": {
+          "character_set": "STANDARD",
+          "face": "BOLD",
+          "family": "SWISS",
+          "size": "NORMAL"
+        },
+        "typographic": {
+          "add_style_name": "",
+          "family_name": "Symbolics Genera Swiss",
+          "setwidth_name": "Normal",
+          "slant": "R",
+          "weight_name": "Bold"
+        }
+      },
       "name": "HL12B",
       "path": "specimens/latin/hl12b.png",
       "repertoire": "standard",
       "sha256": "e18c7225de9a33009f593620be1ab7b8555146a51b4a5cb6d2f476465cc61e7d",
-      "unicode_bdf_sha256": "710c0daa7908451ad40d98bd7ccd7e2e04cd8c2250c3608196403f4b20c83ee2",
+      "unicode_bdf_sha256": "0a705c7dcfd418784266bcb0357b8ac8d74d6884bd824b9fc96126dd786c8c52",
       "width": 740
     },
     {
       "content_class": "latin",
       "height": 40,
       "kind": "pangram",
+      "logical_identity": {
+        "desktop_style_disambiguator": null,
+        "logical_name": "SWISS/BOLD-ITALIC/NORMAL",
+        "mapping_status": "mapped",
+        "nominal_x_size": 12,
+        "primary": {
+          "character_set": "STANDARD",
+          "face": "BOLD-ITALIC",
+          "family": "SWISS",
+          "size": "NORMAL"
+        },
+        "typographic": {
+          "add_style_name": "",
+          "family_name": "Symbolics Genera Swiss",
+          "setwidth_name": "Normal",
+          "slant": "I",
+          "weight_name": "Bold"
+        }
+      },
       "name": "HL12BI",
       "path": "specimens/latin/hl12bi.png",
       "repertoire": "standard",
       "sha256": "9b7bb57fa790db608996edfd02a8377df630dc6855201aa8dd6c7bd2d01b3815",
-      "unicode_bdf_sha256": "4007a96c82511772751b709f9ecfe71966afe230e7d32ff501a8dcc25e9cfaf6",
+      "unicode_bdf_sha256": "c34a932af161a227fc665cefb14b6f5b3f61adc5b984bdf06a115f84ea4a859a",
       "width": 694
     },
     {
       "content_class": "latin",
       "height": 40,
       "kind": "pangram",
+      "logical_identity": {
+        "desktop_style_disambiguator": null,
+        "logical_name": "SWISS/ITALIC/NORMAL",
+        "mapping_status": "mapped",
+        "nominal_x_size": 12,
+        "primary": {
+          "character_set": "STANDARD",
+          "face": "ITALIC",
+          "family": "SWISS",
+          "size": "NORMAL"
+        },
+        "typographic": {
+          "add_style_name": "",
+          "family_name": "Symbolics Genera Swiss",
+          "setwidth_name": "Normal",
+          "slant": "I",
+          "weight_name": "Medium"
+        }
+      },
       "name": "HL12I",
       "path": "specimens/latin/hl12i.png",
       "repertoire": "standard",
       "sha256": "cfac0a7cd49c04aa44b05b65f39f142a6c246efb8a085a4918453187fae533e6",
-      "unicode_bdf_sha256": "7fd47dbd3d9b2e08bd46cab355e703968b83bc4ad700f766b1acd96546484384",
+      "unicode_bdf_sha256": "114623cd4c459519c1063d42caa8b8bba1db616fe674fb23d9090681888f2fec",
       "width": 626
     },
     {
       "content_class": "latin",
       "height": 42,
       "kind": "pangram",
+      "logical_identity": {
+        "desktop_style_disambiguator": null,
+        "logical_name": "SWISS/ROMAN/LARGE",
+        "mapping_status": "mapped",
+        "nominal_x_size": 14,
+        "primary": {
+          "character_set": "STANDARD",
+          "face": "ROMAN",
+          "family": "SWISS",
+          "size": "LARGE"
+        },
+        "typographic": {
+          "add_style_name": "",
+          "family_name": "Symbolics Genera Swiss",
+          "setwidth_name": "Normal",
+          "slant": "R",
+          "weight_name": "Medium"
+        }
+      },
       "name": "HL14",
       "path": "specimens/latin/hl14.png",
       "repertoire": "standard",
       "sha256": "e33165ec94a1e8226d4a95f64b52a8f877b053c0d27889df6cf0b72990c30e94",
-      "unicode_bdf_sha256": "06531ac078a993d9cf0e46a79f1e18bed02009d3e3e98f9d14f6eb174839ff12",
+      "unicode_bdf_sha256": "c54be95c73e3d4189f9a363ec6c4ffcb5be4dd22f44e09be21970a335d5de6fe",
       "width": 688
     },
     {
       "content_class": "latin",
       "height": 42,
       "kind": "pangram",
+      "logical_identity": {
+        "desktop_style_disambiguator": null,
+        "logical_name": "SWISS/BOLD/LARGE",
+        "mapping_status": "mapped",
+        "nominal_x_size": 14,
+        "primary": {
+          "character_set": "STANDARD",
+          "face": "BOLD",
+          "family": "SWISS",
+          "size": "LARGE"
+        },
+        "typographic": {
+          "add_style_name": "",
+          "family_name": "Symbolics Genera Swiss",
+          "setwidth_name": "Normal",
+          "slant": "R",
+          "weight_name": "Bold"
+        }
+      },
       "name": "HL14B",
       "path": "specimens/latin/hl14b.png",
       "repertoire": "standard",
       "sha256": "eaa5231f1a016b0942b70844a224afbf82f250b0e8087a5cb40dbc0175454355",
-      "unicode_bdf_sha256": "7c8fd10f201bf31a00dac777dfb97e7ab8e218158459efa59125b29afc8278a9",
+      "unicode_bdf_sha256": "e3c6858bf238b39654c9cf59d57a76e0f5bef5ef48a4427f3fdd9ae5883995b2",
       "width": 740
     },
     {
       "content_class": "latin",
       "height": 42,
       "kind": "pangram",
+      "logical_identity": {
+        "desktop_style_disambiguator": null,
+        "logical_name": "SWISS/BOLD-ITALIC/LARGE",
+        "mapping_status": "mapped",
+        "nominal_x_size": 14,
+        "primary": {
+          "character_set": "STANDARD",
+          "face": "BOLD-ITALIC",
+          "family": "SWISS",
+          "size": "LARGE"
+        },
+        "typographic": {
+          "add_style_name": "",
+          "family_name": "Symbolics Genera Swiss",
+          "setwidth_name": "Normal",
+          "slant": "I",
+          "weight_name": "Bold"
+        }
+      },
       "name": "HL14BI",
       "path": "specimens/latin/hl14bi.png",
       "repertoire": "standard",
       "sha256": "33d265eedd63a31f632aaf7130486615382cc4e48206b469c1815f65647e7bcd",
-      "unicode_bdf_sha256": "d5c8060b97824b48bb7191d9be62794c90d63c95a8b8e13dac80c5addc753367",
+      "unicode_bdf_sha256": "327cd0fc1ab09382b6052216abf9f9dbfb2b66876d7a929173cfea2e110af3b9",
       "width": 824
     },
     {
       "content_class": "latin",
       "height": 42,
       "kind": "pangram",
+      "logical_identity": {
+        "desktop_style_disambiguator": null,
+        "logical_name": "SWISS/ITALIC/LARGE",
+        "mapping_status": "mapped",
+        "nominal_x_size": 14,
+        "primary": {
+          "character_set": "STANDARD",
+          "face": "ITALIC",
+          "family": "SWISS",
+          "size": "LARGE"
+        },
+        "typographic": {
+          "add_style_name": "",
+          "family_name": "Symbolics Genera Swiss",
+          "setwidth_name": "Normal",
+          "slant": "I",
+          "weight_name": "Medium"
+        }
+      },
       "name": "HL14I",
       "path": "specimens/latin/hl14i.png",
       "repertoire": "standard",
       "sha256": "92fbc5bf95cf25c78b8381d5f6c49621a744b0347535ab3946db182418921f55",
-      "unicode_bdf_sha256": "b9a36d4579d96898fdb6a08d7667cdc9f0c12ced355ef030a48f033ad607f514",
+      "unicode_bdf_sha256": "52490499593443b6d6b80b60cc113769942f46aa4da7bdde06a4482036357ed7",
       "width": 740
     },
     {
       "content_class": "latin",
       "height": 34,
       "kind": "pangram",
+      "logical_identity": {
+        "desktop_style_disambiguator": null,
+        "logical_name": "SWISS/ROMAN/VERY-SMALL",
+        "mapping_status": "mapped",
+        "nominal_x_size": 8,
+        "primary": {
+          "character_set": "STANDARD",
+          "face": "ROMAN",
+          "family": "SWISS",
+          "size": "VERY-SMALL"
+        },
+        "typographic": {
+          "add_style_name": "",
+          "family_name": "Symbolics Genera Swiss",
+          "setwidth_name": "Normal",
+          "slant": "R",
+          "weight_name": "Medium"
+        }
+      },
       "name": "HL8",
       "path": "specimens/latin/hl8.png",
       "repertoire": "standard",
       "sha256": "55b3c286c659770f5d431abd67572b92697b9889832ddfce766de92c5032d7de",
-      "unicode_bdf_sha256": "b393e5fac18ac70e603a2c5d2ab731adf04177063461c289606730ab9e308c74",
+      "unicode_bdf_sha256": "07088f3b23bf3a6341ec7b357b6300df29506dcd2fd3e187cf034a8565f7877a",
       "width": 470
     },
     {
       "content_class": "latin",
       "height": 34,
       "kind": "pangram",
+      "logical_identity": {
+        "desktop_style_disambiguator": null,
+        "logical_name": "SWISS/BOLD/VERY-SMALL",
+        "mapping_status": "mapped",
+        "nominal_x_size": 8,
+        "primary": {
+          "character_set": "STANDARD",
+          "face": "BOLD",
+          "family": "SWISS",
+          "size": "VERY-SMALL"
+        },
+        "typographic": {
+          "add_style_name": "",
+          "family_name": "Symbolics Genera Swiss",
+          "setwidth_name": "Normal",
+          "slant": "R",
+          "weight_name": "Bold"
+        }
+      },
       "name": "HL8B",
       "path": "specimens/latin/hl8b.png",
       "repertoire": "standard",
       "sha256": "3a9519d072299ff65fb5762d3f211a93e4ed2c08d554b608a921dd85f8b0452f",
-      "unicode_bdf_sha256": "708b0d16824f7a38d6284fb17727b029d3f2f5e21564da6267192ee28bf9b90c",
+      "unicode_bdf_sha256": "48aba33f369e4d1ed9e77a5f5594f186e535699b51b18343b28781eb8701ffa9",
       "width": 554
     },
     {
       "content_class": "latin",
       "height": 34,
       "kind": "pangram",
+      "logical_identity": {
+        "desktop_style_disambiguator": null,
+        "logical_name": "SWISS/BOLD-ITALIC/VERY-SMALL",
+        "mapping_status": "mapped",
+        "nominal_x_size": 8,
+        "primary": {
+          "character_set": "STANDARD",
+          "face": "BOLD-ITALIC",
+          "family": "SWISS",
+          "size": "VERY-SMALL"
+        },
+        "typographic": {
+          "add_style_name": "",
+          "family_name": "Symbolics Genera Swiss",
+          "setwidth_name": "Normal",
+          "slant": "I",
+          "weight_name": "Bold"
+        }
+      },
       "name": "HL8BI",
       "path": "specimens/latin/hl8bi.png",
       "repertoire": "standard",
       "sha256": "0625168fde9bdc4797c903ce8c3329fbb63e36f850ea61619b3bb8ad0facd89f",
-      "unicode_bdf_sha256": "ebe7661e81299f2f5799a0ff59ed1edd11fbf90f460d384f889631d02937e927",
+      "unicode_bdf_sha256": "9a576aaa0d4db0426596c6b43a7abb5906f953f5900676df0323340129df3c7c",
       "width": 638
     },
     {
       "content_class": "latin",
       "height": 34,
       "kind": "pangram",
+      "logical_identity": {
+        "desktop_style_disambiguator": null,
+        "logical_name": "SWISS/ITALIC/VERY-SMALL",
+        "mapping_status": "mapped",
+        "nominal_x_size": 8,
+        "primary": {
+          "character_set": "STANDARD",
+          "face": "ITALIC",
+          "family": "SWISS",
+          "size": "VERY-SMALL"
+        },
+        "typographic": {
+          "add_style_name": "",
+          "family_name": "Symbolics Genera Swiss",
+          "setwidth_name": "Normal",
+          "slant": "I",
+          "weight_name": "Medium"
+        }
+      },
       "name": "HL8I",
       "path": "specimens/latin/hl8i.png",
       "repertoire": "standard",
       "sha256": "3fc3e73b7559cf784969f66a9bbce9a0589a5fcdf563a25a2ce7ce3383fd8702",
-      "unicode_bdf_sha256": "788a316572ab8028f83b9ff7830ebaf7b8891ceb62bfd4600e27deeb2ea7954a",
+      "unicode_bdf_sha256": "d64cea999687482521ed47cb9a1c2169a068c742cfcb238e23a86f50499edc0f",
       "width": 498
     },
     {
       "content_class": "latin",
       "height": 34,
       "kind": "pangram",
+      "logical_identity": {
+        "desktop_style_disambiguator": null,
+        "logical_name": "JESS/ROMAN/SMALL",
+        "mapping_status": "mapped",
+        "nominal_x_size": 10,
+        "primary": {
+          "character_set": "STANDARD",
+          "face": "ROMAN",
+          "family": "JESS",
+          "size": "SMALL"
+        },
+        "typographic": {
+          "add_style_name": "",
+          "family_name": "Symbolics Genera Jess",
+          "setwidth_name": "Normal",
+          "slant": "R",
+          "weight_name": "Medium"
+        }
+      },
       "name": "JESS11",
       "path": "specimens/latin/jess11.png",
       "repertoire": "standard",
       "sha256": "464efaae2ce668b941ca38d2efcfebe79a67630b97415d73edff4dbb046e729f",
-      "unicode_bdf_sha256": "128d7fd2b3fb3917e7a2ee1bc980fd76f688d836fe6a9fd980de46f516eb4aca",
+      "unicode_bdf_sha256": "867362720c3501280c52049700c4376bea22d62ca3fdfcaf288e09a6d9f81f05",
       "width": 618
     },
     {
       "content_class": "latin",
       "height": 34,
       "kind": "pangram",
+      "logical_identity": {
+        "desktop_style_disambiguator": null,
+        "logical_name": "JESS/BOLD/SMALL",
+        "mapping_status": "mapped",
+        "nominal_x_size": 10,
+        "primary": {
+          "character_set": "STANDARD",
+          "face": "BOLD",
+          "family": "JESS",
+          "size": "SMALL"
+        },
+        "typographic": {
+          "add_style_name": "",
+          "family_name": "Symbolics Genera Jess",
+          "setwidth_name": "Normal",
+          "slant": "R",
+          "weight_name": "Bold"
+        }
+      },
       "name": "JESS11B",
       "path": "specimens/latin/jess11b.png",
       "repertoire": "standard",
       "sha256": "cf944f723efc956b1b1eeb915021ea75658800b9f142301101d348c82ce609ef",
-      "unicode_bdf_sha256": "8b1760c233d5586d16ec2c07ebdbdb4d674fd21b8e54c00c8c597a249c55a9b9",
+      "unicode_bdf_sha256": "7b665b4af06b2aa3800b6f6a429339a468b229475b1b0f41a0da435a738ffa6c",
       "width": 702
     },
     {
       "content_class": "latin",
       "height": 34,
       "kind": "pangram",
+      "logical_identity": {
+        "desktop_style_disambiguator": null,
+        "logical_name": "JESS/ITALIC/SMALL",
+        "mapping_status": "mapped",
+        "nominal_x_size": 10,
+        "primary": {
+          "character_set": "STANDARD",
+          "face": "ITALIC",
+          "family": "JESS",
+          "size": "SMALL"
+        },
+        "typographic": {
+          "add_style_name": "",
+          "family_name": "Symbolics Genera Jess",
+          "setwidth_name": "Normal",
+          "slant": "I",
+          "weight_name": "Medium"
+        }
+      },
       "name": "JESS11I",
       "path": "specimens/latin/jess11i.png",
       "repertoire": "standard",
       "sha256": "279e6c568de2eae8440ec35b9bb76f2bfd97e9d0c2757185c6d481731a1f97b4",
-      "unicode_bdf_sha256": "28ee8f5b34851f8d257b8b7aaf6f280fcd33b30f79f208ffc0cce442362c4bf7",
+      "unicode_bdf_sha256": "32a45e431a6c26b39197658f58869e3c5f36a15befe6cae762ac5b803a8cead5",
       "width": 702
     },
     {
       "content_class": "latin",
       "height": 38,
       "kind": "pangram",
+      "logical_identity": {
+        "desktop_style_disambiguator": null,
+        "logical_name": "JESS/ROMAN/NORMAL",
+        "mapping_status": "mapped",
+        "nominal_x_size": 12,
+        "primary": {
+          "character_set": "STANDARD",
+          "face": "ROMAN",
+          "family": "JESS",
+          "size": "NORMAL"
+        },
+        "typographic": {
+          "add_style_name": "",
+          "family_name": "Symbolics Genera Jess",
+          "setwidth_name": "Normal",
+          "slant": "R",
+          "weight_name": "Medium"
+        }
+      },
       "name": "JESS13",
       "path": "specimens/latin/jess13.png",
       "repertoire": "standard",
       "sha256": "801f641962824cf504bb7c3f98e7ee115b8c814379c62a96f64106556f7a2d2c",
-      "unicode_bdf_sha256": "bce1f7b3f34583fad8c425aa1b9f19813cb19aaf4779d1c9e7a1557cbbba2439",
+      "unicode_bdf_sha256": "e4d4b91b8f4f968c45cd34cee24f8bd49498c7a9cc9da6c584fe35e32b7bf8e7",
       "width": 644
     },
     {
       "content_class": "latin",
       "height": 38,
       "kind": "pangram",
+      "logical_identity": {
+        "desktop_style_disambiguator": null,
+        "logical_name": "JESS/BOLD/NORMAL",
+        "mapping_status": "mapped",
+        "nominal_x_size": 12,
+        "primary": {
+          "character_set": "STANDARD",
+          "face": "BOLD",
+          "family": "JESS",
+          "size": "NORMAL"
+        },
+        "typographic": {
+          "add_style_name": "",
+          "family_name": "Symbolics Genera Jess",
+          "setwidth_name": "Normal",
+          "slant": "R",
+          "weight_name": "Bold"
+        }
+      },
       "name": "JESS13B",
       "path": "specimens/latin/jess13b.png",
       "repertoire": "standard",
       "sha256": "f4d69da6c717a8416f8d7c5f50ab8131f5347746d424b0559b79dea54693c19e",
-      "unicode_bdf_sha256": "7ef413c1f6262f51e5501895b85b1938ab9e4d06facfb414c2c6494d2cf8aa95",
+      "unicode_bdf_sha256": "60affd86ba9d7f599cc0c07a1215828f744f1f056231af419c97f642c85d8ec2",
       "width": 684
     },
     {
       "content_class": "latin",
       "height": 38,
       "kind": "pangram",
+      "logical_identity": {
+        "desktop_style_disambiguator": null,
+        "logical_name": "JESS/ITALIC/NORMAL",
+        "mapping_status": "mapped",
+        "nominal_x_size": 12,
+        "primary": {
+          "character_set": "STANDARD",
+          "face": "ITALIC",
+          "family": "JESS",
+          "size": "NORMAL"
+        },
+        "typographic": {
+          "add_style_name": "",
+          "family_name": "Symbolics Genera Jess",
+          "setwidth_name": "Normal",
+          "slant": "I",
+          "weight_name": "Medium"
+        }
+      },
       "name": "JESS13I",
       "path": "specimens/latin/jess13i.png",
       "repertoire": "standard",
       "sha256": "c3ba88c97986ef40357869568703601274f58cfce3c8c8092b7631b316e3481d",
-      "unicode_bdf_sha256": "212d23516bf082a712c31a0101464778512304dd97d724ee1437a65974fdd598",
+      "unicode_bdf_sha256": "cc5449f45e8589c1b2341cc0f18b1c04dbf04c753fd781826142d86eba568a87",
       "width": 646
     },
     {
       "content_class": "latin",
       "height": 40,
       "kind": "pangram",
+      "logical_identity": {
+        "desktop_style_disambiguator": null,
+        "logical_name": "JESS/ROMAN/LARGE",
+        "mapping_status": "mapped",
+        "nominal_x_size": 14,
+        "primary": {
+          "character_set": "STANDARD",
+          "face": "ROMAN",
+          "family": "JESS",
+          "size": "LARGE"
+        },
+        "typographic": {
+          "add_style_name": "",
+          "family_name": "Symbolics Genera Jess",
+          "setwidth_name": "Normal",
+          "slant": "R",
+          "weight_name": "Medium"
+        }
+      },
       "name": "JESS14",
       "path": "specimens/latin/jess14.png",
       "repertoire": "standard",
       "sha256": "78c267bfbe219fb2a68b40ad6188c474415506f519bfd7f410a7ed8c4aa2700c",
-      "unicode_bdf_sha256": "062bcd518303201c5e548de81c8b488dc4d5bb82f1346a24c9c585cdb74b2c13",
+      "unicode_bdf_sha256": "99098519f222264eae64775f43c426a04ee3e94c452122c3e1216341fcb892b8",
       "width": 646
     },
     {
       "content_class": "latin",
       "height": 40,
       "kind": "pangram",
+      "logical_identity": {
+        "desktop_style_disambiguator": null,
+        "logical_name": "JESS/BOLD/LARGE",
+        "mapping_status": "mapped",
+        "nominal_x_size": 14,
+        "primary": {
+          "character_set": "STANDARD",
+          "face": "BOLD",
+          "family": "JESS",
+          "size": "LARGE"
+        },
+        "typographic": {
+          "add_style_name": "",
+          "family_name": "Symbolics Genera Jess",
+          "setwidth_name": "Normal",
+          "slant": "R",
+          "weight_name": "Bold"
+        }
+      },
       "name": "JESS14B",
       "path": "specimens/latin/jess14b.png",
       "repertoire": "standard",
       "sha256": "35f520bf1b0b091bc5c586b9366dfc95694a993358556cfa7bee0f9517a96ede",
-      "unicode_bdf_sha256": "c6ca87e4d87d9bae836572a2af353268437602328a9fef4c723e35b1e54169f7",
+      "unicode_bdf_sha256": "f4e7f82b99b15f734c5d1f11295248860f65df555b65de225f28d6e76d03f96e",
       "width": 710
     },
     {
       "content_class": "latin",
       "height": 40,
       "kind": "pangram",
+      "logical_identity": {
+        "desktop_style_disambiguator": null,
+        "logical_name": "JESS/ITALIC/LARGE",
+        "mapping_status": "mapped",
+        "nominal_x_size": 14,
+        "primary": {
+          "character_set": "STANDARD",
+          "face": "ITALIC",
+          "family": "JESS",
+          "size": "LARGE"
+        },
+        "typographic": {
+          "add_style_name": "",
+          "family_name": "Symbolics Genera Jess",
+          "setwidth_name": "Normal",
+          "slant": "I",
+          "weight_name": "Medium"
+        }
+      },
       "name": "JESS14I",
       "path": "specimens/latin/jess14i.png",
       "repertoire": "standard",
       "sha256": "c3cda3fc1e4d3a5d4b56f4921a201e2a663b1942a82010466da6385af4dda7e6",
-      "unicode_bdf_sha256": "d466dd559697028dc3a1335ffcd3fef871bc2231e1c07d223a8642b11b5663d4",
+      "unicode_bdf_sha256": "dfadee59f6754c4cc72e29155f8656cfc38e705edcafe3ddf4b679988acb1a14",
       "width": 730
     },
     {
       "content_class": "symbols",
       "height": 277,
       "kind": "glyph-sheet",
+      "logical_identity": {
+        "desktop_style_disambiguator": null,
+        "logical_name": null,
+        "mapping_status": "role-mapped",
+        "nominal_x_size": null,
+        "primary": null,
+        "typographic": {
+          "add_style_name": "",
+          "family_name": "Symbolics Genera Math",
+          "setwidth_name": "Normal",
+          "slant": "R",
+          "weight_name": "Medium"
+        }
+      },
       "name": "MATH10",
       "path": "specimens/symbols/math10.png",
       "repertoire": "math",
       "sha256": "bc7ed9910ef268531fa9adffc37ffcbf27695b8705cd892f257c624ecb2b4b07",
-      "unicode_bdf_sha256": "81134f4111164a8ffdf5cd14f55b9d4f1e2efcff0de79a13613e3a46e73ae268",
+      "unicode_bdf_sha256": "3df88438a8726a3cff7e1c5fb26e25ea95c5681c00afb4e1102afe9c1f57c94c",
       "width": 609
     },
     {
       "content_class": "symbols",
       "height": 295,
       "kind": "glyph-sheet",
+      "logical_identity": {
+        "desktop_style_disambiguator": null,
+        "logical_name": null,
+        "mapping_status": "role-mapped",
+        "nominal_x_size": null,
+        "primary": null,
+        "typographic": {
+          "add_style_name": "",
+          "family_name": "Symbolics Genera Math",
+          "setwidth_name": "Normal",
+          "slant": "R",
+          "weight_name": "Medium"
+        }
+      },
       "name": "MATH12",
       "path": "specimens/symbols/math12.png",
       "repertoire": "math",
       "sha256": "1ded6a9c87450ddb5dc621e033c94b15cdb0d1a71bc079f454e3eb987a3cb283",
-      "unicode_bdf_sha256": "3a131118b363b13198529f7a6b6f1c2bc289603a2843e878ad1c9db29bb913cd",
+      "unicode_bdf_sha256": "6482327dc3c17dfdd6a684f0f7b815c652c687b711b5becc6b3359d421283949",
       "width": 577
     },
     {
       "content_class": "latin",
       "height": 38,
       "kind": "pangram",
+      "logical_identity": {
+        "desktop_style_disambiguator": null,
+        "logical_name": "FIX/ROMAN/LARGE",
+        "mapping_status": "mapped",
+        "nominal_x_size": 14,
+        "primary": {
+          "character_set": "STANDARD",
+          "face": "ROMAN",
+          "family": "FIX",
+          "size": "LARGE"
+        },
+        "typographic": {
+          "add_style_name": "",
+          "family_name": "Symbolics Genera Fix",
+          "setwidth_name": "Normal",
+          "slant": "R",
+          "weight_name": "Medium"
+        }
+      },
       "name": "MEDFNT",
       "path": "specimens/latin/medfnt.png",
       "repertoire": "standard",
       "sha256": "9b377e918cc357e52c116c4f37b0ca02fc2da0a0733764d6b8e69c78d76e6e8b",
-      "unicode_bdf_sha256": "5920658b9420305358dc469591dc7a52a8ac9dd3e5bd729056f3910c31cfa67a",
+      "unicode_bdf_sha256": "47b4b0794e9526aa092994cd826068847efd6bed72e8f3af97161a1aad2a2332",
       "width": 768
     },
     {
       "content_class": "latin",
       "height": 38,
       "kind": "pangram",
+      "logical_identity": {
+        "desktop_style_disambiguator": null,
+        "logical_name": "FIX/BOLD/LARGE",
+        "mapping_status": "mapped",
+        "nominal_x_size": 14,
+        "primary": {
+          "character_set": "STANDARD",
+          "face": "BOLD",
+          "family": "FIX",
+          "size": "LARGE"
+        },
+        "typographic": {
+          "add_style_name": "",
+          "family_name": "Symbolics Genera Fix",
+          "setwidth_name": "Normal",
+          "slant": "R",
+          "weight_name": "Bold"
+        }
+      },
       "name": "MEDFNTB",
       "path": "specimens/latin/medfntb.png",
       "repertoire": "standard",
       "sha256": "7a54d14565c95ab4167efc90210c72223a028b2e29bbeecd63673f5bf2c4a972",
-      "unicode_bdf_sha256": "618bad1b1adef8a2ab11ac58d1e25fbcd2b34825f75e79d239d96033274ea938",
+      "unicode_bdf_sha256": "eda199fbfa50032c62f98ed382b8715e33f047d825dfdfcd17b7ae642350f89e",
       "width": 852
     },
     {
       "content_class": "latin",
       "height": 38,
       "kind": "pangram",
+      "logical_identity": {
+        "desktop_style_disambiguator": null,
+        "logical_name": "FIX/BOLD-ITALIC/LARGE",
+        "mapping_status": "mapped",
+        "nominal_x_size": 14,
+        "primary": {
+          "character_set": "STANDARD",
+          "face": "BOLD-ITALIC",
+          "family": "FIX",
+          "size": "LARGE"
+        },
+        "typographic": {
+          "add_style_name": "",
+          "family_name": "Symbolics Genera Fix",
+          "setwidth_name": "Normal",
+          "slant": "I",
+          "weight_name": "Bold"
+        }
+      },
       "name": "MEDFNTBI",
       "path": "specimens/latin/medfntbi.png",
       "repertoire": "standard",
       "sha256": "5dfe801ed512653399cb91dab47f36a93d41f6904f9d0423e58446f898565cfe",
-      "unicode_bdf_sha256": "612e45855c9b4b600db5d6d0bf9b4d7c196d11a1569861f70419bbca381a6481",
+      "unicode_bdf_sha256": "7737da11d23dbf729557494c2fea93fac2978615df2749d655b3f059ba860df4",
       "width": 936
     },
     {
       "content_class": "latin",
       "height": 38,
       "kind": "pangram",
+      "logical_identity": {
+        "desktop_style_disambiguator": null,
+        "logical_name": "FIX/ITALIC/LARGE",
+        "mapping_status": "mapped",
+        "nominal_x_size": 14,
+        "primary": {
+          "character_set": "STANDARD",
+          "face": "ITALIC",
+          "family": "FIX",
+          "size": "LARGE"
+        },
+        "typographic": {
+          "add_style_name": "",
+          "family_name": "Symbolics Genera Fix",
+          "setwidth_name": "Normal",
+          "slant": "I",
+          "weight_name": "Medium"
+        }
+      },
       "name": "MEDFNTI",
       "path": "specimens/latin/medfnti.png",
       "repertoire": "standard",
       "sha256": "898f1570624d6c3242fd7eb4d70b1528fce2853fb9b63e1e2ea966db262a1664",
-      "unicode_bdf_sha256": "f6cc67c7fcc81cf003a228c4ebf432d3c28d3d849bf11095a533a5f9ae4e515e",
+      "unicode_bdf_sha256": "2df3a54e393aaf90510c6dcd767098aa8d10bbfbc50114a6b3452ebf2843227c",
       "width": 852
     },
     {
       "content_class": "symbols",
       "height": 185,
       "kind": "glyph-sheet",
+      "logical_identity": {
+        "desktop_style_disambiguator": null,
+        "logical_name": "FIX/ROMAN/NORMAL",
+        "mapping_status": "role-mapped",
+        "nominal_x_size": 12,
+        "primary": {
+          "character_set": "MOUSE",
+          "face": "ROMAN",
+          "family": "FIX",
+          "size": "NORMAL"
+        },
+        "typographic": {
+          "add_style_name": "",
+          "family_name": "Symbolics Genera Mouse",
+          "setwidth_name": "Normal",
+          "slant": "R",
+          "weight_name": "Medium"
+        }
+      },
       "name": "MOUSE",
       "path": "specimens/symbols/mouse.png",
       "repertoire": "mouse",
       "sha256": "49b7b85e943f30cb3912040ca283cc657d64f7d8fff851f53c6e972a68dcc8ba",
-      "unicode_bdf_sha256": "176ac44abc7cb9bd3d70439a40335df3beab8e4d0a5ebeb1632effd4fce2ffc0",
+      "unicode_bdf_sha256": "5faefbefb6d6be28a08d60e547ff4a26cad723581844466c06cbb58ce0878d86",
       "width": 1121
     },
     {
       "content_class": "symbols",
       "height": 77,
       "kind": "glyph-sheet",
+      "logical_identity": {
+        "desktop_style_disambiguator": null,
+        "logical_name": "FIX/ROMAN/NORMAL",
+        "mapping_status": "role-mapped",
+        "nominal_x_size": 12,
+        "primary": {
+          "character_set": "ARROW",
+          "face": "ROMAN",
+          "family": "FIX",
+          "size": "NORMAL"
+        },
+        "typographic": {
+          "add_style_name": "",
+          "family_name": "Symbolics Genera Arrows",
+          "setwidth_name": "Normal",
+          "slant": "R",
+          "weight_name": "Medium"
+        }
+      },
       "name": "NARROW",
       "path": "specimens/symbols/narrow.png",
       "repertoire": "arrow",
       "sha256": "60ea1376c7ff03434ffd139de6ac738de155b78f690dcd6f00882cbe9c3151f4",
-      "unicode_bdf_sha256": "9d13a9e04589178d84ed7466e60db3ad18aa87b710d23fb9e4775c17f625599e",
+      "unicode_bdf_sha256": "2da6b1a2a634e058037e3653ac88ebcece2187448d2a7fb7d1e59ee1856b9691",
       "width": 609
     },
     {
       "content_class": "latin",
       "height": 40,
       "kind": "pangram",
+      "logical_identity": {
+        "desktop_style_disambiguator": null,
+        "logical_name": "SWISS/CONDENSED-CAPS/NORMAL",
+        "mapping_status": "mapped",
+        "nominal_x_size": 12,
+        "primary": {
+          "character_set": "STANDARD",
+          "face": "CONDENSED-CAPS",
+          "family": "SWISS",
+          "size": "NORMAL"
+        },
+        "typographic": {
+          "add_style_name": "Caps",
+          "family_name": "Symbolics Genera Swiss",
+          "setwidth_name": "Condensed",
+          "slant": "R",
+          "weight_name": "Medium"
+        }
+      },
       "name": "SWISS12-CCAPS",
       "path": "specimens/latin/swiss12-ccaps.png",
       "repertoire": "standard",
       "sha256": "414b552d33906ae503fc21662c2c18c5591850f92f0cdaa172bfba408f219837",
-      "unicode_bdf_sha256": "ec7b47ee02278763936e724f4ce2b5c6a01024b8b9e883564c8c7da0382d3ea7",
+      "unicode_bdf_sha256": "71d8a8e7ec07537187d492bc540405c65cc4e39bd5eab6f638f1c89cd45fe703",
       "width": 642
     },
     {
       "content_class": "latin",
       "height": 40,
       "kind": "pangram",
+      "logical_identity": {
+        "desktop_style_disambiguator": null,
+        "logical_name": "SWISS/BOLD-CONDENSED-CAPS/NORMAL",
+        "mapping_status": "mapped",
+        "nominal_x_size": 12,
+        "primary": {
+          "character_set": "STANDARD",
+          "face": "BOLD-CONDENSED-CAPS",
+          "family": "SWISS",
+          "size": "NORMAL"
+        },
+        "typographic": {
+          "add_style_name": "Caps",
+          "family_name": "Symbolics Genera Swiss",
+          "setwidth_name": "Condensed",
+          "slant": "R",
+          "weight_name": "Bold"
+        }
+      },
       "name": "SWISS12B-CCAPS",
       "path": "specimens/latin/swiss12b-ccaps.png",
       "repertoire": "standard",
       "sha256": "e68a33bbc0d1e5ae0491a4d35c7e5697e59c22bc37ebfe18678cc4a5c0aeefdf",
-      "unicode_bdf_sha256": "a2f8aa1116a644c6bfe5f4c9de7a8786da7d79e2693155d1d9b7ebfca2305ed9",
+      "unicode_bdf_sha256": "55bd62a0617600da3043729e06530420b2667719dbcc54e8dbbcc011ad24e7e1",
       "width": 728
     },
     {
       "content_class": "latin",
       "height": 52,
       "kind": "pangram",
+      "logical_identity": {
+        "desktop_style_disambiguator": null,
+        "logical_name": "SWISS/ROMAN/VERY-LARGE",
+        "mapping_status": "mapped",
+        "nominal_x_size": 18,
+        "primary": {
+          "character_set": "STANDARD",
+          "face": "ROMAN",
+          "family": "SWISS",
+          "size": "VERY-LARGE"
+        },
+        "typographic": {
+          "add_style_name": "",
+          "family_name": "Symbolics Genera Swiss",
+          "setwidth_name": "Normal",
+          "slant": "R",
+          "weight_name": "Medium"
+        }
+      },
       "name": "SWISS20",
       "path": "specimens/latin/swiss20.png",
       "repertoire": "standard",
       "sha256": "264291ef270561b4b9220e577d048778ab3182d02517410b6f3fd9119e62906e",
-      "unicode_bdf_sha256": "5f10bc38ddd628b20694bb627367c4b75af4b41e600930c14e47fdd5d3ee4645",
+      "unicode_bdf_sha256": "05ac8a921ff55bd12698dbf99a5bb57fe1fff8b8eddeabef0227b404de21df6f",
       "width": 878
     },
     {
       "content_class": "latin",
       "height": 52,
       "kind": "pangram",
+      "logical_identity": {
+        "desktop_style_disambiguator": null,
+        "logical_name": "SWISS/BOLD/VERY-LARGE",
+        "mapping_status": "mapped",
+        "nominal_x_size": 18,
+        "primary": {
+          "character_set": "STANDARD",
+          "face": "BOLD",
+          "family": "SWISS",
+          "size": "VERY-LARGE"
+        },
+        "typographic": {
+          "add_style_name": "",
+          "family_name": "Symbolics Genera Swiss",
+          "setwidth_name": "Normal",
+          "slant": "R",
+          "weight_name": "Bold"
+        }
+      },
       "name": "SWISS20B",
       "path": "specimens/latin/swiss20b.png",
       "repertoire": "standard",
       "sha256": "c8c3bf5b1b0d13fdf96a3bdea8c3937ceba1401375f4f7986899a7113350d42e",
-      "unicode_bdf_sha256": "075cae2c21d06d2233c487d06e5dbba9c3b37e29eb37bab12bdaac3bdbc65a43",
+      "unicode_bdf_sha256": "b032593269cc59e794aaaf03a9900bf16aa4e86e6b140edfd1ef044452bfc8a3",
       "width": 962
     },
     {
       "content_class": "latin",
       "height": 52,
       "kind": "pangram",
+      "logical_identity": {
+        "desktop_style_disambiguator": null,
+        "logical_name": "SWISS/BOLD-ITALIC/VERY-LARGE",
+        "mapping_status": "mapped",
+        "nominal_x_size": 18,
+        "primary": {
+          "character_set": "STANDARD",
+          "face": "BOLD-ITALIC",
+          "family": "SWISS",
+          "size": "VERY-LARGE"
+        },
+        "typographic": {
+          "add_style_name": "",
+          "family_name": "Symbolics Genera Swiss",
+          "setwidth_name": "Normal",
+          "slant": "I",
+          "weight_name": "Bold"
+        }
+      },
       "name": "SWISS20BI",
       "path": "specimens/latin/swiss20bi.png",
       "repertoire": "standard",
       "sha256": "a0bac440f337eefd4ca52bb8d126476c2964b6b68c92549749f72c4daec84766",
-      "unicode_bdf_sha256": "64fbcf5d68e03830856f0fd598945acbd5c9b8594ea317672e2ed99661c7c892",
+      "unicode_bdf_sha256": "c26d329a537e9b5aa59660f959d9d1b06f099e9567655c022d8e5dd6be934dcd",
       "width": 1046
     },
     {
       "content_class": "latin",
       "height": 52,
       "kind": "pangram",
+      "logical_identity": {
+        "desktop_style_disambiguator": null,
+        "logical_name": "SWISS/ITALIC/VERY-LARGE",
+        "mapping_status": "mapped",
+        "nominal_x_size": 18,
+        "primary": {
+          "character_set": "STANDARD",
+          "face": "ITALIC",
+          "family": "SWISS",
+          "size": "VERY-LARGE"
+        },
+        "typographic": {
+          "add_style_name": "",
+          "family_name": "Symbolics Genera Swiss",
+          "setwidth_name": "Normal",
+          "slant": "I",
+          "weight_name": "Medium"
+        }
+      },
       "name": "SWISS20I",
       "path": "specimens/latin/swiss20i.png",
       "repertoire": "standard",
       "sha256": "48eaf774a82bdbce5cea555d8c50f30f6da96c8a43ea480c2b527c97fdd979e2",
-      "unicode_bdf_sha256": "c39f04b168852e19d45982a4c34472b95e4144c54cdb42d2ed91050cfb72bbb0",
+      "unicode_bdf_sha256": "f359516ba580a519f09dffdd76ee4eaea4c54d34d8e2d7bb66b3c6adcb2112c8",
       "width": 962
     },
     {
       "content_class": "symbols",
       "height": 385,
       "kind": "glyph-sheet",
+      "logical_identity": {
+        "desktop_style_disambiguator": null,
+        "logical_name": null,
+        "mapping_status": "role-mapped",
+        "nominal_x_size": null,
+        "primary": null,
+        "typographic": {
+          "add_style_name": "",
+          "family_name": "Symbolics Genera Symbols",
+          "setwidth_name": "Normal",
+          "slant": "R",
+          "weight_name": "Medium"
+        }
+      },
       "name": "SYMBOL10",
       "path": "specimens/symbols/symbol10.png",
       "repertoire": "symbol",
       "sha256": "8e934a37281183bc1cfaf5ffefd77d04fd25bd8a303a423feaddddeeb5ff4ccb",
-      "unicode_bdf_sha256": "83bb6827e2eb04bfad05f5fd3e3a4307c5fd096157039b8bfae1fae41db5d331",
+      "unicode_bdf_sha256": "bc4644ea696cda565102f4efb4d29034c23514c5e0ec648000fd8561f9b3a2e4",
       "width": 1313
     },
     {
       "content_class": "symbols",
       "height": 211,
       "kind": "glyph-sheet",
+      "logical_identity": {
+        "desktop_style_disambiguator": null,
+        "logical_name": "SWISS/ROMAN/NORMAL",
+        "mapping_status": "role-mapped",
+        "nominal_x_size": 12,
+        "primary": {
+          "character_set": "SYMBOL",
+          "face": "ROMAN",
+          "family": "SWISS",
+          "size": "NORMAL"
+        },
+        "typographic": {
+          "add_style_name": "",
+          "family_name": "Symbolics Genera Symbols",
+          "setwidth_name": "Normal",
+          "slant": "R",
+          "weight_name": "Medium"
+        }
+      },
       "name": "SYMBOL12",
       "path": "specimens/symbols/symbol12.png",
       "repertoire": "symbol",
       "sha256": "8b39645633255e25ad48d58b3f6ad0a70eadac21bcb359982e2402d81233a111",
-      "unicode_bdf_sha256": "acc4c866b92c4aada5a7ade527e6e916a7e85ff82671c3fdf00155586fa9e2c2",
+      "unicode_bdf_sha256": "475504e1b4d73ac24aba11365dcf9b3483660cdc87fa27d452b5c7cf846994bc",
       "width": 673
     },
     {
       "content_class": "latin",
       "height": 24,
       "kind": "pangram",
+      "logical_identity": {
+        "desktop_style_disambiguator": null,
+        "logical_name": "FIX/ROMAN/TINY",
+        "mapping_status": "mapped",
+        "nominal_x_size": 6,
+        "primary": {
+          "character_set": "STANDARD",
+          "face": "ROMAN",
+          "family": "FIX",
+          "size": "TINY"
+        },
+        "typographic": {
+          "add_style_name": "",
+          "family_name": "Symbolics Genera Fix",
+          "setwidth_name": "Normal",
+          "slant": "R",
+          "weight_name": "Medium"
+        }
+      },
       "name": "TINY",
       "path": "specimens/latin/tiny.png",
       "repertoire": "standard",
       "sha256": "3833108751c107d3a83d303e882354220d24aecdcd9d99ff02775e05672b85e5",
-      "unicode_bdf_sha256": "3f8cfa2fcf113ad6e367f0924d21e28ce7955b4dfb9944814b53219495068e51",
+      "unicode_bdf_sha256": "9c5ff7cdab1cea8f0aa916ad626d0c7f0e96c8e74c491800c5f016a824b33d79",
       "width": 348
     },
     {
       "content_class": "latin",
       "height": 36,
       "kind": "pangram",
+      "logical_identity": {
+        "desktop_style_disambiguator": null,
+        "logical_name": "DUTCH/ROMAN/SMALL",
+        "mapping_status": "mapped",
+        "nominal_x_size": 10,
+        "primary": {
+          "character_set": "STANDARD",
+          "face": "ROMAN",
+          "family": "DUTCH",
+          "size": "SMALL"
+        },
+        "typographic": {
+          "add_style_name": "",
+          "family_name": "Symbolics Genera Dutch",
+          "setwidth_name": "Normal",
+          "slant": "R",
+          "weight_name": "Medium"
+        }
+      },
       "name": "TR10",
       "path": "specimens/latin/tr10.png",
       "repertoire": "standard",
       "sha256": "4ab0da54861e16c26dcd2219b668ce97525d155052fedb3a83a15ae6897e7783",
-      "unicode_bdf_sha256": "90310991007b40f81ef3a7952e1099dea49cda4d8b638b84d39e2759cad22132",
+      "unicode_bdf_sha256": "e184134c2d3ee8e8a8205ff5bb044ecbcd66c44291a64de4e327d4e784bac3bf",
       "width": 530
     },
     {
       "content_class": "latin",
       "height": 36,
       "kind": "pangram",
+      "logical_identity": {
+        "desktop_style_disambiguator": null,
+        "logical_name": "DUTCH/BOLD/SMALL",
+        "mapping_status": "mapped",
+        "nominal_x_size": 10,
+        "primary": {
+          "character_set": "STANDARD",
+          "face": "BOLD",
+          "family": "DUTCH",
+          "size": "SMALL"
+        },
+        "typographic": {
+          "add_style_name": "",
+          "family_name": "Symbolics Genera Dutch",
+          "setwidth_name": "Normal",
+          "slant": "R",
+          "weight_name": "Bold"
+        }
+      },
       "name": "TR10B",
       "path": "specimens/latin/tr10b.png",
       "repertoire": "standard",
       "sha256": "e2d4f2f5ce3be80e44deafcea2e2ce93a5dc068bafc405b80f10c2afe5a3ccfb",
-      "unicode_bdf_sha256": "b635c042e80739ff303f602b73812875e85e9e7d7015cd7c4fe7f146c67d5844",
+      "unicode_bdf_sha256": "71a5cb6f9238a24ad6b76f3fa34b412c132db08f8f8102531158d52600b0da43",
       "width": 566
     },
     {
       "content_class": "latin",
       "height": 36,
       "kind": "pangram",
+      "logical_identity": {
+        "desktop_style_disambiguator": "Small Strike",
+        "logical_name": "DUTCH/BOLD-ITALIC/SMALL",
+        "mapping_status": "mapped",
+        "nominal_x_size": 10,
+        "primary": {
+          "character_set": "STANDARD",
+          "face": "BOLD-ITALIC",
+          "family": "DUTCH",
+          "size": "SMALL"
+        },
+        "typographic": {
+          "add_style_name": "Small Strike",
+          "family_name": "Symbolics Genera Dutch",
+          "setwidth_name": "Normal",
+          "slant": "I",
+          "weight_name": "Bold"
+        }
+      },
       "name": "TR10BI",
       "path": "specimens/latin/tr10bi.png",
       "repertoire": "standard",
       "sha256": "e2705e01156edfd8c9d4190ee566a18bb61a3271d8d59c43a07590d100a51f07",
-      "unicode_bdf_sha256": "8fba6d08341ee891fb512544e562eaef6a62e0727d513591b1086fecadcbc585",
+      "unicode_bdf_sha256": "9282e3cafb7fba4a04e5d93f7948407f767f9c154e2a6d29bf1b7fdc11ccddaf",
       "width": 612
     },
     {
       "content_class": "latin",
       "height": 36,
       "kind": "pangram",
+      "logical_identity": {
+        "desktop_style_disambiguator": null,
+        "logical_name": "DUTCH/ITALIC/SMALL",
+        "mapping_status": "mapped",
+        "nominal_x_size": 10,
+        "primary": {
+          "character_set": "STANDARD",
+          "face": "ITALIC",
+          "family": "DUTCH",
+          "size": "SMALL"
+        },
+        "typographic": {
+          "add_style_name": "",
+          "family_name": "Symbolics Genera Dutch",
+          "setwidth_name": "Normal",
+          "slant": "I",
+          "weight_name": "Medium"
+        }
+      },
       "name": "TR10I",
       "path": "specimens/latin/tr10i.png",
       "repertoire": "standard",
       "sha256": "3bb13e85cf4d410f32b675394daea79e858d36cf23237c70f1cee460386e2c7e",
-      "unicode_bdf_sha256": "6a6f33092edc33032f2f3fc6bab2bb2d44733cb3101e0a20bf50bd823a42fc99",
+      "unicode_bdf_sha256": "efa34f284261c823e2ef1bf4ad5345ec206bfae807ce0d1073a80ee7befb2f01",
       "width": 528
     },
     {
       "content_class": "latin",
       "height": 40,
       "kind": "pangram",
+      "logical_identity": {
+        "desktop_style_disambiguator": null,
+        "logical_name": "DUTCH/ROMAN/NORMAL",
+        "mapping_status": "mapped",
+        "nominal_x_size": 12,
+        "primary": {
+          "character_set": "STANDARD",
+          "face": "ROMAN",
+          "family": "DUTCH",
+          "size": "NORMAL"
+        },
+        "typographic": {
+          "add_style_name": "",
+          "family_name": "Symbolics Genera Dutch",
+          "setwidth_name": "Normal",
+          "slant": "R",
+          "weight_name": "Medium"
+        }
+      },
       "name": "TR12",
       "path": "specimens/latin/tr12.png",
       "repertoire": "standard",
       "sha256": "ae9b0d8842814d133326d4f21f5f9f081303f9fd398afcca72e10bab2ac76ccf",
-      "unicode_bdf_sha256": "0410ef1c80531b66e31f85a31f0ec38ffa4a552c58175df78b600c32c99e0078",
+      "unicode_bdf_sha256": "a0f1131fd35cc4bb80a919fc15da28c13f471c2048794bb5c674eb7b62bb263f",
       "width": 628
     },
     {
       "content_class": "latin",
       "height": 44,
       "kind": "pangram",
+      "logical_identity": {
+        "desktop_style_disambiguator": null,
+        "logical_name": "DUTCH/BOLD/NORMAL",
+        "mapping_status": "mapped",
+        "nominal_x_size": 12,
+        "primary": {
+          "character_set": "STANDARD",
+          "face": "BOLD",
+          "family": "DUTCH",
+          "size": "NORMAL"
+        },
+        "typographic": {
+          "add_style_name": "",
+          "family_name": "Symbolics Genera Dutch",
+          "setwidth_name": "Normal",
+          "slant": "R",
+          "weight_name": "Bold"
+        }
+      },
       "name": "TR12B",
       "path": "specimens/latin/tr12b.png",
       "repertoire": "standard",
       "sha256": "5fc1bb118f0523f79ad8b6b3e9e9db0c82fbcde229f615e21cdfa101dfbe227e",
-      "unicode_bdf_sha256": "364e2ce4945596cdfba00dc4a75bb3f5210dbaa53598af865fc9614a05ba7433",
+      "unicode_bdf_sha256": "12e3849830f4e8106ad7fb2df4b5a60155ca63a7d2cd445148b9ac16aecd6770",
       "width": 658
     },
     {
       "content_class": "latin",
       "height": 40,
       "kind": "pangram",
+      "logical_identity": {
+        "desktop_style_disambiguator": null,
+        "logical_name": "DUTCH/BOLD-ITALIC/NORMAL",
+        "mapping_status": "mapped",
+        "nominal_x_size": 12,
+        "primary": {
+          "character_set": "STANDARD",
+          "face": "BOLD-ITALIC",
+          "family": "DUTCH",
+          "size": "NORMAL"
+        },
+        "typographic": {
+          "add_style_name": "",
+          "family_name": "Symbolics Genera Dutch",
+          "setwidth_name": "Normal",
+          "slant": "I",
+          "weight_name": "Bold"
+        }
+      },
       "name": "TR12BI",
       "path": "specimens/latin/tr12bi.png",
       "repertoire": "standard",
       "sha256": "bf487d26018b669a52656226561e1b03af4b4bb0e67ab29fd904fa3c46a5baa0",
-      "unicode_bdf_sha256": "41adec4afaf495fdbf813204ba9b50c73e065eaa305b514cd5157eacb788bea1",
+      "unicode_bdf_sha256": "9099f6b769c12de166e997de3030042117471a98d32c958f420b2306f68f19d6",
       "width": 692
     },
     {
       "content_class": "latin",
       "height": 40,
       "kind": "pangram",
+      "logical_identity": {
+        "desktop_style_disambiguator": null,
+        "logical_name": "DUTCH/ITALIC/NORMAL",
+        "mapping_status": "mapped",
+        "nominal_x_size": 12,
+        "primary": {
+          "character_set": "STANDARD",
+          "face": "ITALIC",
+          "family": "DUTCH",
+          "size": "NORMAL"
+        },
+        "typographic": {
+          "add_style_name": "",
+          "family_name": "Symbolics Genera Dutch",
+          "setwidth_name": "Normal",
+          "slant": "I",
+          "weight_name": "Medium"
+        }
+      },
       "name": "TR12I",
       "path": "specimens/latin/tr12i.png",
       "repertoire": "standard",
       "sha256": "83454d8fd8c65683b0554fa9152a6b11c449076d479f5b6bc74442fe8a6a4716",
-      "unicode_bdf_sha256": "b4b10817d9181570861c19896c37256ddf17f002d7e66d2d928eb7693cf59990",
+      "unicode_bdf_sha256": "e2cfd659bfbb167d333fc471308a3ad401608805e1ee40305874a21d36fd8967",
       "width": 612
     },
     {
       "content_class": "latin",
       "height": 32,
       "kind": "pangram",
+      "logical_identity": {
+        "desktop_style_disambiguator": null,
+        "logical_name": "DUTCH/ROMAN/VERY-SMALL",
+        "mapping_status": "mapped",
+        "nominal_x_size": 8,
+        "primary": {
+          "character_set": "STANDARD",
+          "face": "ROMAN",
+          "family": "DUTCH",
+          "size": "VERY-SMALL"
+        },
+        "typographic": {
+          "add_style_name": "",
+          "family_name": "Symbolics Genera Dutch",
+          "setwidth_name": "Normal",
+          "slant": "R",
+          "weight_name": "Medium"
+        }
+      },
       "name": "TR8",
       "path": "specimens/latin/tr8.png",
       "repertoire": "standard",
       "sha256": "a4a2ce072ab0fa1dca630b1d3de2572aa455ae3e54be2f02054aa42b8d421028",
-      "unicode_bdf_sha256": "126609ccc459ac677b8c8057c23466f9b6389adf2dd343f6069911ca3cd2f65e",
+      "unicode_bdf_sha256": "a80c5f9c8e33cfc0ea408084e6d78e3d215b88126d9b536cd85ffdb011152b99",
       "width": 458
     },
     {
       "content_class": "latin",
       "height": 34,
       "kind": "pangram",
+      "logical_identity": {
+        "desktop_style_disambiguator": null,
+        "logical_name": "DUTCH/BOLD/VERY-SMALL",
+        "mapping_status": "mapped",
+        "nominal_x_size": 8,
+        "primary": {
+          "character_set": "STANDARD",
+          "face": "BOLD",
+          "family": "DUTCH",
+          "size": "VERY-SMALL"
+        },
+        "typographic": {
+          "add_style_name": "",
+          "family_name": "Symbolics Genera Dutch",
+          "setwidth_name": "Normal",
+          "slant": "R",
+          "weight_name": "Bold"
+        }
+      },
       "name": "TR8B",
       "path": "specimens/latin/tr8b.png",
       "repertoire": "standard",
       "sha256": "d044c040b9812b0cb7de604de89854498944185fddd3cd95ba3900d19dd55012",
-      "unicode_bdf_sha256": "0c8dd2826ee1d3eb0eb3043287cdad7d4f40cd2594eaa8216b711abfc64243c4",
+      "unicode_bdf_sha256": "bd5478d579f89971d89deda01ee31397e8e4fce5c95768c75606b9ad3ae6fab0",
       "width": 542
     },
     {
       "content_class": "latin",
       "height": 34,
       "kind": "pangram",
+      "logical_identity": {
+        "desktop_style_disambiguator": "Very Small Strike",
+        "logical_name": "DUTCH/BOLD-ITALIC/VERY-SMALL",
+        "mapping_status": "mapped",
+        "nominal_x_size": 8,
+        "primary": {
+          "character_set": "STANDARD",
+          "face": "BOLD-ITALIC",
+          "family": "DUTCH",
+          "size": "VERY-SMALL"
+        },
+        "typographic": {
+          "add_style_name": "Very Small Strike",
+          "family_name": "Symbolics Genera Dutch",
+          "setwidth_name": "Normal",
+          "slant": "I",
+          "weight_name": "Bold"
+        }
+      },
       "name": "TR8BI",
       "path": "specimens/latin/tr8bi.png",
       "repertoire": "standard",
       "sha256": "c45522ff94870cd4526501723e94440eb2ff03feaf61bf473d244bc7ff89ca0f",
-      "unicode_bdf_sha256": "8487dd73999dca6f734c06708b653024c6e805a43ef6bda322d6b3ceaae07702",
+      "unicode_bdf_sha256": "25c62aff18421701fe4e17ab0c51797686ea2824cd3ea13bf81a8315c264aeb0",
       "width": 626
     },
     {
       "content_class": "latin",
       "height": 32,
       "kind": "pangram",
+      "logical_identity": {
+        "desktop_style_disambiguator": null,
+        "logical_name": "DUTCH/ITALIC/VERY-SMALL",
+        "mapping_status": "mapped",
+        "nominal_x_size": 8,
+        "primary": {
+          "character_set": "STANDARD",
+          "face": "ITALIC",
+          "family": "DUTCH",
+          "size": "VERY-SMALL"
+        },
+        "typographic": {
+          "add_style_name": "",
+          "family_name": "Symbolics Genera Dutch",
+          "setwidth_name": "Normal",
+          "slant": "I",
+          "weight_name": "Medium"
+        }
+      },
       "name": "TR8I",
       "path": "specimens/latin/tr8i.png",
       "repertoire": "standard",
       "sha256": "217e6722843722dbf42182760658f6e9119ebb9be8cebe64aef8966f649e1b07",
-      "unicode_bdf_sha256": "7661827e4897d92510e4b20e4fc4eaac3e9d4daf9c90da39dc7914a567ba924e",
+      "unicode_bdf_sha256": "a7e790ffdaf816c2bd0a8289a0eb7ffe4752a48f0f3c16caa9298803dc87a460",
       "width": 510
     },
     {
       "content_class": "latin",
       "height": 32,
       "kind": "pangram",
+      "logical_identity": {
+        "desktop_style_disambiguator": null,
+        "logical_name": "FIX/ROMAN/SMALL",
+        "mapping_status": "mapped",
+        "nominal_x_size": 10,
+        "primary": {
+          "character_set": "STANDARD",
+          "face": "ROMAN",
+          "family": "FIX",
+          "size": "SMALL"
+        },
+        "typographic": {
+          "add_style_name": "",
+          "family_name": "Symbolics Genera Fix",
+          "setwidth_name": "Normal",
+          "slant": "R",
+          "weight_name": "Medium"
+        }
+      },
       "name": "TVFONT",
       "path": "specimens/latin/tvfont.png",
       "repertoire": "standard",
       "sha256": "44a583283c32a46618ba41d8437acdc16ab8c6cbe1c7073d8d17b0990fcc2ad9",
-      "unicode_bdf_sha256": "0ad518a768fd62f4cf23c0b26d5d9f3040a424fe66b51a0d23a05a8d6f304e79",
+      "unicode_bdf_sha256": "b7f8a48e05d4b4fa05847fd2aebd471093b2911863d33e27167a1db8831bd007",
       "width": 516
     },
     {
       "content_class": "latin",
       "height": 32,
       "kind": "pangram",
+      "logical_identity": {
+        "desktop_style_disambiguator": null,
+        "logical_name": "FIX/BOLD-EXTENDED/SMALL",
+        "mapping_status": "mapped",
+        "nominal_x_size": 10,
+        "primary": {
+          "character_set": "STANDARD",
+          "face": "BOLD-EXTENDED",
+          "family": "FIX",
+          "size": "SMALL"
+        },
+        "typographic": {
+          "add_style_name": "",
+          "family_name": "Symbolics Genera Fix",
+          "setwidth_name": "Expanded",
+          "slant": "R",
+          "weight_name": "Bold"
+        }
+      },
       "name": "TVFONTB",
       "path": "specimens/latin/tvfontb.png",
       "repertoire": "standard",
       "sha256": "efee8947f2e4ce3542a7ab6e74ce6f034631164b1540b594306f5d969653462c",
-      "unicode_bdf_sha256": "702cfabec051ee8d14fff2544d2fe329a0b8add1b1a6753e8559d4d86c6440b8",
+      "unicode_bdf_sha256": "ad39f7c2f090e1acbbfc5acb331b7119980dfa3ff7218171e3be3a8c835a1873",
       "width": 600
     },
     {
       "content_class": "latin",
       "height": 32,
       "kind": "pangram",
+      "logical_identity": {
+        "desktop_style_disambiguator": null,
+        "logical_name": "FIX/BOLD-ITALIC/SMALL",
+        "mapping_status": "mapped",
+        "nominal_x_size": 10,
+        "primary": {
+          "character_set": "STANDARD",
+          "face": "BOLD-ITALIC",
+          "family": "FIX",
+          "size": "SMALL"
+        },
+        "typographic": {
+          "add_style_name": "",
+          "family_name": "Symbolics Genera Fix",
+          "setwidth_name": "Normal",
+          "slant": "I",
+          "weight_name": "Bold"
+        }
+      },
       "name": "TVFONTBI",
       "path": "specimens/latin/tvfontbi.png",
       "repertoire": "standard",
       "sha256": "7608beb8fa519997ee892a6b84c3685acd3160d5a25055f1255d3e37e05167dd",
-      "unicode_bdf_sha256": "7b4a7184541c2b21f5d77597d9d4ce0180cddcb792697bf8d08023be1ef7b019",
+      "unicode_bdf_sha256": "ace498d03a35dc0b337d75d01d20a275c2c7f8a20659386783ad3325801b0084",
       "width": 684
     },
     {
       "content_class": "latin",
       "height": 32,
       "kind": "pangram",
+      "logical_identity": {
+        "desktop_style_disambiguator": null,
+        "logical_name": "FIX/BOLD/SMALL",
+        "mapping_status": "mapped",
+        "nominal_x_size": 10,
+        "primary": {
+          "character_set": "STANDARD",
+          "face": "BOLD",
+          "family": "FIX",
+          "size": "SMALL"
+        },
+        "typographic": {
+          "add_style_name": "",
+          "family_name": "Symbolics Genera Fix",
+          "setwidth_name": "Normal",
+          "slant": "R",
+          "weight_name": "Bold"
+        }
+      },
       "name": "TVFONTCB",
       "path": "specimens/latin/tvfontcb.png",
       "repertoire": "standard",
       "sha256": "7af54d4c62af5596bff8edb574149da9992c3980699d907d1419bf04579c2dcf",
-      "unicode_bdf_sha256": "8779391e73dced98d44448ff09bc9299ca4e8fc8c77438e4e07a93a86ed194d7",
+      "unicode_bdf_sha256": "fa9e3b2f04e47e2e1d0bac671d1b0161ae1d1a109835466f61a978fae54a524b",
       "width": 516
     },
     {
       "content_class": "latin",
       "height": 32,
       "kind": "pangram",
+      "logical_identity": {
+        "desktop_style_disambiguator": null,
+        "logical_name": "FIX/ITALIC/SMALL",
+        "mapping_status": "mapped",
+        "nominal_x_size": 10,
+        "primary": {
+          "character_set": "STANDARD",
+          "face": "ITALIC",
+          "family": "FIX",
+          "size": "SMALL"
+        },
+        "typographic": {
+          "add_style_name": "",
+          "family_name": "Symbolics Genera Fix",
+          "setwidth_name": "Normal",
+          "slant": "I",
+          "weight_name": "Medium"
+        }
+      },
       "name": "TVFONTI",
       "path": "specimens/latin/tvfonti.png",
       "repertoire": "standard",
       "sha256": "3592bad380bc664c8d1af2839c8a62bacfe4539734de95d366813d1f47812068",
-      "unicode_bdf_sha256": "7069509fbfb93e649d0786070f7fa159648ed8a01c1b926f0cdd7b3854355fe1",
+      "unicode_bdf_sha256": "fe5a614906f967535d18258f6ef95786b850bc9201696528cb4b947058fd22a7",
       "width": 600
     },
     {
       "content_class": "symbols",
       "height": 229,
       "kind": "glyph-sheet",
+      "logical_identity": {
+        "desktop_style_disambiguator": null,
+        "logical_name": null,
+        "mapping_status": "unmapped",
+        "nominal_x_size": null,
+        "primary": null,
+        "typographic": {
+          "add_style_name": "",
+          "family_name": "Symbolics Genera VT100",
+          "setwidth_name": "Normal",
+          "slant": "R",
+          "weight_name": "Medium"
+        }
+      },
       "name": "VT100",
       "path": "specimens/symbols/vt100.png",
       "repertoire": "vt100",
       "sha256": "9013a40a2bb7c0fc6e4559489ba7c33593fb8cc42b5e4d8749a63f856271e0e4",
-      "unicode_bdf_sha256": "2f18525203238afcd2ad2cfe3ef2e5b75c5d9ccf46ea687c5610071445c33373",
+      "unicode_bdf_sha256": "29c48f7708d4a854c38f7b3f08e076a99801c6a5893d24f52b2fe944e1e0423b",
       "width": 353
     }
   ],

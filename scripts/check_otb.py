@@ -171,10 +171,70 @@ def _otb_ink(
     return advance, ink
 
 
-def check_pair(bdf_path: Path, otb_path: Path) -> int:
+def _expected_style(typographic: dict[str, object]) -> str:
+    parts: list[str] = []
+    add_style = typographic.get("add_style_name")
+    if add_style:
+        parts.append(str(add_style).replace(" ", "-"))
+    if typographic.get("weight_name") == "Bold":
+        parts.append("Bold")
+    if typographic.get("slant") == "I":
+        parts.append("Italic")
+    setwidth = typographic.get("setwidth_name")
+    if setwidth != "Normal":
+        parts.append(str(setwidth))
+    return " ".join(parts) or "Regular"
+
+
+def _check_identity(
+    font: TTFont, otb_path: Path, logical_identity: dict[str, object]
+) -> None:
+    typographic = logical_identity.get("typographic")
+    require(isinstance(typographic, dict), f"{otb_path}: logical typography is missing")
+    family = typographic.get("family_name")
+    require(isinstance(family, str) and family, f"{otb_path}: logical family is missing")
+    style = _expected_style(typographic)
+    name_table = font["name"]
+    require(name_table.getDebugName(1) == family, f"{otb_path}: OTB family name differs")
+    require(name_table.getDebugName(2) == style, f"{otb_path}: OTB style name differs")
+    expected_full_name = family if style == "Regular" else f"{family} {style}"
+    require(
+        name_table.getDebugName(4) == expected_full_name,
+        f"{otb_path}: OTB full name differs",
+    )
+
+    os2 = font["OS/2"]
+    expected_weight = {"Medium": 400, "Bold": 700}.get(
+        typographic.get("weight_name")
+    )
+    expected_width = {"Condensed": 3, "Normal": 5, "Expanded": 7}.get(
+        typographic.get("setwidth_name")
+    )
+    require(expected_weight is not None, f"{otb_path}: unsupported expected weight")
+    require(expected_width is not None, f"{otb_path}: unsupported expected width")
+    require(os2.usWeightClass == expected_weight, f"{otb_path}: OS/2 weight differs")
+    require(os2.usWidthClass == expected_width, f"{otb_path}: OS/2 width differs")
+    selection = int(os2.fsSelection)
+    italic = typographic.get("slant") == "I"
+    bold = typographic.get("weight_name") == "Bold"
+    require(bool(selection & 0x01) == italic, f"{otb_path}: OS/2 italic bit differs")
+    require(bool(selection & 0x20) == bold, f"{otb_path}: OS/2 bold bit differs")
+    require(
+        bool(selection & 0x40) == (not italic and not bold),
+        f"{otb_path}: OS/2 regular bit differs",
+    )
+
+
+def check_pair(
+    bdf_path: Path,
+    otb_path: Path,
+    logical_identity: dict[str, object],
+) -> int:
     bdf = parse_bdf(bdf_path)
     font = TTFont(otb_path, lazy=False)
     try:
+        require("name" in font and "OS/2" in font, f"{otb_path}: identity tables missing")
+        _check_identity(font, otb_path, logical_identity)
         require("EBLC" in font and "EBDT" in font, f"{otb_path}: no EBDT strike")
         strikes = font["EBLC"].strikes
         strike_data = font["EBDT"].strikeData
@@ -235,7 +295,29 @@ def check_archive(path: Path) -> dict[str, object]:
             if "/fonts/bdf/" in name and name.endswith(".bdf")
         )
         require(bool(bdfs), f"{path}: no packaged Unicode BDFs")
-        pair_bytes: list[tuple[str, bytes, bytes]] = []
+        manifests = [name for name in files if name.endswith("/RELEASE-MANIFEST.json")]
+        require(len(manifests) == 1, f"{path}: expected one release manifest")
+        manifest_stream = archive.extractfile(files[manifests[0]])
+        require(manifest_stream is not None, f"{path}: cannot read release manifest")
+        manifest = json.loads(manifest_stream.read())
+        artifacts = manifest.get("artifacts")
+        require(isinstance(artifacts, list), f"{path}: release artifacts are missing")
+        identities_by_stem: dict[str, dict[str, object]] = {}
+        for artifact in artifacts:
+            require(isinstance(artifact, dict), f"{path}: malformed release artifact")
+            artifact_files = artifact.get("files")
+            identity = artifact.get("logical_identity")
+            require(isinstance(artifact_files, dict), f"{path}: artifact files are missing")
+            require(isinstance(identity, dict), f"{path}: artifact logical identity is missing")
+            bdf_record = artifact_files.get("bdf")
+            require(isinstance(bdf_record, dict), f"{path}: artifact BDF record is missing")
+            relative = bdf_record.get("path")
+            require(isinstance(relative, str), f"{path}: artifact BDF path is missing")
+            stem = PurePosixPath(relative).stem
+            require(stem not in identities_by_stem, f"{path}: duplicate artifact stem")
+            identities_by_stem[stem] = identity
+
+        pair_bytes: list[tuple[str, bytes, bytes, dict[str, object]]] = []
         for bdf_name in bdfs:
             parts = PurePosixPath(bdf_name).parts
             fonts_index = parts.index("fonts")
@@ -246,26 +328,38 @@ def check_archive(path: Path) -> dict[str, object]:
                 / f"{stem}.otb"
             )
             require(otb_name in files, f"{path}: missing {otb_name}")
+            require(stem in identities_by_stem, f"{path}: {stem} lacks logical identity")
             bdf_stream = archive.extractfile(files[bdf_name])
             otb_stream = archive.extractfile(files[otb_name])
             require(
                 bdf_stream is not None and otb_stream is not None,
                 f"{path}: cannot read packaged font pair",
             )
-            pair_bytes.append((bdf_name, bdf_stream.read(), otb_stream.read()))
+            pair_bytes.append(
+                (
+                    bdf_name,
+                    bdf_stream.read(),
+                    otb_stream.read(),
+                    identities_by_stem[stem],
+                )
+            )
+        require(
+            set(identities_by_stem) == {PurePosixPath(name).stem for name in bdfs},
+            f"{path}: logical identities are not closed over packaged BDFs",
+        )
 
     import tempfile
 
     glyph_count = 0
     with tempfile.TemporaryDirectory(prefix="genera-fonts-otb-check-") as directory:
         temporary = Path(directory)
-        for index, (name, bdf_data, otb_data) in enumerate(pair_bytes):
+        for index, (name, bdf_data, otb_data, logical_identity) in enumerate(pair_bytes):
             bdf_path = temporary / f"{index}.bdf"
             otb_path = temporary / f"{index}.otb"
             bdf_path.write_bytes(bdf_data)
             otb_path.write_bytes(otb_data)
             try:
-                glyph_count += check_pair(bdf_path, otb_path)
+                glyph_count += check_pair(bdf_path, otb_path, logical_identity)
             except OtbCheckError as error:
                 raise OtbCheckError(f"{path}:{name}: {error}") from error
     return {

@@ -18,6 +18,8 @@ The current reviewed corpus contains:
   `TV:*DEFAULT-FONT*` and `FONTS:CPTFONT` naming the same object;
 - 11,659 represented slots and 10,836 defined glyphs;
 - 71 variable-width fonts;
+- reviewed logical identities for 86 fonts, with `40VR`, `EINY8`, and `VT100`
+  explicitly unmapped;
 - 78 Latin-class artifacts and 11 symbols artifacts;
 - 9,985 Unicode glyph instances at standard scalars and 851 at project
   Private Use Area scalars; and
@@ -71,7 +73,8 @@ make ci VERSION=v0.1.0
 ```
 
 The generator itself requires Python 3.10 or newer and the standard library.
-Release OTB conversion requires `fonttosfnt`; OTB validation requires Python
+Release OTB conversion requires exactly `fonttosfnt 1.2.5`; older releases
+produce materially different SFNT metrics. OTB validation requires Python
 FontTools.
 
 ## Re-import from the licensed world
@@ -119,6 +122,7 @@ dist/
     catalog.json
     UNICODE-MAPPING.json
   BUILD-MANIFEST.json
+  FONT-IDENTITIES.json
   SOURCE-MANIFEST.json
   NOTICE.md
   LICENSE
@@ -140,6 +144,26 @@ xlsfonts 'genera-unicode-*'
 ```
 
 The aliases are X core-font aliases, not Fontconfig family names.
+
+## Logical families and styles
+
+Resident object names identify physical bitmap strikes, not necessarily font
+families. The closed mapping in
+[`config/font-identities.json`](config/font-identities.json) records the
+reviewed Genera family/face/size relation separately from filenames and raster
+metrics. For example, `HL8`, `HL10`, `HL12`, `HL14`, and `SWISS20` are strikes
+of the **Symbolics Genera Swiss** family; `HL8B` is its Bold very-small strike,
+and `HL8I` is its Italic very-small strike.
+
+The generated BDF and OTB metadata now exposes conventional family, weight,
+slant, and set width. Genera's X display device associates `VERY-SMALL` and
+`LARGE` with nominal X sizes 8 and 14, while the measured resident lines for
+`HL8` and `HL14` remain 11 and 15 pixels. Catalogs preserve the symbolic size,
+device-specific X size, and recovered raster size separately. MacIvory and
+other display devices need not use the same numeric crosswalk. Specialty
+repertoires use isolated desktop families, and the three
+objects without a resident `FONT-SPECS` mapping retain explicit neutral,
+object-specific identities rather than guessed relationships.
 
 ## Unicode and specimens
 
@@ -172,7 +196,8 @@ The two deterministic generic archives are
 `Genera-fonts-symbols-v0.1.0.tar.gz`, with adjacent SHA-256 files. Unicode
 BDFs and their one-bit OTB conversions are the user-facing fonts. The generic
 archives exclude the VLOD, imported source JSON, raw-code BDFs, raw sheets,
-and all other historical raw-code material. See
+and all other historical raw-code material. Each archive carries the exact
+logical-font mapping alongside its Unicode mapping. See
 [RELEASING.md](docs/RELEASING.md) for archive contents and the release proof
 plan.
 

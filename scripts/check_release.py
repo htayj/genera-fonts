@@ -14,8 +14,10 @@ import struct
 import tarfile
 
 
+REPOSITORY_ROOT = Path(__file__).resolve().parents[1]
 LATIN_CODES = frozenset((*range(0x41, 0x5B), *range(0x61, 0x7B)))
 ROOT_PATTERN = re.compile(r"^Genera-fonts-(latin|symbols)-([A-Za-z0-9._+~-]+)$")
+EXPECTED_FONTTOSFNT_VERSION = "fonttosfnt 1.2.5"
 ROOT_FILES = {
     "LICENSE",
     "NOTICE.md",
@@ -25,6 +27,7 @@ ROOT_FILES = {
 }
 METADATA_FILES = {
     "metadata/BUILD-MANIFEST.json",
+    "metadata/FONT-IDENTITIES.json",
     "metadata/SOURCE-MANIFEST.json",
     "metadata/UNICODE-MAPPING.json",
 }
@@ -62,6 +65,58 @@ def safe_font_stem(name: str) -> str:
             result.append("-")
             previous_hyphen = True
     return "".join(result).strip("-") or "unnamed-font"
+
+
+def expected_logical_identity(mapping: dict[str, object], name: str) -> dict[str, object]:
+    assignments = mapping.get("assignments")
+    families = mapping.get("families")
+    faces = mapping.get("faces")
+    named_sizes = mapping.get("x_named_sizes")
+    disambiguators = mapping.get("desktop_style_disambiguators")
+    require(isinstance(assignments, dict), "font-identity assignments are missing")
+    require(isinstance(families, dict), "font-identity families are missing")
+    require(isinstance(faces, dict), "font-identity faces are missing")
+    require(isinstance(named_sizes, dict), "font-identity X named sizes are missing")
+    require(
+        isinstance(disambiguators, dict),
+        "font-identity desktop style disambiguators are missing",
+    )
+    assignment = assignments.get(name)
+    require(isinstance(assignment, dict), f"{name}: font identity is missing")
+    family = families.get(assignment.get("typographic_family"))
+    face = faces.get(assignment.get("typographic_face"))
+    require(isinstance(family, dict), f"{name}: typographic family is missing")
+    require(isinstance(face, dict), f"{name}: typographic face is missing")
+    primary = assignment.get("primary")
+    logical_name = None
+    nominal_x_size = None
+    if primary is not None:
+        require(isinstance(primary, dict), f"{name}: primary logical identity is malformed")
+        try:
+            logical_name = "/".join(
+                (str(primary["family"]), str(primary["face"]), str(primary["size"]))
+            )
+            nominal_x_size = named_sizes[primary["size"]]
+        except KeyError as error:
+            raise ReleaseCheckError(f"{name}: primary logical identity is incomplete") from error
+    disambiguator = disambiguators.get(name)
+    add_style_name = " ".join(
+        value for value in (disambiguator, face.get("add_style_name")) if value
+    )
+    return {
+        "mapping_status": assignment.get("mapping_status"),
+        "logical_name": logical_name,
+        "primary": primary,
+        "nominal_x_size": nominal_x_size,
+        "desktop_style_disambiguator": disambiguator,
+        "typographic": {
+            "family_name": family.get("family_name"),
+            "weight_name": face.get("weight_name"),
+            "slant": face.get("slant"),
+            "setwidth_name": face.get("setwidth_name"),
+            "add_style_name": add_style_name,
+        },
+    }
 
 
 def _parse_bdf(data: bytes, label: str) -> dict[str, object]:
@@ -281,6 +336,19 @@ def check_archive(path: Path) -> dict[str, object]:
             f"{path}:{member.name}: mode differs",
         )
 
+    generator = manifest.get("generator")
+    require(isinstance(generator, dict), f"{path}: generator record is missing")
+    require(
+        generator
+        == {
+            "path": "scripts/build_release.py",
+            "sha256": file_digest(REPOSITORY_ROOT / "scripts" / "build_release.py"),
+            "fonttosfnt": EXPECTED_FONTTOSFNT_VERSION,
+            "otb_input": "selected ISO10646-1 BDF",
+        },
+        f"{path}: release generator identity differs",
+    )
+
     checksum_lines = files["SHA256SUMS"].decode("ascii").splitlines()
     checksums: dict[str, str] = {}
     for line in checksum_lines:
@@ -335,10 +403,16 @@ def check_archive(path: Path) -> dict[str, object]:
     )
 
     mapping = json.loads(files["metadata/UNICODE-MAPPING.json"])
+    font_identities = json.loads(files["metadata/FONT-IDENTITIES.json"])
     mapping_id = mapping.get("mapping_id")
     assignments = mapping.get("assignments")
     private_registry = mapping.get("bmp_private_use")
     require(isinstance(mapping_id, str) and mapping_id, f"{path}: mapping ID missing")
+    identity_mapping_id = font_identities.get("mapping_id")
+    require(
+        isinstance(identity_mapping_id, str) and identity_mapping_id,
+        f"{path}: font-identity mapping ID missing",
+    )
     require(isinstance(assignments, dict), f"{path}: mapping assignments missing")
     require(isinstance(private_registry, dict), f"{path}: mapping PUA registry missing")
     blocks = private_registry.get("blocks")
@@ -357,6 +431,11 @@ def check_archive(path: Path) -> dict[str, object]:
         name = artifact.get("name")
         require(isinstance(name, str) and name not in artifact_names, f"{path}: duplicate font name")
         artifact_names.add(name)
+        require(
+            artifact.get("logical_identity")
+            == expected_logical_identity(font_identities, name),
+            f"{path}:{name}: logical identity differs",
+        )
         artifact_files = artifact.get("files")
         require(isinstance(artifact_files, dict), f"{path}:{name}: file records missing")
         for kind, suffix in (("bdf", ".bdf"), ("otb", ".otb")):
@@ -430,6 +509,17 @@ def check_archive(path: Path) -> dict[str, object]:
     mapping_record = source_distribution.get("unicode_mapping")
     require(isinstance(mapping_record, dict), f"{path}: mapping provenance missing")
     require(mapping_record.get("id") == mapping_id, f"{path}: mapping provenance ID differs")
+    identity_record = source_distribution.get("font_identities")
+    require(isinstance(identity_record, dict), f"{path}: font-identity provenance missing")
+    require(
+        identity_record.get("id") == identity_mapping_id,
+        f"{path}: font-identity provenance ID differs",
+    )
+    require(
+        identity_record.get("sha256")
+        == digest(files["metadata/FONT-IDENTITIES.json"]),
+        f"{path}: font-identity provenance hash differs",
+    )
     class_counts = build_manifest.get("content_class_counts")
     require(isinstance(class_counts, dict), f"{path}: build class counts missing")
     require(class_counts.get(content_class) == len(bdf_files), f"{path}: build class count differs")

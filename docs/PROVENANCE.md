@@ -66,6 +66,34 @@ committed corpus. This command requires the licensed local input. Public
 builders use the committed closed corpus and do not need or receive that
 input.
 
+## Logical font identity evidence
+
+The physical resident-object name is not necessarily the logical typeface
+name. Genera's resident `FONT-SPECS` data identifies families, faces, named
+sizes, and character-set roles independently of the selected bitmap strike.
+For example, `HL8`, `HL8B`, `HL8I`, and `HL8BI` are respectively the Roman,
+Bold, Italic, and Bold Italic faces of logical family `SWISS` at
+`VERY-SMALL`; `HL14` is the same `SWISS` Roman family at `LARGE`.
+
+[`config/font-identities.json`](../config/font-identities.json) is the reviewed
+machine-readable interpretation of that evidence. It is pinned to the source
+VLOD digest and closed over all 89 resident objects. It records 79 primary
+family/face/size selectors, seven specialty character-set roles without a
+fabricated primary text selector, and three objects (`40VR`, `EINY8`, and
+`VT100`) for which no defensible `FONT-SPECS` tuple was established. The
+specialty and unmapped objects receive isolated desktop family names rather
+than being allowed to match an ordinary text family.
+
+The mapping is descriptive metadata, not copied font source. Resident object
+names remain the stable artifact and filename identity. The symbolic named
+size comes from resident `FONT-SPECS`; the separate 6/8/10/12/14/18/24 values
+come from the matching X display-device crosswalk in
+`sys.sct/x11/screen/x-display-device.lisp.~9~`, not from a universal Genera
+point-size rule. BDF and OTB pixel size continues to come from each recovered
+object's measured line height. The build copies the mapping into
+`dist/FONT-IDENTITIES.json`, records its digest in generated manifests, and
+verifies both BDF and OTB family/style metadata against it.
+
 ## 89 resident objects are not 224 distributed BDFs
 
 The matching licensed `sys.sct` tree contains 275 BFD files totaling 2,605,322

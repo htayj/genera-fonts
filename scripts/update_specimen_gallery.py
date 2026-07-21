@@ -43,6 +43,25 @@ def png_dimensions(path: Path) -> tuple[int, int]:
     return struct.unpack(">II", data[16:24])
 
 
+def logical_identity_label(identity: dict[str, object]) -> str:
+    """Describe both a Genera selector and any isolated specialty role."""
+    status = identity["mapping_status"]
+    logical_name = identity["logical_name"]
+    if status == "unmapped":
+        return "unmapped resident strike"
+    if status == "role-mapped":
+        parts = []
+        primary = identity["primary"]
+        if logical_name is not None:
+            character_set = primary["character_set"]
+            parts.append(f"{logical_name} [{character_set}]")
+        family_name = identity["typographic"]["family_name"]
+        parts.append(f"{family_name} (role-mapped)")
+        return " · ".join(parts)
+    require(isinstance(logical_name, str), "mapped specimen lacks a logical name")
+    return logical_name
+
+
 def specimen_table(items: list[dict]) -> list[str]:
     """Render a compact, full-inventory gallery that works on GitHub."""
     lines = ["<table>", "  <tbody>"]
@@ -51,6 +70,9 @@ def specimen_table(items: list[dict]) -> list[str]:
         lines.append("    <tr>")
         for item in row:
             label = html.escape(str(item["name"]))
+            identity_label = html.escape(
+                logical_identity_label(item["logical_identity"])
+            )
             relative = html.escape(Path(item["path"]).as_posix(), quote=True)
             if item["kind"] == "pangram":
                 description = "pangram"
@@ -64,6 +86,7 @@ def specimen_table(items: list[dict]) -> list[str]:
                     '      <td align="center" width="50%">',
                     f'        <a href="{relative}"><img src="{relative}" alt="{label} bitmap-font specimen" width="{thumbnail_width}"></a><br>',
                     f'        <a href="{relative}"><code>{label}</code></a><br>',
+                    f"        <small><code>{identity_label}</code></small><br>",
                     f"        <sub>{dimensions} &middot; {description}</sub>",
                     "      </td>",
                 ]
@@ -105,6 +128,7 @@ def render_gallery(distribution: Path, gallery: Path, index: Path) -> None:
             "sha256": sha256(destination),
             "unicode_bdf_sha256": record["bdf_sha256"],
             "repertoire": record["repertoire"],
+            "logical_identity": record["logical_identity"],
         }
         manifest_fonts.append(item)
         grouped[content_class].append(item)
@@ -113,6 +137,8 @@ def render_gallery(distribution: Path, gallery: Path, index: Path) -> None:
         "schema_version": 1,
         "profile": catalog["profile"],
         "mapping_id": catalog["mapping_id"],
+        "font_identity_mapping_id": catalog["font_identity_mapping_id"],
+        "font_identity_mapping_sha256": catalog["font_identity_mapping_sha256"],
         "font_count": len(manifest_fonts),
         "content_class_counts": {
             key: len(value) for key, value in grouped.items()
@@ -133,6 +159,9 @@ def render_gallery(distribution: Path, gallery: Path, index: Path) -> None:
         "repertoires use complete Unicode-addressed glyph sheets. The source PNGs preserve",
         "the recovered one-bit geometry without smoothing. Click any thumbnail to inspect",
         "the full-resolution image; GitHub may scale thumbnails to fit the gallery.",
+        "Resident strike names are followed by their primary `FAMILY/FACE/SIZE` selector.",
+        "Specialty labels also show the character set and isolated desktop family;",
+        "role-only and genuinely unmapped strikes are labelled explicitly.",
         "",
         "[Latin-capable fonts (78)](#latin-capable-fonts-78) ·",
         "[Specialty repertoires (11)](#specialty-repertoires-11) ·",

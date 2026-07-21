@@ -7,6 +7,9 @@ Genera 8.5 base world. Latin-capable fonts use the project pangram; specialty
 repertoires use complete Unicode-addressed glyph sheets. The source PNGs preserve
 the recovered one-bit geometry without smoothing. Click any thumbnail to inspect
 the full-resolution image; GitHub may scale thumbnails to fit the gallery.
+Resident strike names are followed by their primary `FAMILY/FACE/SIZE` selector.
+Specialty labels also show the character set and isolated desktop family;
+role-only and genuinely unmapped strikes are labelled explicitly.
 
 [Latin-capable fonts (78)](#latin-capable-fonts-78) ·
 [Specialty repertoires (11)](#specialty-repertoires-11) ·
@@ -20,11 +23,13 @@ the full-resolution image; GitHub may scale thumbnails to fit the gallery.
       <td align="center" width="50%">
         <a href="specimens/latin/40vr.png"><img src="specimens/latin/40vr.png" alt="40VR bitmap-font specimen" width="460"></a><br>
         <a href="specimens/latin/40vr.png"><code>40VR</code></a><br>
+        <small><code>unmapped resident strike</code></small><br>
         <sub>1054&times;176 &middot; pangram</sub>
       </td>
       <td align="center" width="50%">
         <a href="specimens/latin/5x5.png"><img src="specimens/latin/5x5.png" alt="5X5 bitmap-font specimen" width="460"></a><br>
         <a href="specimens/latin/5x5.png"><code>5X5</code></a><br>
+        <small><code>FIX/UPPERCASE/VERY-SMALL</code></small><br>
         <sub>516&times;22 &middot; pangram</sub>
       </td>
     </tr>
@@ -32,11 +37,13 @@ the full-resolution image; GitHub may scale thumbnails to fit the gallery.
       <td align="center" width="50%">
         <a href="specimens/latin/bigfnt.png"><img src="specimens/latin/bigfnt.png" alt="BIGFNT bitmap-font specimen" width="460"></a><br>
         <a href="specimens/latin/bigfnt.png"><code>BIGFNT</code></a><br>
+        <small><code>FIX/ROMAN/VERY-LARGE</code></small><br>
         <sub>1020&times;52 &middot; pangram</sub>
       </td>
       <td align="center" width="50%">
         <a href="specimens/latin/bigfntb.png"><img src="specimens/latin/bigfntb.png" alt="BIGFNTB bitmap-font specimen" width="460"></a><br>
         <a href="specimens/latin/bigfntb.png"><code>BIGFNTB</code></a><br>
+        <small><code>FIX/BOLD/VERY-LARGE</code></small><br>
         <sub>1104&times;52 &middot; pangram</sub>
       </td>
     </tr>
@@ -44,11 +51,13 @@ the full-resolution image; GitHub may scale thumbnails to fit the gallery.
       <td align="center" width="50%">
         <a href="specimens/latin/bigfntbi.png"><img src="specimens/latin/bigfntbi.png" alt="BIGFNTBI bitmap-font specimen" width="460"></a><br>
         <a href="specimens/latin/bigfntbi.png"><code>BIGFNTBI</code></a><br>
+        <small><code>FIX/BOLD-ITALIC/VERY-LARGE</code></small><br>
         <sub>1188&times;52 &middot; pangram</sub>
       </td>
       <td align="center" width="50%">
         <a href="specimens/latin/bigfnti.png"><img src="specimens/latin/bigfnti.png" alt="BIGFNTI bitmap-font specimen" width="460"></a><br>
         <a href="specimens/latin/bigfnti.png"><code>BIGFNTI</code></a><br>
+        <small><code>FIX/ITALIC/VERY-LARGE</code></small><br>
         <sub>1104&times;52 &middot; pangram</sub>
       </td>
     </tr>
@@ -56,11 +65,13 @@ the full-resolution image; GitHub may scale thumbnails to fit the gallery.
       <td align="center" width="50%">
         <a href="specimens/latin/cptfont.png"><img src="specimens/latin/cptfont.png" alt="CPTFONT bitmap-font specimen" width="460"></a><br>
         <a href="specimens/latin/cptfont.png"><code>CPTFONT</code></a><br>
+        <small><code>FIX/ROMAN/NORMAL</code></small><br>
         <sub>684&times;36 &middot; pangram</sub>
       </td>
       <td align="center" width="50%">
         <a href="specimens/latin/cptfontb.png"><img src="specimens/latin/cptfontb.png" alt="CPTFONTB bitmap-font specimen" width="460"></a><br>
         <a href="specimens/latin/cptfontb.png"><code>CPTFONTB</code></a><br>
+        <small><code>FIX/BOLD-EXTENDED/NORMAL</code></small><br>
         <sub>768&times;36 &middot; pangram</sub>
       </td>
     </tr>
@@ -68,11 +79,13 @@ the full-resolution image; GitHub may scale thumbnails to fit the gallery.
       <td align="center" width="50%">
         <a href="specimens/latin/cptfontbi.png"><img src="specimens/latin/cptfontbi.png" alt="CPTFONTBI bitmap-font specimen" width="460"></a><br>
         <a href="specimens/latin/cptfontbi.png"><code>CPTFONTBI</code></a><br>
+        <small><code>FIX/BOLD-ITALIC/NORMAL</code></small><br>
         <sub>768&times;36 &middot; pangram</sub>
       </td>
       <td align="center" width="50%">
         <a href="specimens/latin/cptfontc.png"><img src="specimens/latin/cptfontc.png" alt="CPTFONTC bitmap-font specimen" width="460"></a><br>
         <a href="specimens/latin/cptfontc.png"><code>CPTFONTC</code></a><br>
+        <small><code>FIX/CONDENSED/NORMAL</code></small><br>
         <sub>600&times;36 &middot; pangram</sub>
       </td>
     </tr>
@@ -80,11 +93,13 @@ the full-resolution image; GitHub may scale thumbnails to fit the gallery.
       <td align="center" width="50%">
         <a href="specimens/latin/cptfontcb.png"><img src="specimens/latin/cptfontcb.png" alt="CPTFONTCB bitmap-font specimen" width="460"></a><br>
         <a href="specimens/latin/cptfontcb.png"><code>CPTFONTCB</code></a><br>
+        <small><code>FIX/BOLD/NORMAL</code></small><br>
         <sub>684&times;36 &middot; pangram</sub>
       </td>
       <td align="center" width="50%">
         <a href="specimens/latin/cptfontcc.png"><img src="specimens/latin/cptfontcc.png" alt="CPTFONTCC bitmap-font specimen" width="460"></a><br>
         <a href="specimens/latin/cptfontcc.png"><code>CPTFONTCC</code></a><br>
+        <small><code>FIX/EXTRA-CONDENSED/NORMAL</code></small><br>
         <sub>516&times;36 &middot; pangram</sub>
       </td>
     </tr>
@@ -92,11 +107,13 @@ the full-resolution image; GitHub may scale thumbnails to fit the gallery.
       <td align="center" width="50%">
         <a href="specimens/latin/cptfonti.png"><img src="specimens/latin/cptfonti.png" alt="CPTFONTI bitmap-font specimen" width="460"></a><br>
         <a href="specimens/latin/cptfonti.png"><code>CPTFONTI</code></a><br>
+        <small><code>FIX/ITALIC/NORMAL</code></small><br>
         <sub>684&times;36 &middot; pangram</sub>
       </td>
       <td align="center" width="50%">
         <a href="specimens/latin/dutch14.png"><img src="specimens/latin/dutch14.png" alt="DUTCH14 bitmap-font specimen" width="460"></a><br>
         <a href="specimens/latin/dutch14.png"><code>DUTCH14</code></a><br>
+        <small><code>DUTCH/ROMAN/LARGE</code></small><br>
         <sub>680&times;42 &middot; pangram</sub>
       </td>
     </tr>
@@ -104,11 +121,13 @@ the full-resolution image; GitHub may scale thumbnails to fit the gallery.
       <td align="center" width="50%">
         <a href="specimens/latin/dutch14b.png"><img src="specimens/latin/dutch14b.png" alt="DUTCH14B bitmap-font specimen" width="460"></a><br>
         <a href="specimens/latin/dutch14b.png"><code>DUTCH14B</code></a><br>
+        <small><code>DUTCH/BOLD/LARGE</code></small><br>
         <sub>764&times;42 &middot; pangram</sub>
       </td>
       <td align="center" width="50%">
         <a href="specimens/latin/dutch14bi.png"><img src="specimens/latin/dutch14bi.png" alt="DUTCH14BI bitmap-font specimen" width="460"></a><br>
         <a href="specimens/latin/dutch14bi.png"><code>DUTCH14BI</code></a><br>
+        <small><code>DUTCH/BOLD-ITALIC/LARGE</code></small><br>
         <sub>812&times;42 &middot; pangram</sub>
       </td>
     </tr>
@@ -116,11 +135,13 @@ the full-resolution image; GitHub may scale thumbnails to fit the gallery.
       <td align="center" width="50%">
         <a href="specimens/latin/dutch14i.png"><img src="specimens/latin/dutch14i.png" alt="DUTCH14I bitmap-font specimen" width="460"></a><br>
         <a href="specimens/latin/dutch14i.png"><code>DUTCH14I</code></a><br>
+        <small><code>DUTCH/ITALIC/LARGE</code></small><br>
         <sub>728&times;42 &middot; pangram</sub>
       </td>
       <td align="center" width="50%">
         <a href="specimens/latin/dutch20.png"><img src="specimens/latin/dutch20.png" alt="DUTCH20 bitmap-font specimen" width="460"></a><br>
         <a href="specimens/latin/dutch20.png"><code>DUTCH20</code></a><br>
+        <small><code>DUTCH/ROMAN/VERY-LARGE</code></small><br>
         <sub>860&times;52 &middot; pangram</sub>
       </td>
     </tr>
@@ -128,11 +149,13 @@ the full-resolution image; GitHub may scale thumbnails to fit the gallery.
       <td align="center" width="50%">
         <a href="specimens/latin/dutch20b.png"><img src="specimens/latin/dutch20b.png" alt="DUTCH20B bitmap-font specimen" width="460"></a><br>
         <a href="specimens/latin/dutch20b.png"><code>DUTCH20B</code></a><br>
+        <small><code>DUTCH/BOLD/VERY-LARGE</code></small><br>
         <sub>940&times;52 &middot; pangram</sub>
       </td>
       <td align="center" width="50%">
         <a href="specimens/latin/dutch20bi.png"><img src="specimens/latin/dutch20bi.png" alt="DUTCH20BI bitmap-font specimen" width="460"></a><br>
         <a href="specimens/latin/dutch20bi.png"><code>DUTCH20BI</code></a><br>
+        <small><code>DUTCH/BOLD-ITALIC/VERY-LARGE</code></small><br>
         <sub>1020&times;52 &middot; pangram</sub>
       </td>
     </tr>
@@ -140,11 +163,13 @@ the full-resolution image; GitHub may scale thumbnails to fit the gallery.
       <td align="center" width="50%">
         <a href="specimens/latin/dutch20i.png"><img src="specimens/latin/dutch20i.png" alt="DUTCH20I bitmap-font specimen" width="460"></a><br>
         <a href="specimens/latin/dutch20i.png"><code>DUTCH20I</code></a><br>
+        <small><code>DUTCH/ITALIC/VERY-LARGE</code></small><br>
         <sub>936&times;52 &middot; pangram</sub>
       </td>
       <td align="center" width="50%">
         <a href="specimens/latin/einy7.png"><img src="specimens/latin/einy7.png" alt="EINY7 bitmap-font specimen" width="432"></a><br>
         <a href="specimens/latin/einy7.png"><code>EINY7</code></a><br>
+        <small><code>FIX/ROMAN/VERY-SMALL</code></small><br>
         <sub>432&times;26 &middot; pangram</sub>
       </td>
     </tr>
@@ -152,11 +177,13 @@ the full-resolution image; GitHub may scale thumbnails to fit the gallery.
       <td align="center" width="50%">
         <a href="specimens/latin/einy8.png"><img src="specimens/latin/einy8.png" alt="EINY8 bitmap-font specimen" width="432"></a><br>
         <a href="specimens/latin/einy8.png"><code>EINY8</code></a><br>
+        <small><code>unmapped resident strike</code></small><br>
         <sub>432&times;28 &middot; pangram</sub>
       </td>
       <td align="center" width="50%">
         <a href="specimens/latin/eurex21i.png"><img src="specimens/latin/eurex21i.png" alt="EUREX21I bitmap-font specimen" width="460"></a><br>
         <a href="specimens/latin/eurex21i.png"><code>EUREX21I</code></a><br>
+        <small><code>EUREX/ITALIC/VERY-LARGE</code></small><br>
         <sub>1094&times;54 &middot; pangram</sub>
       </td>
     </tr>
@@ -164,11 +191,13 @@ the full-resolution image; GitHub may scale thumbnails to fit the gallery.
       <td align="center" width="50%">
         <a href="specimens/latin/eurex24i.png"><img src="specimens/latin/eurex24i.png" alt="EUREX24I bitmap-font specimen" width="460"></a><br>
         <a href="specimens/latin/eurex24i.png"><code>EUREX24I</code></a><br>
+        <small><code>EUREX/ITALIC/HUGE</code></small><br>
         <sub>1268&times;60 &middot; pangram</sub>
       </td>
       <td align="center" width="50%">
         <a href="specimens/latin/hl10.png"><img src="specimens/latin/hl10.png" alt="HL10 bitmap-font specimen" width="460"></a><br>
         <a href="specimens/latin/hl10.png"><code>HL10</code></a><br>
+        <small><code>SWISS/ROMAN/SMALL</code></small><br>
         <sub>518&times;36 &middot; pangram</sub>
       </td>
     </tr>
@@ -176,11 +205,13 @@ the full-resolution image; GitHub may scale thumbnails to fit the gallery.
       <td align="center" width="50%">
         <a href="specimens/latin/hl10b.png"><img src="specimens/latin/hl10b.png" alt="HL10B bitmap-font specimen" width="460"></a><br>
         <a href="specimens/latin/hl10b.png"><code>HL10B</code></a><br>
+        <small><code>SWISS/BOLD/SMALL</code></small><br>
         <sub>586&times;36 &middot; pangram</sub>
       </td>
       <td align="center" width="50%">
         <a href="specimens/latin/hl10bi.png"><img src="specimens/latin/hl10bi.png" alt="HL10BI bitmap-font specimen" width="460"></a><br>
         <a href="specimens/latin/hl10bi.png"><code>HL10BI</code></a><br>
+        <small><code>SWISS/BOLD-ITALIC/SMALL</code></small><br>
         <sub>608&times;36 &middot; pangram</sub>
       </td>
     </tr>
@@ -188,11 +219,13 @@ the full-resolution image; GitHub may scale thumbnails to fit the gallery.
       <td align="center" width="50%">
         <a href="specimens/latin/hl10i.png"><img src="specimens/latin/hl10i.png" alt="HL10I bitmap-font specimen" width="460"></a><br>
         <a href="specimens/latin/hl10i.png"><code>HL10I</code></a><br>
+        <small><code>SWISS/ITALIC/SMALL</code></small><br>
         <sub>596&times;36 &middot; pangram</sub>
       </td>
       <td align="center" width="50%">
         <a href="specimens/latin/hl12.png"><img src="specimens/latin/hl12.png" alt="HL12 bitmap-font specimen" width="460"></a><br>
         <a href="specimens/latin/hl12.png"><code>HL12</code></a><br>
+        <small><code>SWISS/ROMAN/NORMAL</code></small><br>
         <sub>648&times;40 &middot; pangram</sub>
       </td>
     </tr>
@@ -200,11 +233,13 @@ the full-resolution image; GitHub may scale thumbnails to fit the gallery.
       <td align="center" width="50%">
         <a href="specimens/latin/hl12b.png"><img src="specimens/latin/hl12b.png" alt="HL12B bitmap-font specimen" width="460"></a><br>
         <a href="specimens/latin/hl12b.png"><code>HL12B</code></a><br>
+        <small><code>SWISS/BOLD/NORMAL</code></small><br>
         <sub>740&times;40 &middot; pangram</sub>
       </td>
       <td align="center" width="50%">
         <a href="specimens/latin/hl12bi.png"><img src="specimens/latin/hl12bi.png" alt="HL12BI bitmap-font specimen" width="460"></a><br>
         <a href="specimens/latin/hl12bi.png"><code>HL12BI</code></a><br>
+        <small><code>SWISS/BOLD-ITALIC/NORMAL</code></small><br>
         <sub>694&times;40 &middot; pangram</sub>
       </td>
     </tr>
@@ -212,11 +247,13 @@ the full-resolution image; GitHub may scale thumbnails to fit the gallery.
       <td align="center" width="50%">
         <a href="specimens/latin/hl12i.png"><img src="specimens/latin/hl12i.png" alt="HL12I bitmap-font specimen" width="460"></a><br>
         <a href="specimens/latin/hl12i.png"><code>HL12I</code></a><br>
+        <small><code>SWISS/ITALIC/NORMAL</code></small><br>
         <sub>626&times;40 &middot; pangram</sub>
       </td>
       <td align="center" width="50%">
         <a href="specimens/latin/hl14.png"><img src="specimens/latin/hl14.png" alt="HL14 bitmap-font specimen" width="460"></a><br>
         <a href="specimens/latin/hl14.png"><code>HL14</code></a><br>
+        <small><code>SWISS/ROMAN/LARGE</code></small><br>
         <sub>688&times;42 &middot; pangram</sub>
       </td>
     </tr>
@@ -224,11 +261,13 @@ the full-resolution image; GitHub may scale thumbnails to fit the gallery.
       <td align="center" width="50%">
         <a href="specimens/latin/hl14b.png"><img src="specimens/latin/hl14b.png" alt="HL14B bitmap-font specimen" width="460"></a><br>
         <a href="specimens/latin/hl14b.png"><code>HL14B</code></a><br>
+        <small><code>SWISS/BOLD/LARGE</code></small><br>
         <sub>740&times;42 &middot; pangram</sub>
       </td>
       <td align="center" width="50%">
         <a href="specimens/latin/hl14bi.png"><img src="specimens/latin/hl14bi.png" alt="HL14BI bitmap-font specimen" width="460"></a><br>
         <a href="specimens/latin/hl14bi.png"><code>HL14BI</code></a><br>
+        <small><code>SWISS/BOLD-ITALIC/LARGE</code></small><br>
         <sub>824&times;42 &middot; pangram</sub>
       </td>
     </tr>
@@ -236,11 +275,13 @@ the full-resolution image; GitHub may scale thumbnails to fit the gallery.
       <td align="center" width="50%">
         <a href="specimens/latin/hl14i.png"><img src="specimens/latin/hl14i.png" alt="HL14I bitmap-font specimen" width="460"></a><br>
         <a href="specimens/latin/hl14i.png"><code>HL14I</code></a><br>
+        <small><code>SWISS/ITALIC/LARGE</code></small><br>
         <sub>740&times;42 &middot; pangram</sub>
       </td>
       <td align="center" width="50%">
         <a href="specimens/latin/hl8.png"><img src="specimens/latin/hl8.png" alt="HL8 bitmap-font specimen" width="460"></a><br>
         <a href="specimens/latin/hl8.png"><code>HL8</code></a><br>
+        <small><code>SWISS/ROMAN/VERY-SMALL</code></small><br>
         <sub>470&times;34 &middot; pangram</sub>
       </td>
     </tr>
@@ -248,11 +289,13 @@ the full-resolution image; GitHub may scale thumbnails to fit the gallery.
       <td align="center" width="50%">
         <a href="specimens/latin/hl8b.png"><img src="specimens/latin/hl8b.png" alt="HL8B bitmap-font specimen" width="460"></a><br>
         <a href="specimens/latin/hl8b.png"><code>HL8B</code></a><br>
+        <small><code>SWISS/BOLD/VERY-SMALL</code></small><br>
         <sub>554&times;34 &middot; pangram</sub>
       </td>
       <td align="center" width="50%">
         <a href="specimens/latin/hl8bi.png"><img src="specimens/latin/hl8bi.png" alt="HL8BI bitmap-font specimen" width="460"></a><br>
         <a href="specimens/latin/hl8bi.png"><code>HL8BI</code></a><br>
+        <small><code>SWISS/BOLD-ITALIC/VERY-SMALL</code></small><br>
         <sub>638&times;34 &middot; pangram</sub>
       </td>
     </tr>
@@ -260,11 +303,13 @@ the full-resolution image; GitHub may scale thumbnails to fit the gallery.
       <td align="center" width="50%">
         <a href="specimens/latin/hl8i.png"><img src="specimens/latin/hl8i.png" alt="HL8I bitmap-font specimen" width="460"></a><br>
         <a href="specimens/latin/hl8i.png"><code>HL8I</code></a><br>
+        <small><code>SWISS/ITALIC/VERY-SMALL</code></small><br>
         <sub>498&times;34 &middot; pangram</sub>
       </td>
       <td align="center" width="50%">
         <a href="specimens/latin/jess11.png"><img src="specimens/latin/jess11.png" alt="JESS11 bitmap-font specimen" width="460"></a><br>
         <a href="specimens/latin/jess11.png"><code>JESS11</code></a><br>
+        <small><code>JESS/ROMAN/SMALL</code></small><br>
         <sub>618&times;34 &middot; pangram</sub>
       </td>
     </tr>
@@ -272,11 +317,13 @@ the full-resolution image; GitHub may scale thumbnails to fit the gallery.
       <td align="center" width="50%">
         <a href="specimens/latin/jess11b.png"><img src="specimens/latin/jess11b.png" alt="JESS11B bitmap-font specimen" width="460"></a><br>
         <a href="specimens/latin/jess11b.png"><code>JESS11B</code></a><br>
+        <small><code>JESS/BOLD/SMALL</code></small><br>
         <sub>702&times;34 &middot; pangram</sub>
       </td>
       <td align="center" width="50%">
         <a href="specimens/latin/jess11i.png"><img src="specimens/latin/jess11i.png" alt="JESS11I bitmap-font specimen" width="460"></a><br>
         <a href="specimens/latin/jess11i.png"><code>JESS11I</code></a><br>
+        <small><code>JESS/ITALIC/SMALL</code></small><br>
         <sub>702&times;34 &middot; pangram</sub>
       </td>
     </tr>
@@ -284,11 +331,13 @@ the full-resolution image; GitHub may scale thumbnails to fit the gallery.
       <td align="center" width="50%">
         <a href="specimens/latin/jess13.png"><img src="specimens/latin/jess13.png" alt="JESS13 bitmap-font specimen" width="460"></a><br>
         <a href="specimens/latin/jess13.png"><code>JESS13</code></a><br>
+        <small><code>JESS/ROMAN/NORMAL</code></small><br>
         <sub>644&times;38 &middot; pangram</sub>
       </td>
       <td align="center" width="50%">
         <a href="specimens/latin/jess13b.png"><img src="specimens/latin/jess13b.png" alt="JESS13B bitmap-font specimen" width="460"></a><br>
         <a href="specimens/latin/jess13b.png"><code>JESS13B</code></a><br>
+        <small><code>JESS/BOLD/NORMAL</code></small><br>
         <sub>684&times;38 &middot; pangram</sub>
       </td>
     </tr>
@@ -296,11 +345,13 @@ the full-resolution image; GitHub may scale thumbnails to fit the gallery.
       <td align="center" width="50%">
         <a href="specimens/latin/jess13i.png"><img src="specimens/latin/jess13i.png" alt="JESS13I bitmap-font specimen" width="460"></a><br>
         <a href="specimens/latin/jess13i.png"><code>JESS13I</code></a><br>
+        <small><code>JESS/ITALIC/NORMAL</code></small><br>
         <sub>646&times;38 &middot; pangram</sub>
       </td>
       <td align="center" width="50%">
         <a href="specimens/latin/jess14.png"><img src="specimens/latin/jess14.png" alt="JESS14 bitmap-font specimen" width="460"></a><br>
         <a href="specimens/latin/jess14.png"><code>JESS14</code></a><br>
+        <small><code>JESS/ROMAN/LARGE</code></small><br>
         <sub>646&times;40 &middot; pangram</sub>
       </td>
     </tr>
@@ -308,11 +359,13 @@ the full-resolution image; GitHub may scale thumbnails to fit the gallery.
       <td align="center" width="50%">
         <a href="specimens/latin/jess14b.png"><img src="specimens/latin/jess14b.png" alt="JESS14B bitmap-font specimen" width="460"></a><br>
         <a href="specimens/latin/jess14b.png"><code>JESS14B</code></a><br>
+        <small><code>JESS/BOLD/LARGE</code></small><br>
         <sub>710&times;40 &middot; pangram</sub>
       </td>
       <td align="center" width="50%">
         <a href="specimens/latin/jess14i.png"><img src="specimens/latin/jess14i.png" alt="JESS14I bitmap-font specimen" width="460"></a><br>
         <a href="specimens/latin/jess14i.png"><code>JESS14I</code></a><br>
+        <small><code>JESS/ITALIC/LARGE</code></small><br>
         <sub>730&times;40 &middot; pangram</sub>
       </td>
     </tr>
@@ -320,11 +373,13 @@ the full-resolution image; GitHub may scale thumbnails to fit the gallery.
       <td align="center" width="50%">
         <a href="specimens/latin/medfnt.png"><img src="specimens/latin/medfnt.png" alt="MEDFNT bitmap-font specimen" width="460"></a><br>
         <a href="specimens/latin/medfnt.png"><code>MEDFNT</code></a><br>
+        <small><code>FIX/ROMAN/LARGE</code></small><br>
         <sub>768&times;38 &middot; pangram</sub>
       </td>
       <td align="center" width="50%">
         <a href="specimens/latin/medfntb.png"><img src="specimens/latin/medfntb.png" alt="MEDFNTB bitmap-font specimen" width="460"></a><br>
         <a href="specimens/latin/medfntb.png"><code>MEDFNTB</code></a><br>
+        <small><code>FIX/BOLD/LARGE</code></small><br>
         <sub>852&times;38 &middot; pangram</sub>
       </td>
     </tr>
@@ -332,11 +387,13 @@ the full-resolution image; GitHub may scale thumbnails to fit the gallery.
       <td align="center" width="50%">
         <a href="specimens/latin/medfntbi.png"><img src="specimens/latin/medfntbi.png" alt="MEDFNTBI bitmap-font specimen" width="460"></a><br>
         <a href="specimens/latin/medfntbi.png"><code>MEDFNTBI</code></a><br>
+        <small><code>FIX/BOLD-ITALIC/LARGE</code></small><br>
         <sub>936&times;38 &middot; pangram</sub>
       </td>
       <td align="center" width="50%">
         <a href="specimens/latin/medfnti.png"><img src="specimens/latin/medfnti.png" alt="MEDFNTI bitmap-font specimen" width="460"></a><br>
         <a href="specimens/latin/medfnti.png"><code>MEDFNTI</code></a><br>
+        <small><code>FIX/ITALIC/LARGE</code></small><br>
         <sub>852&times;38 &middot; pangram</sub>
       </td>
     </tr>
@@ -344,11 +401,13 @@ the full-resolution image; GitHub may scale thumbnails to fit the gallery.
       <td align="center" width="50%">
         <a href="specimens/latin/swiss12-ccaps.png"><img src="specimens/latin/swiss12-ccaps.png" alt="SWISS12-CCAPS bitmap-font specimen" width="460"></a><br>
         <a href="specimens/latin/swiss12-ccaps.png"><code>SWISS12-CCAPS</code></a><br>
+        <small><code>SWISS/CONDENSED-CAPS/NORMAL</code></small><br>
         <sub>642&times;40 &middot; pangram</sub>
       </td>
       <td align="center" width="50%">
         <a href="specimens/latin/swiss12b-ccaps.png"><img src="specimens/latin/swiss12b-ccaps.png" alt="SWISS12B-CCAPS bitmap-font specimen" width="460"></a><br>
         <a href="specimens/latin/swiss12b-ccaps.png"><code>SWISS12B-CCAPS</code></a><br>
+        <small><code>SWISS/BOLD-CONDENSED-CAPS/NORMAL</code></small><br>
         <sub>728&times;40 &middot; pangram</sub>
       </td>
     </tr>
@@ -356,11 +415,13 @@ the full-resolution image; GitHub may scale thumbnails to fit the gallery.
       <td align="center" width="50%">
         <a href="specimens/latin/swiss20.png"><img src="specimens/latin/swiss20.png" alt="SWISS20 bitmap-font specimen" width="460"></a><br>
         <a href="specimens/latin/swiss20.png"><code>SWISS20</code></a><br>
+        <small><code>SWISS/ROMAN/VERY-LARGE</code></small><br>
         <sub>878&times;52 &middot; pangram</sub>
       </td>
       <td align="center" width="50%">
         <a href="specimens/latin/swiss20b.png"><img src="specimens/latin/swiss20b.png" alt="SWISS20B bitmap-font specimen" width="460"></a><br>
         <a href="specimens/latin/swiss20b.png"><code>SWISS20B</code></a><br>
+        <small><code>SWISS/BOLD/VERY-LARGE</code></small><br>
         <sub>962&times;52 &middot; pangram</sub>
       </td>
     </tr>
@@ -368,11 +429,13 @@ the full-resolution image; GitHub may scale thumbnails to fit the gallery.
       <td align="center" width="50%">
         <a href="specimens/latin/swiss20bi.png"><img src="specimens/latin/swiss20bi.png" alt="SWISS20BI bitmap-font specimen" width="460"></a><br>
         <a href="specimens/latin/swiss20bi.png"><code>SWISS20BI</code></a><br>
+        <small><code>SWISS/BOLD-ITALIC/VERY-LARGE</code></small><br>
         <sub>1046&times;52 &middot; pangram</sub>
       </td>
       <td align="center" width="50%">
         <a href="specimens/latin/swiss20i.png"><img src="specimens/latin/swiss20i.png" alt="SWISS20I bitmap-font specimen" width="460"></a><br>
         <a href="specimens/latin/swiss20i.png"><code>SWISS20I</code></a><br>
+        <small><code>SWISS/ITALIC/VERY-LARGE</code></small><br>
         <sub>962&times;52 &middot; pangram</sub>
       </td>
     </tr>
@@ -380,11 +443,13 @@ the full-resolution image; GitHub may scale thumbnails to fit the gallery.
       <td align="center" width="50%">
         <a href="specimens/latin/tiny.png"><img src="specimens/latin/tiny.png" alt="TINY bitmap-font specimen" width="348"></a><br>
         <a href="specimens/latin/tiny.png"><code>TINY</code></a><br>
+        <small><code>FIX/ROMAN/TINY</code></small><br>
         <sub>348&times;24 &middot; pangram</sub>
       </td>
       <td align="center" width="50%">
         <a href="specimens/latin/tr10.png"><img src="specimens/latin/tr10.png" alt="TR10 bitmap-font specimen" width="460"></a><br>
         <a href="specimens/latin/tr10.png"><code>TR10</code></a><br>
+        <small><code>DUTCH/ROMAN/SMALL</code></small><br>
         <sub>530&times;36 &middot; pangram</sub>
       </td>
     </tr>
@@ -392,11 +457,13 @@ the full-resolution image; GitHub may scale thumbnails to fit the gallery.
       <td align="center" width="50%">
         <a href="specimens/latin/tr10b.png"><img src="specimens/latin/tr10b.png" alt="TR10B bitmap-font specimen" width="460"></a><br>
         <a href="specimens/latin/tr10b.png"><code>TR10B</code></a><br>
+        <small><code>DUTCH/BOLD/SMALL</code></small><br>
         <sub>566&times;36 &middot; pangram</sub>
       </td>
       <td align="center" width="50%">
         <a href="specimens/latin/tr10bi.png"><img src="specimens/latin/tr10bi.png" alt="TR10BI bitmap-font specimen" width="460"></a><br>
         <a href="specimens/latin/tr10bi.png"><code>TR10BI</code></a><br>
+        <small><code>DUTCH/BOLD-ITALIC/SMALL</code></small><br>
         <sub>612&times;36 &middot; pangram</sub>
       </td>
     </tr>
@@ -404,11 +471,13 @@ the full-resolution image; GitHub may scale thumbnails to fit the gallery.
       <td align="center" width="50%">
         <a href="specimens/latin/tr10i.png"><img src="specimens/latin/tr10i.png" alt="TR10I bitmap-font specimen" width="460"></a><br>
         <a href="specimens/latin/tr10i.png"><code>TR10I</code></a><br>
+        <small><code>DUTCH/ITALIC/SMALL</code></small><br>
         <sub>528&times;36 &middot; pangram</sub>
       </td>
       <td align="center" width="50%">
         <a href="specimens/latin/tr12.png"><img src="specimens/latin/tr12.png" alt="TR12 bitmap-font specimen" width="460"></a><br>
         <a href="specimens/latin/tr12.png"><code>TR12</code></a><br>
+        <small><code>DUTCH/ROMAN/NORMAL</code></small><br>
         <sub>628&times;40 &middot; pangram</sub>
       </td>
     </tr>
@@ -416,11 +485,13 @@ the full-resolution image; GitHub may scale thumbnails to fit the gallery.
       <td align="center" width="50%">
         <a href="specimens/latin/tr12b.png"><img src="specimens/latin/tr12b.png" alt="TR12B bitmap-font specimen" width="460"></a><br>
         <a href="specimens/latin/tr12b.png"><code>TR12B</code></a><br>
+        <small><code>DUTCH/BOLD/NORMAL</code></small><br>
         <sub>658&times;44 &middot; pangram</sub>
       </td>
       <td align="center" width="50%">
         <a href="specimens/latin/tr12bi.png"><img src="specimens/latin/tr12bi.png" alt="TR12BI bitmap-font specimen" width="460"></a><br>
         <a href="specimens/latin/tr12bi.png"><code>TR12BI</code></a><br>
+        <small><code>DUTCH/BOLD-ITALIC/NORMAL</code></small><br>
         <sub>692&times;40 &middot; pangram</sub>
       </td>
     </tr>
@@ -428,11 +499,13 @@ the full-resolution image; GitHub may scale thumbnails to fit the gallery.
       <td align="center" width="50%">
         <a href="specimens/latin/tr12i.png"><img src="specimens/latin/tr12i.png" alt="TR12I bitmap-font specimen" width="460"></a><br>
         <a href="specimens/latin/tr12i.png"><code>TR12I</code></a><br>
+        <small><code>DUTCH/ITALIC/NORMAL</code></small><br>
         <sub>612&times;40 &middot; pangram</sub>
       </td>
       <td align="center" width="50%">
         <a href="specimens/latin/tr8.png"><img src="specimens/latin/tr8.png" alt="TR8 bitmap-font specimen" width="458"></a><br>
         <a href="specimens/latin/tr8.png"><code>TR8</code></a><br>
+        <small><code>DUTCH/ROMAN/VERY-SMALL</code></small><br>
         <sub>458&times;32 &middot; pangram</sub>
       </td>
     </tr>
@@ -440,11 +513,13 @@ the full-resolution image; GitHub may scale thumbnails to fit the gallery.
       <td align="center" width="50%">
         <a href="specimens/latin/tr8b.png"><img src="specimens/latin/tr8b.png" alt="TR8B bitmap-font specimen" width="460"></a><br>
         <a href="specimens/latin/tr8b.png"><code>TR8B</code></a><br>
+        <small><code>DUTCH/BOLD/VERY-SMALL</code></small><br>
         <sub>542&times;34 &middot; pangram</sub>
       </td>
       <td align="center" width="50%">
         <a href="specimens/latin/tr8bi.png"><img src="specimens/latin/tr8bi.png" alt="TR8BI bitmap-font specimen" width="460"></a><br>
         <a href="specimens/latin/tr8bi.png"><code>TR8BI</code></a><br>
+        <small><code>DUTCH/BOLD-ITALIC/VERY-SMALL</code></small><br>
         <sub>626&times;34 &middot; pangram</sub>
       </td>
     </tr>
@@ -452,11 +527,13 @@ the full-resolution image; GitHub may scale thumbnails to fit the gallery.
       <td align="center" width="50%">
         <a href="specimens/latin/tr8i.png"><img src="specimens/latin/tr8i.png" alt="TR8I bitmap-font specimen" width="460"></a><br>
         <a href="specimens/latin/tr8i.png"><code>TR8I</code></a><br>
+        <small><code>DUTCH/ITALIC/VERY-SMALL</code></small><br>
         <sub>510&times;32 &middot; pangram</sub>
       </td>
       <td align="center" width="50%">
         <a href="specimens/latin/tvfont.png"><img src="specimens/latin/tvfont.png" alt="TVFONT bitmap-font specimen" width="460"></a><br>
         <a href="specimens/latin/tvfont.png"><code>TVFONT</code></a><br>
+        <small><code>FIX/ROMAN/SMALL</code></small><br>
         <sub>516&times;32 &middot; pangram</sub>
       </td>
     </tr>
@@ -464,11 +541,13 @@ the full-resolution image; GitHub may scale thumbnails to fit the gallery.
       <td align="center" width="50%">
         <a href="specimens/latin/tvfontb.png"><img src="specimens/latin/tvfontb.png" alt="TVFONTB bitmap-font specimen" width="460"></a><br>
         <a href="specimens/latin/tvfontb.png"><code>TVFONTB</code></a><br>
+        <small><code>FIX/BOLD-EXTENDED/SMALL</code></small><br>
         <sub>600&times;32 &middot; pangram</sub>
       </td>
       <td align="center" width="50%">
         <a href="specimens/latin/tvfontbi.png"><img src="specimens/latin/tvfontbi.png" alt="TVFONTBI bitmap-font specimen" width="460"></a><br>
         <a href="specimens/latin/tvfontbi.png"><code>TVFONTBI</code></a><br>
+        <small><code>FIX/BOLD-ITALIC/SMALL</code></small><br>
         <sub>684&times;32 &middot; pangram</sub>
       </td>
     </tr>
@@ -476,11 +555,13 @@ the full-resolution image; GitHub may scale thumbnails to fit the gallery.
       <td align="center" width="50%">
         <a href="specimens/latin/tvfontcb.png"><img src="specimens/latin/tvfontcb.png" alt="TVFONTCB bitmap-font specimen" width="460"></a><br>
         <a href="specimens/latin/tvfontcb.png"><code>TVFONTCB</code></a><br>
+        <small><code>FIX/BOLD/SMALL</code></small><br>
         <sub>516&times;32 &middot; pangram</sub>
       </td>
       <td align="center" width="50%">
         <a href="specimens/latin/tvfonti.png"><img src="specimens/latin/tvfonti.png" alt="TVFONTI bitmap-font specimen" width="460"></a><br>
         <a href="specimens/latin/tvfonti.png"><code>TVFONTI</code></a><br>
+        <small><code>FIX/ITALIC/SMALL</code></small><br>
         <sub>600&times;32 &middot; pangram</sub>
       </td>
     </tr>
@@ -495,11 +576,13 @@ the full-resolution image; GitHub may scale thumbnails to fit the gallery.
       <td align="center" width="50%">
         <a href="specimens/symbols/boxfont.png"><img src="specimens/symbols/boxfont.png" alt="BOXFONT bitmap-font specimen" width="385"></a><br>
         <a href="specimens/symbols/boxfont.png"><code>BOXFONT</code></a><br>
+        <small><code>Symbolics Genera Box Font (role-mapped)</code></small><br>
         <sub>385&times;305 &middot; boxfont glyph sheet</sub>
       </td>
       <td align="center" width="50%">
         <a href="specimens/symbols/edsymbol12.png"><img src="specimens/symbols/edsymbol12.png" alt="EDSYMBOL12 bitmap-font specimen" width="460"></a><br>
         <a href="specimens/symbols/edsymbol12.png"><code>EDSYMBOL12</code></a><br>
+        <small><code>Symbolics Genera Editor Symbols (role-mapped)</code></small><br>
         <sub>641&times;43 &middot; editor symbols glyph sheet</sub>
       </td>
     </tr>
@@ -507,11 +590,13 @@ the full-resolution image; GitHub may scale thumbnails to fit the gallery.
       <td align="center" width="50%">
         <a href="specimens/symbols/hippo10.png"><img src="specimens/symbols/hippo10.png" alt="HIPPO10 bitmap-font specimen" width="460"></a><br>
         <a href="specimens/symbols/hippo10.png"><code>HIPPO10</code></a><br>
+        <small><code>Symbolics Genera Greek (role-mapped)</code></small><br>
         <sub>545&times;265 &middot; greek glyph sheet</sub>
       </td>
       <td align="center" width="50%">
         <a href="specimens/symbols/hippo12.png"><img src="specimens/symbols/hippo12.png" alt="HIPPO12 bitmap-font specimen" width="460"></a><br>
         <a href="specimens/symbols/hippo12.png"><code>HIPPO12</code></a><br>
+        <small><code>Symbolics Genera Greek (role-mapped)</code></small><br>
         <sub>513&times;295 &middot; greek glyph sheet</sub>
       </td>
     </tr>
@@ -519,11 +604,13 @@ the full-resolution image; GitHub may scale thumbnails to fit the gallery.
       <td align="center" width="50%">
         <a href="specimens/symbols/math10.png"><img src="specimens/symbols/math10.png" alt="MATH10 bitmap-font specimen" width="460"></a><br>
         <a href="specimens/symbols/math10.png"><code>MATH10</code></a><br>
+        <small><code>Symbolics Genera Math (role-mapped)</code></small><br>
         <sub>609&times;277 &middot; math glyph sheet</sub>
       </td>
       <td align="center" width="50%">
         <a href="specimens/symbols/math12.png"><img src="specimens/symbols/math12.png" alt="MATH12 bitmap-font specimen" width="460"></a><br>
         <a href="specimens/symbols/math12.png"><code>MATH12</code></a><br>
+        <small><code>Symbolics Genera Math (role-mapped)</code></small><br>
         <sub>577&times;295 &middot; math glyph sheet</sub>
       </td>
     </tr>
@@ -531,11 +618,13 @@ the full-resolution image; GitHub may scale thumbnails to fit the gallery.
       <td align="center" width="50%">
         <a href="specimens/symbols/mouse.png"><img src="specimens/symbols/mouse.png" alt="MOUSE bitmap-font specimen" width="460"></a><br>
         <a href="specimens/symbols/mouse.png"><code>MOUSE</code></a><br>
+        <small><code>FIX/ROMAN/NORMAL [MOUSE] · Symbolics Genera Mouse (role-mapped)</code></small><br>
         <sub>1121&times;185 &middot; mouse glyph sheet</sub>
       </td>
       <td align="center" width="50%">
         <a href="specimens/symbols/narrow.png"><img src="specimens/symbols/narrow.png" alt="NARROW bitmap-font specimen" width="460"></a><br>
         <a href="specimens/symbols/narrow.png"><code>NARROW</code></a><br>
+        <small><code>FIX/ROMAN/NORMAL [ARROW] · Symbolics Genera Arrows (role-mapped)</code></small><br>
         <sub>609&times;77 &middot; arrow glyph sheet</sub>
       </td>
     </tr>
@@ -543,11 +632,13 @@ the full-resolution image; GitHub may scale thumbnails to fit the gallery.
       <td align="center" width="50%">
         <a href="specimens/symbols/symbol10.png"><img src="specimens/symbols/symbol10.png" alt="SYMBOL10 bitmap-font specimen" width="460"></a><br>
         <a href="specimens/symbols/symbol10.png"><code>SYMBOL10</code></a><br>
+        <small><code>Symbolics Genera Symbols (role-mapped)</code></small><br>
         <sub>1313&times;385 &middot; symbol glyph sheet</sub>
       </td>
       <td align="center" width="50%">
         <a href="specimens/symbols/symbol12.png"><img src="specimens/symbols/symbol12.png" alt="SYMBOL12 bitmap-font specimen" width="460"></a><br>
         <a href="specimens/symbols/symbol12.png"><code>SYMBOL12</code></a><br>
+        <small><code>SWISS/ROMAN/NORMAL [SYMBOL] · Symbolics Genera Symbols (role-mapped)</code></small><br>
         <sub>673&times;211 &middot; symbol glyph sheet</sub>
       </td>
     </tr>
@@ -555,6 +646,7 @@ the full-resolution image; GitHub may scale thumbnails to fit the gallery.
       <td align="center" width="50%">
         <a href="specimens/symbols/vt100.png"><img src="specimens/symbols/vt100.png" alt="VT100 bitmap-font specimen" width="353"></a><br>
         <a href="specimens/symbols/vt100.png"><code>VT100</code></a><br>
+        <small><code>unmapped resident strike</code></small><br>
         <sub>353&times;229 &middot; vt100 glyph sheet</sub>
       </td>
       <td width="50%"></td>

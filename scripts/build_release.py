@@ -25,6 +25,7 @@ VERSION_PATTERN = re.compile(r"^[A-Za-z0-9._+~-]+$")
 ASSET_PATTERN = re.compile(
     r"^Genera-fonts-(latin|symbols)-[A-Za-z0-9._+~-]+\.tar\.gz(?:\.sha256)?$"
 )
+EXPECTED_FONTTOSFNT_VERSION = "fonttosfnt 1.2.5"
 
 
 class ReleaseError(RuntimeError):
@@ -222,16 +223,31 @@ def _artifact_inventory(distribution: Path) -> tuple[list[Artifact], dict[str, o
     source_manifest_path = distribution / "SOURCE-MANIFEST.json"
     catalog_path = distribution / "unicode" / "catalog.json"
     mapping_path = distribution / "unicode" / "UNICODE-MAPPING.json"
+    identities_path = distribution / "FONT-IDENTITIES.json"
     build_manifest = load_json(build_manifest_path)
     source_manifest = load_json(source_manifest_path)
     catalog = load_json(catalog_path)
     mapping = load_json(mapping_path)
+    identities = load_json(identities_path)
     require(build_manifest.get("schema_version") == 1, "unsupported BUILD-MANIFEST schema")
     require(source_manifest.get("schema_version") == 1, "unsupported SOURCE-MANIFEST schema")
     require(catalog.get("schema_version") == 1, "unsupported Unicode catalog schema")
     require(mapping.get("schema_version") == 1, "unsupported Unicode mapping schema")
+    require(identities.get("schema_version") == 1, "unsupported font-identity schema")
     mapping_id = mapping.get("mapping_id")
     require(isinstance(mapping_id, str) and mapping_id, "Unicode mapping ID is missing")
+    identity_mapping_id = identities.get("mapping_id")
+    require(
+        isinstance(identity_mapping_id, str) and identity_mapping_id,
+        "font-identity mapping ID is missing",
+    )
+    require(
+        build_manifest.get("font_identities")
+        == {"id": identity_mapping_id, "sha256": sha256(identities_path)},
+        "build manifest font-identity provenance differs",
+    )
+    identity_assignments = identities.get("assignments")
+    require(isinstance(identity_assignments, dict), "font-identity assignments are missing")
     records = catalog.get("fonts")
     require(isinstance(records, list), "Unicode catalog lacks fonts")
     require(catalog.get("font_count") == len(records), "Unicode catalog font count differs")
@@ -245,6 +261,8 @@ def _artifact_inventory(distribution: Path) -> tuple[list[Artifact], dict[str, o
         require(isinstance(name, str) and name, "Unicode font record lacks name")
         require(name not in seen_names, f"duplicate Unicode font name: {name}")
         seen_names.add(name)
+        require(name in identity_assignments, f"{name}: no logical font assignment")
+        require(isinstance(record.get("logical_identity"), dict), f"{name}: logical identity missing")
         require(isinstance(relative, str), f"{name}: Unicode record lacks bdf_path")
         relative_path = Path(relative)
         require(
@@ -293,6 +311,11 @@ def _artifact_inventory(distribution: Path) -> tuple[list[Artifact], dict[str, o
             "id": mapping_id,
             "sha256": sha256(mapping_path),
         },
+        "font_identities": {
+            "path": "FONT-IDENTITIES.json",
+            "id": identity_mapping_id,
+            "sha256": sha256(identities_path),
+        },
         "source": build_manifest.get("source"),
         "profile": build_manifest.get("profile"),
     }
@@ -312,11 +335,14 @@ def _fonttosfnt_version(executable: str) -> str:
         )
     except OSError as error:
         raise ReleaseError(f"cannot run {resolved}: {error}") from error
-    except subprocess.CalledProcessError:
-        return f"fonttosfnt executable sha256:{sha256(Path(resolved).resolve())}"
-    return (process.stdout or process.stderr).strip() or (
-        f"fonttosfnt executable sha256:{sha256(Path(resolved).resolve())}"
+    except subprocess.CalledProcessError as error:
+        raise ReleaseError(f"cannot identify fonttosfnt version: {error}") from error
+    version = (process.stdout or process.stderr).strip()
+    require(
+        version == EXPECTED_FONTTOSFNT_VERSION,
+        f"unsupported fonttosfnt: expected {EXPECTED_FONTTOSFNT_VERSION!r}, got {version!r}",
     )
+    return version
 
 
 def _convert_otb(source: Path, destination: Path, executable: str, epoch: int) -> None:
@@ -448,6 +474,7 @@ def _build_one(
 
         metadata_sources = {
             "BUILD-MANIFEST.json": distribution / "BUILD-MANIFEST.json",
+            "FONT-IDENTITIES.json": distribution / "FONT-IDENTITIES.json",
             "SOURCE-MANIFEST.json": distribution / "SOURCE-MANIFEST.json",
             "UNICODE-MAPPING.json": distribution / "unicode" / "UNICODE-MAPPING.json",
         }
@@ -476,6 +503,7 @@ def _build_one(
             manifest_artifacts.append(
                 {
                     "name": artifact.name,
+                    "logical_identity": artifact.record.get("logical_identity"),
                     "repertoire": artifact.record.get("repertoire"),
                     "glyph_count": artifact.summary.glyph_count,
                     "standard_glyph_count": artifact.record.get("standard_glyph_count"),

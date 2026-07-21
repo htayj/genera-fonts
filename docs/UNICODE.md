@@ -20,6 +20,14 @@ The project follows three rules:
 The resulting Unicode BDFs are useful interchange derivatives. They do not
 replace the raw `Misc-FontSpecific` records as historical evidence.
 
+Character encoding and logical typeface identity are separate mappings. The
+Unicode profile determines which scalar addresses a glyph; the reviewed
+[`font-identities.json`](../config/font-identities.json) mapping determines
+family, face, named Genera size, and device-specific nominal X size. Thus
+Unicode `HL8`, `HL8B`, and `HL8I`
+remain the same `SWISS` family with Roman, Bold, and Italic faces, while their
+recovered raster geometry is unchanged.
+
 ## Standard Genera repertoire
 
 Seventy-eight fonts use the reviewed standard repertoire. Raw codes 040–176

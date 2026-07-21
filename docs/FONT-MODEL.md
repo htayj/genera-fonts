@@ -61,6 +61,53 @@ No stage traces outlines, smooths pixels, applies hinting, changes scale, or
 generates absent characters. OTB files contain a one-bit embedded bitmap
 strike derived from the Unicode BDF; they are not outline conversions.
 
+## Physical strikes and logical font identities
+
+A resident `FONT` object name is the identity of one physical raster strike.
+It is not necessarily a typographic family. The saved world's `FONT-SPECS`
+relations independently map device, character set, family, face, and logical
+size to those objects. The reviewed mapping is committed as
+[`config/font-identities.json`](../config/font-identities.json), closed over
+all 89 objects, and copied into every distribution and release.
+
+The primary mappings make the physical/logical split concrete:
+
+| Resident strike | Primary logical identity | Resident line height |
+| --- | --- | ---: |
+| `HL8` | `SWISS/ROMAN/VERY-SMALL` (nominal X size 8) | 11 px |
+| `HL8B` | `SWISS/BOLD/VERY-SMALL` (nominal X size 8) | 11 px |
+| `HL8I` | `SWISS/ITALIC/VERY-SMALL` (nominal X size 8) | 11 px |
+| `HL14` | `SWISS/ROMAN/LARGE` (nominal X size 14) | 15 px |
+| `SWISS20` | `SWISS/ROMAN/VERY-LARGE` (nominal X size 18) | 20 px |
+
+`FIX`, `SWISS`, `DUTCH`, `JESS`, and `EUREX` are the ordinary logical
+families. The mapping also preserves the primary Genera faces, including
+Bold, Italic, Bold Italic, Condensed, Extra Condensed, Bold Extended, and caps
+variants. Where one strike serves fallback selectors as well, the first
+resident mapping is the primary desktop identity; for example, `HL14` remains
+Roman even though Genera can also use it for a missing Condensed strike.
+
+Ten specialty objects have reviewed character-set or application-style roles.
+They receive isolated desktop families so a mouse, arrow, mathematical, Greek,
+or editor-symbol repertoire cannot satisfy an ordinary `Fix` or `Swiss` text
+request. `40VR`, `EINY8`, and `VT100` have no resident `FONT-SPECS` mapping.
+They remain explicitly unmapped and use neutral object-specific desktop
+identities; that fallback is packaging metadata, not a historical style claim.
+
+Logical named size is not substituted for physical raster size. `PIXEL_SIZE`,
+BDF `SIZE`, and the 72 dpi interchange `POINT_SIZE` continue to follow the
+measured `character_height`. `nominal_x_size` in the logical-identity record
+preserves the X display device's 6/8/10/12/14/18/24 crosswalk separately.
+That crosswalk is device-specific rather than a universal Genera point-size
+law; MacIvory has different normal and small-screen QuickDraw mappings.
+
+Desktop metadata must also keep distinct physical objects addressable. The
+`TR8BI` and `TR10BI` objects have different logical named sizes and glyph
+bitmaps but the same measured 11-pixel line height. Without another field they
+collapse to one Fontconfig identity, so their desktop styles carry explicit `Very Small
+Strike` and `Small Strike` qualifiers. A closed uniqueness check rejects any
+other family/style/pixel collision.
+
 ## Raw BDF profile
 
 The raw BDFs retain the original Genera character-code numbers and use
@@ -68,12 +115,11 @@ The raw BDFs retain the original Genera character-code numbers and use
 resident advance, cropped raster placement, baseline, and line height.
 
 The XLFD uses 72 dpi as an explicit interchange convention so one recovered
-pixel corresponds to one nominal point. This is not a claim about the physical
-resolution of a Lisp Machine display. The historical objects do not provide a
-complete modern XLFD weight, slant, or set-width classification, so those
-fields remain `Unknown`/`OT`/`Unknown`; the build does not infer typography
-from font names. XLFD `P`, `M`, or `C` spacing is computed from represented
-advances and raster boxes.
+pixel corresponds to one interchange point. This is not a claim about the
+physical resolution of a Lisp Machine display or the logical point-size name.
+Family, weight, slant, and set width come only from the closed reviewed mapping,
+never from parsing resident-name suffixes. XLFD `P`, `M`, or `C` spacing is
+still computed from represented advances and raster boxes.
 
 Every font has two raw aliases:
 
@@ -97,6 +143,12 @@ Unicode BDFs use `ISO10646-1` and parallel aliases:
 
 Raw and Unicode alias namespaces are disjoint. A raw code must not be treated
 as a Unicode scalar merely because the numbers happen to match.
+
+The raw and Unicode BDFs share the same logical family/style metadata. Their
+charset fields and alias namespaces distinguish the addressing profiles.
+User-facing OTBs therefore expose ordinary desktop styles such as Regular,
+Bold, Italic, Bold Italic, Condensed, and Expanded instead of treating every
+physical strike as a separate family.
 
 ## Independent reference comparisons
 

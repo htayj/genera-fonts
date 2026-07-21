@@ -29,6 +29,7 @@ SOURCE_MANIFEST = SOURCE_ROOT / "SOURCE-MANIFEST.json"
 SOURCE_CATALOG = SOURCE_ROOT / "catalog.json"
 SOURCE_VALIDATION = SOURCE_ROOT / "validation.json"
 UNICODE_MAPPING = ROOT / "config" / "unicode-mapping.json"
+FONT_IDENTITIES = ROOT / "config" / "font-identities.json"
 CORPUS_PROFILE = ROOT / "config" / "corpus-profile.json"
 DEFAULT_OUTPUT = ROOT / "dist"
 PANGRAM = "The five boxing Lisp wizards jump quickly."
@@ -39,6 +40,7 @@ OWNED_OUTPUT_NAMES = {
     "release",
     "packages",
     "BUILD-MANIFEST.json",
+    "FONT-IDENTITIES.json",
     "SOURCE-MANIFEST.json",
     "NOTICE.md",
     "LICENSE",
@@ -680,6 +682,306 @@ def load_mapping(font_names: set[str], source_manifest: dict) -> dict:
     return mapping
 
 
+def load_font_identities(font_names: set[str], source_manifest: dict) -> dict:
+    identities = load_json(FONT_IDENTITIES)
+    require_exact_keys(
+        identities,
+        {
+            "schema_version",
+            "mapping_id",
+            "profile",
+            "source",
+            "policy",
+            "x_named_sizes",
+            "families",
+            "faces",
+            "desktop_style_disambiguators",
+            "assignments",
+            "expected",
+        },
+        "font identities",
+    )
+    require(identities["schema_version"] == 1, "unsupported font-identity mapping")
+    for key in ("mapping_id", "profile"):
+        require_bounded_string(identities[key], f"font identities.{key}", limit=128)
+
+    source = require_exact_keys(
+        identities["source"],
+        {"profile", "vlod_sha256", "x_size_evidence"},
+        "font identities.source",
+    )
+    require_bounded_string(source["profile"], "font identities.source.profile", limit=128)
+    require_sha256(source["vlod_sha256"], "font identities.source.vlod_sha256")
+    require(
+        source["vlod_sha256"] == source_manifest["source"]["sha256"],
+        "font identities are pinned to another Genera world",
+    )
+    x_size_evidence = require_exact_keys(
+        source["x_size_evidence"],
+        {"path", "sha256"},
+        "font identities.source.x_size_evidence",
+    )
+    require_bounded_string(
+        x_size_evidence["path"],
+        "font identities.source.x_size_evidence.path",
+        limit=256,
+    )
+    require_sha256(
+        x_size_evidence["sha256"],
+        "font identities.source.x_size_evidence.sha256",
+    )
+
+    policy = require_exact_keys(
+        identities["policy"],
+        {
+            "artifact_identity",
+            "primary_identity",
+            "desktop_identity",
+            "desktop_disambiguation",
+            "specialty_identity",
+            "size_identity",
+            "unmapped_identity",
+        },
+        "font identities.policy",
+    )
+    for key, value in policy.items():
+        require_bounded_string(value, f"font identities.policy.{key}")
+
+    named_sizes = identities["x_named_sizes"]
+    require(isinstance(named_sizes, dict) and named_sizes, "font identities lack X named sizes")
+    for name, x_size in named_sizes.items():
+        require_bounded_string(name, "logical size", limit=64)
+        require_integer(x_size, f"logical X size {name}", minimum=1)
+    require(
+        len(set(named_sizes.values())) == len(named_sizes),
+        "logical sizes do not have unique nominal X sizes",
+    )
+
+    families = identities["families"]
+    require(isinstance(families, dict) and families, "font identities lack families")
+    desktop_family_names: set[str] = set()
+    for name, value in families.items():
+        require_bounded_string(name, "typographic family ID", limit=64)
+        family = require_exact_keys(
+            value, {"family_name", "kind"}, f"typographic family {name}"
+        )
+        require_bounded_string(
+            family["family_name"], f"typographic family {name}.family_name", limit=128
+        )
+        require(
+            family["kind"] in {"text", "specialty", "unmapped"},
+            f"typographic family {name}: invalid kind",
+        )
+        require(
+            family["family_name"] not in desktop_family_names,
+            f"typographic family {name}: duplicate desktop family name",
+        )
+        desktop_family_names.add(family["family_name"])
+
+    faces = identities["faces"]
+    require(isinstance(faces, dict) and faces, "font identities lack faces")
+    for name, value in faces.items():
+        require_bounded_string(name, "typographic face ID", limit=64)
+        face = require_exact_keys(
+            value,
+            {"weight_name", "slant", "setwidth_name", "add_style_name"},
+            f"typographic face {name}",
+        )
+        for key in ("weight_name", "slant", "setwidth_name"):
+            require_bounded_string(face[key], f"typographic face {name}.{key}", limit=64)
+        add_style = face["add_style_name"]
+        require(
+            isinstance(add_style, str)
+            and len(add_style) <= 64
+            and all(character.isprintable() for character in add_style),
+            f"typographic face {name}.add_style_name: invalid string",
+        )
+        require(
+            face["weight_name"] in {"Medium", "Bold"},
+            f"typographic face {name}: unsupported weight",
+        )
+        require(face["slant"] in {"R", "I"}, f"typographic face {name}: invalid slant")
+        require(
+            face["setwidth_name"] in {"Condensed", "Normal", "Expanded"},
+            f"typographic face {name}: unsupported set width",
+        )
+
+    disambiguators = identities["desktop_style_disambiguators"]
+    require(
+        isinstance(disambiguators, dict),
+        "font identities desktop style disambiguators must be an object",
+    )
+    require(
+        set(disambiguators) <= font_names,
+        "desktop style disambiguator references an unknown font",
+    )
+    for name, value in disambiguators.items():
+        require_bounded_string(
+            value, f"desktop style disambiguator for {name}", limit=64
+        )
+
+    assignments = require_exact_keys(
+        identities["assignments"], font_names, "font identities.assignments"
+    )
+    status_counts: Counter[str] = Counter()
+    primary_count = 0
+    used_families: set[str] = set()
+    for name, value in assignments.items():
+        assignment = require_exact_keys(
+            value,
+            {"mapping_status", "primary", "typographic_family", "typographic_face"},
+            f"font identity {name}",
+        )
+        status = assignment["mapping_status"]
+        require(
+            status in {"mapped", "role-mapped", "unmapped"},
+            f"font identity {name}: invalid mapping status",
+        )
+        status_counts[str(status)] += 1
+        family_name = assignment["typographic_family"]
+        face_name = assignment["typographic_face"]
+        require(family_name in families, f"font identity {name}: unknown typographic family")
+        require(face_name in faces, f"font identity {name}: unknown typographic face")
+        require(
+            families[family_name]["kind"]
+            == {"mapped": "text", "role-mapped": "specialty", "unmapped": "unmapped"}[status],
+            f"font identity {name}: mapping status and family kind differ",
+        )
+        used_families.add(str(family_name))
+        primary = assignment["primary"]
+        if primary is not None:
+            primary_count += 1
+            selector = require_exact_keys(
+                primary,
+                {"family", "face", "size", "character_set"},
+                f"font identity {name}.primary",
+            )
+            for key, item in selector.items():
+                require_bounded_string(item, f"font identity {name}.primary.{key}", limit=64)
+            require(selector["family"] in families, f"font identity {name}: unknown logical family")
+            require(selector["face"] in faces, f"font identity {name}: unknown logical face")
+            require(selector["size"] in named_sizes, f"font identity {name}: unknown logical size")
+            require(
+                selector["face"] == face_name,
+                f"font identity {name}: primary and desktop face differ",
+            )
+            if status == "mapped":
+                require(
+                    selector["family"] == family_name,
+                    f"font identity {name}: primary and desktop family differ",
+                )
+        require(
+            status != "mapped" or primary is not None,
+            f"font identity {name}: mapped font lacks a primary style",
+        )
+        require(
+            status != "unmapped" or primary is None,
+            f"font identity {name}: unmapped font has a primary style",
+        )
+
+    expected = require_exact_keys(
+        identities["expected"],
+        {
+            "font_count",
+            "mapped_font_count",
+            "primary_style_count",
+            "role_only_count",
+            "unmapped_font_count",
+            "typographic_family_count",
+            "desktop_style_disambiguator_count",
+        },
+        "font identities.expected",
+    )
+    for key, value in expected.items():
+        require_integer(value, f"font identities.expected.{key}", minimum=0)
+    require(expected["font_count"] == len(assignments), "font-identity count changed")
+    require(
+        expected["mapped_font_count"]
+        == status_counts["mapped"] + status_counts["role-mapped"],
+        "mapped font-identity count changed",
+    )
+    require(expected["primary_style_count"] == primary_count, "primary style count changed")
+    require(
+        expected["role_only_count"]
+        == sum(
+            assignment["mapping_status"] == "role-mapped"
+            and assignment["primary"] is None
+            for assignment in assignments.values()
+        ),
+        "role-only font count changed",
+    )
+    require(
+        expected["unmapped_font_count"] == status_counts["unmapped"],
+        "unmapped font-identity count changed",
+    )
+    require(
+        expected["typographic_family_count"] == len(used_families) == len(families),
+        "typographic family closure changed",
+    )
+    require(
+        expected["desktop_style_disambiguator_count"] == len(disambiguators),
+        "desktop style disambiguator count changed",
+    )
+    return identities
+
+
+def resolved_font_identity(name: str, identities: dict) -> dict[str, object]:
+    assignment = identities["assignments"][name]
+    primary = assignment["primary"]
+    logical_name = None
+    nominal_x_size = None
+    if primary is not None:
+        logical_name = "/".join(
+            (primary["family"], primary["face"], primary["size"])
+        )
+        nominal_x_size = identities["x_named_sizes"][primary["size"]]
+    family = identities["families"][assignment["typographic_family"]]
+    face = identities["faces"][assignment["typographic_face"]]
+    disambiguator = identities["desktop_style_disambiguators"].get(name)
+    add_style_name = " ".join(
+        value for value in (disambiguator, face["add_style_name"]) if value
+    )
+    return {
+        "mapping_status": assignment["mapping_status"],
+        "logical_name": logical_name,
+        "primary": dict(primary) if primary is not None else None,
+        "nominal_x_size": nominal_x_size,
+        "desktop_style_disambiguator": disambiguator,
+        "typographic": {
+            "family_name": family["family_name"],
+            "weight_name": face["weight_name"],
+            "slant": face["slant"],
+            "setwidth_name": face["setwidth_name"],
+            "add_style_name": add_style_name,
+        },
+    }
+
+
+def verify_desktop_identity_uniqueness(
+    source_fonts: list[dict[str, object]], identities: dict
+) -> int:
+    """Reject resident strikes that desktop font clients cannot distinguish."""
+    seen: dict[tuple[object, ...], str] = {}
+    for record in source_fonts:
+        name = str(record["name"])
+        identity = resolved_font_identity(name, identities)
+        typography = identity["typographic"]
+        key = (
+            typography["family_name"],
+            typography["weight_name"],
+            typography["slant"],
+            typography["setwidth_name"],
+            typography["add_style_name"],
+            record["metrics"]["character_height"],
+        )
+        require(
+            key not in seen,
+            f"desktop font identity collision: {seen.get(key)} and {name}",
+        )
+        seen[key] = name
+    return len(seen)
+
+
 def standard_scalar(mapping: dict, code: int) -> int:
     standard = mapping["standard_repertoire"]
     explicit = standard["explicit"]
@@ -864,6 +1166,12 @@ def build(output: Path, *, clean: bool) -> dict:
         )
     source_manifest, source_catalog, source_fonts = verify_source_tree()
     mapping = load_mapping({record["name"] for record in source_fonts}, source_manifest)
+    font_identities = load_font_identities(
+        {record["name"] for record in source_fonts}, source_manifest
+    )
+    desktop_identity_count = verify_desktop_identity_uniqueness(
+        source_fonts, font_identities
+    )
     prepare_output_directory(output, clean=clean, owned_names=OWNED_OUTPUT_NAMES)
     raw_root = output / "raw"
     unicode_root = output / "unicode"
@@ -883,13 +1191,21 @@ def build(output: Path, *, clean: bool) -> dict:
     for record in source_fonts:
         name = record["name"]
         stem = safe_filename(name)
+        logical_identity = resolved_font_identity(name, font_identities)
+        typography = logical_identity["typographic"]
         raw_font = crop_font(record)
         require(len(raw_font.glyphs) == sum(slot["exists"] for slot in record["slots"]), f"{name}: exported glyph count changed")
         raw_profile = bdf_profile(
             raw_font,
             foundry="Misc",
-            family_name=f"Symbolics Genera {name}",
-            add_style_name="Genera 8.5 Resident",
+            family_name=typography["family_name"],
+            weight_name=typography["weight_name"],
+            slant=typography["slant"],
+            setwidth_name=typography["setwidth_name"],
+            add_style_name=typography["add_style_name"],
+            typographic_classification_policy=(
+                "reviewed Genera logical-font mapping; raster metrics remain measured"
+            ),
         )
         raw_bdf = raw_root / "bdf" / f"{stem}.bdf"
         raw_json = raw_root / "json" / f"{stem}.json"
@@ -907,6 +1223,7 @@ def build(output: Path, *, clean: bool) -> dict:
             "json_path": f"raw/json/{stem}.json",
             "sheet_path": f"raw/sheets/{stem}.png",
             "glyph_count": len(raw_font.glyphs),
+            "logical_identity": logical_identity,
             "geometry_sha256": raw_geometry_sha,
             "bdf_sha256": sha256(raw_bdf),
             "sheet_sha256": sha256(raw_sheet),
@@ -919,8 +1236,14 @@ def build(output: Path, *, clean: bool) -> dict:
         unicode_profile = bdf_profile(
             derived,
             foundry="Misc",
-            family_name=f"Symbolics Genera {name}",
-            add_style_name="Genera 8.5 Resident Unicode",
+            family_name=typography["family_name"],
+            weight_name=typography["weight_name"],
+            slant=typography["slant"],
+            setwidth_name=typography["setwidth_name"],
+            add_style_name=typography["add_style_name"],
+            typographic_classification_policy=(
+                "reviewed Genera logical-font mapping; raster metrics remain measured"
+            ),
             charset_registry="ISO10646",
             charset_encoding="1",
         )
@@ -949,6 +1272,7 @@ def build(output: Path, *, clean: bool) -> dict:
                 "profile": "genera-8.5-resident-unicode",
                 "repertoire": mapping["assignments"][name],
                 "content_class": content_class,
+                "logical_identity": logical_identity,
                 "bdf_path": f"unicode/bdf/{stem}.bdf",
                 "specimen_path": specimen.relative_to(output).as_posix(),
                 "specimen_kind": specimen_kind,
@@ -971,6 +1295,8 @@ def build(output: Path, *, clean: bool) -> dict:
         "schema_version": 1,
         "profile": "Genera 8.5 resident raw-code bitmap fonts",
         "source_manifest_sha256": sha256(SOURCE_MANIFEST),
+        "font_identity_mapping_id": font_identities["mapping_id"],
+        "font_identity_mapping_sha256": sha256(FONT_IDENTITIES),
         "font_count": len(raw_artifacts),
         "glyph_count": sum(record["glyph_count"] for record in raw_artifacts),
         "geometry_inventory_sha256": canonical_sha256(raw_geometry_inventory),
@@ -982,6 +1308,8 @@ def build(output: Path, *, clean: bool) -> dict:
         "profile": "Genera 8.5 resident Unicode derivative bitmap fonts",
         "mapping_id": mapping["mapping_id"],
         "mapping_sha256": sha256(UNICODE_MAPPING),
+        "font_identity_mapping_id": font_identities["mapping_id"],
+        "font_identity_mapping_sha256": sha256(FONT_IDENTITIES),
         "font_count": len(unicode_artifacts),
         "glyph_count": sum(record["glyph_count"] for record in unicode_artifacts),
         "standard_glyph_count": resolution_counts["standard"],
@@ -994,6 +1322,7 @@ def build(output: Path, *, clean: bool) -> dict:
     write_json(raw_root / "catalog.json", raw_catalog)
     write_json(unicode_root / "catalog.json", unicode_catalog)
     shutil.copyfile(UNICODE_MAPPING, unicode_root / "UNICODE-MAPPING.json")
+    shutil.copyfile(FONT_IDENTITIES, output / "FONT-IDENTITIES.json")
     shutil.copyfile(SOURCE_MANIFEST, output / "SOURCE-MANIFEST.json")
     for name in ("NOTICE.md", "LICENSE"):
         shutil.copyfile(ROOT / name, output / name)
@@ -1007,6 +1336,22 @@ def build(output: Path, *, clean: bool) -> dict:
             "id": mapping["mapping_id"],
             "sha256": sha256(UNICODE_MAPPING),
         },
+        "font_identities": {
+            "id": font_identities["mapping_id"],
+            "sha256": sha256(FONT_IDENTITIES),
+        },
+        "font_identity_counts": {
+            key: font_identities["expected"][key]
+            for key in (
+                "mapped_font_count",
+                "primary_style_count",
+                "role_only_count",
+                "unmapped_font_count",
+                "typographic_family_count",
+                "desktop_style_disambiguator_count",
+            )
+        },
+        "desktop_identity_count": desktop_identity_count,
         "font_count": len(raw_artifacts),
         "source_slot_count": source_catalog["slot_count"],
         "raw_glyph_count": raw_catalog["glyph_count"],
@@ -1028,6 +1373,7 @@ def build(output: Path, *, clean: bool) -> dict:
             "profile",
             "source_manifest_sha256",
             "unicode_mapping_sha256",
+            "font_identities_sha256",
             "source_normalized_geometry_sha256",
             "expected",
         },
@@ -1037,6 +1383,7 @@ def build(output: Path, *, clean: bool) -> dict:
     require(corpus_profile["profile"] == build_manifest["profile"], "corpus profile identity changed")
     require_sha256(corpus_profile["source_manifest_sha256"], "corpus profile.source_manifest_sha256")
     require_sha256(corpus_profile["unicode_mapping_sha256"], "corpus profile.unicode_mapping_sha256")
+    require_sha256(corpus_profile["font_identities_sha256"], "corpus profile.font_identities_sha256")
     require(
         corpus_profile["source_manifest_sha256"] == sha256(SOURCE_MANIFEST),
         "corpus profile is pinned to a different source manifest",
@@ -1044,6 +1391,10 @@ def build(output: Path, *, clean: bool) -> dict:
     require(
         corpus_profile["unicode_mapping_sha256"] == sha256(UNICODE_MAPPING),
         "corpus profile is pinned to a different Unicode mapping",
+    )
+    require(
+        corpus_profile["font_identities_sha256"] == sha256(FONT_IDENTITIES),
+        "corpus profile is pinned to different logical font identities",
     )
     require(
         corpus_profile["source_normalized_geometry_sha256"]
@@ -1065,6 +1416,8 @@ def build(output: Path, *, clean: bool) -> dict:
             "specimen_count",
             "raw_geometry_inventory_sha256",
             "unicode_geometry_inventory_sha256",
+            "font_identity_counts",
+            "desktop_identity_count",
         },
         "corpus profile.expected",
     )

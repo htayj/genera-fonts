@@ -21,6 +21,7 @@ SOURCE_MANIFEST = SOURCE_ROOT / "SOURCE-MANIFEST.json"
 SOURCE_CATALOG = SOURCE_ROOT / "catalog.json"
 SOURCE_VALIDATION = SOURCE_ROOT / "validation.json"
 UNICODE_MAPPING = ROOT / "config" / "unicode-mapping.json"
+FONT_IDENTITIES = ROOT / "config" / "font-identities.json"
 CORPUS_PROFILE = ROOT / "config" / "corpus-profile.json"
 DEFAULT_OUTPUT = ROOT / "dist"
 HEX_DIGEST = re.compile(r"[0-9a-f]{64}")
@@ -976,6 +977,252 @@ def _validate_mapping(mapping: dict[str, object], names: set[str], source_manife
     require(len(names) - counts["standard"] == expected["private_use_font_count"], "private-use assignment count drift")
 
 
+def _validate_font_identities(
+    identities: dict[str, object], names: set[str], source_manifest: dict[str, object]
+) -> dict[str, dict[str, object]]:
+    exact_keys(
+        identities,
+        {
+            "schema_version",
+            "mapping_id",
+            "profile",
+            "source",
+            "policy",
+            "x_named_sizes",
+            "families",
+            "faces",
+            "desktop_style_disambiguators",
+            "assignments",
+            "expected",
+        },
+        "font identities",
+    )
+    require(identities["schema_version"] == 1, "unsupported font-identity mapping")
+    for key in ("mapping_id", "profile"):
+        bounded_string(identities[key], f"font identities.{key}", limit=128)
+    source = exact_keys(
+        identities["source"],
+        {"profile", "vlod_sha256", "x_size_evidence"},
+        "font identities.source",
+    )
+    bounded_string(source["profile"], "font identities.source.profile", limit=128)
+    checked_sha256(source["vlod_sha256"], "font identities.source.vlod_sha256")
+    require(
+        source["vlod_sha256"] == source_manifest["source"]["sha256"],
+        "font identities are pinned to another Genera world",
+    )
+    x_size_evidence = exact_keys(
+        source["x_size_evidence"],
+        {"path", "sha256"},
+        "font identities.source.x_size_evidence",
+    )
+    bounded_string(
+        x_size_evidence["path"],
+        "font identities.source.x_size_evidence.path",
+        limit=256,
+    )
+    checked_sha256(
+        x_size_evidence["sha256"],
+        "font identities.source.x_size_evidence.sha256",
+    )
+    policy = exact_keys(
+        identities["policy"],
+        {
+            "artifact_identity",
+            "primary_identity",
+            "desktop_identity",
+            "desktop_disambiguation",
+            "specialty_identity",
+            "size_identity",
+            "unmapped_identity",
+        },
+        "font identities.policy",
+    )
+    for key, value in policy.items():
+        bounded_string(value, f"font identities.policy.{key}")
+
+    named_sizes = identities["x_named_sizes"]
+    require(isinstance(named_sizes, dict) and named_sizes, "font identities lack X named sizes")
+    for name, x_size in named_sizes.items():
+        bounded_string(name, "logical size", limit=64)
+        _integer(x_size, f"logical X size {name}: invalid size", minimum=1)
+    require(
+        len(set(named_sizes.values())) == len(named_sizes),
+        "logical sizes do not have unique nominal X sizes",
+    )
+
+    families = identities["families"]
+    require(isinstance(families, dict) and families, "font identities lack families")
+    desktop_family_names: set[str] = set()
+    for name, value in families.items():
+        bounded_string(name, "typographic family ID", limit=64)
+        family = exact_keys(value, {"family_name", "kind"}, f"typographic family {name}")
+        bounded_string(family["family_name"], f"typographic family {name}.family_name", limit=128)
+        require(
+            family["kind"] in {"text", "specialty", "unmapped"},
+            f"typographic family {name}: invalid kind",
+        )
+        require(
+            family["family_name"] not in desktop_family_names,
+            f"typographic family {name}: duplicate desktop family name",
+        )
+        desktop_family_names.add(family["family_name"])
+
+    faces = identities["faces"]
+    require(isinstance(faces, dict) and faces, "font identities lack faces")
+    for name, value in faces.items():
+        bounded_string(name, "typographic face ID", limit=64)
+        face = exact_keys(
+            value,
+            {"weight_name", "slant", "setwidth_name", "add_style_name"},
+            f"typographic face {name}",
+        )
+        for key in ("weight_name", "slant", "setwidth_name"):
+            bounded_string(face[key], f"typographic face {name}.{key}", limit=64)
+        add_style = face["add_style_name"]
+        require(
+            isinstance(add_style, str)
+            and len(add_style) <= 64
+            and all(character.isprintable() for character in add_style),
+            f"typographic face {name}.add_style_name: invalid string",
+        )
+        require(
+            face["weight_name"] in {"Medium", "Bold"},
+            f"typographic face {name}: unsupported weight",
+        )
+        require(face["slant"] in {"R", "I"}, f"typographic face {name}: invalid slant")
+        require(
+            face["setwidth_name"] in {"Condensed", "Normal", "Expanded"},
+            f"typographic face {name}: unsupported set width",
+        )
+
+    disambiguators = identities["desktop_style_disambiguators"]
+    require(
+        isinstance(disambiguators, dict),
+        "font identities desktop style disambiguators must be an object",
+    )
+    require(
+        set(disambiguators) <= names,
+        "desktop style disambiguator references an unknown font",
+    )
+    for name, value in disambiguators.items():
+        bounded_string(value, f"desktop style disambiguator for {name}", limit=64)
+
+    assignments = exact_keys(identities["assignments"], names, "font identities.assignments")
+    status_counts: Counter[str] = Counter()
+    primary_count = 0
+    role_only_count = 0
+    used_families: set[str] = set()
+    resolved: dict[str, dict[str, object]] = {}
+    for name, value in assignments.items():
+        assignment = exact_keys(
+            value,
+            {"mapping_status", "primary", "typographic_family", "typographic_face"},
+            f"font identity {name}",
+        )
+        status = assignment["mapping_status"]
+        require(
+            status in {"mapped", "role-mapped", "unmapped"},
+            f"font identity {name}: invalid mapping status",
+        )
+        status_counts[str(status)] += 1
+        family_id = assignment["typographic_family"]
+        face_id = assignment["typographic_face"]
+        require(family_id in families, f"font identity {name}: unknown typographic family")
+        require(face_id in faces, f"font identity {name}: unknown typographic face")
+        require(
+            families[family_id]["kind"]
+            == {"mapped": "text", "role-mapped": "specialty", "unmapped": "unmapped"}[status],
+            f"font identity {name}: mapping status and family kind differ",
+        )
+        used_families.add(str(family_id))
+        primary = assignment["primary"]
+        logical_name = None
+        nominal_x_size = None
+        if primary is not None:
+            primary_count += 1
+            selector = exact_keys(
+                primary,
+                {"family", "face", "size", "character_set"},
+                f"font identity {name}.primary",
+            )
+            for key, item in selector.items():
+                bounded_string(item, f"font identity {name}.primary.{key}", limit=64)
+            require(selector["family"] in families, f"font identity {name}: unknown logical family")
+            require(selector["face"] in faces, f"font identity {name}: unknown logical face")
+            require(selector["size"] in named_sizes, f"font identity {name}: unknown logical size")
+            require(
+                selector["face"] == face_id,
+                f"font identity {name}: primary and desktop face differ",
+            )
+            if status == "mapped":
+                require(
+                    selector["family"] == family_id,
+                    f"font identity {name}: primary and desktop family differ",
+                )
+            logical_name = "/".join(
+                (str(selector["family"]), str(selector["face"]), str(selector["size"]))
+            )
+            nominal_x_size = named_sizes[selector["size"]]
+        if status == "role-mapped" and primary is None:
+            role_only_count += 1
+        require(status != "mapped" or primary is not None, f"font identity {name}: mapped font lacks primary style")
+        require(status != "unmapped" or primary is None, f"font identity {name}: unmapped font has primary style")
+        family = families[family_id]
+        face = faces[face_id]
+        disambiguator = disambiguators.get(name)
+        add_style_name = " ".join(
+            value for value in (disambiguator, face["add_style_name"]) if value
+        )
+        resolved[str(name)] = {
+            "mapping_status": status,
+            "logical_name": logical_name,
+            "primary": dict(primary) if primary is not None else None,
+            "nominal_x_size": nominal_x_size,
+            "desktop_style_disambiguator": disambiguator,
+            "typographic": {
+                "family_name": family["family_name"],
+                "weight_name": face["weight_name"],
+                "slant": face["slant"],
+                "setwidth_name": face["setwidth_name"],
+                "add_style_name": add_style_name,
+            },
+        }
+
+    expected = exact_keys(
+        identities["expected"],
+        {
+            "font_count",
+            "mapped_font_count",
+            "primary_style_count",
+            "role_only_count",
+            "unmapped_font_count",
+            "typographic_family_count",
+            "desktop_style_disambiguator_count",
+        },
+        "font identities.expected",
+    )
+    for key, value in expected.items():
+        _integer(value, f"font identities.expected.{key}: invalid count", minimum=0)
+    require(expected["font_count"] == len(assignments), "font-identity count changed")
+    require(
+        expected["mapped_font_count"] == status_counts["mapped"] + status_counts["role-mapped"],
+        "mapped font-identity count changed",
+    )
+    require(expected["primary_style_count"] == primary_count, "primary style count changed")
+    require(expected["role_only_count"] == role_only_count, "role-only font count changed")
+    require(expected["unmapped_font_count"] == status_counts["unmapped"], "unmapped font count changed")
+    require(
+        expected["typographic_family_count"] == len(used_families) == len(families),
+        "typographic family closure changed",
+    )
+    require(
+        expected["desktop_style_disambiguator_count"] == len(disambiguators),
+        "desktop style disambiguator count changed",
+    )
+    return resolved
+
+
 def expected_mapping(
     mapping: dict[str, object], font_name: str, raw_code: int
 ) -> tuple[int, str]:
@@ -1159,7 +1406,12 @@ def _artifact_names(catalog: dict[str, object], label: str) -> list[str]:
 def check_distribution(output: Path, *, external_tools: bool = False) -> dict[str, object]:
     output = output.resolve()
     observed_files = _regular_tree(output)
-    required_top = {"BUILD-MANIFEST.json", "SOURCE-MANIFEST.json", "SHA256SUMS"}
+    required_top = {
+        "BUILD-MANIFEST.json",
+        "FONT-IDENTITIES.json",
+        "SOURCE-MANIFEST.json",
+        "SHA256SUMS",
+    }
     require(required_top <= set(observed_files), "distribution lacks required top-level manifests")
     source_manifest, source_catalog, source_fonts = check_source_closure(
         output / "SOURCE-MANIFEST.json"
@@ -1168,14 +1420,22 @@ def check_distribution(output: Path, *, external_tools: bool = False) -> dict[st
     raw_catalog = load_json(output / "raw" / "catalog.json")
     unicode_catalog = load_json(output / "unicode" / "catalog.json")
     mapping = load_json(UNICODE_MAPPING)
+    font_identities = load_json(FONT_IDENTITIES)
     corpus_profile = load_json(CORPUS_PROFILE)
     require(
         (output / "unicode" / "UNICODE-MAPPING.json").read_bytes()
         == UNICODE_MAPPING.read_bytes(),
         "distribution Unicode mapping is stale",
     )
+    require(
+        (output / "FONT-IDENTITIES.json").read_bytes() == FONT_IDENTITIES.read_bytes(),
+        "distribution font identities are stale",
+    )
     names = set(source_fonts)
     _validate_mapping(mapping, names, source_manifest)
+    resolved_identities = _validate_font_identities(
+        font_identities, names, source_manifest
+    )
 
     require(build_manifest.get("schema_version") == 1, "unsupported build manifest")
     require(raw_catalog.get("schema_version") == 1, "unsupported raw catalog")
@@ -1187,6 +1447,7 @@ def check_distribution(output: Path, *, external_tools: bool = False) -> dict[st
             "profile",
             "source_manifest_sha256",
             "unicode_mapping_sha256",
+            "font_identities_sha256",
             "source_normalized_geometry_sha256",
             "expected",
         },
@@ -1204,6 +1465,7 @@ def check_distribution(output: Path, *, external_tools: bool = False) -> dict[st
     )
     checked_sha256(corpus_profile["source_manifest_sha256"], "corpus profile.source_manifest_sha256")
     checked_sha256(corpus_profile["unicode_mapping_sha256"], "corpus profile.unicode_mapping_sha256")
+    checked_sha256(corpus_profile["font_identities_sha256"], "corpus profile.font_identities_sha256")
     require(
         corpus_profile["source_manifest_sha256"] == sha256(SOURCE_MANIFEST),
         "corpus profile is pinned to another source manifest",
@@ -1211,6 +1473,10 @@ def check_distribution(output: Path, *, external_tools: bool = False) -> dict[st
     require(
         corpus_profile["unicode_mapping_sha256"] == sha256(UNICODE_MAPPING),
         "corpus profile is pinned to another Unicode mapping",
+    )
+    require(
+        corpus_profile["font_identities_sha256"] == sha256(FONT_IDENTITIES),
+        "corpus profile is pinned to other logical font identities",
     )
     require(
         build_manifest.get("corpus_profile_sha256") == sha256(CORPUS_PROFILE),
@@ -1231,6 +1497,8 @@ def check_distribution(output: Path, *, external_tools: bool = False) -> dict[st
             "specimen_count",
             "raw_geometry_inventory_sha256",
             "unicode_geometry_inventory_sha256",
+            "font_identity_counts",
+            "desktop_identity_count",
         },
         "corpus profile.expected",
     )
@@ -1243,17 +1511,55 @@ def check_distribution(output: Path, *, external_tools: bool = False) -> dict[st
         == {"id": mapping.get("mapping_id"), "sha256": sha256(UNICODE_MAPPING)},
         "build Unicode mapping identity drift",
     )
+    require(
+        build_manifest.get("font_identities")
+        == {
+            "id": font_identities.get("mapping_id"),
+            "sha256": sha256(FONT_IDENTITIES),
+        },
+        "build logical-font mapping identity drift",
+    )
     require(raw_catalog.get("source_manifest_sha256") == sha256(SOURCE_MANIFEST), "raw catalog source hash drift")
     require(unicode_catalog.get("mapping_id") == mapping.get("mapping_id"), "Unicode catalog mapping id drift")
     require(unicode_catalog.get("mapping_sha256") == sha256(UNICODE_MAPPING), "Unicode catalog mapping hash drift")
+    for label, catalog in (("raw", raw_catalog), ("Unicode", unicode_catalog)):
+        require(
+            catalog.get("font_identity_mapping_id") == font_identities.get("mapping_id"),
+            f"{label} catalog logical-font mapping ID drift",
+        )
+        require(
+            catalog.get("font_identity_mapping_sha256") == sha256(FONT_IDENTITIES),
+            f"{label} catalog logical-font mapping hash drift",
+        )
 
     raw_names = _artifact_names(raw_catalog, "raw")
     unicode_names = _artifact_names(unicode_catalog, "Unicode")
     require(raw_names == unicode_names == sorted(names), "raw/Unicode/source font inventories differ")
     raw_artifacts = raw_catalog["fonts"]
     unicode_artifacts = unicode_catalog["fonts"]
+    desktop_identities: dict[tuple[object, ...], str] = {}
+    for name in sorted(names):
+        typography = resolved_identities[name]["typographic"]
+        key = (
+            typography["family_name"],
+            typography["weight_name"],
+            typography["slant"],
+            typography["setwidth_name"],
+            typography["add_style_name"],
+            source_fonts[name]["metrics"]["character_height"],
+        )
+        require(
+            key not in desktop_identities,
+            f"desktop font identity collision: {desktop_identities.get(key)} and {name}",
+        )
+        desktop_identities[key] = name
+    require(
+        build_manifest.get("desktop_identity_count") == len(desktop_identities),
+        "desktop font identity count drift",
+    )
     expected_files = {
         "BUILD-MANIFEST.json",
+        "FONT-IDENTITIES.json",
         "SOURCE-MANIFEST.json",
         "SHA256SUMS",
         "raw/catalog.json",
@@ -1278,6 +1584,30 @@ def check_distribution(output: Path, *, external_tools: bool = False) -> dict[st
     for raw_artifact, unicode_artifact in zip(raw_artifacts, unicode_artifacts):
         name = str(raw_artifact["name"])
         require(unicode_artifact.get("name") == name, f"profile identity drift at {name}")
+        logical_identity = resolved_identities[name]
+        require(
+            raw_artifact.get("logical_identity") == logical_identity,
+            f"{name}: raw logical identity drift",
+        )
+        require(
+            unicode_artifact.get("logical_identity") == logical_identity,
+            f"{name}: Unicode logical identity drift",
+        )
+        typography = logical_identity["typographic"]
+        for label, artifact in (("raw", raw_artifact), ("Unicode", unicode_artifact)):
+            profile = artifact.get("bdf_profile")
+            require(isinstance(profile, dict), f"{name}: {label} BDF profile missing")
+            for key in (
+                "family_name",
+                "weight_name",
+                "slant",
+                "setwidth_name",
+                "add_style_name",
+            ):
+                require(
+                    profile.get(key) == typography[key],
+                    f"{name}: {label} typographic {key} drift",
+                )
         source = source_fonts[name]
         stem = safe_filename(name)
         expected_paths = {
@@ -1370,7 +1700,7 @@ def check_distribution(output: Path, *, external_tools: bool = False) -> dict[st
         require(raw_bdf["size"] == unicode_bdf["size"], f"{name}: Unicode SIZE changed")
         require(raw_bdf["font_box"] == unicode_bdf["font_box"], f"{name}: Unicode bounding box changed")
         require(set(raw_bdf["properties"]) == set(unicode_bdf["properties"]), f"{name}: Unicode property inventory changed")
-        allowed_property_changes = {"ADD_STYLE_NAME", "CHARSET_REGISTRY", "CHARSET_ENCODING"}
+        allowed_property_changes = {"CHARSET_REGISTRY", "CHARSET_ENCODING"}
         for key in raw_bdf["properties"]:
             if key not in allowed_property_changes:
                 require(raw_bdf["properties"][key] == unicode_bdf["properties"][key], f"{name}: Unicode changed property {key}")

@@ -50,6 +50,7 @@ for file in \
     "$manifest" \
     "$data_root/SHA256SUMS" \
     "$data_root/metadata/BUILD-MANIFEST.json" \
+    "$data_root/metadata/FONT-IDENTITIES.json" \
     "$data_root/metadata/SOURCE-MANIFEST.json" \
     "$data_root/metadata/UNICODE-MAPPING.json"; do
     [[ -s "$file" ]] || fail "missing or empty installed file: $file"
@@ -178,9 +179,96 @@ for file in "$config_available" "$config_enabled"; do
     [[ -s "$file" ]] || fail "missing installed fontconfig file: $file"
 done
 command -v fc-query >/dev/null 2>&1 || fail "missing required tool: fc-query"
-while IFS= read -r -d '' font; do
-    family=$(fc-query --format '%{family[0]}\n' "$font" | head -n 1)
-    [[ -n "$family" ]] || fail "fc-query returned no family for $font"
-done < <(find "$font_root/otb" -type f -name '*.otb' -print0 | sort -z)
+python3 - "$font_root" "$manifest" <<'PY'
+from pathlib import Path, PurePosixPath
+import json
+import subprocess
+import sys
+
+font_root = Path(sys.argv[1])
+manifest = json.loads(Path(sys.argv[2]).read_text(encoding="utf-8"))
+
+
+def expected_style(typographic):
+    parts = []
+    if typographic["add_style_name"]:
+        parts.append(typographic["add_style_name"].replace(" ", "-"))
+    if typographic["weight_name"] == "Bold":
+        parts.append("Bold")
+    if typographic["slant"] == "I":
+        parts.append("Italic")
+    if typographic["setwidth_name"] != "Normal":
+        parts.append(typographic["setwidth_name"])
+    return " ".join(parts) or "Regular"
+
+
+expected_weights = {"Medium": 80, "Bold": 200}
+expected_slants = {"R": 0, "I": 100}
+expected_widths = {"Condensed": 75, "Normal": 100, "Expanded": 125}
+expected_identities = {}
+observed_identities = {}
+for artifact in manifest["artifacts"]:
+    name = artifact["name"]
+    identity = artifact["logical_identity"]
+    typographic = identity["typographic"]
+    otb_relative = PurePosixPath(artifact["files"]["otb"]["path"])
+    bdf_relative = PurePosixPath(artifact["files"]["bdf"]["path"])
+    otb = font_root / Path(*otb_relative.relative_to("fonts").parts)
+    bdf = font_root / Path(*bdf_relative.relative_to("fonts").parts)
+    pixel_values = [
+        line.split()[1]
+        for line in bdf.read_text(encoding="ascii").splitlines()
+        if line.startswith("PIXEL_SIZE ")
+    ]
+    if len(pixel_values) != 1:
+        raise SystemExit(f"{bdf}: expected one PIXEL_SIZE")
+    expected = (
+        typographic["family_name"],
+        expected_style(typographic),
+        expected_weights[typographic["weight_name"]],
+        expected_slants[typographic["slant"]],
+        expected_widths[typographic["setwidth_name"]],
+        float(pixel_values[0]),
+    )
+    if expected in expected_identities:
+        raise SystemExit(
+            f"desktop identity collision: {expected_identities[expected]} and {name}"
+        )
+    expected_identities[expected] = name
+    process = subprocess.run(
+        [
+            "fc-query",
+            "--format",
+            "%{family[0]}\t%{style[0]}\t%{weight}\t%{slant}\t%{width}\t%{pixelsize}\n",
+            str(otb),
+        ],
+        check=True,
+        stdout=subprocess.PIPE,
+        stderr=subprocess.PIPE,
+        text=True,
+    )
+    fields = process.stdout.rstrip("\n").split("\t")
+    if len(fields) != 6:
+        raise SystemExit(f"{otb}: fc-query returned malformed identity")
+    observed = (
+        fields[0],
+        fields[1],
+        int(fields[2]),
+        int(fields[3]),
+        int(fields[4]),
+        float(fields[5]),
+    )
+    if observed in observed_identities:
+        raise SystemExit(
+            f"observed Fontconfig identity collision: "
+            f"{observed_identities[observed]} and {name}"
+        )
+    observed_identities[observed] = name
+    if observed != expected:
+        raise SystemExit(
+            f"{otb}: Fontconfig identity differs for {name}: "
+            f"expected={expected!r}, observed={observed!r}"
+        )
+PY
 
 echo "genera-fonts-$group installed-file verification passed"

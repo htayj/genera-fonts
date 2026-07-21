@@ -50,6 +50,7 @@ Genera-fonts-<group>-<version>/
     otb/                  one-bit OTB conversions of those BDFs
   metadata/
     BUILD-MANIFEST.json
+    FONT-IDENTITIES.json
     SOURCE-MANIFEST.json
     UNICODE-MAPPING.json
 ```
@@ -62,7 +63,9 @@ manifested imported payload.
 
 OTB is a one-bit embedded-bitmap SFNT container, not a vector or outline
 conversion. The OTB checker requires the exact Unicode repertoire, advance,
-and baseline-relative set pixels of the BDF for every encoded glyph. A
+and baseline-relative set pixels of the BDF for every encoded glyph. It also
+requires the logical family and style names plus OS/2 weight, width, and
+bold/italic selection bits recorded by `FONT-IDENTITIES.json`. A
 converter may trim transparent storage rows or columns only when displayed
 geometry is unchanged. The Unicode BDF remains the authoritative derivative
 record.
@@ -87,9 +90,11 @@ checks, deterministic build, specimen closure, release build, release checks,
 and release reproducibility. Running the explicit release targets afterward
 makes the final artifacts and their checks visible at the handoff boundary.
 
-Release construction needs Python 3.10 or newer, `fonttosfnt`, and Python
-FontTools. The full external gate additionally needs `bdftopcf`, `mkfontdir`,
-Xvfb, and Xlib.
+Release construction needs Python 3.10 or newer, Python FontTools, and exactly
+`fonttosfnt 1.2.5`. Older converter releases change horizontal and bitmap-
+strike metrics, so the builder rejects them. The hosted workflow builds 1.2.5
+from the checksum-pinned X.Org source archive. The full external gate
+additionally needs `bdftopcf`, `mkfontdir`, Xvfb, and Xlib.
 
 ## Optional native packages
 
@@ -131,6 +136,8 @@ hard-coded format limits.
 A release is acceptable only when the checks establish:
 
 - exact closure over the 89 committed font records and their source manifest;
+- exact closure over the 86 reviewed logical/role mappings and three explicit
+  unmapped resident objects;
 - 11,659 source slots, 10,836 defined raw glyphs, and unchanged reviewed
   semantic geometry digests;
 - byte-for-byte preservation of display geometry during Unicode derivation;
@@ -142,7 +149,8 @@ A release is acceptable only when the checks establish:
   compilation, and native X loading/rendering where required;
 - one deterministic specimen for each of the 89 fonts and exact agreement
   with the tracked gallery;
-- exact BDF-to-OTB repertoire, advance, and one-bit display pixels;
+- exact BDF-to-OTB logical identity, repertoire, advance, and one-bit display
+  pixels;
 - complete internal and adjacent checksums, safe archive paths, fixed metadata,
   and content allowlists; and
 - two isolated release builds that are byte-for-byte identical.

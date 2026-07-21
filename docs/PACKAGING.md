@@ -26,7 +26,10 @@ written under `dist/packages/<format>/`.
 
 To install both collections in clean native containers and verify their
 package databases, installed-file closure, Fontconfig configuration, and OTB
-discoverability:
+discoverability, run the targets below. The installed-file checker also
+compares every OTB's exact
+Fontconfig family, style, weight, slant, width, and bitmap pixel size with the
+release's reviewed logical identity:
 
 ```sh
 make test-package-deb
@@ -83,4 +86,6 @@ presented as an upstream open-source license. Every package installs both
 The generic archives intentionally omit the tracked specimen gallery. The
 gallery remains a review surface in the source repository; release archives
 contain only installable Unicode BDF/OTB fonts, indexes, notices, and closed
-provenance metadata.
+provenance metadata. That metadata includes `FONT-IDENTITIES.json`, so package
+consumers can distinguish resident strike names, Genera logical selectors,
+device-specific nominal X sizes, and measured bitmap sizes.

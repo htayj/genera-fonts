@@ -11,8 +11,8 @@ lineage begins at ``genera-emu`` commit
 repository additionally emits complete X Logical Font Description (XLFD)
 names and properties.  The source formats carry pixel metrics, but not
 typographic family/weight/slant classifications or a physical design
-resolution, so those packaging choices are deliberately conservative and
-explicit.
+resolution.  Callers may supply a separate reviewed logical-font mapping;
+otherwise the packaging choices remain deliberately conservative and explicit.
 """
 
 from __future__ import annotations
@@ -206,6 +206,7 @@ def bdf_profile(
     resolution_y: int = 72,
     charset_registry: str = "Misc",
     charset_encoding: str = "FontSpecific",
+    typographic_classification_policy: str | None = None,
 ) -> dict[str, object]:
     """Build the complete XLFD/BDF metadata for one recovered bitmap font.
 
@@ -292,7 +293,8 @@ def bdf_profile(
         "resolution_policy": (
             "72 dpi interchange convention; source specifies pixels, not physical resolution"
         ),
-        "typographic_classification_policy": (
+        "typographic_classification_policy": typographic_classification_policy
+        or (
             "Unknown/OT/Unknown because the source carries no authoritative "
             "weight, slant, or setwidth metadata"
         ),

@@ -32,17 +32,43 @@ jobs:
           sudo apt-get update
           sudo DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends \
             ca-certificates \
+            build-essential \
+            curl \
             git \
+            libfontenc-dev \
+            libfreetype-dev \
             libx11-6 \
             make \
+            pkg-config \
             python3 \
             python3-fonttools \
+            x11proto-dev \
             xfonts-utils \
+            xz-utils \
             xvfb
           command -v bdftopcf
-          command -v fonttosfnt
           command -v mkfontdir
           command -v Xvfb
+
+      - name: Build pinned fonttosfnt 1.2.5
+        run: |
+          set -euo pipefail
+          archive="$RUNNER_TEMP/fonttosfnt-1.2.5.tar.xz"
+          source_dir="$RUNNER_TEMP/fonttosfnt-1.2.5"
+          prefix="$RUNNER_TEMP/fonttosfnt-1.2.5-install"
+          curl --fail --location --silent --show-error \
+            --output "$archive" \
+            https://xorg.freedesktop.org/releases/individual/app/fonttosfnt-1.2.5.tar.xz
+          printf '%s  %s\n' \
+            2e251e66e8753c08aa280b26fd4a10d0d88e7d9bba5c8aac3d3fb36705e5918e \
+            "$archive" | sha256sum --check --strict
+          tar --extract --xz --file "$archive" --directory "$RUNNER_TEMP"
+          cd "$source_dir"
+          ./configure --prefix="$prefix"
+          make --jobs=2
+          make install
+          test "$("$prefix/bin/fonttosfnt" --version)" = 'fonttosfnt 1.2.5'
+          echo "$prefix/bin" >> "$GITHUB_PATH"
 
       - name: Compute reproducible release inputs
         id: version

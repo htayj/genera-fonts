@@ -1,0 +1,704 @@
+{
+  "schema_version": 1,
+  "mapping_id": "symbolics-genera-8.5-resident-logical-fonts-v1",
+  "profile": "Symbolics Genera 8.5 resident logical font identities",
+  "source": {
+    "profile": "resident FONT-SPECS, reviewed character-set roles, and Genera X logical-size crosswalk",
+    "vlod_sha256": "a8ee5e86cc7e322f7385af3e0cd579d7650d4dcfc3ce328acbf8b25515dd0672",
+    "x_size_evidence": {
+      "path": "sys.sct/x11/screen/x-display-device.lisp.~9~",
+      "sha256": "85745c5b21ec557b24480bc2dcf1d527017614a4d344c888825157707acdedf3"
+    }
+  },
+  "policy": {
+    "artifact_identity": "Resident FONT object names and filenames remain stable physical-strike identities.",
+    "primary_identity": "A primary family, face, and logical size is recorded only when resident FONT-SPECS supplies a defensible first mapping.",
+    "desktop_identity": "BDF and OTB family, weight, slant, and set width use this reviewed mapping rather than parsing resident-name suffixes.",
+    "desktop_disambiguation": "A symbolic-size Strike qualifier is added only where two distinct resident objects would otherwise have the same desktop family, style, and measured pixel size.",
+    "specialty_identity": "Specialty character-set fonts use isolated desktop families so they cannot satisfy ordinary body-text family requests.",
+    "size_identity": "Logical named size, the device-specific nominal X size, and the measured resident raster line height remain separate.",
+    "unmapped_identity": "40VR, EINY8, and VT100 retain separate neutral desktop identities without fabricating a Genera FONT-SPECS tuple."
+  },
+  "x_named_sizes": {
+    "TINY": 6,
+    "VERY-SMALL": 8,
+    "SMALL": 10,
+    "NORMAL": 12,
+    "LARGE": 14,
+    "VERY-LARGE": 18,
+    "HUGE": 24
+  },
+  "families": {
+    "40VR": {
+      "family_name": "Symbolics Genera 40VR",
+      "kind": "unmapped"
+    },
+    "ARROWS": {
+      "family_name": "Symbolics Genera Arrows",
+      "kind": "specialty"
+    },
+    "BOX": {
+      "family_name": "Symbolics Genera Box Font",
+      "kind": "specialty"
+    },
+    "DUTCH": {
+      "family_name": "Symbolics Genera Dutch",
+      "kind": "text"
+    },
+    "EDITOR-SYMBOLS": {
+      "family_name": "Symbolics Genera Editor Symbols",
+      "kind": "specialty"
+    },
+    "EINY8": {
+      "family_name": "Symbolics Genera EINY8",
+      "kind": "unmapped"
+    },
+    "EUREX": {
+      "family_name": "Symbolics Genera Eurex",
+      "kind": "text"
+    },
+    "FIX": {
+      "family_name": "Symbolics Genera Fix",
+      "kind": "text"
+    },
+    "GREEK": {
+      "family_name": "Symbolics Genera Greek",
+      "kind": "specialty"
+    },
+    "JESS": {
+      "family_name": "Symbolics Genera Jess",
+      "kind": "text"
+    },
+    "MATH": {
+      "family_name": "Symbolics Genera Math",
+      "kind": "specialty"
+    },
+    "MOUSE": {
+      "family_name": "Symbolics Genera Mouse",
+      "kind": "specialty"
+    },
+    "SWISS": {
+      "family_name": "Symbolics Genera Swiss",
+      "kind": "text"
+    },
+    "SYMBOLS": {
+      "family_name": "Symbolics Genera Symbols",
+      "kind": "specialty"
+    },
+    "VT100": {
+      "family_name": "Symbolics Genera VT100",
+      "kind": "unmapped"
+    }
+  },
+  "faces": {
+    "ROMAN": {
+      "weight_name": "Medium",
+      "slant": "R",
+      "setwidth_name": "Normal",
+      "add_style_name": ""
+    },
+    "BOLD": {
+      "weight_name": "Bold",
+      "slant": "R",
+      "setwidth_name": "Normal",
+      "add_style_name": ""
+    },
+    "ITALIC": {
+      "weight_name": "Medium",
+      "slant": "I",
+      "setwidth_name": "Normal",
+      "add_style_name": ""
+    },
+    "BOLD-ITALIC": {
+      "weight_name": "Bold",
+      "slant": "I",
+      "setwidth_name": "Normal",
+      "add_style_name": ""
+    },
+    "BOLD-EXTENDED": {
+      "weight_name": "Bold",
+      "slant": "R",
+      "setwidth_name": "Expanded",
+      "add_style_name": ""
+    },
+    "CONDENSED": {
+      "weight_name": "Medium",
+      "slant": "R",
+      "setwidth_name": "Condensed",
+      "add_style_name": ""
+    },
+    "EXTRA-CONDENSED": {
+      "weight_name": "Medium",
+      "slant": "R",
+      "setwidth_name": "Condensed",
+      "add_style_name": "Extra"
+    },
+    "CONDENSED-CAPS": {
+      "weight_name": "Medium",
+      "slant": "R",
+      "setwidth_name": "Condensed",
+      "add_style_name": "Caps"
+    },
+    "BOLD-CONDENSED-CAPS": {
+      "weight_name": "Bold",
+      "slant": "R",
+      "setwidth_name": "Condensed",
+      "add_style_name": "Caps"
+    },
+    "UPPERCASE": {
+      "weight_name": "Medium",
+      "slant": "R",
+      "setwidth_name": "Normal",
+      "add_style_name": "Uppercase"
+    }
+  },
+  "desktop_style_disambiguators": {
+    "TR10BI": "Small Strike",
+    "TR8BI": "Very Small Strike"
+  },
+  "assignments": {
+    "40VR": {
+      "mapping_status": "unmapped",
+      "primary": null,
+      "typographic_family": "40VR",
+      "typographic_face": "ROMAN"
+    },
+    "5X5": {
+      "mapping_status": "mapped",
+      "primary": {"family": "FIX", "face": "UPPERCASE", "size": "VERY-SMALL", "character_set": "STANDARD"},
+      "typographic_family": "FIX",
+      "typographic_face": "UPPERCASE"
+    },
+    "BIGFNT": {
+      "mapping_status": "mapped",
+      "primary": {"family": "FIX", "face": "ROMAN", "size": "VERY-LARGE", "character_set": "STANDARD"},
+      "typographic_family": "FIX",
+      "typographic_face": "ROMAN"
+    },
+    "BIGFNTB": {
+      "mapping_status": "mapped",
+      "primary": {"family": "FIX", "face": "BOLD", "size": "VERY-LARGE", "character_set": "STANDARD"},
+      "typographic_family": "FIX",
+      "typographic_face": "BOLD"
+    },
+    "BIGFNTBI": {
+      "mapping_status": "mapped",
+      "primary": {"family": "FIX", "face": "BOLD-ITALIC", "size": "VERY-LARGE", "character_set": "STANDARD"},
+      "typographic_family": "FIX",
+      "typographic_face": "BOLD-ITALIC"
+    },
+    "BIGFNTI": {
+      "mapping_status": "mapped",
+      "primary": {"family": "FIX", "face": "ITALIC", "size": "VERY-LARGE", "character_set": "STANDARD"},
+      "typographic_family": "FIX",
+      "typographic_face": "ITALIC"
+    },
+    "BOXFONT": {
+      "mapping_status": "role-mapped",
+      "primary": null,
+      "typographic_family": "BOX",
+      "typographic_face": "ROMAN"
+    },
+    "CPTFONT": {
+      "mapping_status": "mapped",
+      "primary": {"family": "FIX", "face": "ROMAN", "size": "NORMAL", "character_set": "STANDARD"},
+      "typographic_family": "FIX",
+      "typographic_face": "ROMAN"
+    },
+    "CPTFONTB": {
+      "mapping_status": "mapped",
+      "primary": {"family": "FIX", "face": "BOLD-EXTENDED", "size": "NORMAL", "character_set": "STANDARD"},
+      "typographic_family": "FIX",
+      "typographic_face": "BOLD-EXTENDED"
+    },
+    "CPTFONTBI": {
+      "mapping_status": "mapped",
+      "primary": {"family": "FIX", "face": "BOLD-ITALIC", "size": "NORMAL", "character_set": "STANDARD"},
+      "typographic_family": "FIX",
+      "typographic_face": "BOLD-ITALIC"
+    },
+    "CPTFONTC": {
+      "mapping_status": "mapped",
+      "primary": {"family": "FIX", "face": "CONDENSED", "size": "NORMAL", "character_set": "STANDARD"},
+      "typographic_family": "FIX",
+      "typographic_face": "CONDENSED"
+    },
+    "CPTFONTCB": {
+      "mapping_status": "mapped",
+      "primary": {"family": "FIX", "face": "BOLD", "size": "NORMAL", "character_set": "STANDARD"},
+      "typographic_family": "FIX",
+      "typographic_face": "BOLD"
+    },
+    "CPTFONTCC": {
+      "mapping_status": "mapped",
+      "primary": {"family": "FIX", "face": "EXTRA-CONDENSED", "size": "NORMAL", "character_set": "STANDARD"},
+      "typographic_family": "FIX",
+      "typographic_face": "EXTRA-CONDENSED"
+    },
+    "CPTFONTI": {
+      "mapping_status": "mapped",
+      "primary": {"family": "FIX", "face": "ITALIC", "size": "NORMAL", "character_set": "STANDARD"},
+      "typographic_family": "FIX",
+      "typographic_face": "ITALIC"
+    },
+    "DUTCH14": {
+      "mapping_status": "mapped",
+      "primary": {"family": "DUTCH", "face": "ROMAN", "size": "LARGE", "character_set": "STANDARD"},
+      "typographic_family": "DUTCH",
+      "typographic_face": "ROMAN"
+    },
+    "DUTCH14B": {
+      "mapping_status": "mapped",
+      "primary": {"family": "DUTCH", "face": "BOLD", "size": "LARGE", "character_set": "STANDARD"},
+      "typographic_family": "DUTCH",
+      "typographic_face": "BOLD"
+    },
+    "DUTCH14BI": {
+      "mapping_status": "mapped",
+      "primary": {"family": "DUTCH", "face": "BOLD-ITALIC", "size": "LARGE", "character_set": "STANDARD"},
+      "typographic_family": "DUTCH",
+      "typographic_face": "BOLD-ITALIC"
+    },
+    "DUTCH14I": {
+      "mapping_status": "mapped",
+      "primary": {"family": "DUTCH", "face": "ITALIC", "size": "LARGE", "character_set": "STANDARD"},
+      "typographic_family": "DUTCH",
+      "typographic_face": "ITALIC"
+    },
+    "DUTCH20": {
+      "mapping_status": "mapped",
+      "primary": {"family": "DUTCH", "face": "ROMAN", "size": "VERY-LARGE", "character_set": "STANDARD"},
+      "typographic_family": "DUTCH",
+      "typographic_face": "ROMAN"
+    },
+    "DUTCH20B": {
+      "mapping_status": "mapped",
+      "primary": {"family": "DUTCH", "face": "BOLD", "size": "VERY-LARGE", "character_set": "STANDARD"},
+      "typographic_family": "DUTCH",
+      "typographic_face": "BOLD"
+    },
+    "DUTCH20BI": {
+      "mapping_status": "mapped",
+      "primary": {"family": "DUTCH", "face": "BOLD-ITALIC", "size": "VERY-LARGE", "character_set": "STANDARD"},
+      "typographic_family": "DUTCH",
+      "typographic_face": "BOLD-ITALIC"
+    },
+    "DUTCH20I": {
+      "mapping_status": "mapped",
+      "primary": {"family": "DUTCH", "face": "ITALIC", "size": "VERY-LARGE", "character_set": "STANDARD"},
+      "typographic_family": "DUTCH",
+      "typographic_face": "ITALIC"
+    },
+    "EDSYMBOL12": {
+      "mapping_status": "role-mapped",
+      "primary": null,
+      "typographic_family": "EDITOR-SYMBOLS",
+      "typographic_face": "ROMAN"
+    },
+    "EINY7": {
+      "mapping_status": "mapped",
+      "primary": {"family": "FIX", "face": "ROMAN", "size": "VERY-SMALL", "character_set": "STANDARD"},
+      "typographic_family": "FIX",
+      "typographic_face": "ROMAN"
+    },
+    "EINY8": {
+      "mapping_status": "unmapped",
+      "primary": null,
+      "typographic_family": "EINY8",
+      "typographic_face": "ROMAN"
+    },
+    "EUREX21I": {
+      "mapping_status": "mapped",
+      "primary": {"family": "EUREX", "face": "ITALIC", "size": "VERY-LARGE", "character_set": "STANDARD"},
+      "typographic_family": "EUREX",
+      "typographic_face": "ITALIC"
+    },
+    "EUREX24I": {
+      "mapping_status": "mapped",
+      "primary": {"family": "EUREX", "face": "ITALIC", "size": "HUGE", "character_set": "STANDARD"},
+      "typographic_family": "EUREX",
+      "typographic_face": "ITALIC"
+    },
+    "HIPPO10": {
+      "mapping_status": "role-mapped",
+      "primary": null,
+      "typographic_family": "GREEK",
+      "typographic_face": "ROMAN"
+    },
+    "HIPPO12": {
+      "mapping_status": "role-mapped",
+      "primary": null,
+      "typographic_family": "GREEK",
+      "typographic_face": "ROMAN"
+    },
+    "HL10": {
+      "mapping_status": "mapped",
+      "primary": {"family": "SWISS", "face": "ROMAN", "size": "SMALL", "character_set": "STANDARD"},
+      "typographic_family": "SWISS",
+      "typographic_face": "ROMAN"
+    },
+    "HL10B": {
+      "mapping_status": "mapped",
+      "primary": {"family": "SWISS", "face": "BOLD", "size": "SMALL", "character_set": "STANDARD"},
+      "typographic_family": "SWISS",
+      "typographic_face": "BOLD"
+    },
+    "HL10BI": {
+      "mapping_status": "mapped",
+      "primary": {"family": "SWISS", "face": "BOLD-ITALIC", "size": "SMALL", "character_set": "STANDARD"},
+      "typographic_family": "SWISS",
+      "typographic_face": "BOLD-ITALIC"
+    },
+    "HL10I": {
+      "mapping_status": "mapped",
+      "primary": {"family": "SWISS", "face": "ITALIC", "size": "SMALL", "character_set": "STANDARD"},
+      "typographic_family": "SWISS",
+      "typographic_face": "ITALIC"
+    },
+    "HL12": {
+      "mapping_status": "mapped",
+      "primary": {"family": "SWISS", "face": "ROMAN", "size": "NORMAL", "character_set": "STANDARD"},
+      "typographic_family": "SWISS",
+      "typographic_face": "ROMAN"
+    },
+    "HL12B": {
+      "mapping_status": "mapped",
+      "primary": {"family": "SWISS", "face": "BOLD", "size": "NORMAL", "character_set": "STANDARD"},
+      "typographic_family": "SWISS",
+      "typographic_face": "BOLD"
+    },
+    "HL12BI": {
+      "mapping_status": "mapped",
+      "primary": {"family": "SWISS", "face": "BOLD-ITALIC", "size": "NORMAL", "character_set": "STANDARD"},
+      "typographic_family": "SWISS",
+      "typographic_face": "BOLD-ITALIC"
+    },
+    "HL12I": {
+      "mapping_status": "mapped",
+      "primary": {"family": "SWISS", "face": "ITALIC", "size": "NORMAL", "character_set": "STANDARD"},
+      "typographic_family": "SWISS",
+      "typographic_face": "ITALIC"
+    },
+    "HL14": {
+      "mapping_status": "mapped",
+      "primary": {"family": "SWISS", "face": "ROMAN", "size": "LARGE", "character_set": "STANDARD"},
+      "typographic_family": "SWISS",
+      "typographic_face": "ROMAN"
+    },
+    "HL14B": {
+      "mapping_status": "mapped",
+      "primary": {"family": "SWISS", "face": "BOLD", "size": "LARGE", "character_set": "STANDARD"},
+      "typographic_family": "SWISS",
+      "typographic_face": "BOLD"
+    },
+    "HL14BI": {
+      "mapping_status": "mapped",
+      "primary": {"family": "SWISS", "face": "BOLD-ITALIC", "size": "LARGE", "character_set": "STANDARD"},
+      "typographic_family": "SWISS",
+      "typographic_face": "BOLD-ITALIC"
+    },
+    "HL14I": {
+      "mapping_status": "mapped",
+      "primary": {"family": "SWISS", "face": "ITALIC", "size": "LARGE", "character_set": "STANDARD"},
+      "typographic_family": "SWISS",
+      "typographic_face": "ITALIC"
+    },
+    "HL8": {
+      "mapping_status": "mapped",
+      "primary": {"family": "SWISS", "face": "ROMAN", "size": "VERY-SMALL", "character_set": "STANDARD"},
+      "typographic_family": "SWISS",
+      "typographic_face": "ROMAN"
+    },
+    "HL8B": {
+      "mapping_status": "mapped",
+      "primary": {"family": "SWISS", "face": "BOLD", "size": "VERY-SMALL", "character_set": "STANDARD"},
+      "typographic_family": "SWISS",
+      "typographic_face": "BOLD"
+    },
+    "HL8BI": {
+      "mapping_status": "mapped",
+      "primary": {"family": "SWISS", "face": "BOLD-ITALIC", "size": "VERY-SMALL", "character_set": "STANDARD"},
+      "typographic_family": "SWISS",
+      "typographic_face": "BOLD-ITALIC"
+    },
+    "HL8I": {
+      "mapping_status": "mapped",
+      "primary": {"family": "SWISS", "face": "ITALIC", "size": "VERY-SMALL", "character_set": "STANDARD"},
+      "typographic_family": "SWISS",
+      "typographic_face": "ITALIC"
+    },
+    "JESS11": {
+      "mapping_status": "mapped",
+      "primary": {"family": "JESS", "face": "ROMAN", "size": "SMALL", "character_set": "STANDARD"},
+      "typographic_family": "JESS",
+      "typographic_face": "ROMAN"
+    },
+    "JESS11B": {
+      "mapping_status": "mapped",
+      "primary": {"family": "JESS", "face": "BOLD", "size": "SMALL", "character_set": "STANDARD"},
+      "typographic_family": "JESS",
+      "typographic_face": "BOLD"
+    },
+    "JESS11I": {
+      "mapping_status": "mapped",
+      "primary": {"family": "JESS", "face": "ITALIC", "size": "SMALL", "character_set": "STANDARD"},
+      "typographic_family": "JESS",
+      "typographic_face": "ITALIC"
+    },
+    "JESS13": {
+      "mapping_status": "mapped",
+      "primary": {"family": "JESS", "face": "ROMAN", "size": "NORMAL", "character_set": "STANDARD"},
+      "typographic_family": "JESS",
+      "typographic_face": "ROMAN"
+    },
+    "JESS13B": {
+      "mapping_status": "mapped",
+      "primary": {"family": "JESS", "face": "BOLD", "size": "NORMAL", "character_set": "STANDARD"},
+      "typographic_family": "JESS",
+      "typographic_face": "BOLD"
+    },
+    "JESS13I": {
+      "mapping_status": "mapped",
+      "primary": {"family": "JESS", "face": "ITALIC", "size": "NORMAL", "character_set": "STANDARD"},
+      "typographic_family": "JESS",
+      "typographic_face": "ITALIC"
+    },
+    "JESS14": {
+      "mapping_status": "mapped",
+      "primary": {"family": "JESS", "face": "ROMAN", "size": "LARGE", "character_set": "STANDARD"},
+      "typographic_family": "JESS",
+      "typographic_face": "ROMAN"
+    },
+    "JESS14B": {
+      "mapping_status": "mapped",
+      "primary": {"family": "JESS", "face": "BOLD", "size": "LARGE", "character_set": "STANDARD"},
+      "typographic_family": "JESS",
+      "typographic_face": "BOLD"
+    },
+    "JESS14I": {
+      "mapping_status": "mapped",
+      "primary": {"family": "JESS", "face": "ITALIC", "size": "LARGE", "character_set": "STANDARD"},
+      "typographic_family": "JESS",
+      "typographic_face": "ITALIC"
+    },
+    "MATH10": {
+      "mapping_status": "role-mapped",
+      "primary": null,
+      "typographic_family": "MATH",
+      "typographic_face": "ROMAN"
+    },
+    "MATH12": {
+      "mapping_status": "role-mapped",
+      "primary": null,
+      "typographic_family": "MATH",
+      "typographic_face": "ROMAN"
+    },
+    "MEDFNT": {
+      "mapping_status": "mapped",
+      "primary": {"family": "FIX", "face": "ROMAN", "size": "LARGE", "character_set": "STANDARD"},
+      "typographic_family": "FIX",
+      "typographic_face": "ROMAN"
+    },
+    "MEDFNTB": {
+      "mapping_status": "mapped",
+      "primary": {"family": "FIX", "face": "BOLD", "size": "LARGE", "character_set": "STANDARD"},
+      "typographic_family": "FIX",
+      "typographic_face": "BOLD"
+    },
+    "MEDFNTBI": {
+      "mapping_status": "mapped",
+      "primary": {"family": "FIX", "face": "BOLD-ITALIC", "size": "LARGE", "character_set": "STANDARD"},
+      "typographic_family": "FIX",
+      "typographic_face": "BOLD-ITALIC"
+    },
+    "MEDFNTI": {
+      "mapping_status": "mapped",
+      "primary": {"family": "FIX", "face": "ITALIC", "size": "LARGE", "character_set": "STANDARD"},
+      "typographic_family": "FIX",
+      "typographic_face": "ITALIC"
+    },
+    "MOUSE": {
+      "mapping_status": "role-mapped",
+      "primary": {"family": "FIX", "face": "ROMAN", "size": "NORMAL", "character_set": "MOUSE"},
+      "typographic_family": "MOUSE",
+      "typographic_face": "ROMAN"
+    },
+    "NARROW": {
+      "mapping_status": "role-mapped",
+      "primary": {"family": "FIX", "face": "ROMAN", "size": "NORMAL", "character_set": "ARROW"},
+      "typographic_family": "ARROWS",
+      "typographic_face": "ROMAN"
+    },
+    "SWISS12-CCAPS": {
+      "mapping_status": "mapped",
+      "primary": {"family": "SWISS", "face": "CONDENSED-CAPS", "size": "NORMAL", "character_set": "STANDARD"},
+      "typographic_family": "SWISS",
+      "typographic_face": "CONDENSED-CAPS"
+    },
+    "SWISS12B-CCAPS": {
+      "mapping_status": "mapped",
+      "primary": {"family": "SWISS", "face": "BOLD-CONDENSED-CAPS", "size": "NORMAL", "character_set": "STANDARD"},
+      "typographic_family": "SWISS",
+      "typographic_face": "BOLD-CONDENSED-CAPS"
+    },
+    "SWISS20": {
+      "mapping_status": "mapped",
+      "primary": {"family": "SWISS", "face": "ROMAN", "size": "VERY-LARGE", "character_set": "STANDARD"},
+      "typographic_family": "SWISS",
+      "typographic_face": "ROMAN"
+    },
+    "SWISS20B": {
+      "mapping_status": "mapped",
+      "primary": {"family": "SWISS", "face": "BOLD", "size": "VERY-LARGE", "character_set": "STANDARD"},
+      "typographic_family": "SWISS",
+      "typographic_face": "BOLD"
+    },
+    "SWISS20BI": {
+      "mapping_status": "mapped",
+      "primary": {"family": "SWISS", "face": "BOLD-ITALIC", "size": "VERY-LARGE", "character_set": "STANDARD"},
+      "typographic_family": "SWISS",
+      "typographic_face": "BOLD-ITALIC"
+    },
+    "SWISS20I": {
+      "mapping_status": "mapped",
+      "primary": {"family": "SWISS", "face": "ITALIC", "size": "VERY-LARGE", "character_set": "STANDARD"},
+      "typographic_family": "SWISS",
+      "typographic_face": "ITALIC"
+    },
+    "SYMBOL10": {
+      "mapping_status": "role-mapped",
+      "primary": null,
+      "typographic_family": "SYMBOLS",
+      "typographic_face": "ROMAN"
+    },
+    "SYMBOL12": {
+      "mapping_status": "role-mapped",
+      "primary": {"family": "SWISS", "face": "ROMAN", "size": "NORMAL", "character_set": "SYMBOL"},
+      "typographic_family": "SYMBOLS",
+      "typographic_face": "ROMAN"
+    },
+    "TINY": {
+      "mapping_status": "mapped",
+      "primary": {"family": "FIX", "face": "ROMAN", "size": "TINY", "character_set": "STANDARD"},
+      "typographic_family": "FIX",
+      "typographic_face": "ROMAN"
+    },
+    "TR10": {
+      "mapping_status": "mapped",
+      "primary": {"family": "DUTCH", "face": "ROMAN", "size": "SMALL", "character_set": "STANDARD"},
+      "typographic_family": "DUTCH",
+      "typographic_face": "ROMAN"
+    },
+    "TR10B": {
+      "mapping_status": "mapped",
+      "primary": {"family": "DUTCH", "face": "BOLD", "size": "SMALL", "character_set": "STANDARD"},
+      "typographic_family": "DUTCH",
+      "typographic_face": "BOLD"
+    },
+    "TR10BI": {
+      "mapping_status": "mapped",
+      "primary": {"family": "DUTCH", "face": "BOLD-ITALIC", "size": "SMALL", "character_set": "STANDARD"},
+      "typographic_family": "DUTCH",
+      "typographic_face": "BOLD-ITALIC"
+    },
+    "TR10I": {
+      "mapping_status": "mapped",
+      "primary": {"family": "DUTCH", "face": "ITALIC", "size": "SMALL", "character_set": "STANDARD"},
+      "typographic_family": "DUTCH",
+      "typographic_face": "ITALIC"
+    },
+    "TR12": {
+      "mapping_status": "mapped",
+      "primary": {"family": "DUTCH", "face": "ROMAN", "size": "NORMAL", "character_set": "STANDARD"},
+      "typographic_family": "DUTCH",
+      "typographic_face": "ROMAN"
+    },
+    "TR12B": {
+      "mapping_status": "mapped",
+      "primary": {"family": "DUTCH", "face": "BOLD", "size": "NORMAL", "character_set": "STANDARD"},
+      "typographic_family": "DUTCH",
+      "typographic_face": "BOLD"
+    },
+    "TR12BI": {
+      "mapping_status": "mapped",
+      "primary": {"family": "DUTCH", "face": "BOLD-ITALIC", "size": "NORMAL", "character_set": "STANDARD"},
+      "typographic_family": "DUTCH",
+      "typographic_face": "BOLD-ITALIC"
+    },
+    "TR12I": {
+      "mapping_status": "mapped",
+      "primary": {"family": "DUTCH", "face": "ITALIC", "size": "NORMAL", "character_set": "STANDARD"},
+      "typographic_family": "DUTCH",
+      "typographic_face": "ITALIC"
+    },
+    "TR8": {
+      "mapping_status": "mapped",
+      "primary": {"family": "DUTCH", "face": "ROMAN", "size": "VERY-SMALL", "character_set": "STANDARD"},
+      "typographic_family": "DUTCH",
+      "typographic_face": "ROMAN"
+    },
+    "TR8B": {
+      "mapping_status": "mapped",
+      "primary": {"family": "DUTCH", "face": "BOLD", "size": "VERY-SMALL", "character_set": "STANDARD"},
+      "typographic_family": "DUTCH",
+      "typographic_face": "BOLD"
+    },
+    "TR8BI": {
+      "mapping_status": "mapped",
+      "primary": {"family": "DUTCH", "face": "BOLD-ITALIC", "size": "VERY-SMALL", "character_set": "STANDARD"},
+      "typographic_family": "DUTCH",
+      "typographic_face": "BOLD-ITALIC"
+    },
+    "TR8I": {
+      "mapping_status": "mapped",
+      "primary": {"family": "DUTCH", "face": "ITALIC", "size": "VERY-SMALL", "character_set": "STANDARD"},
+      "typographic_family": "DUTCH",
+      "typographic_face": "ITALIC"
+    },
+    "TVFONT": {
+      "mapping_status": "mapped",
+      "primary": {"family": "FIX", "face": "ROMAN", "size": "SMALL", "character_set": "STANDARD"},
+      "typographic_family": "FIX",
+      "typographic_face": "ROMAN"
+    },
+    "TVFONTB": {
+      "mapping_status": "mapped",
+      "primary": {"family": "FIX", "face": "BOLD-EXTENDED", "size": "SMALL", "character_set": "STANDARD"},
+      "typographic_family": "FIX",
+      "typographic_face": "BOLD-EXTENDED"
+    },
+    "TVFONTBI": {
+      "mapping_status": "mapped",
+      "primary": {"family": "FIX", "face": "BOLD-ITALIC", "size": "SMALL", "character_set": "STANDARD"},
+      "typographic_family": "FIX",
+      "typographic_face": "BOLD-ITALIC"
+    },
+    "TVFONTCB": {
+      "mapping_status": "mapped",
+      "primary": {"family": "FIX", "face": "BOLD", "size": "SMALL", "character_set": "STANDARD"},
+      "typographic_family": "FIX",
+      "typographic_face": "BOLD"
+    },
+    "TVFONTI": {
+      "mapping_status": "mapped",
+      "primary": {"family": "FIX", "face": "ITALIC", "size": "SMALL", "character_set": "STANDARD"},
+      "typographic_family": "FIX",
+      "typographic_face": "ITALIC"
+    },
+    "VT100": {
+      "mapping_status": "unmapped",
+      "primary": null,
+      "typographic_family": "VT100",
+      "typographic_face": "ROMAN"
+    }
+  },
+  "expected": {
+    "font_count": 89,
+    "mapped_font_count": 86,
+    "primary_style_count": 79,
+    "role_only_count": 7,
+    "unmapped_font_count": 3,
+    "typographic_family_count": 15,
+    "desktop_style_disambiguator_count": 2
+  }
+}
