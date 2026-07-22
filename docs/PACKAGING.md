@@ -1,21 +1,23 @@
 # Packaging and installation
 
-All installable packages are built from the two checked generic release
-archives. They never consume the licensed VLOD, the committed normalized
-source records, raw-code BDFs, or glyph sheets. Each format produces separate,
-co-installable `genera-fonts-latin` and `genera-fonts-symbols` packages.
+The native release packages are built from the two checked generic archives.
+The stable AUR recipe instead rebuilds those archives from the exact tagged
+public source. Neither path consumes the licensed VLOD or installs committed
+normalized source records, raw-code BDFs, or glyph sheets. Each format
+produces separate, co-installable `genera-fonts-latin` and
+`genera-fonts-symbols` packages.
 
 ## Native package builders
 
 Set the same version and source epoch used for the release archives:
 
 ```sh
-make package-deb  VERSION=v0.1.0 SOURCE_DATE_EPOCH=1
-make package-rpm  VERSION=v0.1.0 SOURCE_DATE_EPOCH=1
-make package-arch VERSION=v0.1.0 SOURCE_DATE_EPOCH=1
-make package-void VERSION=v0.1.0 SOURCE_DATE_EPOCH=1
+make package-deb  VERSION=v0.1.1 SOURCE_DATE_EPOCH=1784671066
+make package-rpm  VERSION=v0.1.1 SOURCE_DATE_EPOCH=1784671066
+make package-arch VERSION=v0.1.1 SOURCE_DATE_EPOCH=1784671066
+make package-void VERSION=v0.1.1 SOURCE_DATE_EPOCH=1784671066
 # or build all four
-make packages VERSION=v0.1.0 SOURCE_DATE_EPOCH=1
+make packages VERSION=v0.1.1 SOURCE_DATE_EPOCH=1784671066
 ```
 
 DEB and RPM use the host packaging tools. Arch uses `makepkg` and a locked,
@@ -67,13 +69,33 @@ The local Guix module is
 outputs and records BSD-3-Clause project work separately from the required
 typeface publication notice.
 
-## Distribution recipe templates
+## Arch User Repository
 
-`packaging/aur/` and `packaging/void/` contain AUR and Void recipe templates.
-They name the public upstream `https://github.com/htayj/genera-fonts`. Do not
-submit them until a versioned release has been published and the recipe
-revisions, source hashes, and release URLs have been updated against that tag.
-No Gentoo overlay is included in this initial profile.
+The AUR package base
+[`genera-fonts`](https://aur.archlinux.org/pkgbase/genera-fonts) builds the
+tagged source release and produces `genera-fonts-latin` and
+`genera-fonts-symbols`. It does not download or redistribute the native Arch
+packages attached to the GitHub release.
+
+Build and install both split packages with the standard AUR workflow:
+
+```sh
+git clone https://aur.archlinux.org/genera-fonts.git
+cd genera-fonts
+makepkg --syncdeps --install
+```
+
+The packages install only Unicode BDF and Unicode-derived OTB fonts below
+`/usr/share/fonts/genera-fonts/<group>/`. Arch discovers those directories
+recursively and refreshes its font cache through existing package-manager
+hooks, so no package-owned Fontconfig configuration or cache hook is needed.
+
+## Distribution recipes
+
+`packaging/aur/` contains the published stable AUR source recipe and
+`packaging/void/` contains local Void templates. Both name the public upstream
+`https://github.com/htayj/genera-fonts`. No Gentoo overlay is included in this
+initial profile.
 
 ## License metadata
 

@@ -69,7 +69,7 @@ gate.
 The complete local gate is:
 
 ```sh
-make ci VERSION=v0.1.0
+make ci VERSION=v0.1.1
 ```
 
 The generator itself requires Python 3.10 or newer and the standard library.
@@ -186,14 +186,14 @@ U+0041–U+005A or U+0061–U+007A; **symbols** is the exact complement. The
 current closure is 78 Latin fonts and 11 symbols fonts.
 
 ```sh
-make release VERSION=v0.1.0
-make check-release VERSION=v0.1.0
-make release-reproducible VERSION=v0.1.0
+make release VERSION=v0.1.1
+make check-release VERSION=v0.1.1
+make release-reproducible VERSION=v0.1.1
 ```
 
 The two deterministic generic archives are
-`Genera-fonts-latin-v0.1.0.tar.gz` and
-`Genera-fonts-symbols-v0.1.0.tar.gz`, with adjacent SHA-256 files. Unicode
+`Genera-fonts-latin-v0.1.1.tar.gz` and
+`Genera-fonts-symbols-v0.1.1.tar.gz`, with adjacent SHA-256 files. Unicode
 BDFs and their one-bit OTB conversions are the user-facing fonts. The generic
 archives exclude the VLOD, imported source JSON, raw-code BDFs, raw sheets,
 and all other historical raw-code material. Each archive carries the exact
@@ -204,12 +204,12 @@ plan.
 Optional native packages are built from those checked archives:
 
 ```sh
-make package-deb VERSION=v0.1.0
-make package-rpm VERSION=v0.1.0
-make package-arch VERSION=v0.1.0
-make package-void VERSION=v0.1.0
+make package-deb VERSION=v0.1.1
+make package-rpm VERSION=v0.1.1
+make package-arch VERSION=v0.1.1
+make package-void VERSION=v0.1.1
 # or all four
-make packages VERSION=v0.1.0
+make packages VERSION=v0.1.1
 ```
 
 Each platform receives co-installable `genera-fonts-latin` and

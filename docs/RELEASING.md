@@ -23,14 +23,14 @@ fonts, 89 total.
 
 ## Generic archives
 
-For version `v0.1.0`, the build writes two deterministic archives and adjacent
+For version `v0.1.1`, the build writes two deterministic archives and adjacent
 checksums under `dist/release/`:
 
 ```text
-Genera-fonts-latin-v0.1.0.tar.gz
-Genera-fonts-latin-v0.1.0.tar.gz.sha256
-Genera-fonts-symbols-v0.1.0.tar.gz
-Genera-fonts-symbols-v0.1.0.tar.gz.sha256
+Genera-fonts-latin-v0.1.1.tar.gz
+Genera-fonts-latin-v0.1.1.tar.gz.sha256
+Genera-fonts-symbols-v0.1.1.tar.gz
+Genera-fonts-symbols-v0.1.1.tar.gz.sha256
 ```
 
 Each archive has one versioned root and carries the selected Unicode
@@ -76,7 +76,7 @@ From the intended release commit, use the tag spelling as the version and the
 commit timestamp as the deterministic archive epoch:
 
 ```sh
-version=v0.1.0
+version=v0.1.1
 export SOURCE_DATE_EPOCH=$(git show -s --format=%ct HEAD)
 
 make ci VERSION="$version" SOURCE_DATE_EPOCH="$SOURCE_DATE_EPOCH"
@@ -130,6 +130,27 @@ Genera-code BDFs and imported JSON records are never installed. The current
 payload counts are 78 Unicode BDFs plus 78 OTBs for `latin`, and 11 plus 11
 for `symbols`; these are reviewed results of the content predicate, not
 hard-coded format limits.
+
+## Updating the AUR package
+
+The AUR package base `genera-fonts` is a separate, source-only Git repository.
+Update it only after the corresponding GitHub tag and release are immutable:
+
+1. bump `pkgver` and reset `pkgrel` in
+   `packaging/aur/genera-fonts/PKGBUILD`;
+2. replace the tag object, tagged commit, and release timestamp with the exact
+   reviewed identities;
+3. regenerate the pinned source hash with `makepkg --geninteg`, then regenerate
+   `.SRCINFO` with `makepkg --printsrcinfo`;
+4. run `pkgctl license check`, `namcap`, a clean Arch build, co-installation,
+   release validation, and Fontconfig discovery; and
+5. copy only `PKGBUILD`, `.SRCINFO`, `.gitignore`, `LICENSE`,
+   `LICENSES/0BSD.txt`, and `REUSE.toml` to the AUR `master` branch, commit a
+   meaningful version update, and push.
+
+Do not upload native packages, file lists, generated font trees, or GitHub
+release assets to the AUR repository. Confirm the public Git author identity
+before pushing because AUR commit history is effectively permanent.
 
 ## What the gates prove
 
