@@ -62,13 +62,21 @@ included as provenance metadata only; it contains hashes and facts, not the
 manifested imported payload.
 
 OTB is a one-bit embedded-bitmap SFNT container, not a vector or outline
-conversion. The OTB checker requires the exact Unicode repertoire, advance,
-and baseline-relative set pixels of the BDF for every encoded glyph. It also
-requires the logical family and style names plus OS/2 weight, width, and
-bold/italic selection bits recorded by `FONT-IDENTITIES.json`. A
+conversion. After `fonttosfnt` conversion, the builder normalizes per-glyph
+`hmtx` advances from the native strike (including zero combining advances),
+zeroes contourless `hmtx` bearings, and recomputes `hhea`, OS/2 average-width,
+and `post.isFixedPitch` summaries. Zero-area bitmap runs are stored as explicit
+metric-only records so blank glyphs remain loadable. None of this changes
+source pixels, bitmap bearings, or baseline geometry.
+
+The OTB checker requires valid bitmap record bounds and horizontal table
+structure, consistent scaled advances and summaries, the exact Unicode
+repertoire, and baseline-relative set pixels of the BDF for every encoded
+glyph. It also requires the logical family and style names plus OS/2 weight,
+width, and bold/italic selection bits recorded by `FONT-IDENTITIES.json`. A
 converter may trim transparent storage rows or columns only when displayed
 geometry is unchanged. The Unicode BDF remains the authoritative derivative
-record.
+record. See [FONT-MODEL.md](FONT-MODEL.md) for normalization and spacing rules.
 
 ## Required local gates
 
@@ -89,12 +97,32 @@ make release-reproducible VERSION="$version" SOURCE_DATE_EPOCH="$SOURCE_DATE_EPO
 checks, deterministic build, specimen closure, release build, release checks,
 and release reproducibility. Running the explicit release targets afterward
 makes the final artifacts and their checks visible at the handoff boundary.
+`make check-release` includes mandatory OTB structure/geometry validation and
+Fontconfig consumer recognition: it stages the archives in a temporary tree,
+queries every OTB with `fc-query`, and checks exact family/style/weight/slant/
+width/pixelsize selection and spacing with isolated `fc-match`. Both archive
+groups participate in matching; no system installation or global font cache
+update is needed.
 
 Release construction needs Python 3.10 or newer, Python FontTools, and exactly
 `fonttosfnt 1.2.5`. Older converter releases change horizontal and bitmap-
 strike metrics, so the builder rejects them. The hosted workflow builds 1.2.5
-from the checksum-pinned X.Org source archive. The full external gate
-additionally needs `bdftopcf`, `mkfontdir`, Xvfb, and Xlib.
+from the checksum-pinned X.Org source archive. Release consumer checks require
+Bash, coreutils (including `sha256sum`), and Fontconfig's `fc-query` and
+`fc-match`. The full external X gate additionally needs `bdftopcf`, `mkfontdir`,
+Xvfb, and Xlib.
+
+For an optional real FreeType all-glyph load and pixel comparison, install the
+Python `freetype-py` binding and native FreeType shared library, then run:
+
+```sh
+python3 scripts/check_otb.py --freetype \
+  "dist/release/Genera-fonts-latin-$version.tar.gz" \
+  "dist/release/Genera-fonts-symbols-$version.tar.gz"
+```
+
+This supplements, rather than replaces, the mandatory FontTools gate and is
+not included in `make ci` or `make check-release`.
 
 ## Optional native packages
 
@@ -166,19 +194,24 @@ A release is acceptable only when the checks establish:
 - the fixed eight-block U+EE00–U+F1FF Genera PUA registry, after CADR's
   U+E000–U+EDFF reservation;
 - 78/11 complete, disjoint Latin/symbols membership;
-- BDF syntax, unique XLFD identities, closed X indexes and aliases, PCF
-  compilation, and native X loading/rendering where required;
+- BDF syntax, unique XLFD identities, closed X indexes, PCF compilation, and
+  native X loading of all 178 raw/Unicode names and 356 aliases, checking all
+  14 XLFD properties and ascent/descent as well as rendering probes;
 - one deterministic specimen for each of the 89 fonts and exact agreement
   with the tracked gallery;
 - exact BDF-to-OTB logical identity, repertoire, advance, and one-bit display
-  pixels;
+  pixels, with valid bitmap records and consistent SFNT horizontal tables;
+- Fontconfig query identity and spacing derived from glyph advances, with
+  isolated matching selecting every exact family/style/physical strike;
 - complete internal and adjacent checksums, safe archive paths, fixed metadata,
   and content allowlists; and
 - two isolated release builds that are byte-for-byte identical.
 
-Undefined-character substitution and Fontconfig/X fallback are outside the
-claim. The gate checks characters actually encoded by each selected font; it
-does not treat a fallback glyph as Genera output.
+Undefined-character substitution and arbitrary Fontconfig/X fallback are
+outside the claim. The gates check characters actually encoded by each selected
+font and require exact Genera file selection for the isolated desktop requests;
+they do not treat a fallback glyph as Genera output. Optional `--freetype`
+validation adds actual native glyph-load evidence only when explicitly run.
 
 ## Licensed-media audit before a provenance-changing release
 

@@ -34,6 +34,7 @@ jobs:
             ca-certificates \
             build-essential \
             curl \
+            fontconfig \
             git \
             libfontenc-dev \
             libfreetype-dev \
@@ -47,6 +48,8 @@ jobs:
             xz-utils \
             xvfb
           command -v bdftopcf
+          command -v fc-query
+          command -v fc-match
           command -v mkfontdir
           command -v Xvfb
 

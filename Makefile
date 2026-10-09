@@ -48,7 +48,8 @@ release: dist
 		--source-date-epoch "$(SOURCE_DATE_EPOCH)"
 
 check-release: release
-	$(PYTHON) scripts/check_release.py --release-dir "$(RELEASE_DIR)"
+# Consumer recognition uses private staging/configuration, not package installs.
+	$(PYTHON) scripts/check_release.py --release-dir "$(RELEASE_DIR)" --fontconfig
 	$(PYTHON) scripts/check_otb.py \
 		"$(RELEASE_DIR)/Genera-fonts-latin-$(VERSION).tar.gz" \
 		"$(RELEASE_DIR)/Genera-fonts-symbols-$(VERSION).tar.gz"

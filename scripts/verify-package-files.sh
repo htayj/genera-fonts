@@ -5,8 +5,11 @@ usage() {
     cat <<'USAGE'
 usage: scripts/verify-package-files.sh --group latin|symbols [--prefix PATH]
        [--layout fhs|prefix] [--allow-missing-doc] [--skip-fontconfig]
+       [--fontconfig-dir DIR ...]
 
-Verify one installed Genera Fonts package from its release manifest.
+Verify one installed or staged Genera Fonts package from its release manifest.
+Fontconfig query and matching checks use only its OTBs and any extra directories,
+with private configuration and caches; no system fonts or configuration are used.
 USAGE
 }
 
@@ -17,6 +20,7 @@ prefix=/
 layout=fhs
 skip_fontconfig=false
 allow_missing_doc=false
+fontconfig_dirs=()
 while [[ $# -gt 0 ]]; do
     case "$1" in
         --group) [[ $# -ge 2 ]] || fail "--group requires a value"; group=$2; shift 2 ;;
@@ -27,6 +31,8 @@ while [[ $# -gt 0 ]]; do
         --layout=*) layout=${1#--layout=}; shift ;;
         --allow-missing-doc) allow_missing_doc=true; shift ;;
         --skip-fontconfig) skip_fontconfig=true; shift ;;
+        --fontconfig-dir) [[ $# -ge 2 ]] || fail "--fontconfig-dir requires a path"; fontconfig_dirs+=("$2"); shift 2 ;;
+        --fontconfig-dir=*) fontconfig_dirs+=("${1#--fontconfig-dir=}"); shift ;;
         --help|-h) usage; exit 0 ;;
         *) fail "unknown option: $1" ;;
     esac
@@ -178,14 +184,19 @@ config_enabled=$(join_path "$prefix" "/etc/fonts/conf.d/$config_name")
 for file in "$config_available" "$config_enabled"; do
     [[ -s "$file" ]] || fail "missing installed fontconfig file: $file"
 done
-command -v fc-query >/dev/null 2>&1 || fail "missing required tool: fc-query"
-python3 - "$font_root" "$manifest" <<'PY'
+for tool in fc-query fc-match; do
+    command -v "$tool" >/dev/null 2>&1 || fail "missing required tool: $tool"
+done
+python3 - "$font_root" "$manifest" "${fontconfig_dirs[@]}" <<'PY'
 from pathlib import Path, PurePosixPath
 import json
+import os
 import subprocess
 import sys
+import tempfile
+from xml.sax.saxutils import escape
 
-font_root = Path(sys.argv[1])
+font_root = Path(sys.argv[1]).resolve()
 manifest = json.loads(Path(sys.argv[2]).read_text(encoding="utf-8"))
 
 
@@ -202,73 +213,137 @@ def expected_style(typographic):
     return " ".join(parts) or "Regular"
 
 
+def spacing_from_bdf(lines):
+    # Released Fontconfig 2.15.0 src/fcfreetype.c, FcFreeTypeSpacing:
+    # https://gitlab.freedesktop.org/fontconfig/fontconfig/-/blob/2.15.0/src/fcfreetype.c
+    # Ignore zero advances, cluster within 1/33, then classify mono / 1:2 dual
+    # / proportional. Use represented BDF advances, not XLFD SPACING or the
+    # source variable_width flag (both differ for zero-advance combining marks).
+    advances = {}
+    encoding = None
+    advance = None
+    for line in lines:
+        if line.startswith("STARTCHAR "):
+            encoding = advance = None
+        elif line.startswith("ENCODING "):
+            encoding = int(line.split()[1])
+        elif line.startswith("DWIDTH "):
+            advance = int(line.split()[1])
+        elif line == "ENDCHAR":
+            if encoding is not None and encoding >= 0 and advance is not None and advance > 0:
+                advances[encoding] = advance
+    clusters = []
+    for _, advance in sorted(advances.items()):
+        if not any(abs(advance - other) * 33 <= max(advance, other) for other in clusters):
+            clusters.append(advance)
+            if len(clusters) == 3:
+                return 0
+    if len(clusters) <= 1:
+        return 100
+    narrow, wide = sorted(clusters)
+    if abs(2 * narrow - wide) * 33 <= max(2 * narrow, wide):
+        return 90
+    return 0
+
+
+def query_identity(command, env):
+    process = subprocess.run(
+        command, check=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE,
+        text=True, env=env,
+    )
+    fields = process.stdout.rstrip("\n").split("\t")
+    if len(fields) != 8:
+        raise SystemExit(f"{command[0]} returned malformed identity: {process.stdout!r}")
+    if not fields[5]:
+        raise SystemExit(
+            f"{command[0]} returned no native pixelsize for {fields[7]}: {process.stdout!r}"
+        )
+    return (
+        fields[0], fields[1], int(fields[2]), int(fields[3]), int(fields[4]),
+        float(fields[5]), int(fields[6]) if fields[6] else 0,
+    ), Path(fields[7]).resolve()
+
+
+def pattern_value(value):
+    # Escape FcNameParse's family delimiters and property-value delimiters.
+    return "".join("\\" + char if char in "\\-,:=" else char for char in str(value))
+
+
 expected_weights = {"Medium": 80, "Bold": 200}
 expected_slants = {"R": 0, "I": 100}
 expected_widths = {"Condensed": 75, "Normal": 100, "Expanded": 125}
-expected_identities = {}
-observed_identities = {}
-for artifact in manifest["artifacts"]:
-    name = artifact["name"]
-    identity = artifact["logical_identity"]
-    typographic = identity["typographic"]
-    otb_relative = PurePosixPath(artifact["files"]["otb"]["path"])
-    bdf_relative = PurePosixPath(artifact["files"]["bdf"]["path"])
-    otb = font_root / Path(*otb_relative.relative_to("fonts").parts)
-    bdf = font_root / Path(*bdf_relative.relative_to("fonts").parts)
-    pixel_values = [
-        line.split()[1]
-        for line in bdf.read_text(encoding="ascii").splitlines()
-        if line.startswith("PIXEL_SIZE ")
-    ]
-    if len(pixel_values) != 1:
-        raise SystemExit(f"{bdf}: expected one PIXEL_SIZE")
-    expected = (
-        typographic["family_name"],
-        expected_style(typographic),
-        expected_weights[typographic["weight_name"]],
-        expected_slants[typographic["slant"]],
-        expected_widths[typographic["setwidth_name"]],
-        float(pixel_values[0]),
+query_format = (
+    "%{family[0]}\t%{style[0]}\t%{weight}\t%{slant}\t%{width}\t"
+    "%{pixelsize}\t%{spacing}\t%{file}\n"
+)
+with tempfile.TemporaryDirectory(prefix="genera-fontconfig-") as directory:
+    private_root = Path(directory)
+    font_dirs = [font_root / "otb", *(Path(value).resolve() for value in sys.argv[3:])]
+    if any(not path.is_dir() for path in font_dirs):
+        raise SystemExit("isolated Fontconfig font directory is missing")
+    config = private_root / "fonts.conf"
+    config.write_text(
+        '<?xml version="1.0"?>\n'
+        '<!DOCTYPE fontconfig SYSTEM "urn:fontconfig:fonts.dtd">\n<fontconfig>\n'
+        + "".join(f"<dir>{escape(str(path))}</dir>\n" for path in font_dirs)
+        + f"<cachedir>{escape(str(private_root / 'cache'))}</cachedir>\n"
+        + "</fontconfig>\n",
+        encoding="utf-8",
     )
-    if expected in expected_identities:
-        raise SystemExit(
-            f"desktop identity collision: {expected_identities[expected]} and {name}"
+    env = dict(os.environ, FONTCONFIG_FILE=str(config), FONTCONFIG_PATH=str(private_root),
+               XDG_CACHE_HOME=str(private_root / "xdg-cache"))
+    env.pop("FONTCONFIG_SYSROOT", None)
+    expected_identities = {}
+    observed_identities = {}
+    for artifact in manifest["artifacts"]:
+        name = artifact["name"]
+        typographic = artifact["logical_identity"]["typographic"]
+        otb_relative = PurePosixPath(artifact["files"]["otb"]["path"])
+        bdf_relative = PurePosixPath(artifact["files"]["bdf"]["path"])
+        otb = font_root / Path(*otb_relative.relative_to("fonts").parts)
+        bdf = font_root / Path(*bdf_relative.relative_to("fonts").parts)
+        lines = bdf.read_text(encoding="ascii").splitlines()
+        pixel_values = [line.split()[1] for line in lines if line.startswith("PIXEL_SIZE ")]
+        if len(pixel_values) != 1:
+            raise SystemExit(f"{bdf}: expected one PIXEL_SIZE")
+        expected = (
+            typographic["family_name"], expected_style(typographic),
+            expected_weights[typographic["weight_name"]],
+            expected_slants[typographic["slant"]],
+            expected_widths[typographic["setwidth_name"]], float(pixel_values[0]),
+            spacing_from_bdf(lines),
         )
-    expected_identities[expected] = name
-    process = subprocess.run(
-        [
-            "fc-query",
-            "--format",
-            "%{family[0]}\t%{style[0]}\t%{weight}\t%{slant}\t%{width}\t%{pixelsize}\n",
-            str(otb),
-        ],
-        check=True,
-        stdout=subprocess.PIPE,
-        stderr=subprocess.PIPE,
-        text=True,
-    )
-    fields = process.stdout.rstrip("\n").split("\t")
-    if len(fields) != 6:
-        raise SystemExit(f"{otb}: fc-query returned malformed identity")
-    observed = (
-        fields[0],
-        fields[1],
-        int(fields[2]),
-        int(fields[3]),
-        int(fields[4]),
-        float(fields[5]),
-    )
-    if observed in observed_identities:
-        raise SystemExit(
-            f"observed Fontconfig identity collision: "
-            f"{observed_identities[observed]} and {name}"
+        # Spacing is not an identity discriminator: otherwise a metric defect
+        # could conceal a family/style/strike collision.
+        identity = expected[:6]
+        if identity in expected_identities:
+            raise SystemExit(f"desktop identity collision: {expected_identities[identity]} and {name}")
+        expected_identities[identity] = name
+        observed, queried_file = query_identity(["fc-query", "--format", query_format, str(otb)], env)
+        if observed[:6] in observed_identities:
+            raise SystemExit(
+                f"observed Fontconfig identity collision: "
+                f"{observed_identities[observed[:6]]} and {name}"
+            )
+        observed_identities[observed[:6]] = name
+        if observed != expected or queried_file != otb:
+            raise SystemExit(
+                f"{otb}: Fontconfig identity/spacing differs for {name}: "
+                f"expected={expected!r}, observed={observed!r}, file={queried_file}"
+            )
+        pattern = pattern_value(expected[0]) + "".join(
+            f":{key}={pattern_value(value)}" for key, value in zip(
+                ("style", "weight", "slant", "width", "pixelsize"), expected[1:6]
+            )
         )
-    observed_identities[observed] = name
-    if observed != expected:
-        raise SystemExit(
-            f"{otb}: Fontconfig identity differs for {name}: "
-            f"expected={expected!r}, observed={observed!r}"
-        )
+        matched, matched_file = query_identity(["fc-match", "--format", query_format, pattern], env)
+        if matched != expected or matched_file != otb:
+            raise SystemExit(
+                f"{name}: isolated fc-match did not select its exact family/style/strike: "
+                f"pattern={pattern!r}, expected={expected!r}, observed={matched!r}, "
+                f"expected_file={otb}, matched_file={matched_file}"
+            )
+    print(f"Fontconfig query/spacing and isolated matching passed for {len(expected_identities)} {manifest['content_class']} fonts")
 PY
 
 echo "genera-fonts-$group installed-file verification passed"

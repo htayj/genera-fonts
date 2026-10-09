@@ -96,10 +96,16 @@ identities; that fallback is packaging metadata, not a historical style claim.
 
 Logical named size is not substituted for physical raster size. `PIXEL_SIZE`,
 BDF `SIZE`, and the 72 dpi interchange `POINT_SIZE` continue to follow the
-measured `character_height`. `nominal_x_size` in the logical-identity record
+measured `character_height`. At 72 dpi one pixel corresponds to one interchange
+point (`POINT_SIZE` stores tenths of a point); that is a transport convention,
+not the measured physical resolution of a Lisp Machine display.
+`nominal_x_size` in the logical-identity record
 preserves the X display device's 6/8/10/12/14/18/24 crosswalk separately.
 That crosswalk is device-specific rather than a universal Genera point-size
 law; MacIvory has different normal and small-screen QuickDraw mappings.
+Fontconfig's bitmap `pixelsize` identifies the physical strike. DPI is a
+rendering request, not a required intrinsic scan property of an OTB; an absent
+Fontconfig scan DPI does not invalidate these size fields.
 
 Desktop metadata must also keep distinct physical objects addressable. The
 `TR8BI` and `TR10BI` objects have different logical named sizes and glyph
@@ -119,7 +125,15 @@ pixel corresponds to one interchange point. This is not a claim about the
 physical resolution of a Lisp Machine display or the logical point-size name.
 Family, weight, slant, and set width come only from the closed reviewed mapping,
 never from parsing resident-name suffixes. XLFD `P`, `M`, or `C` spacing is
-still computed from represented advances and raster boxes.
+computed from represented advances and raster boxes, including zero advances.
+Fontconfig instead classifies positive advances, ignoring zero-advance
+combining glyphs and allowing small width differences: one width is mono, two
+widths in a 1:2 relationship are dual, and other widths are proportional.
+Thus XLFD proportional spacing need not mean Fontconfig proportional spacing;
+`MOUSE` is a dual-width desktop face, not a falsely monospaced one. The source
+`variable_width` flag describes stored width tables, not either consumer's
+spacing classification. The gates derive each expected classification from
+the represented glyph geometry rather than equating these fields.
 
 Every font has two raw aliases:
 
@@ -149,6 +163,37 @@ charset fields and alias namespaces distinguish the addressing profiles.
 User-facing OTBs therefore expose ordinary desktop styles such as Regular,
 Bold, Italic, Bold Italic, Condensed, and Expanded instead of treating every
 physical strike as a separate family.
+
+## OTB normalization and consumer checks
+
+The release builder converts each Unicode BDF with `fonttosfnt 1.2.5` and then
+normalizes the SFNT container with FontTools. Embedded bitmap advances,
+bearings, baselines, and pixels remain authoritative. Per-glyph `hmtx` advances
+are the native pixel advances scaled to `unitsPerEm / ppemX` and rounded to the
+nearest integer, including zero advances for combining glyphs. Since these
+fonts have no contours, their `hmtx` left side bearings are zero; the actual
+bitmap bearings remain in EBDT/EBLC. The builder recomputes `hhea` summaries,
+the OS/2 average of nonzero advances, and `post.isFixedPitch` from whether there
+is exactly one positive advance width.
+It also explicitly sets SFNT `head` creation/modification times from the
+requested archive epoch, including epoch zero, instead of retaining the
+converter's wall-clock timestamps.
+
+Zero-area glyph runs emitted with no bitmap payload are re-encoded as
+EBLC index-format 1 / EBDT image-format 7 records carrying eight-byte metrics
+and no pixels. This generic storage repair keeps blank glyphs loadable without
+deleting glyphs or inventing ink, and preserves their bitmap metrics.
+
+The mandatory OTB gate checks bitmap record bounds, horizontal table structure
+and summaries, logical metadata, every encoded advance, and baseline-relative
+one-bit pixels against the BDF. Its optional `--freetype` mode additionally
+loads every encoded glyph through the native FreeType consumer and compares
+its glyph mapping, advance, and pixels. The release Fontconfig gate checks
+family/style/weight/slant/width/pixelsize and independently derived spacing
+with `fc-query`, then requires an isolated `fc-match` request to select the
+exact physical strike. The external X gate independently checks all 14 XLFD
+fields and line metrics for native names and all aliases, alongside rendering
+probes. See [RELEASING.md](RELEASING.md) for dependencies and commands.
 
 ## Independent reference comparisons
 

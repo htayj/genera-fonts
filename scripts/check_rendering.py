@@ -5,9 +5,12 @@ The pure-Python half of this checker parses BDF directly and produces the
 expected foreground pixels and text extents for sequences of integer BDF
 encodings.  With ``--external`` it compiles the BDFs to PCF, starts an isolated
 Xvfb, draws the same sequences through Xlib, and compares both the framebuffer
-and text-extents results.  Raw ``Misc-FontSpecific`` profiles retain their
-historical 8-bit ``XDrawString`` path; ``ISO10646-1`` derivatives use
-``XDrawString16`` and ``XTextExtents16``.
+and text-extents results.  It also verifies the live full14 XLFD name and
+properties, sizes/resolution, spacing/average width, line metrics, and alias
+targets.  These BDF expectations are checked against source/configuration by
+``check_dist.py``.  Raw ``Misc-FontSpecific`` profiles retain their historical
+8-bit ``XDrawString`` path; ``ISO10646-1`` derivatives use ``XDrawString16`` and
+``XTextExtents16``.
 
 Only codes that are explicitly present in a BDF are put in conformance probes.
 What X does for an absent code (default-character substitution, another
@@ -35,6 +38,15 @@ ROOT = Path(__file__).resolve().parents[1]
 XY_PIXMAP = 1
 Z_PIXMAP = 2
 ALL_PLANES = ctypes.c_ulong(-1).value
+XLFD_PROPERTIES = (
+    "FOUNDRY", "FAMILY_NAME", "WEIGHT_NAME", "SLANT", "SETWIDTH_NAME",
+    "ADD_STYLE_NAME", "PIXEL_SIZE", "POINT_SIZE", "RESOLUTION_X",
+    "RESOLUTION_Y", "SPACING", "AVERAGE_WIDTH", "CHARSET_REGISTRY",
+    "CHARSET_ENCODING",
+)
+XLFD_NUMERIC_PROPERTIES = frozenset(
+    {"PIXEL_SIZE", "POINT_SIZE", "RESOLUTION_X", "RESOLUTION_Y", "AVERAGE_WIDTH"}
+)
 
 
 class RenderCheckError(AssertionError):
@@ -109,6 +121,8 @@ class BdfFont:
     descent: int
     spacing: str
     glyphs: dict[int, Glyph]
+    properties: dict[str, str]
+    size: tuple[int, ...]
     charset_registry: str = "Misc"
     charset_encoding: str = "FontSpecific"
 
@@ -254,6 +268,8 @@ def parse_bdf(path: Path) -> BdfFont:
         glyphs=glyphs,
         charset_registry=properties.get("CHARSET_REGISTRY", ""),
         charset_encoding=properties.get("CHARSET_ENCODING", ""),
+        properties=properties,
+        size=tuple(map(int, _one_line(lines, "SIZE ", path).split())),
     )
 
 
@@ -444,6 +460,14 @@ def _configure_xlib(library: str):
     x11.XLoadQueryFont.argtypes = [ctypes.c_void_p, ctypes.c_char_p]
     x11.XLoadQueryFont.restype = ctypes.POINTER(XFontStruct)
     x11.XFreeFont.argtypes = [ctypes.c_void_p, ctypes.POINTER(XFontStruct)]
+    x11.XGetAtomName.argtypes = [ctypes.c_void_p, ctypes.c_ulong]
+    x11.XGetAtomName.restype = ctypes.c_void_p
+    x11.XFree.argtypes = [ctypes.c_void_p]
+    x11.XListFonts.argtypes = [
+        ctypes.c_void_p, ctypes.c_char_p, ctypes.c_int, ctypes.POINTER(ctypes.c_int)
+    ]
+    x11.XListFonts.restype = ctypes.POINTER(ctypes.c_char_p)
+    x11.XFreeFontNames.argtypes = [ctypes.POINTER(ctypes.c_char_p)]
     x11.XCreatePixmap.argtypes = [ctypes.c_void_p, ctypes.c_ulong, ctypes.c_uint, ctypes.c_uint, ctypes.c_uint]
     x11.XCreatePixmap.restype = ctypes.c_ulong
     x11.XFreePixmap.argtypes = [ctypes.c_void_p, ctypes.c_ulong]
@@ -735,12 +759,104 @@ def parse_fonts_alias(path: Path) -> dict[str, str]:
     return aliases
 
 
+def _x_metadata_expectations(font: BdfFont) -> dict[str, str | int]:
+    """Use BDF metadata validated against source/config by check_dist.py."""
+    fields = font.name[1:].split("-")
+    require(
+        font.name.startswith("-") and len(fields) == len(XLFD_PROPERTIES),
+        f"{font.path}: expected full14 XLFD name",
+    )
+    expected: dict[str, str | int] = {"FONT": font.name}
+    for key, value in zip(XLFD_PROPERTIES, fields):
+        require(key in font.properties, f"{font.path}: missing BDF property {key}")
+        if key in XLFD_NUMERIC_PROPERTIES:
+            try:
+                expected[key] = int(font.properties[key])
+                matches = int(value) == expected[key]
+            except ValueError as error:
+                raise RenderCheckError(f"{font.path}: invalid numeric XLFD {key}") from error
+        else:
+            expected[key] = font.properties[key]
+            matches = value.casefold() == str(expected[key]).casefold()
+        require(matches, f"{font.path}: XLFD/BDF property {key} disagreement")
+    require(
+        font.size == (
+            expected["PIXEL_SIZE"], expected["RESOLUTION_X"], expected["RESOLUTION_Y"]
+        ),
+        f"{font.path}: BDF SIZE disagrees with XLFD pixel size/resolution",
+    )
+    require(
+        font.character_height == expected["PIXEL_SIZE"],
+        f"{font.path}: BDF line metrics disagree with pixel size",
+    )
+    return expected
+
+
+def _x_atom_name(x11, display, atom: int) -> str:
+    pointer = x11.XGetAtomName(display, atom)
+    require(bool(pointer), f"X cannot resolve metadata atom {atom}")
+    try:
+        return ctypes.string_at(pointer).decode("latin1")
+    finally:
+        x11.XFree(pointer)
+
+
+def _require_x_metadata(
+    x11, display, font_pointer, font: BdfFont, query: str,
+    expected: dict[str, str | int],
+) -> None:
+    """Check a native name or alias resolves to the expected complete face."""
+    count = ctypes.c_int()
+    names = x11.XListFonts(display, query.encode("ascii"), 2, ctypes.byref(count))
+    try:
+        listed = [names[index].decode("latin1").casefold() for index in range(count.value)]
+        require(
+            set(listed) == {query.casefold()},
+            f"{font.path}: X does not list {query}: {listed}",
+        )
+    finally:
+        if names:
+            x11.XFreeFontNames(names)
+    observed: dict[str, str | int] = {}
+    loaded = font_pointer.contents
+    for index in range(loaded.n_properties):
+        prop = loaded.properties[index]
+        key = _x_atom_name(x11, display, prop.name)
+        if key not in expected:
+            continue
+        require(key not in observed, f"{query}: duplicate X property {key}")
+        observed[key] = (
+            int(prop.card32 & 0xFFFFFFFF)
+            if key in XLFD_NUMERIC_PROPERTIES
+            else _x_atom_name(x11, display, prop.card32)
+        )
+    for key, value in expected.items():
+        actual = observed.get(key)
+        matches = (
+            isinstance(actual, str) and actual.casefold() == value.casefold()
+            if isinstance(value, str) else actual == value
+        )
+        require(
+            matches,
+            f"{font.path}: {query}: X property {key}: expected {value!r}, got {actual!r}",
+        )
+    require(
+        (loaded.ascent, loaded.descent) == (font.ascent, font.descent),
+        f"{font.path}: {query}: XFontStruct line metrics differ from BDF",
+    )
+
+
 def validate_external(paths: Sequence[Path]) -> dict[str, int]:
     """Compile and compare all defined-glyph probes through X core rendering."""
 
     require(bool(paths), "no BDF files selected for external rendering")
     dependencies = _require_external_dependencies()
     fonts = [parse_bdf(path) for path in paths]
+    fonts_by_name = {font.name.casefold(): font for font in fonts}
+    require(len(fonts_by_name) == len(fonts), "case-insensitive X font name collision")
+    metadata = {
+        font.name.casefold(): _x_metadata_expectations(font) for font in fonts
+    }
     with tempfile.TemporaryDirectory(prefix="genera-font-render-") as directory:
         temporary = Path(directory)
         grouped_fonts: dict[Path, list[BdfFont]] = {}
@@ -773,16 +889,30 @@ def validate_external(paths: Sequence[Path]) -> dict[str, int]:
                 stderr=subprocess.PIPE,
             )
             alias_source = source_directory / "fonts.alias"
-            if alias_source.is_file():
-                group_aliases = parse_fonts_alias(alias_source)
-                for alias, target in group_aliases.items():
-                    previous = aliases.get(alias)
+            require(alias_source.is_file(), f"{source_directory}: missing fonts.alias")
+            group_aliases = parse_fonts_alias(alias_source)
+            for font in group:
+                prefix = "genera-unicode" if font.is_iso10646 else "genera"
+                for alias in (
+                    f"{prefix}-{font.path.stem}".casefold(),
+                    f"{prefix}-runtime-{font.path.stem}".casefold(),
+                ):
                     require(
-                        previous is None or previous.casefold() == target.casefold(),
-                        f"combined X font-path alias collision for {alias}",
+                        group_aliases.get(alias, "").casefold() == font.name.casefold(),
+                        f"{font.path}: missing or misdirected alias {alias}",
                     )
-                    aliases[alias] = target
-                shutil.copyfile(alias_source, font_directory / "fonts.alias")
+            for alias, target in group_aliases.items():
+                previous = aliases.get(alias)
+                require(
+                    previous is None or previous.casefold() == target.casefold(),
+                    f"combined X font-path alias collision for {alias}",
+                )
+                require(
+                    target.casefold() in fonts_by_name,
+                    f"{alias_source}: alias {alias} targets an unselected font {target}",
+                )
+                aliases[alias] = target
+            shutil.copyfile(alias_source, font_directory / "fonts.alias")
         x11 = _configure_xlib(dependencies["libX11"])
         probe_count = 0
         glyph_count = 0
@@ -794,10 +924,9 @@ def validate_external(paths: Sequence[Path]) -> dict[str, int]:
                 require(not x_errors, f"{font.path}: X error loading font: {x_errors}")
                 require(bool(font_pointer), f"{font.path}: X cannot load {font.name}")
                 try:
-                    require(
-                        font_pointer.contents.ascent == font.ascent
-                        and font_pointer.contents.descent == font.descent,
-                        f"{font.path}: XFontStruct line metrics differ from BDF",
+                    _require_x_metadata(
+                        x11, display, font_pointer, font, font.name,
+                        metadata[font.name.casefold()],
                     )
                     for data in probe_strings(font):
                         expected_box_extents = measure_defined_text(font, data, metric_kind="box")
@@ -844,13 +973,23 @@ def validate_external(paths: Sequence[Path]) -> dict[str, int]:
                 x11.XSync(display, 0)
                 require(not x_errors, f"X error loading combined alias {alias}: {x_errors}")
                 require(bool(font_pointer), f"X cannot load combined alias {alias}")
-                x11.XFreeFont(display, font_pointer)
+                try:
+                    target = aliases[alias].casefold()
+                    _require_x_metadata(
+                        x11, display, font_pointer, fonts_by_name[target], alias,
+                        metadata[target],
+                    )
+                    x11.XSync(display, 0)
+                    require(not x_errors, f"X metadata error for alias {alias}: {x_errors}")
+                finally:
+                    x11.XFreeFont(display, font_pointer)
         return {
             "font_count": len(fonts),
             "probe_count": probe_count,
             "glyph_count": glyph_count,
             "font_path_count": len(font_directories),
             "alias_count": len(aliases),
+            "metadata_count": len(fonts) + len(aliases),
         }
 
 
@@ -877,8 +1016,8 @@ def main() -> int:
         "--external",
         action="store_true",
         help=(
-            "require BDF/PCF/Xvfb tools and compare X framebuffer pixels "
-            "and 8/16-bit text extents"
+            "require BDF/PCF/Xvfb tools and compare X framebuffer pixels, "
+            "8/16-bit text extents, full14 XLFD metadata and alias targets"
         ),
     )
     args = parser.parse_args()
@@ -904,6 +1043,13 @@ def main() -> int:
                 f"{result['probe_count']} framebuffer/extent probes, "
                 f"{result['alias_count']} aliases across "
                 f"{result['font_path_count']} font paths"
+            )
+            print(
+                "X metadata: "
+                f"{result['metadata_count']} native/alias loads checked for FONT/full14 "
+                "properties (family/style, sizes, x/y resolution, spacing, average width, "
+                "charset) and line metrics; raw/Unicode alias targets verified "
+                "case-insensitively against BDFs (source/config checks: check_dist.py)"
             )
         else:
             print("X conformance: skipped (pass --external to require it)")

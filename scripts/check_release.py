@@ -10,8 +10,11 @@ import json
 from pathlib import Path, PurePosixPath
 import re
 import shlex
+import shutil
 import struct
 import tarfile
+import subprocess
+import tempfile
 
 
 REPOSITORY_ROOT = Path(__file__).resolve().parents[1]
@@ -584,10 +587,46 @@ def check_archives(paths: list[Path]) -> list[dict[str, object]]:
     return results
 
 
+def _check_fontconfig(paths: list[Path], results: list[dict[str, object]]) -> None:
+    """Reuse package staging and recognition gates without a system install."""
+    for tool in ("bash", "fc-query", "fc-match"):
+        require(shutil.which(tool) is not None, f"Fontconfig release gate needs {tool}")
+    with tempfile.TemporaryDirectory(prefix="genera-release-consumers-") as directory:
+        roots = [Path(directory) / str(index) for index in range(len(paths))]
+        font_dirs = [
+            root / "share/fonts/genera-fonts" / str(result["content_class"]) / "otb"
+            for root, result in zip(roots, results)
+        ]
+        for path, result, root in zip(paths, results, roots):
+            command = [
+                "bash", str(REPOSITORY_ROOT / "scripts/stage-linux-package.sh"),
+                "--format", "nix", "--group", str(result["content_class"]),
+                "--destdir", str(root), "--version", str(result["version"]),
+                "--archive", str(path.resolve()),
+            ]
+            process = subprocess.run(command, stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
+            require(process.returncode == 0, f"{path}: consumer staging failed:\n{process.stdout}{process.stderr}")
+        for result, root, own_dir in zip(results, roots, font_dirs):
+            command = [
+                "bash", str(REPOSITORY_ROOT / "scripts/verify-package-files.sh"),
+                "--group", str(result["content_class"]), "--prefix", str(root),
+                "--layout", "prefix",
+            ]
+            for font_dir in font_dirs:
+                if font_dir != own_dir:
+                    command.extend(("--fontconfig-dir", str(font_dir)))
+            process = subprocess.run(command, stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
+            require(process.returncode == 0, f"{result['content_class']}: Fontconfig recognition failed:\n{process.stdout}{process.stderr}")
+
+
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("archives", nargs="*", type=Path)
     parser.add_argument("--release-dir", type=Path, default=Path("dist/release"))
+    parser.add_argument(
+        "--fontconfig", action="store_true",
+        help="stage archives privately and verify fc-query spacing plus isolated fc-match identities",
+    )
     args = parser.parse_args()
     directory_mode = not args.archives
     paths = args.archives or sorted(args.release_dir.glob("Genera-fonts-*.tar.gz"))
@@ -614,6 +653,8 @@ def main() -> int:
                 observed_assets == expected_assets,
                 f"{args.release_dir}: release asset closure differs",
             )
+        if args.fontconfig:
+            _check_fontconfig(paths, results)
     except (OSError, UnicodeError, json.JSONDecodeError, ReleaseCheckError) as error:
         parser.error(str(error))
     serializable = [
@@ -631,7 +672,10 @@ def main() -> int:
         }
         for result in results
     ]
-    print(json.dumps({"status": "ok", "archives": serializable}, indent=2))
+    report = {"status": "ok", "archives": serializable}
+    if args.fontconfig:
+        report["fontconfig"] = {"status": "ok", "font_count": sum(int(result["font_count"]) for result in results)}
+    print(json.dumps(report, indent=2))
     return 0
 
 

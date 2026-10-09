@@ -225,10 +225,142 @@ def _check_identity(
     )
 
 
+def _check_bitmap_locations(font: TTFont, otb_path: Path) -> None:
+    """Require real records, including for empty glyphs, inside the EBDT table."""
+    table_size = font.reader.tables["EBDT"].length
+    for strike in font["EBLC"].strikes:
+        for subtable in strike.indexSubTables:
+            require(
+                len(subtable.names) == len(subtable.locations),
+                f"{otb_path}: EBLC names and locations differ",
+            )
+            for name, (start, end) in zip(subtable.names, subtable.locations):
+                # FreeType rejects zero-length records even when image 5 has
+                # zero area. Equal offsets also mean 'missing' in index 1.
+                require(
+                    4 <= start < end <= table_size,
+                    f"{otb_path}: {name} has an empty or out-of-bounds EBDT record "
+                    f"({start}, {end}; table size {table_size})",
+                )
+
+
+def _check_horizontal_metrics(font: TTFont, otb_path: Path) -> None:
+    """Validate metadata used by FreeType's unscaled advances and Fontconfig."""
+    require(
+        all(tag in font for tag in ("head", "hhea", "hmtx")),
+        f"{otb_path}: horizontal metric tables missing",
+    )
+    require(
+        "glyf" in font and font.reader.tables["glyf"].length == 0,
+        f"{otb_path}: nonempty glyf falsely advertises scalable outlines",
+    )
+    strike = font["EBLC"].strikes[0]
+    ppem = strike.bitmapSizeTable.ppemX
+    units = font["head"].unitsPerEm
+    require(ppem > 0, f"{otb_path}: zero horizontal ppem")
+    hhea = font["hhea"]
+    count = font["maxp"].numGlyphs
+    require(0 < hhea.numberOfHMetrics <= count, f"{otb_path}: invalid hmtx metric count")
+    expected_size = 4 * hhea.numberOfHMetrics + 2 * (count - hhea.numberOfHMetrics)
+    require(
+        font.reader.tables["hmtx"].length == expected_size,
+        f"{otb_path}: hmtx length differs from glyph/metric counts",
+    )
+    hmtx = font["hmtx"].metrics
+    for subtable in strike.indexSubTables:
+        for name in subtable.names:
+            _, _, _, _, advance, _ = _bitmap_metrics(font["EBDT"].strikeData[0][name], subtable)
+            scaled = (2 * advance * units + ppem) // (2 * ppem)
+            require(
+                hmtx.get(name) == (scaled, 0),
+                f"{otb_path}: {name} hmtx does not match native bitmap escapement "
+                f"(expected {(scaled, 0)}, observed {hmtx.get(name)})",
+            )
+    widths = [width for width, _ in hmtx.values()]
+    require(hhea.advanceWidthMax == max(widths), f"{otb_path}: hhea maximum advance differs")
+    require(
+        (hhea.minLeftSideBearing, hhea.minRightSideBearing, hhea.xMaxExtent) == (0, 0, 0),
+        f"{otb_path}: contourless hhea bearing/extents differ",
+    )
+    positive = [width for width in widths if width > 0]
+    average = (2 * sum(positive) + len(positive)) // (2 * len(positive)) if positive else 0
+    require(
+        font["OS/2"].xAvgCharWidth == average,
+        f"{otb_path}: OS/2 average advance differs",
+    )
+    require(
+        bool(font["post"].isFixedPitch) == (len(set(positive)) == 1),
+        f"{otb_path}: post fixed-pitch flag differs from nonzero escapements",
+    )
+
+
+def _check_freetype(
+    bdf: dict[str, object], font: TTFont, otb_path: Path
+) -> None:
+    """Load every encoded glyph with FreeType and compare its actual pixels."""
+    try:
+        import freetype
+    except ImportError as error:
+        raise OtbCheckError(
+            "--freetype requires freetype-py and the FreeType shared library"
+        ) from error
+    try:
+        face = freetype.Face(str(otb_path))
+        require(not face.is_scalable, f"{otb_path}: FreeType falsely advertises scalable outlines")
+        require(face.num_fixed_sizes == 1, f"{otb_path}: FreeType strike count differs")
+        face.select_size(0)
+        face.select_charmap(freetype.FT_ENCODING_UNICODE)
+        cmap = font.getBestCmap() or {}
+        for code, glyph in sorted(bdf["glyphs"].items()):
+            glyph_index = face.get_char_index(code)
+            require(
+                glyph_index == font.getGlyphID(cmap[code]),
+                f"{otb_path}: FreeType U+{code:04X} glyph index differs",
+            )
+            try:
+                face.load_glyph(glyph_index, freetype.FT_LOAD_DEFAULT)
+            except freetype.FT_Exception as error:
+                raise OtbCheckError(
+                    f"{otb_path}: FreeType cannot load U+{code:04X}: {error}"
+                ) from error
+            slot = face.glyph
+            bitmap = slot.bitmap
+            require(
+                slot.format == freetype.FT_GLYPH_FORMAT_BITMAP,
+                f"{otb_path}: FreeType U+{code:04X} is not a bitmap",
+            )
+            ink: set[tuple[int, int]] = set()
+            if bitmap.width and bitmap.rows:
+                require(
+                    bitmap.pixel_mode == freetype.FT_PIXEL_MODE_MONO,
+                    f"{otb_path}: FreeType U+{code:04X} is not monochrome",
+                )
+                pixels = bitmap.buffer
+                pitch = abs(bitmap.pitch)
+                for row in range(bitmap.rows):
+                    storage_row = row if bitmap.pitch >= 0 else bitmap.rows - row - 1
+                    for column in range(bitmap.width):
+                        if pixels[storage_row * pitch + column // 8] & (0x80 >> (column % 8)):
+                            ink.add((slot.bitmap_left + column, slot.bitmap_top - row - 1))
+            expected_advance, expected_ink = _bdf_ink(glyph)
+            require(
+                (slot.advance.x, slot.advance.y) == (expected_advance * 64, 0),
+                f"{otb_path}: FreeType U+{code:04X} advance differs",
+            )
+            require(
+                ink == expected_ink,
+                f"{otb_path}: FreeType U+{code:04X} baseline-relative ink differs",
+            )
+    except freetype.FT_Exception as error:
+        raise OtbCheckError(f"{otb_path}: FreeType cannot open/select strike: {error}") from error
+
+
 def check_pair(
     bdf_path: Path,
     otb_path: Path,
     logical_identity: dict[str, object],
+    *,
+    freetype_check: bool = False,
 ) -> int:
     bdf = parse_bdf(bdf_path)
     font = TTFont(otb_path, lazy=False)
@@ -244,6 +376,8 @@ def check_pair(
         )
         size = strikes[0].bitmapSizeTable
         require(size.bitDepth == 1, f"{otb_path}: strike is not one-bit")
+        _check_bitmap_locations(font, otb_path)
+        _check_horizontal_metrics(font, otb_path)
         cmap = font.getBestCmap() or {}
         bdf_codes = set(bdf["glyphs"])
         require(
@@ -280,12 +414,14 @@ def check_pair(
                 f"(missing={len(expected_ink - observed_ink)}, "
                 f"extra={len(observed_ink - expected_ink)})",
             )
+        if freetype_check:
+            _check_freetype(bdf, font, otb_path)
         return len(bdf_codes)
     finally:
         font.close()
 
 
-def check_archive(path: Path) -> dict[str, object]:
+def check_archive(path: Path, *, freetype_check: bool = False) -> dict[str, object]:
     with tarfile.open(path, "r:gz") as archive:
         members = _safe_archive_members(archive)
         files = {member.name: member for member in members if member.isfile()}
@@ -359,22 +495,32 @@ def check_archive(path: Path) -> dict[str, object]:
             bdf_path.write_bytes(bdf_data)
             otb_path.write_bytes(otb_data)
             try:
-                glyph_count += check_pair(bdf_path, otb_path, logical_identity)
+                glyph_count += check_pair(
+                    bdf_path, otb_path, logical_identity, freetype_check=freetype_check
+                )
             except OtbCheckError as error:
                 raise OtbCheckError(f"{path}:{name}: {error}") from error
     return {
         "archive": str(path),
         "font_count": len(pair_bytes),
         "glyph_count": glyph_count,
+        "freetype_checked": freetype_check,
     }
 
 
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("archives", nargs="+", type=Path)
+    parser.add_argument(
+        "--freetype", action="store_true",
+        help="also load and compare every glyph through FreeType (requires freetype-py)",
+    )
     args = parser.parse_args()
     try:
-        results = [check_archive(path.resolve()) for path in args.archives]
+        results = [
+            check_archive(path.resolve(), freetype_check=args.freetype)
+            for path in args.archives
+        ]
     except (OSError, OtbCheckError, tarfile.TarError) as error:
         parser.error(str(error))
     print(json.dumps({"status": "ok", "archives": results}, indent=2))

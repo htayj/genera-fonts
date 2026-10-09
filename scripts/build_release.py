@@ -17,6 +17,16 @@ import subprocess
 import tarfile
 import tempfile
 
+try:
+    from fontTools.ttLib import TTFont, newTable
+    from fontTools.ttLib.tables.DefaultTable import DefaultTable
+    from fontTools.ttLib.tables.E_B_D_T_ import ebdt_bitmap_format_7
+    from fontTools.ttLib.tables.E_B_L_C_ import eblc_index_sub_table_1
+except ImportError as error:  # pragma: no cover - exercised by release hosts
+    raise SystemExit(
+        "build_release.py requires fontTools (for example python3-fonttools)"
+    ) from error
+
 
 ROOT = Path(__file__).resolve().parents[1]
 CONTENT_CLASSES = ("latin", "symbols")
@@ -345,6 +355,97 @@ def _fonttosfnt_version(executable: str) -> str:
     return version
 
 
+def _normalize_empty_bitmap_runs(font: TTFont) -> int:
+    """Give empty fixed-size bitmap runs a real, metric-only EBDT record.
+
+    fonttosfnt's index 2/5, image 5 encoding stores no bytes for zero-area
+    glyphs. FreeType rejects these zero-length records before reading metrics.
+    Index 1 with image 7 instead stores all eight BigGlyphMetrics bytes per
+    glyph, without adding pixels or altering either direction's metrics.
+    """
+    changed = 0
+    for strike, bitmaps in zip(font["EBLC"].strikes, font["EBDT"].strikeData):
+        for index, subtable in enumerate(strike.indexSubTables):
+            if (
+                subtable.indexFormat not in (2, 5)
+                or subtable.imageFormat != 5
+                or subtable.imageSize != 0
+            ):
+                continue
+            require(
+                subtable.metrics.width * subtable.metrics.height == 0,
+                "zero-size EBDT run has nonempty bitmap dimensions",
+            )
+            replacement = eblc_index_sub_table_1(None, font)
+            replacement.indexFormat = 1
+            replacement.imageFormat = 7
+            replacement.names = list(subtable.names)
+            for name in replacement.names:
+                require(not bitmaps[name].imageData, f"{name}: zero-size run has pixels")
+                # Distinct objects keep records consecutive when fontTools compiles
+                # EBDT: its alias deduplication is unsuitable for index 1 offsets.
+                bitmap = ebdt_bitmap_format_7(None, font)
+                bitmap.metrics = subtable.metrics
+                bitmap.imageData = b""
+                bitmaps[name] = bitmap
+            strike.indexSubTables[index] = replacement
+            changed += len(replacement.names)
+    return changed
+
+
+def _normalize_horizontal_metrics(font: TTFont) -> None:
+    """Expose every bitmap escapement to consumers of unscaled SFNT metrics."""
+    require(len(font["EBLC"].strikes) == 1, "horizontal metrics require one native strike")
+    strike = font["EBLC"].strikes[0]
+    ppem = strike.bitmapSizeTable.ppemX
+    units = font["head"].unitsPerEm
+    require(ppem > 0, "native strike has zero horizontal ppem")
+    metrics: dict[str, tuple[int, int]] = {}
+    bitmaps = font["EBDT"].strikeData[0]
+    for subtable in strike.indexSubTables:
+        for name in subtable.names:
+            bitmap = bitmaps[name]
+            glyph_metrics = bitmap.metrics if hasattr(bitmap, "metrics") else subtable.metrics
+            advance = (
+                glyph_metrics.Advance if hasattr(glyph_metrics, "Advance")
+                else glyph_metrics.horiAdvance
+            )
+            # Nearest design unit, matching fonttosfnt's positive-width rounding.
+            scaled = (2 * advance * units + ppem) // (2 * ppem)
+            # OTB has no contours: hmtx LSB is zero, independently of the
+            # baseline-relative bitmap bearing preserved in EBDT/EBLC.
+            metrics[name] = (scaled, 0)
+    require(set(metrics) == set(font.getGlyphOrder()), "native strike misses an SFNT glyph")
+    font["hmtx"] = newTable("hmtx")
+    font["hmtx"].metrics = metrics
+    # There are no outlines: do not load/recompile glyf merely to derive zeros.
+    hhea = font["hhea"]
+    hhea.advanceWidthMax = max(width for width, _ in metrics.values())
+    hhea.minLeftSideBearing = hhea.minRightSideBearing = hhea.xMaxExtent = 0
+    font["OS/2"].recalcAvgCharWidth(font)
+    positive_widths = {width for width, _ in metrics.values() if width > 0}
+    font["post"].isFixedPitch = int(len(positive_widths) == 1)
+
+
+def _normalize_otb(path: Path, epoch: int) -> None:
+    with TTFont(path, recalcTimestamp=False, recalcBBoxes=False) as font:
+        # fonttosfnt 1.2.5 treats SOURCE_DATE_EPOCH=0 as unspecified and uses
+        # wall-clock time. Write the requested epoch explicitly, in SFNT's
+        # seconds-since-1904 units, even when the Unix epoch is zero.
+        font["head"].created = font["head"].modified = epoch + 0x7C259DC0
+        # fontTools' glyf compiler inserts a byte for an all-empty outline table.
+        # That changes FreeType/Fontconfig from bitmap-only to scalable. Retain
+        # the converter's raw zero-length glyf and matching loca placeholders.
+        require(font.reader.tables["glyf"].length == 0, f"{path}: unexpected outlines")
+        for tag in ("glyf", "loca"):
+            table = DefaultTable(tag)
+            table.data = font.reader[tag]
+            font[tag] = table
+        _normalize_empty_bitmap_runs(font)
+        _normalize_horizontal_metrics(font)
+        font.save(path)
+
+
 def _convert_otb(source: Path, destination: Path, executable: str, epoch: int) -> None:
     destination.parent.mkdir(parents=True, exist_ok=True)
     environment = os.environ.copy()
@@ -365,6 +466,7 @@ def _convert_otb(source: Path, destination: Path, executable: str, epoch: int) -
         destination.read_bytes()[:4] in {b"\x00\x01\x00\x00", b"OTTO", b"true", b"typ1"},
         f"{destination}: output lacks an SFNT signature",
     )
+    _normalize_otb(destination, epoch)
 
 
 def _copy(source: Path, destination: Path) -> None:
