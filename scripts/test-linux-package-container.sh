@@ -106,7 +106,7 @@ case "$FORMAT" in
     fi
     ;;
   arch)
-    pacman -Sy --noconfirm --needed bash fontconfig python
+    pacman -Syu --noconfirm --needed bash fontconfig python
     pacman -U --noconfirm $package_files
     ;;
   void)
